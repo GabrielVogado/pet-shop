@@ -1,0 +1,199 @@
+{
+  "users": [
+    {
+      "id": "user-001",
+      "name": "Mariana Souza",
+      "email": "mariana@demo.com",
+      "phone": "(11) 99999-0000",
+      "password": "123456",
+      "role": "tutor",
+      "pets": [
+        {
+          "id": "pet-001",
+          "name": "Luna",
+          "species": "Cachorro",
+          "breed": "Shih-tzu",
+          "age": "4 anos",
+          "notes": "Pele sensivel"
+        },
+        {
+          "id": "pet-002",
+          "name": "Theo",
+          "species": "Gato",
+          "breed": "SRD",
+          "age": "2 anos",
+          "notes": "Prefere atendimento calmo"
+        }
+      ]
+    },
+    {
+      "id": "owner-001",
+      "name": "Carlos Higgins",
+      "email": "owner@demo.com",
+      "phone": "(11) 98888-1111",
+      "password": "admin123",
+      "role": "owner",
+      "businessName": "Higgins Petshop",
+      "petshopId": "petshop-higgins",
+      "pets": []
+    },
+    {
+      "id": "owner-002",
+      "name": "Ana Pet Prime",
+      "email": "prime@demo.com",
+      "phone": "(11) 97777-2222",
+      "password": "admin123",
+      "role": "owner",
+      "businessName": "Pet Prime",
+      "petshopId": "petshop-prime",
+      "pets": []
+    }
+  ],
+  "services": {
+    "baths": [
+      {
+        "id": "bath-simple",
+        "name": "Banho Simples",
+        "category": "bath",
+        "duration": "45 min",
+        "price": 69.9,
+        "description": "Higienizacao completa, secagem, escovacao e perfume suave.",
+        "features": ["Shampoo neutro", "Secagem assistida", "Escovacao"]
+      },
+      {
+        "id": "bath-higgins",
+        "name": "Banho + Tosa Higgins",
+        "category": "bath",
+        "duration": "1h 40 min",
+        "price": 139.9,
+        "description": "Pacote premium com banho, tosa higienica, hidratacao e finalizacao.",
+        "features": ["Tosa higienica", "Hidratacao", "Corte de unhas"]
+      },
+      {
+        "id": "bath-spa",
+        "name": "Spa Relax Pet",
+        "category": "bath",
+        "duration": "1h 15 min",
+        "price": 109.9,
+        "description": "Banho terapeutico com mascara hidratante e cuidado para pele sensivel.",
+        "features": ["Mascara hidratante", "Produto hipoalergenico", "Massagem leve"]
+      }
+    ],
+    "vaccines": [
+      {
+        "id": "vaccine-v10",
+        "name": "Multipla V10",
+        "category": "vaccine",
+        "duration": "20 min",
+        "price": 119.9,
+        "description": "Protecao contra cinomose, parvovirose, leptospirose e outras doencas.",
+        "features": ["Dose anual", "Registro na carteira", "Orientacao veterinaria"]
+      },
+      {
+        "id": "vaccine-rabies",
+        "name": "Antirrabica",
+        "category": "vaccine",
+        "duration": "15 min",
+        "price": 89.9,
+        "description": "Vacina anual obrigatoria para prevencao da raiva.",
+        "features": ["Dose anual", "Aplicacao rapida", "Certificado digital"]
+      },
+      {
+        "id": "vaccine-giardia",
+        "name": "Giardia",
+        "category": "vaccine",
+        "duration": "20 min",
+        "price": 104.9,
+        "description": "Indicada para pets com rotina em parques, hoteis e creches.",
+        "features": ["Protocolo preventivo", "Anamnese simples", "Controle de reforco"]
+      }
+    ]
+  },
+  "serviceHistory": [
+    {
+      "id": "svc-1004",
+      "userId": "user-001",
+      "tutor": "Mariana Souza",
+      "petshopId": "petshop-higgins",
+      "petId": "pet-001",
+      "dateTime": "18/06/2026, 10:30:00",
+      "date": "18/06/2026",
+      "type": "Vacina",
+      "service": "Antirrabica",
+      "pet": "Luna",
+      "status": "Concluido"
+    },
+    {
+      "id": "svc-1003",
+      "userId": "user-001",
+      "tutor": "Mariana Souza",
+      "petshopId": "petshop-higgins",
+      "petId": "pet-001",
+      "dateTime": "03/06/2026, 14:00:00",
+      "date": "03/06/2026",
+      "type": "Banho",
+      "service": "Banho + Tosa Higgins",
+      "pet": "Luna",
+      "status": "Agendado"
+    },
+    {
+      "id": "svc-1002",
+      "userId": "user-001",
+      "tutor": "Mariana Souza",
+      "petshopId": "petshop-higgins",
+      "petId": "pet-002",
+      "dateTime": "29/05/2026, 09:15:00",
+      "date": "29/05/2026",
+      "type": "Vacina",
+      "service": "Multipla V10",
+      "pet": "Theo",
+      "status": "Concluido"
+    },
+    {
+      "id": "svc-1001",
+      "userId": "user-001",
+      "tutor": "Mariana Souza",
+      "petshopId": "petshop-higgins",
+      "petId": "pet-001",
+      "dateTime": "22/05/2026, 16:45:00",
+      "date": "22/05/2026",
+      "type": "Banho",
+      "service": "Banho Simples",
+      "pet": "Luna",
+      "status": "Cancelado"
+    }
+  ],
+  "notifications": [],
+  "vaccinationRecords": [
+    {
+      "id": "vac-001",
+      "petId": "pet-001",
+      "pet": "Luna",
+      "name": "Multipla V10",
+      "appliedAt": "29/05/2026",
+      "nextDose": "29/05/2027",
+      "batch": "V10-26A91",
+      "veterinarian": "Dra. Paula Nunes"
+    },
+    {
+      "id": "vac-002",
+      "petId": "pet-001",
+      "pet": "Luna",
+      "name": "Antirrabica",
+      "appliedAt": "18/06/2026",
+      "nextDose": "18/06/2027",
+      "batch": "RAB-7X204",
+      "veterinarian": "Dr. Theo Martins"
+    },
+    {
+      "id": "vac-003",
+      "petId": "pet-002",
+      "pet": "Theo",
+      "name": "Giardia",
+      "appliedAt": "12/02/2026",
+      "nextDose": "12/02/2027",
+      "batch": "GIA-4401B",
+      "veterinarian": "Dra. Paula Nunes"
+    }
+  ]
+}

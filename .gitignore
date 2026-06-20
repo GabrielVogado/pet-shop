@@ -1,0 +1,8 @@
+# Dependências do Node
+node_modules/
+
+# Diretório de build/distribuição
+dist/
+
+# Documento de contexto específico
+CONTEXTO.md
