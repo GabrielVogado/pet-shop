@@ -41,7 +41,16 @@ export function OwnerDashboard({
 	const selectedTutor = selectedAppointment
 		? users.find((user) => user.id === selectedAppointment.userId)
 		: null;
-	const selectedPet = selectedTutor?.pets.find((pet) => pet.id === selectedAppointment?.petId);
+	const selectedPet = selectedAppointment
+		? {
+				id: selectedAppointment.petId,
+				name: selectedAppointment.pet,
+				species: selectedAppointment.petSpecies,
+				breed: selectedAppointment.petBreed,
+				age: selectedAppointment.petAge,
+				notes: selectedAppointment.petNotes
+			}
+		: null;
 
 	function getTutorName(appointment) {
 		return (

@@ -28,15 +28,20 @@ export function App() {
   const [catalogServices, setCatalogServices] = useState({ baths: [], vaccines: [] });
   const [ownerServices, setOwnerServices] = useState([]);
 
+  async function refreshPetshops(preferredPetshopId = null) {
+    try {
+      const data = await petshopsApi.list();
+      const singlePetshop = Array.isArray(data) && data.length > 0 ? [data[0]] : [];
+      setPetshops(singlePetshop);
+      setSelectedPetshopId(preferredPetshopId ?? singlePetshop[0]?.petshopId ?? null);
+    } catch {
+      setPetshops([]);
+      setSelectedPetshopId(preferredPetshopId ?? null);
+    }
+  }
+
   useEffect(() => {
-    petshopsApi
-      .list()
-      .then((data) => {
-        const singlePetshop = Array.isArray(data) && data.length > 0 ? [data[0]] : [];
-        setPetshops(singlePetshop);
-        setSelectedPetshopId(singlePetshop[0]?.petshopId ?? null);
-      })
-      .catch(() => {});
+    refreshPetshops();
   }, []);
 
   useEffect(() => {
@@ -97,6 +102,7 @@ export function App() {
   async function handleRegisterUser(formData) {
     try {
       await authApi.register(formData);
+      await refreshPetshops();
       return { ok: true, message: 'Cadastro criado. Agora faca login para acessar sua conta.' };
     } catch (error) {
       return { ok: false, message: error.message || 'Nao foi possivel concluir o cadastro.' };
@@ -110,9 +116,7 @@ export function App() {
       setSessionUser(auth.user);
       setActivePetId(null);
       setActiveTab('request');
-      if (auth.user?.role === 'owner' && auth.user.petshopId) {
-        setSelectedPetshopId(auth.user.petshopId);
-      }
+      await refreshPetshops(auth.user?.role === 'owner' ? auth.user.petshopId : null);
       return { ok: true };
     } catch (error) {
       return { ok: false, message: error.message || 'Email ou senha invalidos.' };
@@ -126,6 +130,8 @@ export function App() {
     setHistory([]);
     setNotifications([]);
     setOwnerServices([]);
+    setPetshops([]);
+    setSelectedPetshopId(null);
     setActivePetId(null);
     setActiveTab('request');
   }

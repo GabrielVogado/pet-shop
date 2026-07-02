@@ -7,6 +7,7 @@ import com.petcare.dto.AgendamentoRequest;
 import com.petcare.dto.AgendamentoView;
 import com.petcare.model.Roles;
 import com.petcare.model.Usuario;
+import com.petcare.repository.PetRepository;
 import com.petcare.repository.UsuarioRepository;
 import com.petcare.service.AgendamentoService;
 
@@ -37,6 +38,9 @@ public class AgendamentoResource {
     UsuarioRepository usuarios;
 
     @Inject
+    PetRepository pets;
+
+    @Inject
     JsonWebToken jwt;
 
     /**
@@ -48,11 +52,17 @@ public class AgendamentoResource {
     public List<AgendamentoView> list(@QueryParam("petId") String petId) {
         if (isOwner()) {
             return service.listForPetshop(currentPetshopId()).stream()
-                    .map(a -> AgendamentoView.from(a, usuarios.findById(a.getUserId()).orElse(null)))
+                .map(a -> AgendamentoView.from(
+                    a,
+                    usuarios.findById(a.getUserId()).orElse(null),
+                    pets.findById(a.getPetId()).orElse(null)))
                     .toList();
         }
         return service.listForTutor(jwt.getSubject(), petId).stream()
-                .map(a -> AgendamentoView.from(a, usuarios.findById(a.getUserId()).orElse(null)))
+            .map(a -> AgendamentoView.from(
+                a,
+                usuarios.findById(a.getUserId()).orElse(null),
+                pets.findById(a.getPetId()).orElse(null)))
                 .toList();
     }
 
@@ -62,7 +72,7 @@ public class AgendamentoResource {
         Usuario tutor = currentUser();
         var created = service.create(tutor, request);
         return Response.status(Response.Status.CREATED)
-                .entity(AgendamentoView.from(created, tutor))
+            .entity(AgendamentoView.from(created, tutor, pets.findById(created.getPetId()).orElse(null)))
                 .build();
     }
 
@@ -86,10 +96,16 @@ public class AgendamentoResource {
     public AgendamentoView cancel(@PathParam("id") String id) {
         if (isOwner()) {
             var updated = service.cancelByPetshop(currentPetshopId(), id);
-            return AgendamentoView.from(updated, usuarios.findById(updated.getUserId()).orElse(null));
+            return AgendamentoView.from(
+                    updated,
+                    usuarios.findById(updated.getUserId()).orElse(null),
+                    pets.findById(updated.getPetId()).orElse(null));
         }
         var updated = service.cancelByTutor(jwt.getSubject(), id);
-        return AgendamentoView.from(updated, usuarios.findById(updated.getUserId()).orElse(null));
+        return AgendamentoView.from(
+                updated,
+                usuarios.findById(updated.getUserId()).orElse(null),
+                pets.findById(updated.getPetId()).orElse(null));
     }
 
     private boolean isOwner() {
