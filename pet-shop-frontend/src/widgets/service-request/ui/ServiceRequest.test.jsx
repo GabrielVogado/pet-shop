@@ -5,7 +5,7 @@ import { ServiceRequest } from './ServiceRequest';
 import { services } from '../../../test/fixtures';
 
 describe('ServiceRequest', () => {
-	it('agenda um banho para o petshop selecionado', async () => {
+	it('agenda um banho para o petshop unico ativo', async () => {
 		const user = userEvent.setup();
 		const onSchedule = vi.fn();
 		const onSelectPetshop = vi.fn();
@@ -18,11 +18,8 @@ describe('ServiceRequest', () => {
 			<ServiceRequest
 				pet={{ id: 'pet-1', name: 'Luna' }}
 				services={services}
-				petshops={[
-					{ petshopId: 'petshop-1', businessName: 'Petshop 1' },
-					{ petshopId: 'petshop-2', businessName: 'Petshop 2' }
-				]}
-				selectedPetshopId="petshop-1"
+				petshops={[{ petshopId: 'petshop-1', businessName: 'Petshop 1' }]}
+				selectedPetshopId=""
 				onSelectPetshop={onSelectPetshop}
 				onLoadAvailability={onLoadAvailability}
 				onSchedule={onSchedule}
@@ -37,6 +34,7 @@ describe('ServiceRequest', () => {
 		expect(onSchedule).toHaveBeenCalledTimes(1);
 		expect(onSchedule).toHaveBeenCalledWith(services.baths[0], 'petshop-1', '2026-07-10T10:00');
 		expect(onLoadAvailability).toHaveBeenCalledWith('petshop-1', 'bath-1');
+		expect(onSelectPetshop).toHaveBeenCalledWith('petshop-1');
 	});
 
 	it('desabilita agendamento sem petshop selecionado', () => {
@@ -57,7 +55,7 @@ describe('ServiceRequest', () => {
 		expect(screen.getByRole('button', { name: 'Agendar' })).toBeDisabled();
 	});
 
-	it('auto seleciona petshop quando existe apenas um cadastrado', async () => {
+	it('exibe nome do petshop unico sem seletor', async () => {
 		const onSelectPetshop = vi.fn();
 
 		render(
@@ -76,7 +74,7 @@ describe('ServiceRequest', () => {
 			expect(onSelectPetshop).toHaveBeenCalledWith('petshop-unico');
 		});
 
-		expect(screen.getByRole('option', { name: 'AgroPet' })).toBeInTheDocument();
-		expect(screen.getByRole('combobox', { name: 'Petshop' })).toBeDisabled();
+		expect(screen.getByText('AgroPet')).toBeInTheDocument();
+		expect(screen.queryByRole('combobox', { name: 'Petshop' })).not.toBeInTheDocument();
 	});
 });

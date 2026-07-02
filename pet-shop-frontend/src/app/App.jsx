@@ -32,16 +32,9 @@ export function App() {
     petshopsApi
       .list()
       .then((data) => {
-        setPetshops(data);
-        if (data.length === 1) {
-          setSelectedPetshopId(data[0].petshopId);
-        } else if (data.length > 1) {
-          setSelectedPetshopId((current) =>
-            current && data.some((shop) => shop.petshopId === current) ? current : null
-          );
-        } else {
-          setSelectedPetshopId(null);
-        }
+        const singlePetshop = Array.isArray(data) && data.length > 0 ? [data[0]] : [];
+        setPetshops(singlePetshop);
+        setSelectedPetshopId(singlePetshop[0]?.petshopId ?? null);
       })
       .catch(() => {});
   }, []);

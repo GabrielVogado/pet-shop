@@ -210,9 +210,9 @@ describe('App integration flows', () => {
 				name: 'Carlos Dono',
 				email: 'owner@example.com',
 				businessName: 'Pet Shop Central',
-				petshopId: expect.stringMatching(/^pet-shop-central-/),
 				firstPet: null
 			})
 		);
+		expect(sharedApiMocks.authApi.register.mock.calls.at(-1)[0]).not.toHaveProperty('petshopId');
 	});
 });
