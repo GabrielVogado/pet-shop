@@ -1,0 +1,60 @@
+{
+  "baths": [
+    {
+      "id": "bath-simple",
+      "name": "Banho Simples",
+      "category": "bath",
+      "duration": "45 min",
+      "price": 69.9,
+      "description": "Higienizacao completa, secagem, escovacao e perfume suave.",
+      "features": ["Shampoo neutro", "Secagem assistida", "Escovacao"]
+    },
+    {
+      "id": "bath-higgins",
+      "name": "Banho + Tosa Higgins",
+      "category": "bath",
+      "duration": "1h 40 min",
+      "price": 139.9,
+      "description": "Pacote premium com banho, tosa higienica, hidratacao e finalizacao.",
+      "features": ["Tosa higienica", "Hidratacao", "Corte de unhas"]
+    },
+    {
+      "id": "bath-spa",
+      "name": "Spa Relax Pet",
+      "category": "bath",
+      "duration": "1h 15 min",
+      "price": 109.9,
+      "description": "Banho terapeutico com mascara hidratante e cuidado para pele sensivel.",
+      "features": ["Mascara hidratante", "Produto hipoalergenico", "Massagem leve"]
+    }
+  ],
+  "vaccines": [
+    {
+      "id": "vaccine-v10",
+      "name": "Multipla V10",
+      "category": "vaccine",
+      "duration": "20 min",
+      "price": 119.9,
+      "description": "Protecao contra cinomose, parvovirose, leptospirose e outras doencas.",
+      "features": ["Dose anual", "Registro na carteira", "Orientacao veterinaria"]
+    },
+    {
+      "id": "vaccine-rabies",
+      "name": "Antirrabica",
+      "category": "vaccine",
+      "duration": "15 min",
+      "price": 89.9,
+      "description": "Vacina anual obrigatoria para prevencao da raiva.",
+      "features": ["Dose anual", "Aplicacao rapida", "Certificado digital"]
+    },
+    {
+      "id": "vaccine-giardia",
+      "name": "Giardia",
+      "category": "vaccine",
+      "duration": "20 min",
+      "price": 104.9,
+      "description": "Indicada para pets com rotina em parques, hoteis e creches.",
+      "features": ["Protocolo preventivo", "Anamnese simples", "Controle de reforco"]
+    }
+  ]
+}

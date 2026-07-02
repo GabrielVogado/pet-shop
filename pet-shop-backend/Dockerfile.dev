@@ -1,0 +1,15 @@
+# Imagem de desenvolvimento: roda Quarkus em dev mode (live reload).
+# O codigo-fonte e montado via bind mount (ver docker-compose.dev.yml),
+# entao nao copiamos nada aqui.
+FROM maven:3.9-eclipse-temurin-17
+WORKDIR /code
+
+# 8080 = HTTP da aplicacao | 5005 = porta de debug remoto (JDWP)
+EXPOSE 8080 5005
+
+# host=0.0.0.0 para ser acessivel fora do container; debug aberto na 5005.
+CMD ["mvn", "quarkus:dev", \
+     "-Dquarkus.http.host=0.0.0.0", \
+     "-Dquarkus.analytics.disabled=true", \
+     "-Ddebug=5005", \
+     "-Dquarkus.debug.host=0.0.0.0"]

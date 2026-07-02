@@ -1,8 +1,33 @@
-# Dependências do Node
+﻿# Dependências do Node
 node_modules/
+.idea/
+.kilo/
+**/.idea/
+playwright-report/
+test-results/
+pet-shop-frontend/playwright-report/
+pet-shop-frontend/test-results/
 
 # Diretório de build/distribuição
 dist/
 
+# Backend Java / Maven
+target/
+*.class
+
+# Chaves de assinatura JWT (não versionar chave privada real em produção)
+*.pem
+*.key
+*.p12
+*.jks
+
 # Documento de contexto específico
 CONTEXTO.md
+
+# Scripts e documentos apenas da raiz do projeto
+/*.py
+/*.ps1
+/*.md
+/*.txt
+/*.csv
+/*.bak
