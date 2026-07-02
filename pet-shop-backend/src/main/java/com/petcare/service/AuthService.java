@@ -17,6 +17,7 @@ import jakarta.inject.Inject;
  */
 @ApplicationScoped
 public class AuthService {
+    public static final String SINGLE_PETSHOP_ID = "petshop-unico";
 
     @Inject
     UsuarioRepository usuarios;
@@ -38,6 +39,9 @@ public class AuthService {
         if (owner && (req.businessName() == null || req.businessName().isBlank())) {
             throw ApiException.badRequest("Informe a razao social ou nome da loja.");
         }
+        if (owner && usuarios.existsOwner()) {
+            throw ApiException.conflict("Ja existe um petshop cadastrado no sistema.");
+        }
         if (!owner && (req.phone() == null || req.phone().isBlank())) {
             throw ApiException.badRequest("Informe o telefone do tutor.");
         }
@@ -56,7 +60,7 @@ public class AuthService {
 
         if (owner) {
             usuario.setBusinessName(req.businessName().trim());
-            usuario.setPetshopId(generateUniquePetshopId(req.businessName()));
+            usuario.setPetshopId(SINGLE_PETSHOP_ID);
         }
 
         Usuario saved = usuarios.insert(usuario);
@@ -87,16 +91,4 @@ public class AuthService {
         }
         return usuario;
     }
-
-    private synchronized String generateUniquePetshopId(String businessName) {
-        String base = Ids.slug(businessName);
-        String candidate = base;
-        int counter = 1;
-        while (usuarios.existsByPetshopId(candidate)) {
-            candidate = base + "-" + counter;
-            counter++;
-        }
-        return candidate;
-    }
 }
-

@@ -10,7 +10,6 @@ const initialRegister = {
 	address: '',
 	password: '',
 	businessName: '',
-	petshopId: '',
 	firstPet: {
 		name: '',
 		species: 'Cachorro',
@@ -44,15 +43,7 @@ export function AuthScreen({ onRegister, onLogin }) {
 	}, [registerForm.role]);
 
 	function updateRegister(field, value) {
-		setRegisterForm((current) => {
-			const nextForm = { ...current, [field]: value };
-
-			if (field === 'businessName') {
-				nextForm.petshopId = generatePetshopId(value);
-			}
-
-			return nextForm;
-		});
+		setRegisterForm((current) => ({ ...current, [field]: value }));
 	}
 
 	function updateFirstPet(field, value) {
@@ -115,22 +106,22 @@ export function AuthScreen({ onRegister, onLogin }) {
 						</div>
 						<div>
 							<h1 className="text-2xl font-bold text-ink">PetCare Agenda</h1>
-							<p className="text-sm text-ink/60">SaaS para tutores, pets e petshops</p>
+							<p className="text-sm text-ink/60">Gestao para tutores, pets e um petshop</p>
 						</div>
 					</div>
 					<div className="space-y-3">
 						<h2 className="text-3xl font-bold text-ink sm:text-4xl">
-							Cadastros separados para clientes e empresas.
+							Cadastros separados para clientes e petshop.
 						</h2>
 						<p className="max-w-xl text-base leading-7 text-ink/70">
 							Tutores gerenciam seus pets e agendamentos. Donos de petshop acessam um dashboard
-							isolado por empresa com dados vinculados ao seu petshop.
+							do unico estabelecimento cadastrado no sistema.
 						</p>
 					</div>
 					<div className="grid gap-3 sm:grid-cols-3">
 						<InfoBox title="Role" text="Tutor ou owner gravado no usuario." />
-						<InfoBox title="Identificador interno" text="Gerado automaticamente para empresas." />
-						<InfoBox title="Escopo" text="Dados separados por usuario e loja." />
+						<InfoBox title="Petshop unico" text="Apenas um estabelecimento ativo no momento." />
+						<InfoBox title="Escopo" text="Dados separados por usuario dentro do mesmo petshop." />
 					</div>
 				</section>
 
@@ -348,7 +339,7 @@ function OwnerFields({ form, onChange }) {
 					onChange={(value) => onChange('businessName', value)}
 				/>
 				<div className="rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink/65">
-					Identificador interno gerado automaticamente no cadastro.
+					Este cadastro usa automaticamente o petshop unico do sistema.
 				</div>
 			</div>
 		</div>
@@ -390,16 +381,4 @@ function InfoBox({ title, text }) {
 			<p className="mt-1 text-sm text-ink/60">{text}</p>
 		</div>
 	);
-}
-
-function generatePetshopId(value) {
-	const slug = value
-		.toLowerCase()
-		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
-		.replace(/[^a-z0-9]+/g, '-')
-		.replace(/^-+|-+$/g, '')
-		.slice(0, 32);
-
-	return slug ? `${slug}-${Date.now().toString(36)}` : '';
 }

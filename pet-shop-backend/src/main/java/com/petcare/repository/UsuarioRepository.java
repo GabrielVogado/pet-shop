@@ -47,10 +47,16 @@ public class UsuarioRepository {
                 .isPresent();
     }
 
+    public boolean existsOwner() {
+        return template.select(Usuario.class)
+                .where("role").eq("owner")
+                .singleResult()
+                .isPresent();
+    }
+
     public List<Usuario> findPetshops() { return template.select(Usuario.class).where("role").eq("owner").result(); }
 
     public List<Usuario> findAll() {
         return template.select(Usuario.class).result();
     }
 }
-

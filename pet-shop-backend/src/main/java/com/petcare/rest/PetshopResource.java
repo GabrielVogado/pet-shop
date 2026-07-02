@@ -26,8 +26,10 @@ public class PetshopResource {
     @GET
     public List<PetshopView> list() {
         return usuarios.findPetshops().stream()
-            .map(u -> new PetshopView(u.getPetshopId(),
-                u.getName() != null && !u.getName().isBlank() ? u.getName() : u.getPetshopId()))
-                .toList();
+                .findFirst()
+                .map(u -> List.of(new PetshopView(
+                        u.getPetshopId(),
+                        u.getName() != null && !u.getName().isBlank() ? u.getName() : u.getPetshopId())))
+                .orElse(List.of());
     }
 }

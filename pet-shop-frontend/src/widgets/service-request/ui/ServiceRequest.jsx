@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { CalendarClock, Check, Syringe, Waves } from 'lucide-react';
+import { CalendarClock, Check, Store, Syringe, Waves } from 'lucide-react';
 
 const currency = new Intl.NumberFormat('pt-BR', {
 	style: 'currency',
@@ -30,16 +30,17 @@ export function ServiceRequest({
 		[serviceType, services]
 	);
 	const selectedService = visibleServices.find((service) => service.id === selectedServiceId) ?? null;
+	const activePetshopId = selectedPetshopId || petshops[0]?.petshopId || null;
+	const activePetshopName =
+		petshops[0]?.name ?? petshops[0]?.businessName ?? petshops[0]?.petshopId ?? 'Petshop';
 
-	const showPetshopSelector = petshops.length > 0;
 	const noPetshops = petshops.length === 0;
-	const singlePetshop = petshops.length === 1;
 
 	useEffect(() => {
-		if (petshops.length === 1 && !selectedPetshopId) {
+		if (activePetshopId && activePetshopId !== selectedPetshopId) {
 			onSelectPetshop(petshops[0].petshopId);
 		}
-	}, [petshops, selectedPetshopId, onSelectPetshop]);
+	}, [activePetshopId, petshops, selectedPetshopId, onSelectPetshop]);
 
 	useEffect(() => {
 		if (!visibleServices.length) {
@@ -56,7 +57,7 @@ export function ServiceRequest({
 		let cancelled = false;
 
 		async function loadInitialAvailability() {
-			if (!selectedPetshopId || !selectedServiceId || !onLoadAvailability) {
+			if (!activePetshopId || !selectedServiceId || !onLoadAvailability) {
 				setAvailableDates([]);
 				setAvailableTimes([]);
 				setSelectedDate('');
@@ -67,7 +68,7 @@ export function ServiceRequest({
 			setLoadingAvailability(true);
 			setAvailabilityError('');
 			try {
-				const data = await onLoadAvailability(selectedPetshopId, selectedServiceId);
+				const data = await onLoadAvailability(activePetshopId, selectedServiceId);
 				if (cancelled) {
 					return;
 				}
@@ -97,20 +98,20 @@ export function ServiceRequest({
 		return () => {
 			cancelled = true;
 		};
-	}, [selectedPetshopId, selectedServiceId, onLoadAvailability]);
+	}, [activePetshopId, selectedServiceId, onLoadAvailability]);
 
 	useEffect(() => {
 		let cancelled = false;
 
 		async function loadTimesForDate() {
-			if (!selectedDate || !selectedPetshopId || !selectedServiceId || !onLoadAvailability) {
+			if (!selectedDate || !activePetshopId || !selectedServiceId || !onLoadAvailability) {
 				return;
 			}
 
 			setLoadingAvailability(true);
 			setAvailabilityError('');
 			try {
-				const data = await onLoadAvailability(selectedPetshopId, selectedServiceId, selectedDate);
+				const data = await onLoadAvailability(activePetshopId, selectedServiceId, selectedDate);
 				if (cancelled) {
 					return;
 				}
@@ -135,7 +136,7 @@ export function ServiceRequest({
 		return () => {
 			cancelled = true;
 		};
-	}, [selectedDate, selectedPetshopId, selectedServiceId, onLoadAvailability]);
+	}, [selectedDate, activePetshopId, selectedServiceId, onLoadAvailability]);
 
 	function handleSchedule(service) {
 		if (service.id !== selectedServiceId) {
@@ -147,7 +148,7 @@ export function ServiceRequest({
 			return;
 		}
 
-		onSchedule(service, selectedPetshopId, `${selectedDate}T${selectedTime}`);
+		onSchedule(service, activePetshopId, `${selectedDate}T${selectedTime}`);
 	}
 
 	return (
@@ -160,29 +161,10 @@ export function ServiceRequest({
 					</h2>
 				</div>
 
-				{showPetshopSelector && (
-					<div className="flex items-end gap-2">
-						<div className="flex flex-col">
-							<label className="mb-1 text-xs font-bold text-ink/60" htmlFor="petshop-select">
-								Petshop
-							</label>
-							<select
-								id="petshop-select"
-								value={selectedPetshopId || ''}
-								onChange={(e) => onSelectPetshop(e.target.value)}
-								disabled={singlePetshop}
-								className="rounded-md border border-ink/20 bg-white px-3 py-2 text-sm font-bold text-ink focus:outline-none focus:ring-2 focus:ring-ocean"
-							>
-								<option value="" disabled>
-									Selecione um petshop
-								</option>
-								{petshops.map((ps) => (
-									<option key={ps.petshopId} value={ps.petshopId}>
-										{ps.name ?? ps.businessName ?? 'Petshop sem nome'}
-									</option>
-								))}
-							</select>
-						</div>
+				{!noPetshops && (
+					<div className="inline-flex items-center gap-2 rounded-md border border-ink/10 bg-white px-3 py-2 text-sm font-bold text-ink/70">
+						<Store size={16} className="text-ocean" />
+						{activePetshopName}
 					</div>
 				)}
 
@@ -285,7 +267,7 @@ export function ServiceRequest({
 				{visibleServices.map((service) => {
 					const isSelectedService = service.id === selectedServiceId;
 					const canSchedule =
-						isSelectedService && !!selectedPetshopId && !!selectedDate && !!selectedTime && !noPetshops;
+						isSelectedService && !!activePetshopId && !!selectedDate && !!selectedTime && !noPetshops;
 
 					return (
 						<article
