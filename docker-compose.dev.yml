@@ -1,0 +1,70 @@
+# Ambiente de DESENVOLVIMENTO com hot-reload.
+# Backend: mvn quarkus:dev (live coding). Frontend: Vite dev server.
+# Suba com:  docker compose -f docker-compose.dev.yml up -d --build
+services:
+  mongodb:
+    image: mongo:7
+    container_name: petcare-mongo-dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - petcare-mongo-dev-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - petcare-dev-net
+
+  backend-dev:
+    build:
+      context: ./pet-shop-backend
+      dockerfile: Dockerfile.dev
+    container_name: petcare-backend-dev
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      QUARKUS_MONGODB_CONNECTION_STRING: mongodb://mongodb:27017
+      QUARKUS_MONGODB_DATABASE: petcare
+      JNOSQL_DOCUMENT_DATABASE: petcare
+      QUARKUS_HTTP_CORS_ORIGINS: "http://localhost:5173"
+    volumes:
+      # Codigo-fonte bind-montado: editar no host recarrega no container
+      - ./pet-shop-backend:/code
+      # Cache do Maven persistido entre reinicios
+      - petcare-maven-cache:/root/.m2
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    networks:
+      - petcare-dev-net
+
+  frontend-dev:
+    image: node:20-alpine
+    container_name: petcare-frontend-dev
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    environment:
+      VITE_API_URL: "http://localhost:8080"
+      # Polling garante hot-reload de arquivos montados no Windows/WSL
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./pet-shop-frontend:/app
+      # node_modules isolado (binarios nativos linux do container)
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend-dev
+    networks:
+      - petcare-dev-net
+
+volumes:
+  petcare-mongo-dev-data:
+  petcare-maven-cache:
+
+networks:
+  petcare-dev-net:
+    driver: bridge
