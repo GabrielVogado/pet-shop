@@ -1,0 +1,100 @@
+package com.petcare.infrastructure.web.controller;
+
+import java.util.List;
+
+import com.petcare.application.dto.input.PetRequest;
+import com.petcare.application.dto.output.PetView;
+import com.petcare.domain.entity.Pet;
+import com.petcare.infrastructure.persistence.MongoPetRepository;
+import com.petcare.infrastructure.web.exception.ApiException;
+import com.petcare.shared.util.IdGenerator;
+
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
+@Path("/api/pets")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+@RolesAllowed("tutor")
+public class PetController {
+
+    @Inject
+    MongoPetRepository pets;
+
+    @Inject
+    JsonWebToken jwt;
+
+    @GET
+    public List<PetView> list() {
+        return pets.findByOwnerUserId(jwt.getSubject()).stream()
+                .map(PetView::from)
+                .toList();
+    }
+
+    @POST
+    public Response create(@Valid PetRequest request) {
+        Pet pet = new Pet();
+        pet.setId(IdGenerator.newId("pet"));
+        pet.setOwnerUserId(jwt.getSubject());
+        pet.setName(request.name().trim());
+        pet.setSpecies(request.species());
+        pet.setBreed(request.breed());
+        pet.setAge(request.age());
+        pet.setNotes(request.notes());
+        Pet saved = pets.insert(pet);
+        return Response.status(Response.Status.CREATED)
+                .entity(PetView.from(saved))
+                .build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    public PetView update(@PathParam("id") String id, @Valid PetRequest request) {
+        Pet current = pets.findById(id)
+                .orElseThrow(() -> ApiException.notFound("Pet nao encontrado."));
+
+        if (!jwt.getSubject().equals(current.getOwnerUserId())) {
+            throw ApiException.forbidden("Voce nao pode editar este pet.");
+        }
+
+        current.setName(request.name().trim());
+        current.setSpecies(request.species());
+        current.setBreed(request.breed());
+        current.setAge(request.age());
+        current.setNotes(request.notes());
+
+        return PetView.from(pets.update(current));
+    }
+
+    @GET
+    @Path("/{id}")
+    public PetView getPet(@PathParam("id") String id) {
+        Pet pet = pets.findById(id)
+                .orElseThrow(() -> ApiException.notFound("Pet nao encontrado."));
+
+        if (!jwt.getSubject().equals(pet.getOwnerUserId())) {
+            throw ApiException.forbidden("Voce nao pode acessar este pet.");
+        }
+
+        return PetView.from(pet);
+    }
+}
+
+
+
+
+
+
+
+
