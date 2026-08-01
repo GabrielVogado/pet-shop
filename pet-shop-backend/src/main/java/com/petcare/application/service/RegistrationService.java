@@ -1,8 +1,8 @@
 package com.petcare.application.service;
 
 import com.petcare.application.dto.input.RegisterRequest;
-import com.petcare.application.port.PetRepository;
-import com.petcare.application.port.UserRepository;
+import com.petcare.infrastructure.persistence.MongoPetRepository;
+import com.petcare.infrastructure.persistence.MongoUserRepository;
 import com.petcare.domain.entity.Pet;
 import com.petcare.domain.entity.Usuario;
 import com.petcare.domain.valueobject.UserRole;
@@ -22,10 +22,10 @@ public class RegistrationService {
     public static final String SINGLE_PETSHOP_ID = "petshop-unico";
 
     @Inject
-    UserRepository usuarios;
+    MongoUserRepository usuarios;
 
     @Inject
-    PetRepository pets;
+    MongoPetRepository pets;
 
     @Inject
     BCryptPasswordEncoder passwordEncoder;
@@ -84,4 +84,5 @@ public class RegistrationService {
         return saved;
     }
 }
+
 

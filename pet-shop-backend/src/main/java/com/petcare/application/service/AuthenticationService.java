@@ -1,6 +1,6 @@
 package com.petcare.application.service;
 
-import com.petcare.application.port.UserRepository;
+import com.petcare.infrastructure.persistence.MongoUserRepository;
 import com.petcare.domain.entity.Usuario;
 import com.petcare.infrastructure.security.BCryptPasswordEncoder;
 import com.petcare.infrastructure.web.exception.ApiException;
@@ -16,7 +16,7 @@ import jakarta.inject.Inject;
 public class AuthenticationService {
 
     @Inject
-    UserRepository usuarios;
+    MongoUserRepository usuarios;
 
     @Inject
     BCryptPasswordEncoder passwordEncoder;
@@ -31,3 +31,4 @@ public class AuthenticationService {
         return usuario;
     }
 }
+
