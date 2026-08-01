@@ -8,6 +8,7 @@ import com.petcare.model.Usuario;
 import com.petcare.security.TokenService;
 import com.petcare.service.AuthService;
 
+import io.smallrye.faulttolerance.api.RateLimit;
 import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -41,6 +42,7 @@ public class AuthResource {
 
     @POST
     @Path("/login")
+    @RateLimit(value = 5, window = 1, windowUnit = java.time.temporal.ChronoUnit.MINUTES)
     public AuthResponse login(@Valid LoginRequest request) {
         Usuario usuario = authService.login(request.email(), request.password());
         String token = tokenService.generate(usuario);

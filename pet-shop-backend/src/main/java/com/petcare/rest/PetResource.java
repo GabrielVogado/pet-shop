@@ -75,4 +75,17 @@ public class PetResource {
 
         return PetView.from(pets.update(current));
     }
+
+    @GET
+    @Path("/{id}")
+    public PetView getPet(@PathParam("id") String id) {
+        Pet pet = pets.findById(id)
+                .orElseThrow(() -> ApiException.notFound("Pet nao encontrado."));
+
+        if (!jwt.getSubject().equals(pet.getOwnerUserId())) {
+            throw ApiException.forbidden("Voce nao pode acessar este pet.");
+        }
+
+        return PetView.from(pet);
+    }
 }

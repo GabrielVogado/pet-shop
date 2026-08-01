@@ -21,6 +21,9 @@ target/
 *.p12
 *.jks
 
+# Variáveis de ambiente com segredos (nunca commitar)
+.env
+
 # Documento de contexto específico
 CONTEXTO.md
 
