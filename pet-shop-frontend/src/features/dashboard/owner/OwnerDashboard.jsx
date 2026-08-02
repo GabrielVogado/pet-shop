@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
 	CalendarCheck,
 	LogOut,
@@ -22,8 +22,19 @@ export function OwnerDashboard({
 	onCancelAppointment,
 	onLogout
 }) {
-	const [selectedAppointmentId, setSelectedAppointmentId] = useState(appointments[0]?.id ?? null);
+	const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
 	const [activeTab, setActiveTab] = useState('appointments');
+
+	useEffect(() => {
+		if (!selectedAppointmentId) {
+			return;
+		}
+
+		const exists = appointments.some((appointment) => appointment.id === selectedAppointmentId);
+		if (!exists) {
+			setSelectedAppointmentId(null);
+		}
+	}, [appointments, selectedAppointmentId]);
 
 	const metrics = useMemo(() => {
 		return {
@@ -35,9 +46,7 @@ export function OwnerDashboard({
 	}, [appointments]);
 
 	const selectedAppointment =
-		appointments.find((appointment) => appointment.id === selectedAppointmentId) ??
-		appointments[0] ??
-		null;
+		appointments.find((appointment) => appointment.id === selectedAppointmentId) ?? null;
 	const selectedTutor = selectedAppointment
 		? users.find((user) => user.id === selectedAppointment.userId)
 		: null;
@@ -351,7 +360,6 @@ function TableHead({ children }) {
 function TableCell({ children }) {
 	return <td className="whitespace-nowrap px-4 py-4 text-sm text-ink/75">{children}</td>;
 }
-
 
 
 
