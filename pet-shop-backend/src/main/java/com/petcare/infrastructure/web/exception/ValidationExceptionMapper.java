@@ -31,7 +31,7 @@ public class ValidationExceptionMapper {
         }
 
         return Response.status(Response.Status.BAD_REQUEST)
-                .entity(Map.of("message", "DIAG:" + message))
+                .entity(Map.of("message", message))
                 .build();
     }
 }

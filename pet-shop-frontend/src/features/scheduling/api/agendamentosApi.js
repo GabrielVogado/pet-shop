@@ -1,4 +1,4 @@
-import { request } from '../../../shared/api/httpClientClient';
+import { request } from '../../../shared/api/httpClient';
 
 export const agendamentosApi = {
   list: (petId) => request(`/api/agendamentos${petId ? `?petId=${encodeURIComponent(petId)}` : ''}`),

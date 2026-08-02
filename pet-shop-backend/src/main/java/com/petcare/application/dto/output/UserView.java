@@ -1,7 +1,5 @@
 package com.petcare.application.dto.output;
 
-import com.petcare.application.dto.output.UserView;
-
 import com.petcare.domain.entity.Usuario;
 
 /**

@@ -38,10 +38,17 @@ const { sharedApiMocks, streamHookMocks } = vi.hoisted(() => ({
 	}
 }));
 
-vi.mock('../shared/api', () => sharedApiMocks);
-vi.mock('../features/service-catalog-stream/model/useServiceCatalogStream', () => streamHookMocks);
+vi.mock('../shared/api/httpClient', () => ({
+  getToken: vi.fn(() => null),
+  setToken: sharedApiMocks.setToken,
+  clearToken: sharedApiMocks.clearToken,
+  request: vi.fn(),
+}));
+vi.mock('../features/realtime/hooks/useCatalogStream', () => ({
+  useServiceCatalogStream: streamHookMocks.useServiceCatalogStream,
+}));
 
-import { App } from './App';
+import App from './App';
 
 async function fillAndSubmitLogin(user, email, password) {
 	await user.type(screen.getByLabelText('Email'), email);

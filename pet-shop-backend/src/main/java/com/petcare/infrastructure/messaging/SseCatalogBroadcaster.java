@@ -1,14 +1,15 @@
 package com.petcare.infrastructure.messaging;
 
 import com.petcare.application.dto.output.ServicoView;
-
 import com.petcare.infrastructure.messaging.CatalogUpdate;
-import com.petcare.application.dto.output.ServicoView;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.sse.Sse;
 import jakarta.ws.rs.sse.SseEventSink;
 import org.jboss.logging.Logger;
-import java.util.stream.Collectors;
+
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -17,6 +18,7 @@ import java.util.concurrent.ConcurrentMap;
 public class SseCatalogBroadcaster {
 
     private static final Logger LOG = Logger.getLogger(SseCatalogBroadcaster.class);
+    private static final ObjectMapper MAPPER = new ObjectMapper();
     private final ConcurrentMap<String, SseEventSink> sinks = new ConcurrentHashMap<>();
 
     public String register(SseEventSink sink, String petshopId) {
@@ -34,7 +36,13 @@ public class SseCatalogBroadcaster {
     }
 
     public void broadcast(Sse sse, ServicoView servico, String action, String petshopId) {
-        String payload = toJson(new CatalogUpdate(action, servico));
+        String payload;
+        try {
+            payload = MAPPER.writeValueAsString(new CatalogUpdate(action, servico));
+        } catch (JsonProcessingException e) {
+            LOG.error("Falha ao serializar CatalogUpdate para JSON. Causa: " + e.getMessage());
+            return;
+        }
         sinks.entrySet().removeIf(entry -> {
             if (!entry.getKey().startsWith(petshopId + ":")) {
                 return false;
@@ -48,42 +56,4 @@ public class SseCatalogBroadcaster {
             }
         });
     }
-
-    private String toJson(CatalogUpdate update) {
-        ServicoView s = update.servico();
-        String featuresJson = s.features() == null
-                ? "[]"
-                : s.features().stream().map(this::jsonString).collect(Collectors.joining(",", "[", "]"));
-        return "{"
-                + "\"action\":" + jsonString(update.action()) + ","
-                + "\"servico\":{"
-                + "\"id\":" + jsonString(s.id()) + ","
-                + "\"petshopId\":" + jsonString(s.petshopId()) + ","
-                + "\"name\":" + jsonString(s.name()) + ","
-                + "\"category\":" + jsonString(s.category()) + ","
-                + "\"duration\":" + jsonString(s.duration()) + ","
-                + "\"price\":" + s.price() + ","
-                + "\"description\":" + jsonString(s.description()) + ","
-                + "\"features\":" + featuresJson
-                + "}"
-                + "}";
-    }
-
-    private String jsonString(String value) {
-        if (value == null) {
-            return "null";
-        }
-        return "\"" + value
-                .replace("\\", "\\\\")
-                .replace("\"", "\\\"")
-                .replace("\n", "\\n")
-                .replace("\r", "\\r")
-                .replace("\t", "\\t") + "\"";
-    }
 }
-
-
-
-
-
-

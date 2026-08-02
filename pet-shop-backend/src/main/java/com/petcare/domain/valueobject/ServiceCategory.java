@@ -1,7 +1,5 @@
 package com.petcare.domain.valueobject;
 
-import com.petcare.domain.valueobject.ServiceCategory;
-
 /**
  * Categorias de servico oferecidas pelos petshops.
  */

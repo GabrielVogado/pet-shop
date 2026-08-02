@@ -41,7 +41,7 @@ public class RegistrationService {
         if (owner && (req.businessName() == null || req.businessName().isBlank())) {
             throw ApiException.badRequest("Informe a razao social ou nome da loja.");
         }
-        if (owner && usuarios.findAll().stream().anyMatch(u -> UserRole.OWNER.getValue().equals(u.getRole()))) {
+        if (owner && usuarios.existsOwner()) {
             throw ApiException.conflict("Ja existe um petshop cadastrado no sistema.");
         }
         if (!owner && (req.phone() == null || req.phone().isBlank())) {
@@ -65,7 +65,15 @@ public class RegistrationService {
             usuario.setPetshopId(SINGLE_PETSHOP_ID);
         }
 
-        Usuario saved = usuarios.insert(usuario);
+        Usuario saved;
+        try {
+            saved = usuarios.insert(usuario);
+        } catch (RuntimeException e) {
+            if (isDuplicateKeyError(e)) {
+                throw ApiException.conflict("Ja existe um petshop cadastrado no sistema.");
+            }
+            throw e;
+        }
 
         // Cadastro opcional do primeiro pet (apenas tutor).
         if (!owner && req.firstPet() != null
@@ -82,6 +90,23 @@ public class RegistrationService {
         }
 
         return saved;
+    }
+
+    /**
+     * Verifica se a exceção (ou sua cadeia de causas) é um erro E11000
+     * de chave duplicada do MongoDB, gerado pelo índice único parcial
+     * {@code idx_usuario_role_owner_unique} (criado em MIG-001).
+     */
+    private boolean isDuplicateKeyError(Throwable e) {
+        Throwable current = e;
+        while (current != null) {
+            String msg = current.getMessage();
+            if (msg != null && (msg.contains("E11000") || msg.contains("duplicate key"))) {
+                return true;
+            }
+            current = current.getCause();
+        }
+        return false;
     }
 }
 

@@ -22,6 +22,9 @@ public class JwtTokenProvider {
     @ConfigProperty(name = "petcare.jwt.duration", defaultValue = "3600")
     long durationSeconds;
 
+    @ConfigProperty(name = "petcare.jwt.kid", defaultValue = "petcare-rsa-key")
+    String jwkKeyId;
+
     public String generate(Usuario usuario) {
         var builder = Jwt.issuer(issuer)
                 .upn(usuario.getEmail())
@@ -34,7 +37,7 @@ public class JwtTokenProvider {
             builder = builder.claim("petshopId", usuario.getPetshopId());
         }
 
-        return builder.expiresIn(Duration.ofSeconds(durationSeconds)).sign();
+        return builder.expiresIn(Duration.ofSeconds(durationSeconds)).jws().keyId(jwkKeyId).sign();
     }
 }
 

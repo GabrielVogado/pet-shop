@@ -53,18 +53,12 @@ public class AppointmentController {
     public List<AgendamentoView> list(@QueryParam("petId") String petId) {
         if (isOwner()) {
             return service.listForPetshop(currentPetshopId()).stream()
-                .map(a -> AgendamentoView.from(
-                    a,
-                    usuarios.findById(a.getUserId()).orElse(null),
-                    pets.findById(a.getPetId()).orElse(null)))
-                    .toList();
+                .map(AgendamentoView::from)
+                .toList();
         }
         return service.listForTutor(jwt.getSubject(), petId).stream()
-            .map(a -> AgendamentoView.from(
-                a,
-                usuarios.findById(a.getUserId()).orElse(null),
-                pets.findById(a.getPetId()).orElse(null)))
-                .toList();
+            .map(AgendamentoView::from)
+            .toList();
     }
 
     @POST

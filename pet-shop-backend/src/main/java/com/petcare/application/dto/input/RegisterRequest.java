@@ -1,7 +1,5 @@
 package com.petcare.application.dto.input;
 
-import com.petcare.application.dto.input.RegisterRequest;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

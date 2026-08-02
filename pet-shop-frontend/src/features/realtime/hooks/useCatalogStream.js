@@ -5,6 +5,12 @@ export function useServiceCatalogStream(petshopId, onUpdate) {
   const eventSourceRef = useRef(null);
   const reconnectTimeoutRef = useRef(null);
   const retryCountRef = useRef(0);
+  const onUpdateRef = useRef(onUpdate);
+
+  // Sincroniza o callback mais recente sem disparar o efeito SSE
+  useEffect(() => {
+    onUpdateRef.current = onUpdate;
+  });
 
   useEffect(() => {
     if (!petshopId) {
@@ -27,7 +33,7 @@ export function useServiceCatalogStream(petshopId, onUpdate) {
       const handleMessage = (event) => {
         try {
           const data = JSON.parse(event.data);
-          onUpdate(data);
+          onUpdateRef.current(data);
           setConnected(true);
         } catch (error) {
           console.error('Erro ao parsear SSE:', error);
@@ -67,7 +73,7 @@ export function useServiceCatalogStream(petshopId, onUpdate) {
         clearTimeout(reconnectTimeoutRef.current);
       }
     };
-  }, [petshopId, onUpdate]);
+  }, [petshopId]);
 
   return connected;
 }

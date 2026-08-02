@@ -7,7 +7,7 @@ import { OwnerDashboardPage } from '../pages/owner/OwnerDashboardPage';
 
 function ProtectedRoute({ children }) {
   const { token, loading } = useAuth();
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <div className="flex h-screen items-center justify-center text-ink/60">Carregando...</div>;
   return token ? children : <Navigate to="/auth" replace />;
 }
 

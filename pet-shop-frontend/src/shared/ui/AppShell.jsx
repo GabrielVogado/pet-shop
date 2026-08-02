@@ -66,7 +66,7 @@ export function AppShell({
 
 					<nav className="flex gap-2 overflow-x-auto rounded-md border border-ink/10 bg-white p-1 shadow-sm">
 						{tabs.map((tab) => {
-							const Icon = tab.icon;
+							const Icon = tab.icon || PawPrint;
 							const isActive = activeTab === tab.id;
 
 							return (

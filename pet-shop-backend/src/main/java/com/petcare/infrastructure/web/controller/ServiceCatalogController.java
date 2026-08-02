@@ -7,8 +7,6 @@ import java.util.List;
 import com.petcare.application.dto.output.CatalogView;
 import com.petcare.application.dto.output.ServicoView;
 import com.petcare.application.dto.input.ServicoRequest;
-import com.petcare.application.dto.output.CatalogView;
-import com.petcare.application.dto.output.ServicoView;
 import com.petcare.domain.valueobject.ServiceCategory;
 import com.petcare.domain.entity.Servico;
 import com.petcare.application.service.ServiceCatalogService;

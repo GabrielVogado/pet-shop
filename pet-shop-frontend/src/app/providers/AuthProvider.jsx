@@ -33,8 +33,8 @@ export function AuthProvider({ children }) {
     setUser(null);
   }, []);
 
-  const isOwner = user?.groups?.includes('owner');
-  const isTutor = !isOwner;
+  const isOwner = user?.groups?.includes('owner') || user?.role === 'owner';
+  const isTutor = Boolean(user) && !isOwner;
 
   return (
     <AuthContext.Provider value={{ user, token, loading, login, logout, isOwner, isTutor }}>
