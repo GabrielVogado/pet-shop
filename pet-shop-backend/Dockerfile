@@ -7,7 +7,7 @@ COPY pom.xml .
 COPY src ./src
 
 # Empacota a aplicacao Quarkus (fast-jar). Testes pulados no build da imagem.
-RUN mvn -B -DskipTests clean package
+RUN mvn -B -Dmaven.test.skip=true clean package
 
 # ===== Stage 2: runtime (apenas JRE 17) =====
 FROM eclipse-temurin:17-jre

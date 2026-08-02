@@ -17,33 +17,33 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-import com.petcare.dto.AgendamentoRequest;
-import com.petcare.dto.AgendamentoAvailabilityView;
-import com.petcare.model.Agendamento;
-import com.petcare.model.Pet;
-import com.petcare.model.Servico;
-import com.petcare.model.Usuario;
-import com.petcare.repository.AgendamentoRepository;
-import com.petcare.repository.PetRepository;
-import com.petcare.repository.ServicoRepository;
-import com.petcare.repository.UsuarioRepository;
-import com.petcare.rest.ApiException;
+import com.petcare.application.dto.input.AgendamentoRequest;
+import com.petcare.application.dto.input.AgendamentoAvailabilityView;
+import com.petcare.domain.entity.Agendamento;
+import com.petcare.domain.entity.Pet;
+import com.petcare.domain.entity.Servico;
+import com.petcare.domain.entity.Usuario;
+import com.petcare.infrastructure.persistence.MongoMongoAppointmentRepository;
+import com.petcare.infrastructure.persistence.MongoMongoPetRepository;
+import com.petcare.infrastructure.persistence.MongoMongoServiceRepository;
+import com.petcare.infrastructure.persistence.MongoMongoUserRepository;
+import com.petcare.infrastructure.web.exception.ApiException;
 
 class AgendamentoServiceTest {
 
-    private AgendamentoService service;
-    private AgendamentoRepository agendamentos;
-    private PetRepository pets;
-    private UsuarioRepository usuarios;
-    private ServicoRepository servicos;
+    private AppointmentService service;
+    private MongoAppointmentRepository agendamentos;
+    private MongoPetRepository pets;
+    private MongoUserRepository usuarios;
+    private MongoServiceRepository servicos;
 
     @BeforeEach
     void setUp() {
-        service = new AgendamentoService();
-        agendamentos = mock(AgendamentoRepository.class);
-        pets = mock(PetRepository.class);
-        usuarios = mock(UsuarioRepository.class);
-        servicos = mock(ServicoRepository.class);
+        service = new AppointmentService();
+        agendamentos = mock(MongoAppointmentRepository.class);
+        pets = mock(MongoPetRepository.class);
+        usuarios = mock(MongoUserRepository.class);
+        servicos = mock(MongoServiceRepository.class);
 
         service.agendamentos = agendamentos;
         service.pets = pets;
@@ -192,3 +192,5 @@ class AgendamentoServiceTest {
         return servico;
     }
 }
+
+

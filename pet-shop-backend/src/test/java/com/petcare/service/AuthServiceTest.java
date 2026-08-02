@@ -11,28 +11,28 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.petcare.dto.RegisterRequest;
-import com.petcare.model.Usuario;
-import com.petcare.repository.PetRepository;
-import com.petcare.repository.UsuarioRepository;
-import com.petcare.rest.ApiException;
-import com.petcare.security.PasswordService;
+import com.petcare.application.dto.input.RegisterRequest;
+import com.petcare.domain.entity.Usuario;
+import com.petcare.infrastructure.persistence.MongoPetRepository;
+import com.petcare.infrastructure.persistence.MongoUserRepository;
+import com.petcare.infrastructure.web.exception.ApiException;
+import com.petcare.infrastructure.security.BCryptPasswordEncoder;
 
 class AuthServiceTest {
 
-    private AuthService service;
-    private UsuarioRepository usuarios;
-    private PasswordService passwordService;
+    private RegistrationService service;
+    private MongoUserRepository usuarios;
+    private BCryptPasswordEncoder BCryptPasswordEncoder;
 
     @BeforeEach
     void setUp() {
-        service = new AuthService();
-        usuarios = mock(UsuarioRepository.class);
-        passwordService = mock(PasswordService.class);
+        service = new RegistrationService();
+        usuarios = mock(MongoUserRepository.class);
+        BCryptPasswordEncoder = mock(BCryptPasswordEncoder.class);
 
         service.usuarios = usuarios;
         service.pets = mock(PetRepository.class);
-        service.passwordService = passwordService;
+        service.BCryptPasswordEncoder = BCryptPasswordEncoder;
     }
 
     @Test
@@ -49,12 +49,12 @@ class AuthServiceTest {
 
         when(usuarios.existsByEmail("owner@example.com")).thenReturn(false);
         when(usuarios.existsOwner()).thenReturn(false);
-        when(passwordService.hash("123456")).thenReturn("hash");
+        when(BCryptPasswordEncoder.hash("123456")).thenReturn("hash");
         when(usuarios.insert(any(Usuario.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         Usuario created = service.register(request);
 
-        assertEquals(AuthService.SINGLE_PETSHOP_ID, created.getPetshopId());
+        assertEquals(RegistrationService.SINGLE_PETSHOP_ID, created.getPetshopId());
         assertEquals("Pet Shop Central", created.getBusinessName());
     }
 
@@ -80,3 +80,5 @@ class AuthServiceTest {
         verify(usuarios, never()).insert(any(Usuario.class));
     }
 }
+
+
