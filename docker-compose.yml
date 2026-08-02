@@ -26,6 +26,9 @@
       QUARKUS_MONGODB_DATABASE: petcare
       JNOSQL_DOCUMENT_DATABASE: petcare
       QUARKUS_HTTP_CORS_ORIGINS: "http://localhost:8081,http://localhost:5173"
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+      JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
+      QUARKUS_PROFILE: prod
     ports:
       - "8080:8080"
     healthcheck:

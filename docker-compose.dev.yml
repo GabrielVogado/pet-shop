@@ -30,6 +30,8 @@ services:
       QUARKUS_MONGODB_DATABASE: petcare
       JNOSQL_DOCUMENT_DATABASE: petcare
       QUARKUS_HTTP_CORS_ORIGINS: "http://localhost:5173"
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+      JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
     volumes:
       # Codigo-fonte bind-montado: editar no host recarrega no container
       - ./pet-shop-backend:/code
