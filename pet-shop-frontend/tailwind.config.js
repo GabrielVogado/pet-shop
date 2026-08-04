@@ -6,6 +6,7 @@ export default {
       colors: {
         ink: '#18212f',
         coral: '#f26957',
+        coralHover: '#dc5848',
         ocean: '#147b8f',
         mint: '#dff5ec',
         paper: '#faf8f4'

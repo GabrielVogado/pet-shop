@@ -1,5 +1,5 @@
 const statusStyles = {
-  Agendado: 'bg-mint text-ocean',
+  Agendado: 'bg-ocean text-white',
   Concluido: 'bg-ink text-white',
   Cancelado: 'bg-coral/15 text-coral'
 };

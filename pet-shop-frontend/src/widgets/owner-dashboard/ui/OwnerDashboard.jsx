@@ -11,6 +11,8 @@ import {
 } from 'lucide-react';
 import { OwnerServices } from '../../owner-services/ui/OwnerServices';
 import { formatDateTime } from '../../../shared/lib/dateTime';
+import { StatusBadge } from '../../../shared/ui/StatusBadge';
+import { TableHead, TableCell } from '../../../shared/ui/Table';
 
 export function OwnerDashboard({
 	owner,
@@ -56,7 +58,7 @@ export function OwnerDashboard({
 		return (
 			users.find((user) => user.id === appointment.userId)?.name ??
 			appointment.tutor ??
-			'Tutor nao identificado'
+			'Tutor não identificado'
 		);
 	}
 
@@ -87,7 +89,7 @@ export function OwnerDashboard({
 					<button
 						type="button"
 						onClick={onLogout}
-						className="flex min-h-10 items-center justify-center gap-2 rounded border border-ink/10 bg-white px-3 text-sm font-bold text-ink/70 transition hover:bg-mint hover:text-ink"
+						className="flex min-h-10 items-center justify-center gap-2 rounded border border-ink/10 bg-white px-3 text-sm font-bold text-ink/70 transition hover:bg-mint hover:text-ink focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2"
 					>
 						<LogOut size={17} />
 						Sair
@@ -100,7 +102,7 @@ export function OwnerDashboard({
 					<button
 						type="button"
 						onClick={() => setActiveTab('appointments')}
-						className={`flex min-h-11 items-center justify-center rounded px-4 text-sm font-bold ${
+						className={`flex min-h-11 items-center justify-center rounded px-4 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2 ${
 							activeTab === 'appointments' ? 'bg-ocean text-white' : 'text-ink/65 hover:bg-mint'
 						}`}
 					>
@@ -109,7 +111,7 @@ export function OwnerDashboard({
 					<button
 						type="button"
 						onClick={() => setActiveTab('services')}
-						className={`flex min-h-11 items-center justify-center rounded px-4 text-sm font-bold ${
+						className={`flex min-h-11 items-center justify-center rounded px-4 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2 ${
 							activeTab === 'services' ? 'bg-ocean text-white' : 'text-ink/65 hover:bg-mint'
 						}`}
 					>
@@ -204,7 +206,7 @@ export function OwnerDashboard({
 															<button
 																type="button"
 																onClick={() => setSelectedAppointmentId(appointment.id)}
-																className="min-h-9 rounded bg-ink px-3 text-xs font-bold text-white transition hover:bg-ink/90"
+																className="min-h-9 rounded bg-ink px-3 text-xs font-bold text-white transition hover:bg-ink/90 focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2"
 															>
 																Ver detalhes
 															</button>
@@ -258,26 +260,26 @@ function AppointmentDetails({ appointment, tutor, pet, onCancel }) {
 			<InfoGroup icon={User} title="Cliente">
 				<InfoLine label="Nome" value={tutor?.name ?? appointment.tutor} />
 				<InfoLine
-					label="Endereco"
-					value={appointment.tutorAddress ?? tutor?.address ?? 'Nao informado'}
+					label="Endereço"
+					value={appointment.tutorAddress ?? tutor?.address ?? 'Não informado'}
 				/>
-				<InfoLine label="Email" value={appointment.tutorEmail ?? tutor?.email ?? 'Nao informado'} />
-				<InfoLine label="Telefone" value={appointment.tutorPhone ?? tutor?.phone ?? 'Nao informado'} />
+				<InfoLine label="Email" value={appointment.tutorEmail ?? tutor?.email ?? 'Não informado'} />
+				<InfoLine label="Telefone" value={appointment.tutorPhone ?? tutor?.phone ?? 'Não informado'} />
 			</InfoGroup>
 
 			<InfoGroup icon={PawPrint} title="Pet">
 				<InfoLine label="Nome" value={pet?.name ?? appointment.pet} />
-				<InfoLine label="Especie" value={pet?.species ?? 'Nao informado'} />
-				<InfoLine label="Raca" value={pet?.breed ?? 'Nao informado'} />
-				<InfoLine label="Idade" value={pet?.age ?? 'Nao informado'} />
-				<InfoLine label="Observacoes" value={pet?.notes || 'Sem observacoes'} />
+				<InfoLine label="Espécie" value={pet?.species ?? 'Não informado'} />
+				<InfoLine label="Raça" value={pet?.breed ?? 'Não informado'} />
+				<InfoLine label="Idade" value={pet?.age ?? 'Não informado'} />
+				<InfoLine label="Observações" value={pet?.notes || 'Sem observações'} />
 			</InfoGroup>
 
 			<button
 				type="button"
 				onClick={onCancel}
 				disabled={appointment.status !== 'Agendado'}
-				className="flex min-h-11 w-full items-center justify-center rounded bg-coral px-4 text-sm font-bold text-white transition hover:bg-[#dc5848] disabled:cursor-not-allowed disabled:bg-ink/20 disabled:text-ink/45"
+				className="flex min-h-11 w-full items-center justify-center rounded bg-coral px-4 text-sm font-bold text-white transition hover:bg-coral-hover focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-ink/20 disabled:text-ink/45"
 			>
 				Cancelar agendamento
 			</button>
@@ -320,34 +322,4 @@ function InfoLine({ label, value }) {
 			<dd className="break-words text-sm font-semibold text-ink/75">{value}</dd>
 		</div>
 	);
-}
-
-function StatusBadge({ status }) {
-	const styles = {
-		Agendado: 'bg-mint text-ocean',
-		Concluido: 'bg-ink text-white',
-		Cancelado: 'bg-coral/15 text-coral'
-	};
-
-	return (
-		<span
-			className={`inline-flex min-w-24 justify-center rounded px-3 py-1 text-xs font-bold ${
-				styles[status] ?? 'bg-ink/10 text-ink'
-			}`}
-		>
-			{status}
-		</span>
-	);
-}
-
-function TableHead({ children }) {
-	return (
-		<th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide text-ink/65">
-			{children}
-		</th>
-	);
-}
-
-function TableCell({ children }) {
-	return <td className="whitespace-nowrap px-4 py-4 text-sm text-ink/75">{children}</td>;
 }
