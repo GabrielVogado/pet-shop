@@ -10,21 +10,22 @@ class IdsTest {
 
     @Test
     void newIdUsaPrefixoEhUnico() {
-        String a = Ids.newId("user");
-        String b = Ids.newId("user");
+        String a = IdGenerator.newId("user");
+        String b = IdGenerator.newId("user");
         assertTrue(a.startsWith("user-"));
         assertNotEquals(a, b);
     }
 
     @Test
     void slugRemoveAcentosECaracteresEspeciais() {
-        assertEquals("higgins-petshop", Ids.slug("Higgins  Petshop!"));
-        assertEquals("pet-prime", Ids.slug("Pét Prime"));
+        assertEquals("higgins-petshop", IdGenerator.slug("Higgins  Petshop!"));
+        assertEquals("pet-prime", IdGenerator.slug("Pét Prime"));
     }
 
     @Test
     void slugVazioUsaPadrao() {
-        assertEquals("petshop", Ids.slug("   "));
-        assertEquals("petshop", Ids.slug(null));
+        assertEquals("petshop", IdGenerator.slug("   "));
+        assertEquals("petshop", IdGenerator.slug(null));
     }
 }
+

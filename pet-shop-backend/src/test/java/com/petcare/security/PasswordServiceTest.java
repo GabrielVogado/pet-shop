@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class PasswordServiceTest {
 
-    private final PasswordService service = new PasswordService();
+    private final BCryptPasswordEncoder service = new BCryptPasswordEncoder();
 
     @Test
     void hashNaoDeveSerIgualAoTextoPuro() {
@@ -31,3 +31,5 @@ class PasswordServiceTest {
         assertFalse(service.verify("segredo123", null));
     }
 }
+
+
