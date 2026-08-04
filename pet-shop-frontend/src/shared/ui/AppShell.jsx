@@ -35,7 +35,7 @@ export function AppShell({
 						<button
 							type="button"
 							onClick={onLogout}
-							className="flex min-h-10 items-center justify-center gap-2 rounded border border-ink/10 bg-white px-3 text-sm font-bold text-ink/70 transition hover:bg-mint hover:text-ink"
+							className="flex min-h-10 items-center justify-center gap-2 rounded border border-ink/10 bg-white px-3 text-sm font-bold text-ink/70 transition hover:bg-mint hover:text-ink focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2"
 						>
 							<LogOut size={17} />
 							Sair
@@ -52,7 +52,7 @@ export function AppShell({
 										key={pet.id}
 										type="button"
 										onClick={() => onPetChange(pet.id)}
-										className={`flex min-h-10 shrink-0 items-center gap-2 rounded px-3 text-sm font-bold transition ${
+										className={`flex min-h-10 shrink-0 items-center gap-2 rounded px-3 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2 ${
 											isActive ? 'bg-ocean text-white' : 'text-ink/65 hover:bg-mint hover:text-ink'
 										}`}
 									>
@@ -75,7 +75,7 @@ export function AppShell({
 									type="button"
 									onClick={() => onTabChange(tab.id)}
 									disabled={!activePet}
-									className={`flex min-h-10 shrink-0 items-center gap-2 rounded px-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-45 ${
+									className={`flex min-h-10 shrink-0 items-center gap-2 rounded px-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-45 focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2 ${
 										isActive
 											? 'bg-ink text-white'
 											: 'text-ink/65 hover:bg-mint hover:text-ink'
@@ -92,10 +92,10 @@ export function AppShell({
 
 			<main className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8">
 				{notifications.length > 0 && (
-					<section className="rounded-md border border-coral/20 bg-white p-4 shadow-soft">
+					<section className="rounded-md border border-coral/20 bg-white p-4 shadow-soft" role="region" aria-label="Notificações do petshop">
 						<div className="flex items-center gap-2">
-							<Bell size={18} className="text-coral" />
-							<h2 className="font-bold text-ink">Notificacoes do petshop</h2>
+							<Bell size={18} className="text-coral" aria-hidden="true" />
+							<h2 className="font-bold text-ink">Notificações do petshop</h2>
 						</div>
 						<div className="mt-3 space-y-2">
 							{notifications.slice(0, 3).map((notification) => (
