@@ -172,7 +172,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | RNF-06 | **LGPD, exclusão:** o tutor pode pedir a exclusão dos seus dados. Os dados são apagados, sem anonimização, exceto os registros que a lei obriga a guardar (pagamentos e notas fiscais), que ficam retidos pelo prazo legal. |
 | RNF-07 | **LGPD, portabilidade:** o tutor pode baixar o histórico e a carteira de vacinas dos seus pets. |
 | RNF-08 | **Retenção:** cada dado fica guardado pelo prazo legal mínimo. Para notas fiscais e pagamentos, são 5 anos. |
-| RNF-09 | **Hospedagem:** ainda sem nuvem definida. O custo de infraestrutura será estimado antes do desenvolvimento. |
+| RNF-09 | **Hospedagem:** ainda sem nuvem definida. Há uma [estimativa de custo](../02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) de referência, em Google Cloud, a ser refinada. |
 | RNF-10 | **Dados de pagamento:** o PetCare não guarda dados de cartão. O cartão fica tokenizado no provedor. |
 | RNF-11 | **Encarregado de dados (DPO):** o PO, Gabriel Vogado, é o encarregado no início, com um e-mail próprio de privacidade publicado na política de privacidade. A Resolução CD/ANPD nº 2/2022 dispensa empresas de pequeno porte de nomear um encarregado, mas exige um canal de contato com o titular. Com o crescimento, avaliar a contratação de "DPO como serviço". A política de privacidade e os termos de uso devem passar por revisão jurídica antes do lançamento. |
 
@@ -186,5 +186,5 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | P-02 | Avaliação do tutor pela loja não pública (RN-63) | Confirmado pelo PO |
 | P-03 | iOS fora do MVP (RNF-04) | Confirmado pelo PO |
 | P-04 | Provedor de pagamento (RN-53) | [ADR-007](../08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) proposto; spike em sandbox fica para depois da fase de documentação |
-| P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir |
-| P-06 | Nuvem e custo de infraestrutura (RNF-09) | Estimativa a fazer antes do desenvolvimento |
+| P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir; custo mínimo por loja na estimativa de nuvem |
+| P-06 | Nuvem e custo de infraestrutura (RNF-09) | [Estimativa v1.0](../02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) feita; falta SMS, tarifas de São Paulo e comparar outras nuvens |

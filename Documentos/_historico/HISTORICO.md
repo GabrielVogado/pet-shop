@@ -31,6 +31,7 @@ Reconstruída do histórico do Git em 05/11/2026.
 | 05/11/2026 | Direção do produto definida pelo PO: vários petshops, pagamento e app mobile, com foco em documentação antes de desenvolver | [Roadmap](../04-backlog/Roadmap-v1.0.md) |
 | 05/11/2026 | Entrevista com o PO define o sistema-alvo: marketplace com mensalidade da loja, sinal de 50%, carteira de vacinas com origem verificada, avaliações com direito de resposta, Android e web | [Documento-Negocial-v2.0](../01-negocio/Documento-Negocial-v2.0.md) |
 | 05/11/2026 | ADR-007 propõe o caminho para escolher o provedor de pagamento (Asaas recomendado, Stripe Connect como alternativa, a validar em sandbox) | [ADR-007](../08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) |
+| 05/11/2026 | Estimativa de custo de nuvem para 30 lojas e 100 tutores: infraestrutura de ~US$ 21 a ~US$ 161 por mês, com o WhatsApp como custo variável principal | [Estimativa-Custo-Nuvem](../02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) |
 
 ---
 
