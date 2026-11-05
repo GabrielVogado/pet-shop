@@ -236,7 +236,7 @@ Decisão aceita e documentada. O código continua em React e Java até as estór
 
 ## ADR-007: Provedor de pagamento
 
-- **Status:** Proposto (recomendação aguardando validação em sandbox e decisão do PO)
+- **Status:** Proposto (recomendação aguardando validação em sandbox e decisão do PO). O teste em sandbox fica pendente para depois da fase de documentação.
 - **Data:** 05/11/2026
 - **Decisor:** Gabriel Vogado (PO)
 
@@ -255,7 +255,7 @@ O [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md) define o f
 
 ### Decisão proposta
 
-Escolher o provedor depois de um **spike em sandbox** com os dois candidatos mais fortes (abaixo). A recomendação atual é o **Asaas**, com o **Stripe Connect** como alternativa. Nada disso foi testado: a recomendação vem da leitura da documentação pública e muda se o spike mostrar que um requisito não se cumpre.
+Por decisão do PO em 05/11/2026, a fase de documentação segue só com estimativas; o teste em sandbox é uma **pendência para depois dela**. Escolher o provedor depois de um **spike em sandbox** com os dois candidatos mais fortes (abaixo). A recomendação atual é o **Asaas**, com o **Stripe Connect** como alternativa. Nada disso foi testado: a recomendação vem da leitura da documentação pública e muda se o spike mostrar que um requisito não se cumpre.
 
 ### Como foi verificado
 
@@ -309,11 +309,11 @@ Pesquisa na documentação pública em 05/11/2026. A coluna "Fonte" diz o que fo
 
 ### Próximos passos
 
-1. [ ] Spike em sandbox com Asaas e Stripe: criar uma subconta, cobrar 50% em cartão e em Pix **na conta da loja**, estornar, e criar uma assinatura de mensalidade.
+1. [ ] (Pendente, depois da fase de documentação) Spike em sandbox com Asaas e Stripe: criar uma subconta, cobrar 50% em cartão e em Pix **na conta da loja**, estornar, e criar uma assinatura de mensalidade.
 2. [ ] Levantar o custo real dos dois (tabela de taxas) e o prazo de repasse.
 3. [ ] PO decidir com os resultados e mudar o status para Aceito.
 4. [ ] Atualizar RN-53 e a pendência P-04 do Documento Negocial.
 
 ### Situação em 05/11/2026
 
-Proposto. Nada foi testado, e nenhum provedor foi contratado.
+Proposto. Nada foi testado, e nenhum provedor foi contratado. O PO decidiu seguir por enquanto só com estimativas e fazer o teste em sandbox depois da fase de documentação.
