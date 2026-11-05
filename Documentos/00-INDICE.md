@@ -21,9 +21,9 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
-## 📌 Revisão 05/11/2026 — Estrutura no padrão do Saúde Monitor
+## 📌 Revisão 05/11/2026 — Nova estrutura de Documentos/
 
-**O que mudou:** a pedido do PO, `Documentos/` passa a seguir a estrutura do Saúde Monitor: pastas numeradas, este índice, `MELHORIAS.md` e `HISTORICO.md`. O `MANUAL.md` adota o mesmo git-flow (`feature/* → develop → master → release/<tag>`). Visão e regras foram unidas no `Documento-Negocial-v1.0.md` e os ADRs reunidos em `adrs.md`. Registro em `MELHORIAS.md` (M-004).
+**O que mudou:** a pedido do PO, `Documentos/` passa a ter pastas numeradas, este índice, `MELHORIAS.md` e `HISTORICO.md`. O `MANUAL.md` adota o git-flow (`feature/* → develop → master → release/<tag>`). Visão e regras foram unidas no `Documento-Negocial-v1.0.md` e os ADRs reunidos em `adrs.md`. Registro em `MELHORIAS.md` (M-004).
 **Sem mudança:** `De-Para-Backlog-Features.md` (documentação, sem estória entregue).
 
 ---
@@ -51,7 +51,7 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 | `_historico/` | [HISTORICO](_historico/HISTORICO.md) | Linha do tempo do projeto e documentos substituídos |
 | raiz | [De-Para-Backlog-Features](De-Para-Backlog-Features.md) | Rastreabilidade backlog × entregas (PRs) |
 
-Pastas reservadas, criadas quando houver conteúdo (mesma numeração do Saúde Monitor): `03-ui-ux`, `05-features`, `06-sprints`, `07-dados`, `11-desempenho`, `12-seguranca`, `13-marketing`.
+Pastas reservadas, criadas quando houver conteúdo: `03-ui-ux`, `05-features`, `06-sprints`, `07-dados`, `11-desempenho`, `12-seguranca`, `13-marketing`.
 
 ## ADRs
 

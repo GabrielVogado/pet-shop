@@ -10,7 +10,7 @@ Hoje o sistema é um MVP web com **um único petshop**. O próximo ciclo leva o 
 |---|---|
 | `pet-shop-backend/` | API REST em Quarkus 3.15 (Java 17) com MongoDB via JNoSQL, JWT RS256 e SSE |
 | `pet-shop-frontend/` | SPA em React 19 + Vite 7 + Tailwind + React Router, organizada em FSD |
-| `Documentos/` | Documentação do projeto, no padrão do Saúde Monitor (negócio, arquitetura, API, backlog, ADRs, melhorias, histórico, git-flow) |
+| `Documentos/` | Documentação do projeto (negócio, arquitetura, API, backlog, ADRs, melhorias, histórico, git-flow) |
 | `docker-compose.yml` | Ambiente completo: MongoDB + backend + frontend (nginx) |
 | `docker-compose.dev.yml` | Ambiente de desenvolvimento com hot reload |
 

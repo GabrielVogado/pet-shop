@@ -166,7 +166,7 @@ Com isso, a decisão fica:
 | Opção | Complexidade | Familiaridade da equipe | Web | Mobile | Observação |
 |---|---|---|---|---|---|
 | A. Flutter para web e mobile | Alta: reescrita total, Dart novo | Baixa | Funciona, carregamento inicial pesado e SEO fraco | Nativo, uma base | Descartada: o PO manteve a web em React |
-| B. React web + React Native/Expo no mobile | Média: web aproveitada, app novo | Alta: já é React; o Saúde Monitor usa Expo | Mantém a SPA atual | Bom, base separada da web | Não escolhida |
+| B. React web + React Native/Expo no mobile | Média: web aproveitada, app novo | Alta: já é React | Mantém a SPA atual | Bom, base separada da web | Não escolhida |
 | **C. React web mantido + Flutter só no mobile** (escolhida) | Média | Mista | Mantém a SPA atual | Nativo | Duas bases em duas linguagens |
 
 **Backend**

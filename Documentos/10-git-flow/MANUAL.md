@@ -1,6 +1,6 @@
 # 📘 Manual de Funcionamento — PetCare Agenda
 
-Manual operacional do projeto: fluxo de desenvolvimento (git-flow), ambientes, CI/CD, release, testes e como manter a documentação. Segue o mesmo modelo do projeto Saúde Monitor.
+Manual operacional do projeto: fluxo de desenvolvimento (git-flow), ambientes, CI/CD, release, testes e como manter a documentação.
 
 > **Revisão 05/11/2026.** Primeira versão no padrão `Documentos/10-git-flow/`. Hoje o projeto **não tem CI/CD nem ambiente publicado**: as seções 2 e 4 descrevem o modelo adotado e marcam com ⚠️ o que ainda não existe.
 
