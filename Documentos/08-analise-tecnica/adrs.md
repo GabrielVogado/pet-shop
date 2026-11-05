@@ -9,7 +9,7 @@ Registros de decisão de arquitetura. Numeração sequencial; um ADR substituíd
 | [ADR-003](#adr-003-taxonomia-de-erros-da-api) | Taxonomia de erros da API | Proposto |
 | [ADR-004](#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na agenda do owner | Proposto |
 | [ADR-005](#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT | Aceito, implementado |
-| [ADR-006](#adr-006-flutter-no-app-mobile-e-kotlin-no-backend-quarkus) | Flutter no app mobile e Kotlin no backend Quarkus | Aceito |
+| [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito |
 
 ---
 
@@ -127,9 +127,9 @@ Sem identificador de chave no token, trocar o par RSA invalida todas as sessões
 
 ---
 
-## ADR-006: Flutter no app mobile e Kotlin no backend Quarkus
+## ADR-006: Flutter na web e no mobile e Kotlin no backend Quarkus
 
-- **Status:** Aceito pelo PO em 05/11/2026, não implementado.
+- **Status:** Aceito pelo PO em 05/11/2026, com mudança de escopo no mesmo dia (web também em Flutter). Não implementado.
 - **Data:** 05/11/2026
 - **Decisor:** Gabriel Vogado (PO)
 
@@ -150,12 +150,12 @@ Respostas do PO em 05/11/2026 às perguntas que ficaram em aberto na proposta:
 | A troca vem antes do Épico 1 (vários petshops) ou junto com ele? | **Junto com o Épico 1** |
 | O backend migra para Kotlin aos poucos ou de uma vez? | **De uma vez** |
 | A persistência fica no JNoSQL ou passa para Panache Kotlin? | **Panache Kotlin**, escolhido pelo PO após a comparação abaixo |
-| A web também vai para Flutter, ou só o app mobile? | **Só o app mobile** |
+| A web também vai para Flutter, ou só o app mobile? | Primeiro "só o app mobile"; no mesmo dia o PO mudou o escopo: **a web também vai para Flutter** |
 
 Com isso, a decisão fica:
 
-1. **Web continua em React** (SPA atual, React 19 + Vite). Não há reescrita da web.
-2. **App mobile em Flutter** (Android e iOS), consumindo a mesma API REST. É a opção C do frontend.
+1. **Frontend em Flutter, web e mobile numa base só** (Android, iOS e web), substituindo a SPA React. É a opção A do frontend.
+2. A reescrita do frontend acompanha a do backend, junto com o Épico 1.
 3. **Backend reescrito em Kotlin de uma vez**, no mesmo Quarkus, junto com o Épico 1. A API REST, o MongoDB, o JWT RS256 e o SSE continuam iguais para os clientes.
 4. **Persistência: `quarkus-mongodb-panache-kotlin`**, substituindo o JNoSQL.
 
@@ -165,9 +165,9 @@ Com isso, a decisão fica:
 
 | Opção | Complexidade | Familiaridade da equipe | Web | Mobile | Observação |
 |---|---|---|---|---|---|
-| A. Flutter para web e mobile | Alta: reescrita total, Dart novo | Baixa | Funciona, carregamento inicial pesado e SEO fraco | Nativo, uma base | Descartada: o PO manteve a web em React |
+| **A. Flutter para web e mobile** (escolhida) | Alta: reescrita total, Dart novo | Baixa | Funciona, carregamento inicial pesado e SEO fraco | Nativo, uma base | Uma base para tudo |
 | B. React web + React Native/Expo no mobile | Média: web aproveitada, app novo | Alta: já é React | Mantém a SPA atual | Bom, base separada da web | Não escolhida |
-| **C. React web mantido + Flutter só no mobile** (escolhida) | Média | Mista | Mantém a SPA atual | Nativo | Duas bases em duas linguagens |
+| C. React web mantido + Flutter só no mobile | Média | Mista | Mantém a SPA atual | Nativo | Escolhida no início, substituída pela A na mudança de escopo |
 
 **Backend**
 
@@ -195,22 +195,25 @@ O código atual usa o `Template` do Jakarta NoSQL em 5 repositórios (`infrastru
 
 ### Análise dos trade-offs
 
-- Manter a web em React elimina o maior custo da proposta original: não há reescrita de 36 arquivos nem dos testes de interface, e a página pública de busca de petshops (Épico 1) continua sem o problema de SEO do Flutter web.
-- O preço é ter duas bases de interface em duas linguagens (TypeScript e Dart). As regras de negócio ficam no backend, então a duplicação se limita a telas e validações de formulário.
-- Reescrever o backend de uma vez **junto** com o Épico 1 concentra risco: a troca de linguagem, de persistência e o novo modelo multi-petshop entram no mesmo período. A mitigação é tratar a API atual como contrato: os testes de integração REST existentes são portados primeiro e precisam passar contra o backend Kotlin antes das funcionalidades novas.
+- Uma base única em Flutter elimina a duplicação de telas entre web e mobile: o Épico 3 (app mobile) deixa de ser um projeto separado.
+- O custo é reescrever do zero os 36 arquivos da SPA React e todos os testes de interface, sem ganho funcional imediato para o usuário.
+- Flutter na web tem carregamento inicial pesado e SEO fraco. Isso pesa pouco no painel do petshop e na área logada do tutor, mas pesa na página pública de busca de petshops (Épico 1). Se essa página precisar ser encontrada por buscadores, ela pode ficar como página estática/servidor à parte; a decisão fica para o ADR do Épico 1.
+- Reescrever backend e frontend de uma vez **junto** com o Épico 1 concentra risco: a troca de linguagens, de persistência, de toda a interface e o novo modelo multi-petshop entram no mesmo período. A mitigação é tratar a API atual como contrato: os testes de integração REST existentes são portados primeiro e precisam passar contra o backend Kotlin antes das funcionalidades novas.
 - Fazer a troca junto com o Épico 1 evita escrever o modelo multi-petshop em Java e reescrevê-lo logo depois em Kotlin.
 
 ### Consequências
 
 **Ganhos**
-- A web atual segue funcionando e evoluindo sem reescrita.
-- O app mobile nasce nativo em Flutter para Android e iOS.
+- Uma base de interface para web, Android e iOS.
+- O app mobile sai da mesma base da web, sem projeto separado.
 - Kotlin reduz código repetitivo no backend (data classes, null-safety no compilador).
 - Com Panache Kotlin, reserva atômica, agregações e transações ficam disponíveis sem contornar a biblioteca.
 
 **Custos e riscos**
 - A equipe precisa dominar Dart/Flutter e Kotlin.
-- Testes do app passam a ser `flutter_test` e `integration_test`; os da web (Vitest, Testing Library, Playwright) continuam.
+- O frontend React é reescrito do zero: nada do React, do Tailwind, da organização FSD nem dos testes (Vitest, Testing Library, Playwright) é aproveitado. Os testes passam a ser `flutter_test` e `integration_test`.
+- Flutter web: carregamento inicial pesado e SEO fraco (ver trade-offs).
+- Até a troca, a SPA React fica congelada: só correções, para não haver trabalho duplicado.
 - Kotlin no Quarkus precisa do plugin `all-open` para os beans CDI.
 - A reescrita de uma vez trava o backend Java: correções em Java durante a reescrita precisam ser repetidas no Kotlin.
 - As anotações e a migração dos índices (MIG-001, índice único do ADR-002) precisam ser refeitas no Panache; o ADR-002 será substituído pelo ADR de multi-tenancy do Épico 1.
@@ -220,7 +223,7 @@ O código atual usa o `Template` do Jakarta NoSQL em 5 repositórios (`infrastru
 1. [x] Responder às perguntas em aberto e mudar o status para Aceito.
 2. [x] PO confirmar Panache Kotlin como persistência.
 3. [ ] Spike de Kotlin + Panache no Quarkus: uma entidade, um repositório, um endpoint e a reserva atômica com `findOneAndUpdate`.
-4. [ ] Spike de Flutter mobile com login e listagem de pets contra a API atual.
+4. [ ] Spike de Flutter (web e mobile) com login e listagem de pets contra a API atual, medindo o tempo de carregamento inicial na web.
 5. [ ] Estórias de migração no Roadmap (junto com o Épico 1) e no De-Para.
 
 ### Situação em 05/11/2026

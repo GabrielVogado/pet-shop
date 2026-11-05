@@ -25,8 +25,9 @@ Reconstruída do histórico do Git em 05/11/2026.
 | 05/11/2026 | Limpeza de backups do `pom.xml` e `dev.log` versionados | PR #7 |
 | 05/11/2026 | Documentação do projeto volta ao repositório, escrita a partir do código | PR #8 |
 | 05/11/2026 | `Documentos/` reorganizado (pastas numeradas, `MELHORIAS.md`, `HISTORICO.md`, git-flow `develop → master → release/<tag>`) | PR #9 |
-| 05/11/2026 | PO propõe Flutter no frontend e Kotlin no backend Quarkus | [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-no-app-mobile-e-kotlin-no-backend-quarkus) |
-| 05/11/2026 | PO aceita o ADR-006: web segue em React, app mobile em Flutter, backend reescrito em Kotlin de uma vez junto com o Épico 1; persistência em Panache Kotlin | [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-no-app-mobile-e-kotlin-no-backend-quarkus) |
+| 05/11/2026 | PO propõe Flutter no frontend e Kotlin no backend Quarkus | [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) |
+| 05/11/2026 | PO aceita o ADR-006: web segue em React, app mobile em Flutter, backend reescrito em Kotlin de uma vez junto com o Épico 1; persistência em Panache Kotlin | [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) |
+| 05/11/2026 | Mudança de escopo do PO: a web também vai para Flutter (web e mobile numa base só) | [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) |
 | 05/11/2026 | Direção do produto definida pelo PO: vários petshops, pagamento e app mobile, com foco em documentação antes de desenvolver | [Roadmap](../04-backlog/Roadmap-v1.0.md) |
 
 ---

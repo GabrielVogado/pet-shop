@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 05/11/2026 — ADR-006: web também em Flutter
+
+**O que mudou:** o PO mudou o escopo do ADR-006: a web também vai para Flutter, junto com o app mobile, numa base só. O ADR passa a se chamar "Flutter na web e no mobile e Kotlin no backend Quarkus", com a opção A do frontend escolhida e os custos da reescrita da SPA React. O `Roadmap-v1.0.md` e o `HISTORICO.md` foram atualizados. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (decisão registrada, nada entregue).
+
+---
+
 ## 📌 Revisão 05/11/2026 — ADR-006 aceito pelo PO
 
 **O que mudou:** o PO respondeu às quatro perguntas do ADR-006. A web continua em React, o app mobile será em Flutter e o backend será reescrito em Kotlin de uma vez, junto com o Épico 1 (vários petshops). Para a persistência, o ADR compara JNoSQL, Panache Kotlin e o driver Kotlin com coroutines e o PO escolheu `quarkus-mongodb-panache-kotlin`. O ADR foi renomeado para "Flutter no app mobile e Kotlin no backend Quarkus", e o `Roadmap-v1.0.md` e o `HISTORICO.md` foram atualizados. Nenhuma mudança de código.
@@ -62,7 +69,7 @@ Pastas reservadas, criadas quando houver conteúdo: `03-ui-ux`, `05-features`, `
 | [ADR-003](08-analise-tecnica/adrs.md#adr-003-taxonomia-de-erros-da-api) | Taxonomia de erros da API | Proposto, não implementado |
 | [ADR-004](08-analise-tecnica/adrs.md#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na listagem de agendamentos do owner | Proposto, não implementado |
 | [ADR-005](08-analise-tecnica/adrs.md#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT para rotação de chaves | Aceito, implementado |
-| [ADR-006](08-analise-tecnica/adrs.md#adr-006-flutter-no-app-mobile-e-kotlin-no-backend-quarkus) | Flutter no app mobile e Kotlin no backend Quarkus | Aceito pelo PO |
+| [ADR-006](08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito pelo PO |
 
 ## Espelho no Obsidian
 
