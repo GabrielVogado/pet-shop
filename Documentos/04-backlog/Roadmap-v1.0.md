@@ -15,7 +15,7 @@ Sem isso os épicos seguintes ficam arriscados.
 
 - Entidade `Petshop` própria (nome, CNPJ, endereço, geolocalização, horário de funcionamento, capacidade por horário), separada do usuário owner.
 - Cadastro de várias lojas; um owner pode administrar uma ou mais lojas, e uma loja pode ter funcionários.
-- Substituir o [ADR-002](ADR/ADR-002-indice-unico-owner.md) (owner único) por um novo ADR de multi-tenancy.
+- Substituir o [ADR-002](../08-analise-tecnica/adrs.md#adr-002-índice-único-parcial-para-garantir-um-único-owner) (owner único) por um novo ADR de multi-tenancy.
 - Busca de petshops pelo tutor (por cidade ou proximidade), página da loja com catálogo e avaliações.
 - Horário de funcionamento e capacidade configuráveis por loja (hoje são fixos: 9h–18h, um serviço por vez).
 - Migração de dados: `petshop-unico` vira o primeiro registro de `Petshop`.
