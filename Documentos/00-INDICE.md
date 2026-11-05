@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 05/11/2026 — Proposta de troca de stack (ADR-006)
+
+**O que mudou:** o PO propôs trocar o frontend React por Flutter (web e mobile numa base só) e escrever o backend Quarkus em Kotlin. Registrado como ADR-006, **proposto**, com ganhos, custos e quatro perguntas em aberto; o `Roadmap-v1.0.md` passa a citar a proposta. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (decisão ainda não aprovada nem entregue).
+
+---
+
 ## 📌 Revisão 05/11/2026 — Estrutura no padrão do Saúde Monitor
 
 **O que mudou:** a pedido do PO, `Documentos/` passa a seguir a estrutura do Saúde Monitor: pastas numeradas, este índice, `MELHORIAS.md` e `HISTORICO.md`. O `MANUAL.md` adota o mesmo git-flow (`feature/* → develop → master → release/<tag>`). Visão e regras foram unidas no `Documento-Negocial-v1.0.md` e os ADRs reunidos em `adrs.md`. Registro em `MELHORIAS.md` (M-004).
@@ -29,7 +36,7 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 | | [Especificacao-API-v1.0](02-arquitetura-tecnica/Especificacao-API-v1.0.md) | Endpoints REST e SSE com perfis de acesso |
 | | [Guia-Ambiente-Local-v1.0](02-arquitetura-tecnica/Guia-Ambiente-Local-v1.0.md) | Pré-requisitos, como rodar e testar na máquina |
 | `04-backlog/` | [Roadmap-v1.0](04-backlog/Roadmap-v1.0.md) | Fase 0 (fundação) e épicos: vários petshops, pagamento, app mobile |
-| `08-analise-tecnica/` | [adrs](08-analise-tecnica/adrs.md) | ADR-001 a ADR-005 |
+| `08-analise-tecnica/` | [adrs](08-analise-tecnica/adrs.md) | ADR-001 a ADR-006 |
 | | [Debitos-Tecnicos-v1.0](08-analise-tecnica/Debitos-Tecnicos-v1.0.md) | Débitos com evidência no código |
 | `09-melhoria-continua/` | [MELHORIAS](09-melhoria-continua/MELHORIAS.md) | Melhorias aplicadas (M-NNN), com PR |
 | `10-git-flow/` | [MANUAL](10-git-flow/MANUAL.md) | Git-flow, ambientes, CI/CD, release, testes, regras de documentação |
@@ -48,6 +55,7 @@ Pastas reservadas, criadas quando houver conteúdo (mesma numeração do Saúde 
 | [ADR-003](08-analise-tecnica/adrs.md#adr-003-taxonomia-de-erros-da-api) | Taxonomia de erros da API | Proposto, não implementado |
 | [ADR-004](08-analise-tecnica/adrs.md#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na listagem de agendamentos do owner | Proposto, não implementado |
 | [ADR-005](08-analise-tecnica/adrs.md#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT para rotação de chaves | Aceito, implementado |
+| [ADR-006](08-analise-tecnica/adrs.md#adr-006-flutter-no-frontend-e-kotlin-no-backend-quarkus) | Flutter no frontend e Kotlin no backend Quarkus | Proposto pelo PO |
 
 ## Espelho no Obsidian
 

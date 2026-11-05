@@ -9,6 +9,7 @@ Registros de decisão de arquitetura. Numeração sequencial; um ADR substituíd
 | [ADR-003](#adr-003-taxonomia-de-erros-da-api) | Taxonomia de erros da API | Proposto |
 | [ADR-004](#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na agenda do owner | Proposto |
 | [ADR-005](#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT | Aceito, implementado |
+| [ADR-006](#adr-006-flutter-no-frontend-e-kotlin-no-backend-quarkus) | Flutter no frontend e Kotlin no backend Quarkus | Proposto |
 
 ---
 
@@ -123,3 +124,46 @@ Sem identificador de chave no token, trocar o par RSA invalida todas as sessões
 
 - Permite rotação gradual quando a verificação passar a aceitar mais de uma chave pública (JWKS).
 - Hoje a verificação usa uma única `JWT_PUBLIC_KEY`; a rotação com duas chaves ainda não está implementada.
+
+---
+
+## ADR-006: Flutter no frontend e Kotlin no backend Quarkus
+
+- **Status:** Proposto (pelo PO em 05/11/2026), não implementado
+- **Data:** 05/11/2026
+
+### Contexto
+
+O roadmap pede **app mobile** (Épico 3) e continua precisando de interface web para tutor e petshop. Hoje o frontend é uma SPA React 19 + Vite, só web (36 arquivos em `pet-shop-frontend/src`), e o backend é Quarkus 3.15 em Java 17 (48 classes em `pet-shop-backend/src/main`). Manter React na web e criar um app mobile à parte significaria duas bases de interface.
+
+O PO propôs:
+
+> "ao inves de utilizar o React, estou pensando em utilizar Flutter e para o backend quero utilizar Quarkus com Kotlin"
+
+### Decisão proposta
+
+1. **Frontend em Flutter**, uma base para Android, iOS e web, substituindo a SPA React.
+2. **Backend continua em Quarkus, escrito em Kotlin**, substituindo o Java. A API REST, o MongoDB, o JWT RS256 e o SSE continuam iguais.
+
+### Consequências
+
+**Ganhos**
+- Uma base de código de interface para web e mobile: o Épico 3 deixa de ser um app separado.
+- Kotlin reduz código repetitivo no backend (data classes no lugar de getters/setters, null-safety no compilador) e convive com Java no mesmo projeto Maven, o que permite migrar classe por classe.
+
+**Custos e riscos**
+- O frontend é **reescrito do zero**: nada do React, do Tailwind, da organização FSD nem dos testes (Vitest, Testing Library, Playwright) é aproveitado. Testes passam a ser `flutter_test` e `integration_test`.
+- Flutter na web gera uma aplicação pesada no primeiro carregamento e fraca para SEO. Para o painel do petshop isso pesa pouco; para uma página pública de busca de petshops (Épico 1), pesa mais.
+- Kotlin no Quarkus precisa dos plugins `all-open` (beans CDI) e `no-arg` (entidades persistidas), e o JNoSQL com Kotlin precisa ser validado. Alternativa a avaliar: `quarkus-mongodb-panache-kotlin`.
+- A equipe precisa dominar Dart/Flutter e Kotlin.
+
+### Perguntas em aberto (para o PO)
+
+1. A troca acontece **antes** do Épico 1 (vários petshops) ou junto com ele?
+2. Backend: migrar para Kotlin **aos poucos** (Java e Kotlin convivendo) ou reescrever de uma vez?
+3. Persistência: manter JNoSQL ou trocar por Panache Kotlin?
+4. A web do tutor e do petshop também vai para Flutter, ou só o app mobile?
+
+### Situação em 05/11/2026
+
+Somente documentado. O código continua em React e Java. Quando o PO aprovar, este ADR passa a "Aceito" e o [Roadmap](../04-backlog/Roadmap-v1.0.md) ganha as estórias de migração.

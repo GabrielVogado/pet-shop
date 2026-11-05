@@ -2,6 +2,10 @@
 
 > Direção definida pelo PO em 05/11/2026: **vários petshops, pagamento e app mobile**. A ordem abaixo segue as dependências: o modelo multi-loja vem antes do pagamento, e a API estável vem antes do app.
 
+## Proposta de stack (ADR-006)
+
+> O PO propôs em 05/11/2026 trocar o frontend React por **Flutter** (web e mobile numa base só) e escrever o backend Quarkus em **Kotlin**. Enquanto o [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-no-frontend-e-kotlin-no-backend-quarkus) estiver como proposto, os épicos abaixo valem para qualquer stack. Se for aceito, o Épico 3 deixa de ser um app à parte e a migração entra como épico próprio.
+
 ## Fase 0: Fundação (pré-requisito)
 
 Sem isso os épicos seguintes ficam arriscados.
@@ -30,7 +34,7 @@ Sem isso os épicos seguintes ficam arriscados.
 
 ## Épico 3: App mobile
 
-- App para o tutor (React Native/Expo é o caminho natural pelo frontend em React), consumindo a mesma API.
+- App para o tutor consumindo a mesma API. Com o ADR-006 aceito, é o próprio app Flutter; sem ele, React Native/Expo aproveita o conhecimento de React.
 - Notificações push (lembrete de agendamento, cancelamento, vacina vencendo).
 - Login persistente com refresh token (hoje o JWT expira em 1 hora e não há refresh).
 - Publicação nas lojas Apple e Google.
