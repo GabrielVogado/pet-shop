@@ -34,3 +34,7 @@ CONTEXTO.md
 /*.txt
 /*.csv
 /*.bak
+
+# Backups locais e logs de execucao
+*.log
+pom.xml.*
