@@ -187,4 +187,4 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | P-03 | iOS fora do MVP (RNF-04) | Confirmado pelo PO |
 | P-04 | Provedor de pagamento (RN-53) | [ADR-007](../08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) proposto; spike em sandbox fica para depois da fase de documentação |
 | P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir; custo mínimo por loja na estimativa de nuvem |
-| P-06 | Nuvem e custo de infraestrutura (RNF-09) | [Estimativa v1.0](../02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) feita; falta SMS, tarifas de São Paulo e comparar outras nuvens |
+| P-06 | Nuvem e custo de infraestrutura (RNF-09) | [Estimativa v1.0](../02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) feita; faltam as tarifas de São Paulo, provedores de SMS brasileiros e conferir a AWS em fonte oficial |

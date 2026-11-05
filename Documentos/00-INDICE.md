@@ -9,7 +9,7 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ## 📌 Revisão 05/11/2026 — Estimativa de custo de nuvem
 
-**O que mudou:** novo `Estimativa-Custo-Nuvem-v1.0.md` com o custo mensal de referência para 30 lojas e 100 tutores, em três cenários de volume e dois perfis de infraestrutura (Google Cloud, MongoDB Atlas, Firebase Hosting e WhatsApp). A infraestrutura fica entre ~US$ 21 e ~US$ 161 por mês; o WhatsApp é o custo que cresce com o uso. A seção "O que não foi estimado" lista as lacunas, entre elas o SMS. O Documento Negocial v2.0 aponta para a estimativa em RNF-09 e P-06. Nenhuma mudança de código.
+**O que mudou:** novo `Estimativa-Custo-Nuvem-v1.0.md` com o custo mensal de referência para 30 lojas e 100 tutores, em três cenários de volume e dois perfis de infraestrutura (Google Cloud, MongoDB Atlas, Firebase Hosting, WhatsApp, SMS e e-mail). A infraestrutura fica entre ~US$ 21 e ~US$ 161 por mês; o WhatsApp é o custo que cresce com o uso. O SMS custa cerca de 9 vezes mais que o WhatsApp nas tarifas encontradas, e há uma comparação do backend com AWS e servidor virtual. A seção "O que não foi estimado" lista as lacunas. O Documento Negocial v2.0 aponta para a estimativa em RNF-09 e P-06. Nenhuma mudança de código.
 **Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
 
 ---
