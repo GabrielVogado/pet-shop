@@ -25,7 +25,7 @@ Os PRs #1 a #6 entregaram o MVP; o detalhamento por funcionalidade foi reconstru
 
 | ID | Item | Status | PR |
 |---|---|---|---|
-| FD-01 | Documentação do projeto versionada em `Documentos/` | ✅ | este PR |
+| FD-01 | Documentação do projeto versionada em `Documentos/` | ✅ | #8 |
 | FD-02 | Remover backups do `pom.xml` e `dev.log` | ✅ | #7 |
 | FD-03 | CI no GitHub Actions | ⬜ | |
 | FD-04 | Medição de cobertura | ⬜ | |
