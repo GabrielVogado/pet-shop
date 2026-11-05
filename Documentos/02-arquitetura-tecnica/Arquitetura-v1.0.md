@@ -24,7 +24,7 @@ Clean Architecture em quatro pacotes sob `com.petcare`:
 | `infrastructure` | Adaptadores: REST, persistência, segurança, SSE | `*Controller`, `Mongo*Repository`, `JwtTokenProvider`, `BCryptPasswordEncoder`, `SseCatalogBroadcaster` |
 | `shared` | Utilitários | `IdGenerator` |
 
-Os services injetam diretamente os repositórios Mongo, sem interfaces de port ([ADR-001](ADR/ADR-001-remocao-dos-ports.md)). Erros de negócio saem como `ApiException` com status HTTP, convertidos por `ApiExceptionMapper` e `ValidationExceptionMapper`.
+Os services injetam diretamente os repositórios Mongo, sem interfaces de port ([ADR-001](../08-analise-tecnica/adrs.md#adr-001-services-injetam-os-repositórios-mongo-diretamente)). Erros de negócio saem como `ApiException` com status HTTP, convertidos por `ApiExceptionMapper` e `ValidationExceptionMapper`.
 
 ### Principais dependências
 
@@ -45,7 +45,7 @@ Status de agendamento: `Agendado`, `Concluido`, `Cancelado` (rótulos em portugu
 ## Segurança
 
 - JWT RS256 assinado com `JWT_PRIVATE_KEY` e validado com `JWT_PUBLIC_KEY` (variáveis de ambiente, nunca versionadas). Expiração padrão de 3600 s (`petcare.jwt.duration`).
-- Claims: `sub` (id do usuário), `upn` (e-mail), `groups` (papel), `name`, `role` e `petshopId` (owner). Header com `kid` configurável ([ADR-005](ADR/ADR-005-jwt-kid.md)).
+- Claims: `sub` (id do usuário), `upn` (e-mail), `groups` (papel), `name`, `role` e `petshopId` (owner). Header com `kid` configurável ([ADR-005](../08-analise-tecnica/adrs.md#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves)).
 - Autorização por `@RolesAllowed("tutor" | "owner")`; o escopo do owner vem sempre do `petshopId` do token, nunca do corpo da requisição.
 - Login limitado a 5 chamadas por minuto (`@RateLimit`).
 - CORS liberado para `http://localhost:5173` em dev e configurado por variável no Compose.
@@ -76,4 +76,4 @@ Rotas: `/auth`, `/tutor/*`, `/owner/*`; qualquer outra rota redireciona para `/a
 | `pet-shop-backend/Dockerfile` | Build Maven multi-stage, imagem final JRE 17 com layout fast-jar. Testes pulados no build da imagem. |
 | `pet-shop-frontend/Dockerfile` | Build Vite e nginx servindo os estáticos |
 
-Não há pipeline de CI nem ambiente publicado. Ver [Débitos técnicos](Debitos-Tecnicos.md).
+Não há pipeline de CI nem ambiente publicado. Ver [Débitos técnicos](../08-analise-tecnica/Debitos-Tecnicos-v1.0.md).
