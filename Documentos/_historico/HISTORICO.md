@@ -29,6 +29,7 @@ Reconstruída do histórico do Git em 05/11/2026.
 | 05/11/2026 | PO aceita o ADR-006: web segue em React, app mobile em Flutter, backend reescrito em Kotlin de uma vez junto com o Épico 1; persistência em Panache Kotlin | [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) |
 | 05/11/2026 | Mudança de escopo do PO: a web também vai para Flutter (web e mobile numa base só) | [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) |
 | 05/11/2026 | Direção do produto definida pelo PO: vários petshops, pagamento e app mobile, com foco em documentação antes de desenvolver | [Roadmap](../04-backlog/Roadmap-v1.0.md) |
+| 05/11/2026 | Entrevista com o PO define o sistema-alvo: marketplace com mensalidade da loja, sinal de 50%, carteira de vacinas com origem verificada, avaliações com direito de resposta, Android e web | [Documento-Negocial-v2.0](../01-negocio/Documento-Negocial-v2.0.md) |
 
 ---
 
@@ -40,7 +41,7 @@ Antes de 05/11/2026 a documentação existia só no vault `D:\Mega Brain`. Ela f
 
 | Grupo | Documentos antigos (vault) | Substituídos por |
 |---|---|---|
-| Contexto e arquitetura | `CONTEXTO`, `ARQUITETURA`, `FSD_ARCHITECTURE`, `ARCHITECTURAL_ASSESSMENT`, `VEREDITO_PROJETO`, `FEATURES`, `CHANGELOG`, `RELATORIO_MELHORIAS`, `GUIA_DE_DESENVOLVIMENTO`, `GUIA_CONTRIBUICAO` | [`Documento-Negocial-v1.0`](../01-negocio/Documento-Negocial-v1.0.md), [`Arquitetura-v1.0`](../02-arquitetura-tecnica/Arquitetura-v1.0.md), [`MANUAL`](../10-git-flow/MANUAL.md), este histórico |
+| Contexto e arquitetura | `CONTEXTO`, `ARQUITETURA`, `FSD_ARCHITECTURE`, `ARCHITECTURAL_ASSESSMENT`, `VEREDITO_PROJETO`, `FEATURES`, `CHANGELOG`, `RELATORIO_MELHORIAS`, `GUIA_DE_DESENVOLVIMENTO`, `GUIA_CONTRIBUICAO` | [`Documento-Negocial-v1.0`](Documento-Negocial-v1.0.md), [`Arquitetura-v1.0`](../02-arquitetura-tecnica/Arquitetura-v1.0.md), [`MANUAL`](../10-git-flow/MANUAL.md), este histórico |
 | QA de código (01/08) | `QA_ANALYSIS`, `QA_REPORT`, `QA_FIXES`, `QA_REVISAO_*` (3), `QA_ACAO_*` (3), `QA_CORRECAO_API`, `QA_VEREDITO_FINAL`, `QA_RUNBOOK` | [`Debitos-Tecnicos-v1.0`](../08-analise-tecnica/Debitos-Tecnicos-v1.0.md) |
 | QA de design (02/08) | `DESIGN_SYSTEM`, `QA_DESIGN_FINAL`, `QA_DESIGN_REPORT`, `QA_DESIGN_ISSUES` (+ `.csv`), `QA_DESIGN_TRACEABILITY`, `USABILIDADE_DOC`, `DESIGN_SPEC_IMPROVEMENTS` | Sem substituto ainda (futuro `03-ui-ux/`) |
 | Segurança e performance | `SECURITY_HARDENING_PLAN`, `SECURITY_PENTEST_PLAN`, `JMETER_ANALYSIS`, `RELATORIO_PERFORMANCE`, `BASELINE_TESTES` | Sem substituto ainda (futuros `11-desempenho/` e `12-seguranca/`) |
@@ -59,4 +60,4 @@ Antes de 05/11/2026 a documentação existia só no vault `D:\Mega Brain`. Ela f
 
 | Documento | Versão | Data | Motivo da troca |
 |---|---|---|---|
-| — | — | — | Nenhuma ainda |
+| [Documento-Negocial](Documento-Negocial-v1.0.md) | v1.0 | 05/11/2026 | Substituído pela v2.0, que descreve o sistema-alvo definido em entrevista com o PO. A v1.0 continua sendo a referência do comportamento do código atual (MVP de um petshop). |

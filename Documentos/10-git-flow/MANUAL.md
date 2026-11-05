@@ -124,7 +124,7 @@ Toda entrega mantém `Documentos/` em dia **no mesmo PR**:
 | Sempre | Uma linha em [`00-INDICE.md`](../00-INDICE.md) (seção de revisões) |
 | Entrega de estória do backlog | A linha correspondente em [`De-Para-Backlog-Features.md`](../De-Para-Backlog-Features.md), com o número do PR |
 | Melhoria de processo, qualidade, infraestrutura ou correção relevante | Uma entrada `M-NNN` em [`MELHORIAS.md`](../09-melhoria-continua/MELHORIAS.md) |
-| Mudança de regra de negócio | [`Documento-Negocial-v1.0.md`](../01-negocio/Documento-Negocial-v1.0.md) |
+| Mudança de regra de negócio | [`Documento-Negocial-v2.0.md`](../01-negocio/Documento-Negocial-v2.0.md) |
 | Mudança de endpoint | [`Especificacao-API-v1.0.md`](../02-arquitetura-tecnica/Especificacao-API-v1.0.md) |
 | Decisão de arquitetura | Novo ADR em [`adrs.md`](../08-analise-tecnica/adrs.md), próximo número livre |
 | Documento substituído por versão nova | A versão antiga vai para [`_historico/`](../_historico/) e ganha linha em [`HISTORICO.md`](../_historico/HISTORICO.md) |
