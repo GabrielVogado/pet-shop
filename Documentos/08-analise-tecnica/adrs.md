@@ -10,6 +10,7 @@ Registros de decisão de arquitetura. Numeração sequencial; um ADR substituíd
 | [ADR-004](#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na agenda do owner | Proposto |
 | [ADR-005](#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT | Aceito, implementado |
 | [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito |
+| [ADR-007](#adr-007-provedor-de-pagamento) | Provedor de pagamento | Proposto |
 
 ---
 
@@ -229,3 +230,90 @@ O código atual usa o `Template` do Jakarta NoSQL em 5 repositórios (`infrastru
 ### Situação em 05/11/2026
 
 Decisão aceita e documentada. O código continua em React e Java até as estórias de migração entrarem no Roadmap.
+
+
+---
+
+## ADR-007: Provedor de pagamento
+
+- **Status:** Proposto (recomendação aguardando validação em sandbox e decisão do PO). O teste em sandbox fica pendente para depois da fase de documentação.
+- **Data:** 05/11/2026
+- **Decisor:** Gabriel Vogado (PO)
+
+### Contexto
+
+O [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md) define o fluxo de dinheiro (RN-50 a RN-55). O provedor escolhido precisa cobrir:
+
+1. **Recebimento direto pela loja (RN-53):** cada loja tem a própria conta recebedora; o PetCare cria a cobrança e não recebe nem repassa o dinheiro.
+2. **Sinal de 50% (RN-51):** cobrado na confirmação da loja, em cartão de crédito, Pix ou débito. O sinal vira multa se o tutor cancelar depois de 2h antes ou faltar (RN-46, RN-47), e é devolvido nos demais casos.
+3. **Cartão de garantia (RN-50):** cartão de crédito guardado (tokenizado), sem que o PetCare toque nos dados do cartão (RNF-10).
+4. **Restante após o atendimento (RN-52):** cobrado pelo app ou pago na loja.
+5. **Estorno** total do sinal.
+6. **Mensalidade da loja:** cobrança recorrente de valor fixo, paga ao PetCare, sem período grátis; inadimplência tira a loja da busca (RN-17).
+7. **Taxa do provedor** fica com a loja (RN-54).
+8. Brasil inteiro, em reais; volume inicial de ~30 lojas (RNF-01).
+
+### Decisão proposta
+
+Por decisão do PO em 05/11/2026, a fase de documentação segue só com estimativas; o teste em sandbox é uma **pendência para depois dela**. Escolher o provedor depois de um **spike em sandbox** com os dois candidatos mais fortes (abaixo). A recomendação atual é o **Asaas**, com o **Stripe Connect** como alternativa. Nada disso foi testado: a recomendação vem da leitura da documentação pública e muda se o spike mostrar que um requisito não se cumpre.
+
+### Como foi verificado
+
+Pesquisa na documentação pública em 05/11/2026. A coluna "Fonte" diz o que foi confirmado e o que ficou em aberto.
+
+| Provedor | O que a documentação confirma | O que ficou em aberto |
+|---|---|---|
+| **Asaas** | Split para subcontas por `walletId`, em valor fixo ou percentual sobre o valor líquido. Estorno da cobrança estorna os repasses. Há split em assinaturas e webhook por split (`PAYMENT_SPLIT_DONE`). | A cobrança nasce na conta que a criou e o split reparte o saldo. Falta confirmar se o PetCare consegue criar a cobrança **na conta da loja** (para não passar o dinheiro pela conta do PetCare). Cartão tokenizado, Pix e débito não foram detalhados na página consultada. |
+| **Stripe Connect** | Pix funciona em contas do Brasil, inclusive em Connect (cobranças diretas na conta conectada). Reembolso total e parcial de Pix em até 90 dias. Billing disponível para a mensalidade. | Disponibilidade de contas conectadas brasileiras e o custo não foram confirmados. Pix Automático não existe para empresas do Brasil. O Pix não tem captura manual nem pré-autorização. A lista de categorias proibidas para Pix inclui serviços médicos (MCC 8099); falta confirmar com o Stripe como a consulta veterinária é classificada. |
+| **Mercado Pago** | Marketplace com OAuth do vendedor; modelo 1:1 documentado. | O modelo 1:N (um pagamento para vários vendedores) só para "carteira assessorada". A página consultada era a do México; a elegibilidade no Brasil não foi confirmada. |
+| **Pagar.me** | Citado como alternativa de recebedores e split. | A busca não retornou a documentação oficial: nada foi confirmado. |
+| **Iugu** | Documentação de marketplace com "split por fatura". | Nada além disso foi confirmado. |
+
+### Opções consideradas
+
+| Opção | Aderência aos requisitos | Complexidade | Observação |
+|---|---|---|---|
+| **A. Asaas** (recomendada, a validar) | Alta no papel: subcontas, split, assinaturas, Pix e cartão no Brasil | Média | Provedor brasileiro; o ponto crítico é cobrar na conta da loja (RN-53) |
+| **B. Stripe Connect** | Alta em Pix e Connect; Billing resolve a mensalidade | Média/alta | Boa documentação e SDKs; confirmar contas conectadas no Brasil e a classificação (MCC) das lojas com consulta veterinária |
+| C. Mercado Pago | Média: 1:1 funciona, 1:N exige carteira assessorada | Média | Elegibilidade no Brasil a confirmar |
+| D. Pagar.me | Não verificada | — | Reavaliar se A e B falharem |
+| E. Iugu | Não verificada | — | Reavaliar se A e B falharem |
+| F. Cada loja conecta o próprio provedor | Atende RN-53 por definição | Alta | Cada loja teria um contrato diferente; difícil de suportar e de padronizar |
+
+### Análise dos trade-offs
+
+- **O requisito que mais pesa é RN-53.** Se o PetCare criar as cobranças na própria conta e repartir por split, o dinheiro passa pela conta do PetCare, ainda que por instantes. Isso pode trazer exigências de responsabilidade por estornos e disputas. O spike precisa dizer se cada provedor permite cobrar diretamente na conta da loja.
+- **Pix e sinal:** o Pix não pré-autoriza. O sinal em Pix é pago na hora e devolvido por estorno, o que funciona. Já o "cartão de garantia" só serve para crédito.
+- **Mensalidade:** é uma cobrança do PetCare para a loja, em conta própria, e não entra no split. Os dois candidatos têm assinatura recorrente.
+- **Risco de dependência:** o provedor fica atrás de uma interface do backend (`PagamentoGateway`), para trocar de provedor sem reescrever as regras de agendamento.
+- **Segurança:** o cartão é tokenizado no provedor e o PetCare só guarda o token (RNF-10). O backend valida a assinatura dos webhooks.
+
+### Consequências
+
+**Ganhos**
+- O PetCare não guarda dados de cartão e, se RN-53 for cumprida, também não guarda o dinheiro das lojas.
+- A troca de provedor fica isolada atrás de uma interface.
+
+**Custos e riscos**
+- Cada loja passa por um cadastro (KYC) no provedor antes de receber, o que é mais uma etapa no onboarding.
+- Estornos, disputas e conciliação dos 50% precisam de tratamento no backend (webhooks e uma tabela de pagamentos).
+- A multa de 50% pode ser contestada pelo tutor junto ao banco ou ao cartão.
+- Os termos de uso precisam descrever o sinal, a multa e o estorno com clareza (revisão jurídica, como no RNF-11).
+
+### Perguntas em aberto
+
+1. Cada provedor permite que o PetCare crie a cobrança direto na conta da loja?
+2. As lojas com consulta veterinária são aceitas para Pix no Stripe (MCC)?
+3. Qual é o custo real: taxa por transação (cartão e Pix), taxa por assinatura e prazo de repasse para a loja?
+4. O repasse para a loja pode ser imediato ou segue um prazo (D+1, D+30 no cartão)? Isso afeta o fluxo de caixa das lojas.
+
+### Próximos passos
+
+1. [ ] (Pendente, depois da fase de documentação) Spike em sandbox com Asaas e Stripe: criar uma subconta, cobrar 50% em cartão e em Pix **na conta da loja**, estornar, e criar uma assinatura de mensalidade.
+2. [ ] Levantar o custo real dos dois (tabela de taxas) e o prazo de repasse.
+3. [ ] PO decidir com os resultados e mudar o status para Aceito.
+4. [ ] Atualizar RN-53 e a pendência P-04 do Documento Negocial.
+
+### Situação em 05/11/2026
+
+Proposto. Nada foi testado, e nenhum provedor foi contratado. O PO decidiu seguir por enquanto só com estimativas e fazer o teste em sandbox depois da fase de documentação.

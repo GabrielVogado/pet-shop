@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 05/11/2026 — ADR-007: provedor de pagamento (proposto)
+
+**O que mudou:** novo ADR-007 compara Asaas, Stripe Connect, Mercado Pago, Pagar.me, Iugu e "cada loja com o próprio provedor" contra os requisitos de pagamento do Documento Negocial v2.0. A documentação pública foi consultada; o que foi confirmado e o que ficou em aberto está na tabela do ADR. Recomendação provisória: Asaas, com Stripe Connect como alternativa, a validar em sandbox. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (decisão ainda não tomada).
+
+---
+
 ## 📌 Revisão 05/11/2026 — Documento Negocial v2.0 (sistema-alvo)
 
 **O que mudou:** a partir de uma entrevista com o PO em seis blocos, o `Documento-Negocial-v2.0.md` descreve o sistema-alvo, que será desenvolvido do zero:
@@ -67,7 +74,7 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | | [Especificacao-API-v1.0](02-arquitetura-tecnica/Especificacao-API-v1.0.md) | Endpoints REST e SSE com perfis de acesso |
 | | [Guia-Ambiente-Local-v1.0](02-arquitetura-tecnica/Guia-Ambiente-Local-v1.0.md) | Pré-requisitos, como rodar e testar na máquina |
 | `04-backlog/` | [Roadmap-v1.0](04-backlog/Roadmap-v1.0.md) | Fase 0 (fundação) e épicos: vários petshops, pagamento, app mobile |
-| `08-analise-tecnica/` | [adrs](08-analise-tecnica/adrs.md) | ADR-001 a ADR-006 |
+| `08-analise-tecnica/` | [adrs](08-analise-tecnica/adrs.md) | ADR-001 a ADR-007 |
 | | [Debitos-Tecnicos-v1.0](08-analise-tecnica/Debitos-Tecnicos-v1.0.md) | Débitos com evidência no código |
 | `09-melhoria-continua/` | [MELHORIAS](09-melhoria-continua/MELHORIAS.md) | Melhorias aplicadas (M-NNN), com PR |
 | `10-git-flow/` | [MANUAL](10-git-flow/MANUAL.md) | Git-flow, ambientes, CI/CD, release, testes, regras de documentação |
@@ -87,6 +94,7 @@ Pastas reservadas, criadas quando houver conteúdo: `03-ui-ux`, `05-features`, `
 | [ADR-004](08-analise-tecnica/adrs.md#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na listagem de agendamentos do owner | Proposto, não implementado |
 | [ADR-005](08-analise-tecnica/adrs.md#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT para rotação de chaves | Aceito, implementado |
 | [ADR-006](08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito pelo PO |
+| [ADR-007](08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) | Provedor de pagamento | Proposto |
 
 ## Espelho no Obsidian
 

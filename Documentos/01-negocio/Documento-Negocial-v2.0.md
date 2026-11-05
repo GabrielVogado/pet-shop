@@ -185,6 +185,6 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | P-01 | Encarregado de dados (DPO) | Resolvido: o PO é o encarregado (RNF-11) |
 | P-02 | Avaliação do tutor pela loja não pública (RN-63) | Confirmado pelo PO |
 | P-03 | iOS fora do MVP (RNF-04) | Confirmado pelo PO |
-| P-04 | Provedor de pagamento (RN-53) | ADR a escrever |
+| P-04 | Provedor de pagamento (RN-53) | [ADR-007](../08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) proposto; spike em sandbox fica para depois da fase de documentação |
 | P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir |
 | P-06 | Nuvem e custo de infraestrutura (RNF-09) | Estimativa a fazer antes do desenvolvimento |
