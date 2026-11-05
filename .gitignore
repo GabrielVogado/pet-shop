@@ -31,6 +31,7 @@ CONTEXTO.md
 /*.py
 /*.ps1
 /*.md
+!/README.md
 /*.txt
 /*.csv
 /*.bak
