@@ -131,6 +131,7 @@ Sem identificador de chave no token, trocar o par RSA invalida todas as sessões
 
 - **Status:** Proposto (pelo PO em 05/11/2026), não implementado
 - **Data:** 05/11/2026
+- **Decisor:** Gabriel Vogado (PO)
 
 ### Contexto
 
@@ -145,7 +146,30 @@ O PO propôs:
 1. **Frontend em Flutter**, uma base para Android, iOS e web, substituindo a SPA React.
 2. **Backend continua em Quarkus, escrito em Kotlin**, substituindo o Java. A API REST, o MongoDB, o JWT RS256 e o SSE continuam iguais.
 
-### Consequências
+### Opções consideradas
+
+**Frontend**
+
+| Opção | Complexidade | Familiaridade da equipe | Web | Mobile | Observação |
+|---|---|---|---|---|---|
+| **A. Flutter para web e mobile** (proposta) | Alta: reescrita total, Dart novo | Baixa | Funciona, carregamento inicial pesado e SEO fraco | Nativo, uma base | Uma base para tudo |
+| B. React web + React Native/Expo no mobile | Média: web aproveitada, app novo | Alta: já é React; o Saúde Monitor usa Expo | Mantém a SPA atual | Bom, base separada da web | Duas bases, mesma linguagem e parte da lógica compartilhável |
+| C. React web mantido + Flutter só no mobile | Média | Mista | Mantém a SPA atual | Nativo | Duas bases em duas linguagens |
+
+**Backend**
+
+| Opção | Complexidade | Familiaridade | Observação |
+|---|---|---|---|
+| **A. Quarkus em Kotlin** (proposta) | Média: plugins `all-open`/`no-arg`, migração classe a classe possível | A desenvolver | Menos código repetitivo, null-safety |
+| B. Quarkus em Java (atual, subir para Java 21) | Baixa | Alta | Records e pattern matching já reduzem boa parte do código repetitivo |
+
+### Análise dos trade-offs
+
+- O maior custo da proposta está no frontend: é uma reescrita de 36 arquivos e de todos os testes de interface, sem ganho funcional imediato para o usuário. O ganho aparece no Épico 3, quando o app mobile sai da mesma base.
+- A opção B do frontend chega ao app mobile com menos risco para quem já sabe React e mantém a web como está, ao custo de duas bases.
+- No backend, Kotlin é uma troca de linguagem dentro do mesmo framework: a API, o banco e a segurança não mudam, e Java e Kotlin podem conviver durante a migração. O risco é baixo se for gradual.
+
+### Consequências (se a proposta A for aceita)
 
 **Ganhos**
 - Uma base de código de interface para web e mobile: o Épico 3 deixa de ser um app separado.
@@ -163,6 +187,13 @@ O PO propôs:
 2. Backend: migrar para Kotlin **aos poucos** (Java e Kotlin convivendo) ou reescrever de uma vez?
 3. Persistência: manter JNoSQL ou trocar por Panache Kotlin?
 4. A web do tutor e do petshop também vai para Flutter, ou só o app mobile?
+
+### Próximos passos (se aceito)
+
+1. [ ] Responder às perguntas em aberto e mudar o status para Aceito.
+2. [ ] Spike de Kotlin no Quarkus com JNoSQL (uma entidade, um repositório, um endpoint) antes de migrar o resto.
+3. [ ] Spike de Flutter web + mobile com login e listagem de pets contra a API atual.
+4. [ ] Estórias de migração no Roadmap e no De-Para.
 
 ### Situação em 05/11/2026
 

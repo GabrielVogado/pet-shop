@@ -39,3 +39,11 @@ CONTEXTO.md
 # Backups locais e logs de execucao
 *.log
 pom.xml.*
+
+# Configuracao de agentes e skills (fora do repositorio)
+.claude/
+CLAUDE.md
+.opencode/
+.spec/
+skill-observations/
+skill-updates/
