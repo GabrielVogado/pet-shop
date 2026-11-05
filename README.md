@@ -1,31 +1,37 @@
 # PetCare Agenda
 
-Plataforma que conecta donos de pets (tutores) a petshops para agendar banhos e vacinas.
+O PetCare Agenda é uma plataforma que liga **donos de pets (tutores)** a **petshops** para agendar serviços pelo celular ou pelo navegador, sem ligação, sem mensagem solta e sem agenda de papel.
 
-Hoje o sistema é um MVP web com **um único petshop**. O próximo ciclo leva o produto para **vários petshops, pagamento e app mobile** (ver [Roadmap](Documentos/04-backlog/Roadmap-v1.0.md)).
+## Para quem é
 
-## Estrutura
+- **Tutor:** encontra um petshop, escolhe o serviço (banho, tosa, vacina ou consulta), reserva um horário e acompanha tudo pelo app. Usar é grátis.
+- **Petshop:** recebe os pedidos de agendamento, aceita ou recusa, organiza a agenda do dia e registra vacinas e serviços feitos. Paga uma mensalidade fixa e pode ter várias filiais.
 
-| Pasta | Conteúdo |
-|---|---|
-| `pet-shop-backend/` | API REST em Quarkus 3.15 (Java 17) com MongoDB via JNoSQL, JWT RS256 e SSE |
-| `pet-shop-frontend/` | SPA em React 19 + Vite 7 + Tailwind + React Router, organizada em FSD |
-| `Documentos/` | Documentação do projeto (negócio, arquitetura, API, backlog, ADRs, melhorias, histórico, git-flow) |
-| `docker-compose.yml` | Ambiente completo: MongoDB + backend + frontend (nginx) |
-| `docker-compose.dev.yml` | Ambiente de desenvolvimento com hot reload |
+## O que o sistema faz
 
-## Como rodar
+- **Agendamento com aceite da loja:** o pedido só vira horário marcado quando o petshop confirma.
+- **Sinal de 50%:** o tutor paga metade na reserva. O sinal também funciona como multa: cancelando com menos de 2 horas de antecedência, ou faltando, a loja fica com ele.
+- **Pagamento direto para a loja:** cada petshop tem a própria conta recebedora. O PetCare não recebe o dinheiro do serviço.
+- **Cartão de vacina digital:** cada registro mostra se foi aplicado por uma loja (verificado) ou informado pelo tutor.
+- **Avaliações:** o tutor avalia a loja com estrelas e comentário, e a loja pode responder.
+- **Avisos:** notificações no app e pelo WhatsApp para o tutor; app, SMS, WhatsApp e e-mail para a loja.
 
-```bash
-cp .env.example .env        # preencha JWT_PUBLIC_KEY e JWT_PRIVATE_KEY
-docker compose up -d --build
-```
+## Em que pé está
 
-- Frontend: http://localhost:8081
-- API: http://localhost:8080 (OpenAPI em `/q/openapi`)
+O projeto está na **fase de documentação**: o desenvolvimento só começa depois que o funcionamento do sistema estiver todo descrito. O sistema atual é um protótipo para um único petshop e será refeito do zero para vários petshops, com pagamento e aplicativo Android.
 
-Desenvolvimento local, testes e fluxo de branches estão no [Guia do Ambiente Local](Documentos/02-arquitetura-tecnica/Guia-Ambiente-Local-v1.0.md) e no [Manual](Documentos/10-git-flow/MANUAL.md).
+## Onde ler mais
 
-## Documentação
+- Como o sistema deve funcionar: [Documento Negocial](Documentos/01-negocio/Documento-Negocial-v2.0.md)
+- O que será feito e em que ordem: [Roadmap](Documentos/04-backlog/Roadmap-v1.0.md)
+- Decisões técnicas e custos: [ADRs](Documentos/08-analise-tecnica/adrs.md) e [Estimativa de custo de nuvem](Documentos/02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md)
+- Toda a documentação: [Índice](Documentos/00-INDICE.md)
 
-Comece pelo índice em [Documentos/00-INDICE.md](Documentos/00-INDICE.md).
+## Para desenvolvedores
+
+Cada parte do código tem o próprio README com instruções de instalação, execução e testes:
+
+- [`pet-shop-backend/`](pet-shop-backend/README.md): API
+- [`pet-shop-frontend/`](pet-shop-frontend/README.md): interface web
+
+O fluxo de branches e de documentação está no [Manual do desenvolvedor](Documentos/10-git-flow/MANUAL.md).

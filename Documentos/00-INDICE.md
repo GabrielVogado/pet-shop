@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 05/11/2026 — README para quem não é desenvolvedor
+
+**O que mudou:** o `README.md` da raiz agora explica o que é o projeto, para quem é e o que o sistema faz, sem instruções técnicas. As instruções de instalação, execução e testes foram para `pet-shop-backend/README.md` e `pet-shop-frontend/README.md`. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 05/11/2026 — Estimativa de custo de nuvem
 
 **O que mudou:** novo `Estimativa-Custo-Nuvem-v1.0.md` com o custo mensal de referência para 30 lojas e 100 tutores, em três cenários de volume e dois perfis de infraestrutura (Google Cloud, MongoDB Atlas, Firebase Hosting, WhatsApp, SMS e e-mail). A infraestrutura fica entre ~US$ 21 e ~US$ 161 por mês; o WhatsApp é o custo que cresce com o uso. O SMS custa cerca de 9 vezes mais que o WhatsApp nas tarifas encontradas, e há uma comparação do backend com AWS e servidor virtual. A seção "O que não foi estimado" lista as lacunas. O Documento Negocial v2.0 aponta para a estimativa em RNF-09 e P-06. Nenhuma mudança de código.
