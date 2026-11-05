@@ -2,9 +2,14 @@
 
 > Direção definida pelo PO em 05/11/2026: **vários petshops, pagamento e app mobile**. A ordem abaixo segue as dependências: o modelo multi-loja vem antes do pagamento, e a API estável vem antes do app.
 
-## Proposta de stack (ADR-006)
+## Stack (ADR-006, aceito em 05/11/2026)
 
-> O PO propôs em 05/11/2026 trocar o frontend React por **Flutter** (web e mobile numa base só) e escrever o backend Quarkus em **Kotlin**. Enquanto o [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-no-frontend-e-kotlin-no-backend-quarkus) estiver como proposto, os épicos abaixo valem para qualquer stack. Se for aceito, o Épico 3 deixa de ser um app à parte e a migração entra como épico próprio.
+> Decisão do PO registrada no [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-no-app-mobile-e-kotlin-no-backend-quarkus):
+> - **Web:** continua em React.
+> - **App mobile (Épico 3):** Flutter, para Android e iOS.
+> - **Backend:** reescrito em Kotlin no mesmo Quarkus, **de uma vez e junto com o Épico 1**. A persistência recomendada é `quarkus-mongodb-panache-kotlin`, que aguarda confirmação do PO.
+>
+> O Épico 1 começa portando os testes de integração REST para o backend Kotlin. Eles precisam passar antes de entrarem as funcionalidades multi-petshop.
 
 ## Fase 0: Fundação (pré-requisito)
 
@@ -17,6 +22,7 @@ Sem isso os épicos seguintes ficam arriscados.
 
 ## Épico 1: Vários petshops (marketplace)
 
+- Reescrita do backend em Kotlin com Panache (ADR-006): primeiro os testes de integração REST atuais, depois as 48 classes, mantendo o contrato da API.
 - Entidade `Petshop` própria (nome, CNPJ, endereço, geolocalização, horário de funcionamento, capacidade por horário), separada do usuário owner.
 - Cadastro de várias lojas; um owner pode administrar uma ou mais lojas, e uma loja pode ter funcionários.
 - Substituir o [ADR-002](../08-analise-tecnica/adrs.md#adr-002-índice-único-parcial-para-garantir-um-único-owner) (owner único) por um novo ADR de multi-tenancy.
@@ -34,7 +40,7 @@ Sem isso os épicos seguintes ficam arriscados.
 
 ## Épico 3: App mobile
 
-- App para o tutor consumindo a mesma API. Com o ADR-006 aceito, é o próprio app Flutter; sem ele, React Native/Expo aproveita o conhecimento de React.
+- App Flutter (Android e iOS) para o tutor, consumindo a mesma API ([ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-no-app-mobile-e-kotlin-no-backend-quarkus)).
 - Notificações push (lembrete de agendamento, cancelamento, vacina vencendo).
 - Login persistente com refresh token (hoje o JWT expira em 1 hora e não há refresh).
 - Publicação nas lojas Apple e Google.

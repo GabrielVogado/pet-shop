@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 05/11/2026 — ADR-006 aceito pelo PO
+
+**O que mudou:** o PO respondeu às quatro perguntas do ADR-006. A web continua em React, o app mobile será em Flutter e o backend será reescrito em Kotlin de uma vez, junto com o Épico 1 (vários petshops). Para a persistência, o ADR compara JNoSQL, Panache Kotlin e o driver Kotlin com coroutines e recomenda `quarkus-mongodb-panache-kotlin`, que aguarda confirmação do PO. O ADR foi renomeado para "Flutter no app mobile e Kotlin no backend Quarkus", e o `Roadmap-v1.0.md` e o `HISTORICO.md` foram atualizados. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (decisão registrada, nada entregue).
+
+---
+
 ## 📌 Revisão 05/11/2026 — Proposta de troca de stack (ADR-006)
 
 **O que mudou:** o PO propôs trocar o frontend React por Flutter (web e mobile numa base só) e escrever o backend Quarkus em Kotlin. Registrado como ADR-006, **proposto**, com ganhos, custos e quatro perguntas em aberto; o `Roadmap-v1.0.md` passa a citar a proposta. Nenhuma mudança de código.
@@ -55,7 +62,7 @@ Pastas reservadas, criadas quando houver conteúdo (mesma numeração do Saúde 
 | [ADR-003](08-analise-tecnica/adrs.md#adr-003-taxonomia-de-erros-da-api) | Taxonomia de erros da API | Proposto, não implementado |
 | [ADR-004](08-analise-tecnica/adrs.md#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na listagem de agendamentos do owner | Proposto, não implementado |
 | [ADR-005](08-analise-tecnica/adrs.md#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT para rotação de chaves | Aceito, implementado |
-| [ADR-006](08-analise-tecnica/adrs.md#adr-006-flutter-no-frontend-e-kotlin-no-backend-quarkus) | Flutter no frontend e Kotlin no backend Quarkus | Proposto pelo PO |
+| [ADR-006](08-analise-tecnica/adrs.md#adr-006-flutter-no-app-mobile-e-kotlin-no-backend-quarkus) | Flutter no app mobile e Kotlin no backend Quarkus | Aceito pelo PO |
 
 ## Espelho no Obsidian
 

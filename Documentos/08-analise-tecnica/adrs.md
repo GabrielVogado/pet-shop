@@ -9,7 +9,7 @@ Registros de decisão de arquitetura. Numeração sequencial; um ADR substituíd
 | [ADR-003](#adr-003-taxonomia-de-erros-da-api) | Taxonomia de erros da API | Proposto |
 | [ADR-004](#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na agenda do owner | Proposto |
 | [ADR-005](#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT | Aceito, implementado |
-| [ADR-006](#adr-006-flutter-no-frontend-e-kotlin-no-backend-quarkus) | Flutter no frontend e Kotlin no backend Quarkus | Proposto |
+| [ADR-006](#adr-006-flutter-no-app-mobile-e-kotlin-no-backend-quarkus) | Flutter no app mobile e Kotlin no backend Quarkus | Aceito |
 
 ---
 
@@ -127,24 +127,37 @@ Sem identificador de chave no token, trocar o par RSA invalida todas as sessões
 
 ---
 
-## ADR-006: Flutter no frontend e Kotlin no backend Quarkus
+## ADR-006: Flutter no app mobile e Kotlin no backend Quarkus
 
-- **Status:** Proposto (pelo PO em 05/11/2026), não implementado
+- **Status:** Aceito pelo PO em 05/11/2026, não implementado. A ferramenta de persistência (item 3) está recomendada e aguarda confirmação do PO.
 - **Data:** 05/11/2026
 - **Decisor:** Gabriel Vogado (PO)
 
 ### Contexto
 
-O roadmap pede **app mobile** (Épico 3) e continua precisando de interface web para tutor e petshop. Hoje o frontend é uma SPA React 19 + Vite, só web (36 arquivos em `pet-shop-frontend/src`), e o backend é Quarkus 3.15 em Java 17 (48 classes em `pet-shop-backend/src/main`). Manter React na web e criar um app mobile à parte significaria duas bases de interface.
+O roadmap pede **app mobile** (Épico 3) e continua precisando de interface web para tutor e petshop. Hoje o frontend é uma SPA React 19 + Vite, só web (36 arquivos em `pet-shop-frontend/src`), e o backend é Quarkus 3.15 em Java 17 (48 classes em `pet-shop-backend/src/main`), com persistência em JNoSQL 3.3.0 sobre MongoDB.
 
 O PO propôs:
 
 > "ao inves de utilizar o React, estou pensando em utilizar Flutter e para o backend quero utilizar Quarkus com Kotlin"
 
-### Decisão proposta
+### Decisão
 
-1. **Frontend em Flutter**, uma base para Android, iOS e web, substituindo a SPA React.
-2. **Backend continua em Quarkus, escrito em Kotlin**, substituindo o Java. A API REST, o MongoDB, o JWT RS256 e o SSE continuam iguais.
+Respostas do PO em 05/11/2026 às perguntas que ficaram em aberto na proposta:
+
+| Pergunta | Resposta do PO |
+|---|---|
+| A troca vem antes do Épico 1 (vários petshops) ou junto com ele? | **Junto com o Épico 1** |
+| O backend migra para Kotlin aos poucos ou de uma vez? | **De uma vez** |
+| A persistência fica no JNoSQL ou passa para Panache Kotlin? | PO pediu a recomendação da melhor ferramenta (ver abaixo) |
+| A web também vai para Flutter, ou só o app mobile? | **Só o app mobile** |
+
+Com isso, a decisão fica:
+
+1. **Web continua em React** (SPA atual, React 19 + Vite). Não há reescrita da web.
+2. **App mobile em Flutter** (Android e iOS), consumindo a mesma API REST. É a opção C do frontend.
+3. **Backend reescrito em Kotlin de uma vez**, no mesmo Quarkus, junto com o Épico 1. A API REST, o MongoDB, o JWT RS256 e o SSE continuam iguais para os clientes.
+4. **Persistência: `quarkus-mongodb-panache-kotlin`** (recomendação, aguardando confirmação do PO).
 
 ### Opções consideradas
 
@@ -152,49 +165,64 @@ O PO propôs:
 
 | Opção | Complexidade | Familiaridade da equipe | Web | Mobile | Observação |
 |---|---|---|---|---|---|
-| **A. Flutter para web e mobile** (proposta) | Alta: reescrita total, Dart novo | Baixa | Funciona, carregamento inicial pesado e SEO fraco | Nativo, uma base | Uma base para tudo |
-| B. React web + React Native/Expo no mobile | Média: web aproveitada, app novo | Alta: já é React; o Saúde Monitor usa Expo | Mantém a SPA atual | Bom, base separada da web | Duas bases, mesma linguagem e parte da lógica compartilhável |
-| C. React web mantido + Flutter só no mobile | Média | Mista | Mantém a SPA atual | Nativo | Duas bases em duas linguagens |
+| A. Flutter para web e mobile | Alta: reescrita total, Dart novo | Baixa | Funciona, carregamento inicial pesado e SEO fraco | Nativo, uma base | Descartada: o PO manteve a web em React |
+| B. React web + React Native/Expo no mobile | Média: web aproveitada, app novo | Alta: já é React; o Saúde Monitor usa Expo | Mantém a SPA atual | Bom, base separada da web | Não escolhida |
+| **C. React web mantido + Flutter só no mobile** (escolhida) | Média | Mista | Mantém a SPA atual | Nativo | Duas bases em duas linguagens |
 
 **Backend**
 
 | Opção | Complexidade | Familiaridade | Observação |
 |---|---|---|---|
-| **A. Quarkus em Kotlin** (proposta) | Média: plugins `all-open`/`no-arg`, migração classe a classe possível | A desenvolver | Menos código repetitivo, null-safety |
-| B. Quarkus em Java (atual, subir para Java 21) | Baixa | Alta | Records e pattern matching já reduzem boa parte do código repetitivo |
+| **A. Quarkus em Kotlin, de uma vez** (escolhida) | Média/alta: reescrever 48 classes e os testes | A desenvolver | Menos código repetitivo, null-safety |
+| A'. Quarkus em Kotlin, aos poucos (Java e Kotlin convivendo) | Média | A desenvolver | Não escolhida pelo PO |
+| B. Quarkus em Java (atual, subir para Java 21) | Baixa | Alta | Não escolhida |
+
+**Persistência (MongoDB)**
+
+O código atual usa o `Template` do Jakarta NoSQL em 5 repositórios (`infrastructure/persistence/Mongo*Repository`) com consultas simples (`select(...).where(...).eq(...)`). As necessidades que já estão no backlog pesam mais que o código atual: reserva atômica de horário (DT-03), disponibilidade sem centenas de consultas (DT-04), lista de agendamentos sem N+1 (DT-05) e, com o Épico 1, filtro por `petshopId` em todas as consultas.
+
+| Critério | JNoSQL (`quarkus-jnosql-document-mongodb`, atual) | **Panache Kotlin (`quarkus-mongodb-panache-kotlin`)** | Driver Kotlin com coroutines (`mongodb-driver-kotlin-coroutine`) |
+|---|---|---|---|
+| Quem mantém | Quarkiverse (comunidade), versão própria (3.3.0) fora do BOM do Quarkus | Projeto Quarkus, no BOM, sai junto com cada versão | MongoDB, fora do Quarkus |
+| Kotlin | Funciona, mas a API é Java (Optional, builders); entidades precisam do plugin `no-arg` | API feita para Kotlin: `PanacheMongoRepository`, `PanacheMongoCompanion`, retorno anulável em vez de `Optional` | Nativo de Kotlin, com `suspend` |
+| Operação atômica (DT-03) | O `Template` não expõe `findOneAndUpdate`; precisa descer ao driver | `mongoCollection().findOneAndUpdate(...)` disponível no próprio repositório | Disponível |
+| Agregações (DT-04, DT-05) | Não tem API de agregação; precisa descer ao driver | `mongoCollection().aggregate(...)` | Disponível |
+| Transações | Sem suporte declarativo | `@Transactional` com MongoDB em replica set | Manual, com `ClientSession` |
+| Integração Quarkus (Dev Services, health, métricas, build nativo) | Parcial | Completa | Nenhuma: configuração e ciclo de vida à mão |
+| Esforço na reescrita | Mantém as anotações `jakarta.nosql`, mas segue com a API Java | Troca as anotações por `@MongoEntity`/`@BsonId` e reescreve 5 repositórios | Reescreve tudo e perde a integração com Quarkus |
+
+**Recomendação: Panache Kotlin.** Como o backend será reescrito de uma vez, o custo de trocar a persistência já está dentro da reescrita. O Panache Kotlin é mantido pelo próprio Quarkus, tem API pensada para Kotlin e dá acesso direto ao driver para as três correções de dados que o backlog já pede (reserva atômica, disponibilidade e N+1). Com JNoSQL, essas correções precisariam contornar a biblioteca. O driver com coroutines só compensaria num backend todo reativo, o que não é o caso hoje.
 
 ### Análise dos trade-offs
 
-- O maior custo da proposta está no frontend: é uma reescrita de 36 arquivos e de todos os testes de interface, sem ganho funcional imediato para o usuário. O ganho aparece no Épico 3, quando o app mobile sai da mesma base.
-- A opção B do frontend chega ao app mobile com menos risco para quem já sabe React e mantém a web como está, ao custo de duas bases.
-- No backend, Kotlin é uma troca de linguagem dentro do mesmo framework: a API, o banco e a segurança não mudam, e Java e Kotlin podem conviver durante a migração. O risco é baixo se for gradual.
+- Manter a web em React elimina o maior custo da proposta original: não há reescrita de 36 arquivos nem dos testes de interface, e a página pública de busca de petshops (Épico 1) continua sem o problema de SEO do Flutter web.
+- O preço é ter duas bases de interface em duas linguagens (TypeScript e Dart). As regras de negócio ficam no backend, então a duplicação se limita a telas e validações de formulário.
+- Reescrever o backend de uma vez **junto** com o Épico 1 concentra risco: a troca de linguagem, de persistência e o novo modelo multi-petshop entram no mesmo período. A mitigação é tratar a API atual como contrato: os testes de integração REST existentes são portados primeiro e precisam passar contra o backend Kotlin antes das funcionalidades novas.
+- Fazer a troca junto com o Épico 1 evita escrever o modelo multi-petshop em Java e reescrevê-lo logo depois em Kotlin.
 
-### Consequências (se a proposta A for aceita)
+### Consequências
 
 **Ganhos**
-- Uma base de código de interface para web e mobile: o Épico 3 deixa de ser um app separado.
-- Kotlin reduz código repetitivo no backend (data classes no lugar de getters/setters, null-safety no compilador) e convive com Java no mesmo projeto Maven, o que permite migrar classe por classe.
+- A web atual segue funcionando e evoluindo sem reescrita.
+- O app mobile nasce nativo em Flutter para Android e iOS.
+- Kotlin reduz código repetitivo no backend (data classes, null-safety no compilador).
+- Com Panache Kotlin, reserva atômica, agregações e transações ficam disponíveis sem contornar a biblioteca.
 
 **Custos e riscos**
-- O frontend é **reescrito do zero**: nada do React, do Tailwind, da organização FSD nem dos testes (Vitest, Testing Library, Playwright) é aproveitado. Testes passam a ser `flutter_test` e `integration_test`.
-- Flutter na web gera uma aplicação pesada no primeiro carregamento e fraca para SEO. Para o painel do petshop isso pesa pouco; para uma página pública de busca de petshops (Épico 1), pesa mais.
-- Kotlin no Quarkus precisa dos plugins `all-open` (beans CDI) e `no-arg` (entidades persistidas), e o JNoSQL com Kotlin precisa ser validado. Alternativa a avaliar: `quarkus-mongodb-panache-kotlin`.
 - A equipe precisa dominar Dart/Flutter e Kotlin.
+- Testes do app passam a ser `flutter_test` e `integration_test`; os da web (Vitest, Testing Library, Playwright) continuam.
+- Kotlin no Quarkus precisa do plugin `all-open` para os beans CDI.
+- A reescrita de uma vez trava o backend Java: correções em Java durante a reescrita precisam ser repetidas no Kotlin.
+- As anotações e a migração dos índices (MIG-001, índice único do ADR-002) precisam ser refeitas no Panache; o ADR-002 será substituído pelo ADR de multi-tenancy do Épico 1.
 
-### Perguntas em aberto (para o PO)
+### Próximos passos
 
-1. A troca acontece **antes** do Épico 1 (vários petshops) ou junto com ele?
-2. Backend: migrar para Kotlin **aos poucos** (Java e Kotlin convivendo) ou reescrever de uma vez?
-3. Persistência: manter JNoSQL ou trocar por Panache Kotlin?
-4. A web do tutor e do petshop também vai para Flutter, ou só o app mobile?
-
-### Próximos passos (se aceito)
-
-1. [ ] Responder às perguntas em aberto e mudar o status para Aceito.
-2. [ ] Spike de Kotlin no Quarkus com JNoSQL (uma entidade, um repositório, um endpoint) antes de migrar o resto.
-3. [ ] Spike de Flutter web + mobile com login e listagem de pets contra a API atual.
-4. [ ] Estórias de migração no Roadmap e no De-Para.
+1. [x] Responder às perguntas em aberto e mudar o status para Aceito.
+2. [ ] PO confirmar Panache Kotlin como persistência.
+3. [ ] Spike de Kotlin + Panache no Quarkus: uma entidade, um repositório, um endpoint e a reserva atômica com `findOneAndUpdate`.
+4. [ ] Spike de Flutter mobile com login e listagem de pets contra a API atual.
+5. [ ] Estórias de migração no Roadmap (junto com o Épico 1) e no De-Para.
 
 ### Situação em 05/11/2026
 
-Somente documentado. O código continua em React e Java. Quando o PO aprovar, este ADR passa a "Aceito" e o [Roadmap](../04-backlog/Roadmap-v1.0.md) ganha as estórias de migração.
+Decisão aceita e documentada. O código continua em React e Java até as estórias de migração entrarem no Roadmap.
