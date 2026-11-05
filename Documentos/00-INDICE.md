@@ -7,6 +7,23 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 05/11/2026 — Documento Negocial v2.0 (sistema-alvo)
+
+**O que mudou:** a partir de uma entrevista com o PO em seis blocos, o `Documento-Negocial-v2.0.md` descreve o sistema-alvo, que será desenvolvido do zero:
+- marketplace de lojas com mensalidade fixa;
+- tutor sem custo;
+- sinal de 50% que funciona como multa;
+- prazo de aceite pela loja;
+- carteira de vacinas com origem verificada e permissão do tutor;
+- avaliações com direito de resposta;
+- notificações por app, WhatsApp, SMS e e-mail;
+- requisitos não funcionais e pendências.
+
+A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md`, `Especificacao-API-v1.0.md` e `HISTORICO.md` ajustados. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 05/11/2026 — ADR-006: web também em Flutter
 
 **O que mudou:** o PO mudou o escopo do ADR-006: a web também vai para Flutter, junto com o app mobile, numa base só. O ADR passa a se chamar "Flutter na web e no mobile e Kotlin no backend Quarkus", com a opção A do frontend escolhida e os custos da reescrita da SPA React. O `Roadmap-v1.0.md` e o `HISTORICO.md` foram atualizados. Nenhuma mudança de código.
@@ -45,7 +62,7 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 | Pasta | Documento | Para que serve |
 |---|---|---|
-| `01-negocio/` | [Documento-Negocial-v1.0](01-negocio/Documento-Negocial-v1.0.md) | Problema, perfis, o que o MVP entrega, limitações e regras de negócio (RN-01 a RN-23) |
+| `01-negocio/` | [Documento-Negocial-v2.0](01-negocio/Documento-Negocial-v2.0.md) | Sistema-alvo: visão, modelo de negócio, perfis, regras de negócio (RN-01 a RN-72), requisitos não funcionais e pendências. O código atual segue descrito na [v1.0](_historico/Documento-Negocial-v1.0.md) |
 | `02-arquitetura-tecnica/` | [Arquitetura-v1.0](02-arquitetura-tecnica/Arquitetura-v1.0.md) | Camadas do backend e do frontend, modelo de dados, segurança, tempo real, infraestrutura |
 | | [Especificacao-API-v1.0](02-arquitetura-tecnica/Especificacao-API-v1.0.md) | Endpoints REST e SSE com perfis de acesso |
 | | [Guia-Ambiente-Local-v1.0](02-arquitetura-tecnica/Guia-Ambiente-Local-v1.0.md) | Pré-requisitos, como rodar e testar na máquina |

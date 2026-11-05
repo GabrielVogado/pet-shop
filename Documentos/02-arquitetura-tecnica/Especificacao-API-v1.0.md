@@ -41,7 +41,7 @@ Autenticação: `Authorization: Bearer <JWT>` obtido em `/api/auth/login` ou `/a
 | Método | Rota | Perfil | Descrição |
 |---|---|---|---|
 | GET | `/api/agendamentos?petId=` | tutor, owner | Tutor: seu histórico (opcionalmente de um pet). Owner: agenda da loja com e-mail, telefone e dados do pet |
-| POST | `/api/agendamentos` | tutor | Cria agendamento (ver [Regras de Negócio](../01-negocio/Documento-Negocial-v1.0.md#regras-de-negócio)) |
+| POST | `/api/agendamentos` | tutor | Cria agendamento (ver [Regras de Negócio](../_historico/Documento-Negocial-v1.0.md#regras-de-negócio)) |
 | GET | `/api/agendamentos/availability?petshopId=&serviceId=&date=` | tutor | Dias com vaga nos próximos 14 dias e horários livres da data |
 | PUT | `/api/agendamentos/{id}/cancel` | tutor, owner | Cancela agendamento com status Agendado |
 

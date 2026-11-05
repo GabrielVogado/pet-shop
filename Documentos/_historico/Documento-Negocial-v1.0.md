@@ -1,5 +1,7 @@
 # Documento Negocial — PetCare Agenda (v1.0)
 
+> **Histórico.** Substituído em 05/11/2026 pela [v2.0](../01-negocio/Documento-Negocial-v2.0.md), que descreve o sistema-alvo. Este documento continua valendo como descrição do **código atual** (MVP de um petshop).
+>
 > Estado medido no código da branch `develop` em 05/11/2026. Reúne a visão do produto e as regras de negócio.
 
 ## Visão do Produto
