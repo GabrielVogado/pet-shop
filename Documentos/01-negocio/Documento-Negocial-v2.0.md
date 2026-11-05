@@ -2,7 +2,7 @@
 
 > **Sistema-alvo**, definido em entrevista com o PO (Gabriel Vogado) em 05/11/2026. O sistema será desenvolvido do zero na stack do [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus). O comportamento do código atual (MVP de um petshop) está registrado na [v1.0](../_historico/Documento-Negocial-v1.0.md).
 >
-> Itens marcados **(proposta)** foram sugeridos durante a entrevista e aceitos pelo PO. Itens marcados **(suposição)** ainda aguardam confirmação e estão listados em [Pendências](#pendências).
+> Itens marcados **(proposta)** foram sugeridos durante a entrevista e aceitos pelo PO.
 
 ---
 
@@ -32,7 +32,7 @@ O PetCare aproxima petshops e donos de pet. O tutor encontra lojas, agenda servi
 | Busca de lojas, agendamento, sinal e pagamento | Venda de produtos |
 | Carteira de vacinas e histórico de cuidados | Chat entre tutor e loja |
 | Avaliações | Login por funcionário da loja |
-| App Android (Google Play) e web | App iOS (App Store) **(suposição)** |
+| App Android (Google Play) e web | App iOS (App Store) |
 
 ---
 
@@ -135,7 +135,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | RN-60 | Depois de um atendimento concluído, o tutor avalia a loja com nota de 1 a 5 e um comentário opcional. |
 | RN-61 | **Direito de resposta (proposta):** a nota entra na média na hora. O comentário fica 72h aguardando a resposta da loja e depois é publicado, com a resposta ao lado se houver. |
 | RN-62 | A loja não edita, não apaga nem bloqueia avaliações. A plataforma só remove conteúdo ofensivo, mediante denúncia. |
-| RN-63 | A loja avalia o tutor depois do atendimento. Essa avaliação **não é pública** **(suposição)**: quando outra loja recebe um pedido, vê só indicadores objetivos do tutor, como número de faltas e nota média. |
+| RN-63 | A loja avalia o tutor depois do atendimento. Essa avaliação **não é pública**: quando outra loja recebe um pedido, vê só indicadores objetivos do tutor, como número de faltas e nota média. |
 
 ---
 
@@ -167,7 +167,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | RNF-01 | **Volume no primeiro ano:** pelo menos 30 lojas e 100 tutores. A arquitetura não precisa de escala horizontal no início. |
 | RNF-02 | **Disponibilidade:** no ar o tempo todo. Uma janela de manutenção de até 1h de madrugada é aceitável. |
 | RNF-03 | **Idioma e moeda:** português e real. |
-| RNF-04 | **Plataformas:** app Android na Google Play, e web para o tutor e para o painel da loja. O iOS fica fora do MVP **(suposição)**. |
+| RNF-04 | **Plataformas:** app Android na Google Play, e web para o tutor e para o painel da loja. O iOS fica fora do MVP. |
 | RNF-05 | **Exige internet.** Não há modo offline. |
 | RNF-06 | **LGPD, exclusão:** o tutor pode pedir a exclusão dos seus dados. Os dados são apagados, sem anonimização, exceto os registros que a lei obriga a guardar (pagamentos e notas fiscais), que ficam retidos pelo prazo legal. |
 | RNF-07 | **LGPD, portabilidade:** o tutor pode baixar o histórico e a carteira de vacinas dos seus pets. |
@@ -183,8 +183,8 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | # | Ponto | Situação |
 |---|---|---|
 | P-01 | Encarregado de dados (DPO) | Resolvido: o PO é o encarregado (RNF-11) |
-| P-02 | Avaliação do tutor pela loja não pública (RN-63) | Suposição, aguarda confirmação |
-| P-03 | iOS fora do MVP (RNF-04) | Suposição, aguarda confirmação |
+| P-02 | Avaliação do tutor pela loja não pública (RN-63) | Confirmado pelo PO |
+| P-03 | iOS fora do MVP (RNF-04) | Confirmado pelo PO |
 | P-04 | Provedor de pagamento (RN-53) | ADR a escrever |
 | P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir |
 | P-06 | Nuvem e custo de infraestrutura (RNF-09) | Estimativa a fazer antes do desenvolvimento |
