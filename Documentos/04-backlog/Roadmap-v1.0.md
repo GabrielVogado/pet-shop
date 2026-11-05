@@ -7,7 +7,7 @@
 > Decisão do PO registrada no [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-no-app-mobile-e-kotlin-no-backend-quarkus):
 > - **Web:** continua em React.
 > - **App mobile (Épico 3):** Flutter, para Android e iOS.
-> - **Backend:** reescrito em Kotlin no mesmo Quarkus, **de uma vez e junto com o Épico 1**. A persistência recomendada é `quarkus-mongodb-panache-kotlin`, que aguarda confirmação do PO.
+> - **Backend:** reescrito em Kotlin no mesmo Quarkus, **de uma vez e junto com o Épico 1**. A persistência passa a ser `quarkus-mongodb-panache-kotlin`, no lugar do JNoSQL.
 >
 > O Épico 1 começa portando os testes de integração REST para o backend Kotlin. Eles precisam passar antes de entrarem as funcionalidades multi-petshop.
 

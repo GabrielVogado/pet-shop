@@ -129,7 +129,7 @@ Sem identificador de chave no token, trocar o par RSA invalida todas as sessões
 
 ## ADR-006: Flutter no app mobile e Kotlin no backend Quarkus
 
-- **Status:** Aceito pelo PO em 05/11/2026, não implementado. A ferramenta de persistência (item 3) está recomendada e aguarda confirmação do PO.
+- **Status:** Aceito pelo PO em 05/11/2026, não implementado.
 - **Data:** 05/11/2026
 - **Decisor:** Gabriel Vogado (PO)
 
@@ -149,7 +149,7 @@ Respostas do PO em 05/11/2026 às perguntas que ficaram em aberto na proposta:
 |---|---|
 | A troca vem antes do Épico 1 (vários petshops) ou junto com ele? | **Junto com o Épico 1** |
 | O backend migra para Kotlin aos poucos ou de uma vez? | **De uma vez** |
-| A persistência fica no JNoSQL ou passa para Panache Kotlin? | PO pediu a recomendação da melhor ferramenta (ver abaixo) |
+| A persistência fica no JNoSQL ou passa para Panache Kotlin? | **Panache Kotlin**, escolhido pelo PO após a comparação abaixo |
 | A web também vai para Flutter, ou só o app mobile? | **Só o app mobile** |
 
 Com isso, a decisão fica:
@@ -157,7 +157,7 @@ Com isso, a decisão fica:
 1. **Web continua em React** (SPA atual, React 19 + Vite). Não há reescrita da web.
 2. **App mobile em Flutter** (Android e iOS), consumindo a mesma API REST. É a opção C do frontend.
 3. **Backend reescrito em Kotlin de uma vez**, no mesmo Quarkus, junto com o Épico 1. A API REST, o MongoDB, o JWT RS256 e o SSE continuam iguais para os clientes.
-4. **Persistência: `quarkus-mongodb-panache-kotlin`** (recomendação, aguardando confirmação do PO).
+4. **Persistência: `quarkus-mongodb-panache-kotlin`**, substituindo o JNoSQL.
 
 ### Opções consideradas
 
@@ -191,7 +191,7 @@ O código atual usa o `Template` do Jakarta NoSQL em 5 repositórios (`infrastru
 | Integração Quarkus (Dev Services, health, métricas, build nativo) | Parcial | Completa | Nenhuma: configuração e ciclo de vida à mão |
 | Esforço na reescrita | Mantém as anotações `jakarta.nosql`, mas segue com a API Java | Troca as anotações por `@MongoEntity`/`@BsonId` e reescreve 5 repositórios | Reescreve tudo e perde a integração com Quarkus |
 
-**Recomendação: Panache Kotlin.** Como o backend será reescrito de uma vez, o custo de trocar a persistência já está dentro da reescrita. O Panache Kotlin é mantido pelo próprio Quarkus, tem API pensada para Kotlin e dá acesso direto ao driver para as três correções de dados que o backlog já pede (reserva atômica, disponibilidade e N+1). Com JNoSQL, essas correções precisariam contornar a biblioteca. O driver com coroutines só compensaria num backend todo reativo, o que não é o caso hoje.
+**Recomendação: Panache Kotlin** (confirmada pelo PO em 05/11/2026). Como o backend será reescrito de uma vez, o custo de trocar a persistência já está dentro da reescrita. O Panache Kotlin é mantido pelo próprio Quarkus, tem API pensada para Kotlin e dá acesso direto ao driver para as três correções de dados que o backlog já pede (reserva atômica, disponibilidade e N+1). Com JNoSQL, essas correções precisariam contornar a biblioteca. O driver com coroutines só compensaria num backend todo reativo, o que não é o caso hoje.
 
 ### Análise dos trade-offs
 
@@ -218,7 +218,7 @@ O código atual usa o `Template` do Jakarta NoSQL em 5 repositórios (`infrastru
 ### Próximos passos
 
 1. [x] Responder às perguntas em aberto e mudar o status para Aceito.
-2. [ ] PO confirmar Panache Kotlin como persistência.
+2. [x] PO confirmar Panache Kotlin como persistência.
 3. [ ] Spike de Kotlin + Panache no Quarkus: uma entidade, um repositório, um endpoint e a reserva atômica com `findOneAndUpdate`.
 4. [ ] Spike de Flutter mobile com login e listagem de pets contra a API atual.
 5. [ ] Estórias de migração no Roadmap (junto com o Épico 1) e no De-Para.
