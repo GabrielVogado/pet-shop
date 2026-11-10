@@ -59,13 +59,13 @@ Os arquivos do Figma foram criados na área de rascunhos do PO e precisam ser mo
 | **T16 Cadastrar pet** | Nome, espécie, raça, porte (com faixa de peso), nascimento | RN-20 | `POST /tutor/pets` |
 | **T17 Cartão de garantia** | Bandeira e final, para que serve, exemplo da diferença cobrada, trocar e remover | RN-50, RN-57 | `GET /tutor/cartao-garantia` |
 | **T18 Cadastrar ou trocar cartão** | Formulário do provedor (só crédito); o app guarda só bandeira e final | RN-50, RNF-10 | `POST /tutor/cartao-garantia` |
-| **T19 Remover cartão** | Confirmação: sem cartão, não dá para pedir em loja com multa maior que o sinal | RN-50 | `DELETE /tutor/cartao-garantia` |
+| **T19 Remover cartão** | Só aparece se houver outro cartão cadastrado; com um cartão só, a tela mostra "Cadastre outro cartão antes de remover este" e o botão para cadastrar | RN-50, RN-74 | `DELETE /tutor/cartao-garantia` |
 | **T20 Notificações** | Avisos do app por dia, com não lidos | RN-70 | `GET /eu/notificacoes` |
 | **T21 Preferências de aviso** | Push e WhatsApp liga e desliga, alerta se desligar os dois | RN-70 | `PUT /eu/preferencias-aviso` |
 | **T22 Conta** | Dados, cartão, avisos, privacidade, ajuda, sair | — | `PUT /eu`, `POST /auth/sair` |
 | **T23 Privacidade e dados** | Baixar dados (arquivo pronto e validade) e excluir conta | RNF-06, RNF-07 | `POST /eu/exportacao`, `GET /eu/exportacao/{id}` |
 | **T24 Excluir conta** | O que apaga, o que a lei obriga a guardar, agendamentos que serão cancelados, confirmação com senha | RNF-06 | `POST /eu/exclusao` |
-| **T25 Remarcar** | Novo dia e horário, sinal mantido, pedido volta para "Aguardando a loja" | RN-46, P-08 | `POST /tutor/agendamentos/{id}/remarcar` |
+| **T25 Remarcar** | Novo dia e horário, sinal mantido, pedido volta para "Aguardando a loja". Se a loja recusar, o pedido fica no horário antigo e o T8 oferece "Cancelar sem multa" | RN-46, RN-73, P-08 | `POST /tutor/agendamentos/{id}/remarcar` |
 
 ### 2.4 Tutor na web (1280 de largura)
 
@@ -85,7 +85,7 @@ As demais telas do tutor na web reaproveitam as do app numa coluna central.
 | **W9 Editar unidade** | Endereço, táxi pet e raio, veterinários com CRMV, horário por dia da semana; mudar o horário recalcula os horários livres futuros | RN-11, RN-13, RN-14 | `PUT /loja/unidades/{id}`, `/veterinarios` |
 | **W10 Conta recebedora** | Etapas do cadastro no provedor e link para continuar | RN-53 | `GET/POST /loja/conta-recebedora` |
 | **W11 Mensalidade e inadimplência** | Faixa de atraso (fora da busca, sem pedidos novos), meses com situação, gerar Pix | RN-17 | `GET /loja/mensalidades`, `POST .../cobranca` |
-| **W12 Canais de aviso e Google Agenda** | Painel, WhatsApp, SMS e e-mail liga e desliga; Google Agenda conectada | RN-71, RN-72 | `PUT /loja`, `POST/DELETE /loja/google-agenda` |
+| **W12 Canais de aviso e Google Agenda** | Painel, WhatsApp, SMS e e-mail liga e desliga; Google Agenda conectada nas duas vias: pedidos confirmados vão para o Google, e compromissos do Google bloqueiam esses horários no app | RN-71, RN-72, RN-75 | `PUT /loja`, `POST/DELETE /loja/google-agenda` |
 
 A W5 passou a dizer que o sinal vai de 0 a 100% (RN-56) e que, se a multa puder passar do sinal, o tutor precisa de cartão de garantia.
 
@@ -167,17 +167,20 @@ flowchart LR
 
 ---
 
-## 5. Pontos em aberto nas telas da v1.1
+## 5. Pontos das telas decididos pelo PO
 
-As telas abaixo seguem uma suposição que precisa de confirmação do PO.
+As suposições da v1.1 foram respondidas pelo PO em 10/11/2026.
 
-| # | Ponto | Como foi desenhado |
+| # | Ponto | Decisão |
 |---|---|---|
-| 1 | Remarcação que a loja não aceita | O pedido mantém o horário antigo |
-| 2 | Remover o cartão com pedido confirmado em loja com multa maior que o sinal | A T19 mostra só o caso comum; não diz se bloqueia |
-| 3 | Sentido da integração com o Google Agenda (RN-72) | Só do app para o Google; eventos do Google não bloqueiam horário |
-| 4 | Valores de exemplo que não são regra | Mensalidade R$ 149,00 (P-05 em aberto), táxi pet R$ 20,00, link do provedor válido por 24 h, arquivo de exportação válido por 7 dias |
-| 5 | Mapa na busca | Marcador de lugar até a biblioteca ser escolhida |
+| 1 | Remarcação que a loja não aceita | A loja decide. Se recusar, o pedido fica no horário antigo e o tutor pode cancelar sem penalidade (RN-73) |
+| 2 | Remover o cartão de garantia | Só com outro cartão cadastrado (RN-74) |
+| 3 | Sentido da integração com o Google Agenda | Nas duas vias: o app envia os pedidos, e compromissos do Google deixam o horário indisponível no app (RN-75) |
+| 4 | Preços nas telas | Os preços dos serviços, inclusive o táxi pet, são definidos pela loja (RN-12, RN-15); os valores nas telas são só ilustração. A mensalidade segue em aberto (P-05) |
+| 5 | Prazos de exemplo | Link do provedor válido por 24 h e arquivo de exportação por 7 dias continuam como proposta de engenharia |
+| 6 | Mapa na busca | Marcador de lugar até a biblioteca ser escolhida |
+
+Os desenhos do Open Design ainda mostram as suposições antigas nas telas T19, T25 e W12 e precisam ser ajustados.
 
 Ainda não desenhadas: as demais telas do tutor em tela larga (seção 2.4).
 

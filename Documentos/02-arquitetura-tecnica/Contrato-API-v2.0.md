@@ -89,7 +89,7 @@ O PetCare **nunca** recebe o número do cartão (RNF-10). O app envia o cartão 
 |---|---|---|---|
 | POST | `/tutor/cartao-garantia` | TUTOR | Guarda o token do cartão (`tokenProvedor`, `bandeira`, `final`) |
 | GET | `/tutor/cartao-garantia` | TUTOR | Bandeira e final do cartão cadastrado |
-| DELETE | `/tutor/cartao-garantia` | TUTOR | Remove o cartão (impede novos pedidos) |
+| DELETE | `/tutor/cartao-garantia` | TUTOR | Remove o cartão; recusa com `409` se for o único cadastrado (RN-74) |
 
 ### 3.3 Agendamentos do tutor
 
@@ -232,7 +232,7 @@ POST /api/v1/loja/agendamentos/6711c4.../concluir
 | GET | `/loja/pagamentos` | LOJA | Sinais e restantes recebidos, com o desfecho | |
 | GET | `/loja/mensalidades` | LOJA | Mensalidades e situação | RN-17 |
 | POST | `/loja/mensalidades/{competencia}/cobranca` | LOJA | Gera cobrança de mensalidade em atraso | RN-17 |
-| POST | `/loja/google-agenda` | LOJA | Conecta a agenda do Google (retorno do consentimento) | RN-72 |
+| POST | `/loja/google-agenda` | LOJA | Conecta a agenda do Google nas duas vias (retorno do consentimento): envia pedidos e lê os horários ocupados | RN-72, RN-75 |
 | DELETE | `/loja/google-agenda` | LOJA | Desconecta | RN-72 |
 
 ### 4.4 Tempo real para o painel

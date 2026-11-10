@@ -110,6 +110,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | RN-44 | Se o prazo vencer sem resposta, o pedido fica **Expirado**, o sinal é devolvido e o tutor recebe sugestões de outro horário ou de outra loja. |
 | RN-45 | Se a loja recusar ou cancelar, o sinal é devolvido integralmente e o tutor recebe sugestões de outro horário ou de outra loja. |
 | RN-46 | O tutor pode **cancelar ou remarcar sem penalidade até 2h antes** do horário. Depois disso, aplica-se a **multa da loja** (RN-56), se ela tiver definido uma. |
+| RN-73 | **Remarcação recusada:** a loja decide se aceita a remarcação. Se recusar, o pedido mantém o horário antigo e o tutor pode **cancelar sem penalidade**, com o sinal devolvido, mesmo a menos de 2h do horário (decidido pelo PO em 10/11/2026). |
 | RN-47 | **Falta (no-show):** é registrada e aplica-se a **multa da loja** (RN-56), se houver. O tutor não é bloqueado. |
 | RN-48 | A **loja marca o atendimento como concluído** e, nesse momento, registra os procedimentos realizados (vacinas, banho, tosa, consulta) no histórico do pet. |
 
@@ -120,6 +121,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | ID | Regra |
 |---|---|
 | RN-50 | Para agendar numa loja cuja multa possa ser maior que o sinal, o tutor precisa ter um **cartão de crédito cadastrado** como garantia, para cobrar a diferença (**proposta**, P-15). O débito não permite cobrança posterior sem a presença do tutor. |
+| RN-74 | O tutor **só remove o cartão de garantia se tiver outro cartão cadastrado** (decidido pelo PO em 10/11/2026). Para trocar, cadastra o novo antes. |
 | RN-51 | O tutor paga pelo app (crédito, débito ou Pix) o **sinal definido pela loja** (RN-56): um percentual do total, de 0% (sem sinal) a 100%. O sinal é um adiantamento do serviço e é abatido do valor final. O sinal é cobrado **ao pedir** (decisão do PO, P-07): o pedido só chega à loja depois que o sinal é pago. |
 | RN-52 | O restante é pago depois do atendimento, pelo app ou direto na loja. |
 | RN-53 | **Recebimento (proposta):** cada loja tem a própria conta recebedora no provedor de pagamento. O PetCare cria a cobrança em nome da loja e nunca recebe nem repassa o dinheiro. O provedor será escolhido num ADR próprio. |
@@ -160,6 +162,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | RN-70 | O tutor recebe avisos pelo **app (push)** e pelo **WhatsApp**. |
 | RN-71 | A loja escolhe os canais que quer usar: painel, **SMS e WhatsApp** no número cadastrado, e **e-mail**. |
 | RN-72 | A loja pode integrar a agenda ao **Google Agenda**. |
+| RN-75 | A integração com o Google Agenda é **nas duas vias** (decidido pelo PO em 10/11/2026): o pedido confirmado vira evento no Google (e sai de lá se for cancelado), e os horários que já têm compromisso no Google da loja ficam **indisponíveis** para agendar no app. |
 
 ---
 
@@ -189,7 +192,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | P-02 | Avaliação do tutor pela loja não pública (RN-63) | Confirmado pelo PO |
 | P-03 | iOS fora do MVP (RNF-04) | Confirmado pelo PO |
 | P-04 | Provedor de pagamento (RN-53) | [ADR-007](../08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) proposto; spike em sandbox fica para depois da fase de documentação |
-| P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir; custo mínimo por loja na estimativa de nuvem |
+| P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir; custo mínimo por loja na estimativa de nuvem. Os preços dos serviços, inclusive o táxi pet, são da loja (RN-12, RN-15) |
 | P-06 | Nuvem e custo de infraestrutura (RNF-09) | **Nuvem decidida pelo PO em 10/11/2026: Google Cloud, São Paulo.** [Estimativa v1.0](../02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) feita; faltam as tarifas de São Paulo, provedores de SMS brasileiros e conferir a AWS em fonte oficial |
 | P-07 | Quando o sinal é cobrado? A RN-51 diz "na confirmação", mas as RN-44 e RN-45 devolvem o sinal quando a loja recusa ou o prazo vence | **Decidido pelo PO em 10/11/2026: cobrar ao pedir**, com 15 minutos para pagar e o estado Aguardando pagamento ([Diagramas](../02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md#1-estados-do-agendamento)) |
 | P-08 | Remarcar (RN-46) exige novo aceite da loja? | **Decidido pelo PO em 10/11/2026: sim**, mantendo o sinal |

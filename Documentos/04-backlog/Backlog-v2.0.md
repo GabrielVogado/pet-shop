@@ -86,7 +86,7 @@
 | A-01 | Como tutor, quero ver horários livres (RN-41) | Intervalos de 30 min com capacidade livre; pendente ocupa a vaga (RN-42) | T4 | M |
 | A-02 | Como tutor, quero pedir vários serviços e pets de uma vez (RN-40) | Cada serviço indica o pet; vagas reservadas de forma atômica; corrida entre dois tutores deixa só um com a vaga | T4 | G |
 | A-03 | Como tutor, quero ver o total, o sinal e a multa em reais antes de confirmar (RN-56 a RN-58) | Valores batem com a política da loja; a política é copiada para o pedido e não muda depois | T5 | M |
-| A-04 | Como tutor, quero guardar um cartão de garantia quando a multa puder passar do sinal (RN-50) | Cartão tokenizado no provedor; o PetCare não guarda dados de cartão (RNF-10); troca e remoção | `/tutor/cartao` | G |
+| A-04 | Como tutor, quero guardar um cartão de garantia quando a multa puder passar do sinal (RN-50) | Cartão tokenizado no provedor; o PetCare não guarda dados de cartão (RNF-10); troca e remoção; não remove o único cartão (RN-74) | `/tutor/cartao` | G |
 | A-05 | Como tutor, quero pagar o sinal no Pix (RN-51) | QR Code e copia e cola; 15 min para pagar; webhook idempotente muda o pedido para Pendente; sem pagar, vira Abandonado e a vaga volta | T6 | G |
 | A-06 | Como tutor de loja sem sinal, quero que o pedido já nasça Pendente | Pula o pagamento; mesmas regras de vaga | T5 | P |
 
@@ -97,7 +97,7 @@
 | O-01 | Como loja, quero ver os pedidos pendentes com o prazo de aceite (RN-42, RN-43) | Lista em tempo real (SSE); indicadores do tutor (RN-63); prazo conforme a antecedência | W2 | M |
 | O-02 | Como loja, quero aceitar ou recusar | Aceitar confirma; recusar devolve o sinal e libera a vaga (RN-45); tutor avisado com sugestões | W2 | M |
 | O-03 | Como sistema, quero expirar pedidos sem resposta (RN-44) | Tarefa a cada minuto; sinal devolvido; vaga liberada; lembrete 5 min antes para a loja | | M |
-| O-04 | Como tutor, quero cancelar sabendo o que acontece (RN-46) | Mais de 2 h: sem multa. Menos de 2 h: multa da política do pedido; excedente devolvido ou diferença cobrada no cartão de garantia | T8 | G |
+| O-04 | Como tutor, quero cancelar sabendo o que acontece (RN-46, RN-73) | Mais de 2 h: sem multa. Menos de 2 h: multa da política do pedido; excedente devolvido ou diferença cobrada no cartão de garantia. Remarcação recusada pela loja: cancelamento sem multa a qualquer momento | T8 | G |
 | O-05 | Como loja, quero cancelar por imprevisto (RN-45) | Sinal devolvido por inteiro, sempre | W4 | P |
 | O-06 | Como loja, quero registrar a falta do tutor (RN-47) | Só depois do horário; aplica a multa; `dispensarMulta` quando a loja abrir mão (P-14) | W4 | M |
 | O-07 | Como loja, quero concluir o atendimento com os registros (RN-48) | Exige os procedimentos; vacina exige CRMV; grava na carteira com selo "Verificado pela loja" | W4 | G |
@@ -120,7 +120,7 @@
 |---|---|---|---|
 | N-01 | Como tutor, quero receber push dos eventos do meu pedido (RN-70) | Aceito, recusado, expirado, cancelado e lembrete do horário; preferências por tipo | G |
 | N-02 | Como loja, quero escolher os canais de aviso (RN-71) | Painel e e-mail sempre disponíveis; SMS e WhatsApp dependem de decisões do PO | M |
-| N-03 | Como loja, quero integrar ao Google Agenda (RN-72) | Pedido confirmado vira evento; cancelado remove | M |
+| N-03 | Como loja, quero integrar ao Google Agenda nas duas vias (RN-72, RN-75) | Pedido confirmado vira evento; cancelado remove; compromissos do Google deixam o horário indisponível no app | M |
 | N-04 | Como tutor, quero lembretes de reforço de vacina e do próximo banho (RN-24) | Tarefa diária; respeita preferências | M |
 
 ### M8 Privacidade e mensalidade
