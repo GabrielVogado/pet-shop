@@ -33,6 +33,7 @@ Reconstruída do histórico do Git em 05/11/2026.
 | 10/11/2026 | Proposto o contrato da API v2.0 | [Contrato-API-v2.0](../02-arquitetura-tecnica/Contrato-API-v2.0.md) |
 | 10/11/2026 | Propostas as telas e os fluxos: 17 wireframes (tutor e loja) no Figma e fluxos no FigJam | [Telas-e-Fluxos](../03-ui-ux/Telas-e-Fluxos-v1.0.md) |
 | 10/11/2026 | Proposta a arquitetura do app Flutter (ADR-009) | [ADR-009](../08-analise-tecnica/adrs.md#adr-009-arquitetura-do-app-flutter) |
+| 10/11/2026 | Propostos o backlog em marcos e histórias, a definição de pronto e a estratégia de testes | [Backlog-v2.0](../04-backlog/Backlog-v2.0.md) |
 | 05/11/2026 | Direção do produto definida pelo PO: vários petshops, pagamento e app mobile, com foco em documentação antes de desenvolver | [Roadmap](../04-backlog/Roadmap-v1.0.md) |
 | 05/11/2026 | Entrevista com o PO define o sistema-alvo: marketplace com mensalidade da loja, sinal de 50%, carteira de vacinas com origem verificada, avaliações com direito de resposta, Android e web | [Documento-Negocial-v2.0](../01-negocio/Documento-Negocial-v2.0.md) |
 | 05/11/2026 | ADR-007 propõe o caminho para escolher o provedor de pagamento (Asaas recomendado, Stripe Connect como alternativa, a validar em sandbox) | [ADR-007](../08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) |

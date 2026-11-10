@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Backlog, definição de pronto e testes
+
+**O que mudou:** novos `04-backlog/Backlog-v2.0.md` (9 marcos, cerca de 60 histórias com critérios de aceite, riscos que mexem na ordem) e `04-backlog/Definicao-de-Pronto-e-Testes-v1.0.md` (10 itens de pronto, pirâmide de testes, casos obrigatórios, dados e ambientes). O `Roadmap-v1.0.md` ganhou um aviso de que o backlog v2.0 define a ordem do sistema-alvo. Com isso, a lista de documentos antes do desenvolvimento está completa. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 10/11/2026 — Arquitetura do app Flutter (ADR-009)
 
 **O que mudou:** o `adrs.md` ganhou o ADR-009 (proposto): um projeto com dois pontos de entrada (tutor e loja), pastas por feature, Riverpod, `go_router`, cliente da API gerado do OpenAPI, erros por `codigo`, dinheiro em centavos, SSE e push, tema Material 3 e política de testes. Nenhuma mudança de código.
@@ -132,6 +139,8 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | | [Diagramas-de-Engenharia-v2.0](02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md) | Estados do agendamento e do pagamento e sequências dos fluxos principais |
 | | [Contrato-API-v2.0](02-arquitetura-tecnica/Contrato-API-v2.0.md) | Sistema-alvo: contrato REST entre backend Kotlin e clientes Flutter, erros e regras de evolução |
 | `03-ui-ux/` | [Telas-e-Fluxos-v1.0](03-ui-ux/Telas-e-Fluxos-v1.0.md) | Sistema-alvo: wireframes do app do tutor e do painel da loja, com regras e rotas de cada tela, e os fluxos |
+| `04-backlog/` | [Backlog-v2.0](04-backlog/Backlog-v2.0.md) | Sistema-alvo: marcos e histórias com critérios de aceite |
+| | [Definicao-de-Pronto-e-Testes-v1.0](04-backlog/Definicao-de-Pronto-e-Testes-v1.0.md) | Sistema-alvo: o que é "pronto" e a estratégia de testes |
 | | [Especificacao-API-v1.0](02-arquitetura-tecnica/Especificacao-API-v1.0.md) | Endpoints REST e SSE com perfis de acesso |
 | | [Estimativa-Custo-Nuvem-v1.0](02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) | Custo mensal estimado de nuvem e mensagens, por cenário e perfil, com o que não foi estimado |
 | | [Guia-Ambiente-Local-v1.0](02-arquitetura-tecnica/Guia-Ambiente-Local-v1.0.md) | Pré-requisitos, como rodar e testar na máquina |

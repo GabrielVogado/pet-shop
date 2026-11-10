@@ -1,5 +1,7 @@
 # Roadmap
 
+> **Atenção.** Este roadmap é a direção de 05/11/2026. Para o sistema-alvo definido na entrevista com o PO, a ordem e as histórias estão no [Backlog v2.0](Backlog-v2.0.md).
+
 > Direção definida pelo PO em 05/11/2026: **vários petshops, pagamento e app mobile**. A ordem abaixo segue as dependências: o modelo multi-loja vem antes do pagamento, e a API estável vem antes do app.
 
 ## Stack (ADR-006, aceito em 05/11/2026)
