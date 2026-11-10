@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Identidade visual e nome Pertim
+
+**O que mudou:** o PO escolheu a nova identidade entre três direções e quatro nomes. Novo `03-ui-ux/Identidade-Visual-v1.0.md`: nome **Pertim** (de "pertinho"), símbolo de alfinete de mapa com pegada (SVGs em `03-ui-ux/marca/`), paleta Pinheiro, Girassol, Folha, Calçada e Asfalto com papéis do Material 3 nos temas claro e escuro e contrastes medidos, Bricolage Grotesque e Figtree, formas, ícones, tom de voz e esboço do tema Flutter. As `Telas-e-Fluxos-v1.0.md` e o ADR-009 passam a apontar para ele. O nome só troca nos documentos e no código depois da busca no INPI, em PR próprio. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 10/11/2026 — Backlog, definição de pronto e testes
 
 **O que mudou:** novos `04-backlog/Backlog-v2.0.md` (9 marcos, cerca de 60 histórias com critérios de aceite, riscos que mexem na ordem) e `04-backlog/Definicao-de-Pronto-e-Testes-v1.0.md` (10 itens de pronto, pirâmide de testes, casos obrigatórios, dados e ambientes). O `Roadmap-v1.0.md` ganhou um aviso de que o backlog v2.0 define a ordem do sistema-alvo. Com isso, a lista de documentos antes do desenvolvimento está completa. Nenhuma mudança de código.
@@ -139,6 +146,7 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | | [Diagramas-de-Engenharia-v2.0](02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md) | Estados do agendamento e do pagamento e sequências dos fluxos principais |
 | | [Contrato-API-v2.0](02-arquitetura-tecnica/Contrato-API-v2.0.md) | Sistema-alvo: contrato REST entre backend Kotlin e clientes Flutter, erros e regras de evolução |
 | `03-ui-ux/` | [Telas-e-Fluxos-v1.0](03-ui-ux/Telas-e-Fluxos-v1.0.md) | Sistema-alvo: wireframes do app do tutor e do painel da loja, com regras e rotas de cada tela, e os fluxos |
+| `03-ui-ux/` | [Identidade-Visual-v1.0](03-ui-ux/Identidade-Visual-v1.0.md) | Sistema-alvo: nome Pertim, marca, cores claro e escuro, tipografia, formas, ícones, tom de voz e tema do app |
 | `04-backlog/` | [Backlog-v2.0](04-backlog/Backlog-v2.0.md) | Sistema-alvo: marcos e histórias com critérios de aceite |
 | | [Definicao-de-Pronto-e-Testes-v1.0](04-backlog/Definicao-de-Pronto-e-Testes-v1.0.md) | Sistema-alvo: o que é "pronto" e a estratégia de testes |
 | | [Especificacao-API-v1.0](02-arquitetura-tecnica/Especificacao-API-v1.0.md) | Endpoints REST e SSE com perfis de acesso |

@@ -407,7 +407,7 @@ Sem um padrão antes da primeira tela, cada feature escolhe seu próprio jeito d
 6. **Mensagens de erro por `codigo`**, num único arquivo de textos em português, nunca o texto vindo do servidor (Telas, seção 4).
 7. **Dinheiro em centavos (`int`) até a hora de mostrar**, formatado com `intl` como `R$ 0,00`; datas chegam em UTC e são mostradas no fuso do aparelho como `dd/mm/aaaa`.
 8. **Tempo real:** painel da loja assina o SSE `/loja/eventos`; o app do tutor recebe push. Em ambos o evento só avisa, e a tela busca de novo o recurso (Telas, seção 4).
-9. **Tema Material 3** com tokens num só lugar (`core/tema`), para a identidade visual (decisão pendente) entrar sem mexer nas telas. Contraste AA, alvo de toque de 48 dp, fonte escalável.
+9. **Tema Material 3** com tokens num só lugar (`core/tema`), para a identidade visual ([Identidade visual v1.0](../03-ui-ux/Identidade-Visual-v1.0.md)) entrar sem mexer nas telas. Contraste AA, alvo de toque de 48 dp, fonte escalável.
 10. **Só português do Brasil**, mas com textos em arquivos ARB desde o início, porque trocar depois custa mais.
 11. **Testes:** unitários nos controladores e no mapeamento, de widget nas telas com os estados vazio, carregando e erro, golden nas telas principais, e de integração do fluxo pedir e pagar o sinal contra a API de teste. Detalhes na estratégia de testes.
 12. **Sem modo offline no MVP.** A carteira de vacinas guarda a última leitura para consulta rápida, mas toda escrita exige conexão.
@@ -462,7 +462,7 @@ Sem um padrão antes da primeira tela, cada feature escolhe seu próprio jeito d
 | Refresh token na web: cookie `HttpOnly` (exige apoio do backend, mais seguro) ou armazenamento do navegador | PO, com a revisão de segurança |
 | Provedor de push no Android (o PO prefere recursos próprios, mas push de sistema depende do serviço do Android) | PO |
 | Provedor de mapas na busca | PO, com a estimativa de custo |
-| Identidade visual (nome, cores, tipografia) | PO |
+| ~~Identidade visual (nome, cores, tipografia)~~ Decidida em 10/11/2026: [Identidade visual v1.0](../03-ui-ux/Identidade-Visual-v1.0.md) | PO |
 
 ### Próximos passos
 

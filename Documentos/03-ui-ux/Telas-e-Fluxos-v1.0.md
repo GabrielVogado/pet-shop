@@ -1,6 +1,6 @@
 # Telas e fluxos (v1.0)
 
-> **Sistema-alvo.** Wireframes de baixa fidelidade do app do tutor (Android) e do painel web da loja, e os fluxos entre as telas. Servem para validar o que cada tela mostra e o que ela chama na API, **não** definem identidade visual, cores finais nem tipografia.
+> **Sistema-alvo.** Wireframes de baixa fidelidade do app do tutor (Android) e do painel web da loja, e os fluxos entre as telas. Servem para validar o que cada tela mostra e o que ela chama na API, **não** definem identidade visual, cores finais nem tipografia. A identidade está em [Identidade visual v1.0](Identidade-Visual-v1.0.md).
 >
 > Regras: [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md). Rotas: [Contrato da API v2.0](../02-arquitetura-tecnica/Contrato-API-v2.0.md). É **proposta**, sujeita às respostas do PO às pendências P-07 a P-15.
 
@@ -128,7 +128,7 @@ Essas telas seguem o mesmo padrão das já desenhadas e entram numa v1.1 deste d
 
 | # | Decisão | Onde |
 |---|---|---|
-| 1 | Identidade visual: nome, logotipo, cores e tipografia | Documento próprio |
+| 1 | ~~Identidade visual: nome, logotipo, cores e tipografia~~ Decidida em 10/11/2026: nome Pertim, direção Bairro | [Identidade visual v1.0](Identidade-Visual-v1.0.md) |
 | 2 | Sistema de design em Flutter (Material 3 ou próprio) | ADR do app Flutter |
 | 3 | Mapa na busca (qual provedor de mapas e seu custo) | A decidir, com a estimativa de custo |
 | 4 | Vitrine pública da loja fora do app, para buscadores | Arquitetura-alvo, seção 9 |
