@@ -86,7 +86,7 @@
 | A-01 | Como tutor, quero ver horários livres (RN-41) | Intervalos de 30 min com capacidade livre; pendente ocupa a vaga (RN-42) | T4 | M |
 | A-02 | Como tutor, quero pedir vários serviços e pets de uma vez (RN-40) | Cada serviço indica o pet; vagas reservadas de forma atômica; corrida entre dois tutores deixa só um com a vaga | T4 | G |
 | A-03 | Como tutor, quero ver o total, o sinal e a multa em reais antes de confirmar (RN-56 a RN-58) | Valores batem com a política da loja; a política é copiada para o pedido e não muda depois | T5 | M |
-| A-04 | Como tutor, quero guardar um cartão de garantia quando a multa puder passar do sinal (RN-50) | Cartão tokenizado no provedor; o PetCare não guarda dados de cartão (RNF-10); troca e remoção; não remove o único cartão (RN-74) | `/tutor/cartao` | G |
+| A-04 | Como tutor, quero guardar um cartão de garantia quando a multa puder passar do sinal (RN-50) | Cartão tokenizado no provedor; o PetCare não guarda dados de cartão (RNF-10); mais de um cartão; o que garante pedido confirmado só sai com outro cadastrado (RN-74) | `/tutor/cartoes-garantia` | G |
 | A-05 | Como tutor, quero pagar o sinal no Pix (RN-51) | QR Code e copia e cola; 15 min para pagar; webhook idempotente muda o pedido para Pendente; sem pagar, vira Abandonado e a vaga volta | T6 | G |
 | A-06 | Como tutor de loja sem sinal, quero que o pedido já nasça Pendente | Pula o pagamento; mesmas regras de vaga | T5 | P |
 

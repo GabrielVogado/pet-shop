@@ -60,7 +60,7 @@ Na coluna **Tenant**, `lojaId` quer dizer que o documento pertence a uma loja; `
 | `registros_saude` | tutor | `petId`, `tutorId`, `tipo` (VACINA, BANHO, TOSA, CONSULTA, OUTRO), `nome`, `data`, `proximaDose?`, `origem` (LOJA ou TUTOR), `verificado`, `lojaId?`, `agendamentoId?`, `profissional?` (`nome`, `crmv?`), `comprovanteId?`, `observacao?` |
 | `permissoes_carteira` | tutor | `petId`, `tutorId`, `lojaId`, `concedidaEm`, `revogadaEm?` |
 
-`perfilTutor` embutido em `usuarios`: `cartaoGarantia?` (`tokenProvedor`, `bandeira`, `final`), `preferenciasAviso` (push e WhatsApp), `indicadores` (`concluidos`, `faltas`, `notaMedia`; veja RN-63).
+`perfilTutor` embutido em `usuarios`: `cartoesGarantia[]` (`id`, `tokenProvedor`, `bandeira`, `final`; RN-74), `preferenciasAviso` (push e WhatsApp), `indicadores` (`concluidos`, `faltas`, `notaMedia`; veja RN-63).
 
 Regras de acesso:
 - `registros_saude` com `origem = LOJA` tem `verificado = true`, o `profissional` e não pode ser editado pelo tutor. `origem = TUTOR` é sempre `verificado = false` e pode ter comprovante (RN-21). Um registro nunca sobrescreve o outro.
@@ -82,7 +82,7 @@ O papel do membro (`papel`) existe para o login por funcionário no futuro (RN-0
 
 | Coleção | Tenant | Campos principais |
 |---|---|---|
-| `agendamentos` | `lojaId` | `unidadeId`, `tutorId`, `status`, `itens[]` (`petId`, `servicoId`, `nomeServico`, `precoCentavos`, `inicio`, `fim`), `inicio`, `fim`, `totalCentavos`, `sinalCentavos`, `politica` (cópia da política da loja na hora do pedido; RN-58), `multaCentavos?`, `prazoAceiteEm?`, `tutorSnapshot` (`nome`, `telefone`), `notaFiscal?` (`arquivoId`, `tipo`), `historico[]` (`de`, `para`, `em`, `porUsuarioId?`, `motivo?`), `versao` |
+| `agendamentos` | `lojaId` | `unidadeId`, `tutorId`, `status`, `itens[]` (`petId`, `servicoId`, `nomeServico`, `precoCentavos`, `inicio`, `fim`), `inicio`, `fim`, `totalCentavos`, `sinalCentavos`, `politica` (cópia da política da loja na hora do pedido; RN-58), `multaCentavos?`, `cartaoGarantiaId?` (cartão que garante a diferença da multa; RN-74), `prazoAceiteEm?`, `tutorSnapshot` (`nome`, `telefone`), `notaFiscal?` (`arquivoId`, `tipo`), `historico[]` (`de`, `para`, `em`, `porUsuarioId?`, `motivo?`), `versao` |
 | `pagamentos` | `lojaId` | `agendamentoId`, `tutorId`, `tipo` (SINAL, RESTANTE ou MULTA), `valorCentavos`, `metodo` (CARTAO, PIX, DEBITO, NA_LOJA), `status` (CRIADO, PENDENTE, PAGO, FALHOU, ESTORNADO), `desfecho?` (DEVOLVIDO, ABATIDO_NO_SERVICO ou APLICADO_NA_MULTA), `provedor`, `provedorCobrancaId`, `estornos[]`, `pagadorSnapshot`, `retencaoAte` |
 | `avaliacoes_loja` | `lojaId` | `agendamentoId` (único), `tutorId`, `unidadeId`, `nota`, `comentario?`, `status` (RETIDO, PUBLICADO, REMOVIDO), `publicarEm`, `resposta?` (`texto`, `em`), `denuncias[]` |
 | `avaliacoes_tutor` | `lojaId` | `agendamentoId` (único), `tutorId`, `nota`, `comentario?`. **Não é pública** (RN-63) |

@@ -87,9 +87,9 @@ O PetCare **nunca** recebe o número do cartão (RNF-10). O app envia o cartão 
 
 | Método | Rota | Perfil | Descrição |
 |---|---|---|---|
-| POST | `/tutor/cartao-garantia` | TUTOR | Guarda o token do cartão (`tokenProvedor`, `bandeira`, `final`) |
-| GET | `/tutor/cartao-garantia` | TUTOR | Bandeira e final do cartão cadastrado |
-| DELETE | `/tutor/cartao-garantia` | TUTOR | Remove o cartão; recusa com `409` se for o único cadastrado (RN-74) |
+| POST | `/tutor/cartoes-garantia` | TUTOR | Adiciona um cartão (`tokenProvedor`, `bandeira`, `final`) |
+| GET | `/tutor/cartoes-garantia` | TUTOR | Cartões cadastrados (bandeira, final e se garante algum pedido) |
+| DELETE | `/tutor/cartoes-garantia/{id}` | TUTOR | Remove o cartão. Se ele garante um pedido confirmado, os pedidos passam para outro cartão; sem outro, recusa com `409 CARTAO_GARANTIA_EM_USO` (RN-74) |
 
 ### 3.3 Agendamentos do tutor
 
@@ -146,7 +146,7 @@ Com `metodoSinal = CARTAO`, o corpo traz o `tokenCartao` (ou usa o cartão de ga
 | GET | `/lojas` | PUBLICO | Busca: `lat`, `lng`, `raioKm`, `cidade`, `servico`, `especie`, `precoMax`, `notaMin`, `ordem` (`distancia`, `nota`, `preco`). Só lojas aprovadas e em dia | RN-17, RN-30 |
 | GET | `/lojas/{lojaId}` | PUBLICO | Página da loja: unidades, catálogo, política de cancelamento (sinal e multa), nota média, telefone | RN-31, RN-58 |
 | GET | `/lojas/{lojaId}/avaliacoes` | PUBLICO | Avaliações publicadas, com a resposta da loja | RN-61 |
-| GET | `/unidades/{unidadeId}/disponibilidade` | PUBLICO | Horários livres: `servicoId`, `data`, `petId?` | RN-41 |
+| GET | `/unidades/{unidadeId}/disponibilidade` | PUBLICO | Horários livres: `servicoId`, `data`, `petId?`. Desconta os horários ocupados no Google Agenda da loja, quando conectado | RN-41, RN-75 |
 
 **Disponibilidade (exemplo de resposta):**
 
@@ -294,7 +294,7 @@ Corpo padronizado ([ADR-003](../08-analise-tecnica/adrs.md#adr-003-taxonomia-de-
 | 401 | Sem token ou token vencido | `NAO_AUTENTICADO`, `TOKEN_EXPIRADO` |
 | 403 | Logado, mas sem permissão | `PERFIL_INSUFICIENTE`, `REGISTRO_VERIFICADO`, `EMAIL_NAO_CONFIRMADO` |
 | 404 | Não existe, ou é de outra loja | `NAO_ENCONTRADO` |
-| 409 | Conflito de estado | `HORARIO_INDISPONIVEL`, `TRANSICAO_INVALIDA`, `PEDIDO_EXPIRADO`, `EMAIL_JA_CADASTRADO`, `CNPJ_JA_CADASTRADO`, `IDEMPOTENCIA_EM_USO` |
+| 409 | Conflito de estado | `HORARIO_INDISPONIVEL`, `TRANSICAO_INVALIDA`, `PEDIDO_EXPIRADO`, `EMAIL_JA_CADASTRADO`, `CNPJ_JA_CADASTRADO`, `IDEMPOTENCIA_EM_USO`, `CARTAO_GARANTIA_EM_USO` |
 | 422 | Regra de negócio | `CARTAO_GARANTIA_OBRIGATORIO`, `POLITICA_INVALIDA`, `LOJA_INADIMPLENTE`, `LOJA_NAO_APROVADA`, `VETERINARIO_OBRIGATORIO`, `PET_COM_AGENDAMENTO_ATIVO`, `FORA_DO_PRAZO` |
 | 429 | Muitas chamadas | `LIMITE_EXCEDIDO` (com `Retry-After`) |
 | 502 | Provedor de pagamento ou de mensagem fora do ar | `PROVEDOR_INDISPONIVEL` |

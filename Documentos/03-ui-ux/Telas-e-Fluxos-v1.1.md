@@ -11,7 +11,7 @@
 | O que | Onde |
 |---|---|
 | 17 telas da v1.0 (10 do tutor, 7 da loja) e os componentes básicos, já com a identidade Pertim | [Figma: telas e fluxos](https://www.figma.com/design/78LTEyl9XQWaYjjJqWfQsm), páginas **Tutor (Android)** e **Loja (web)** |
-| As 49 telas da v1.1 (as 17 acima e as 32 novas), componentes, cores claro e escuro e os dois fluxos | Projeto **Pertim – telas e fluxos** no Open Design, no computador do PO (8 páginas: identidade, tutor, tutor T11 a T25, tutor web, loja, loja W8 a W12, estados, fluxos) |
+| As 50 telas da v1.1 (as 17 acima e as 33 novas, com a T19 dividida em T19a e T19b), componentes, cores claro e escuro e os dois fluxos | Projeto **Pertim – telas e fluxos** no Open Design, no computador do PO (8 páginas: identidade, tutor, tutor T11 a T25, tutor web, loja, loja W8 a W12, estados, fluxos) |
 | Fluxos do tutor e da loja | [FigJam: fluxos](https://www.figma.com/board/dFzAbKu55ADTEJNAvKT4es) |
 
 Os arquivos do Figma foram criados na área de rascunhos do PO e precisam ser movidos para o projeto da equipe. O Figma e o Open Design são o desenho; **este documento é a referência versionada**: quando uma tela mudar, este texto muda no mesmo PR.
@@ -40,11 +40,11 @@ Os arquivos do Figma foram criados na área de rascunhos do PO e precisam ser mo
 | Tela | O que mostra | Regras | Rotas |
 |---|---|---|---|
 | **W1 Cadastro da loja** | CNPJ, razão social, e-mail, telefone, senha, primeira unidade, como funciona a aprovação | RN-03, RN-10, RN-11 | `POST /auth/cadastro-loja` |
-| **W2 Pedidos** | Pendentes com **prazo de aceite**, tutor com indicadores (faltas e nota), sinal, aceitar e recusar | RN-42 a RN-45, RN-63 | `GET /loja/agendamentos`, `POST .../aceitar`, `POST .../recusar`, SSE `/loja/eventos` |
-| **W3 Agenda do dia** | Grade por hora e tipo de serviço, com a capacidade; pendente também ocupa a vaga | RN-13, RN-42 | `GET /loja/agenda` |
+| **W2 Pedidos** | Pendentes com **prazo de aceite**, tutor com indicadores (faltas e nota), sinal, aceitar e recusar. Remarcações aparecem com selo "Remarcação", horário antigo e novo e sinal mantido, e lembram que a recusa permite ao tutor cancelar sem multa | RN-42 a RN-45, RN-63, RN-73 | `GET /loja/agendamentos`, `POST .../aceitar`, `POST .../recusar`, SSE `/loja/eventos` |
+| **W3 Agenda do dia** | Grade por hora e tipo de serviço, com a capacidade; pendente também ocupa a vaga; horário marcado "Ocupado no Google Agenda" | RN-13, RN-42, RN-75 | `GET /loja/agenda` |
 | **W4 Detalhe e conclusão** | Tutor, pet, pagamento, registros do que foi feito (vacina com CRMV), restante pelo app ou na loja, nota fiscal, concluir, registrar falta, cancelar | RN-47, RN-48, RN-52, RN-55, RN-57 | `POST .../concluir`, `.../registrar-falta`, `.../cancelar`, `.../nota-fiscal` |
 | **W5 Política de cancelamento** | Sinal (%) e multa (%), exemplo calculado, aviso de que só vale para pedidos novos | RN-56 a RN-58 | `GET/PUT /loja/politica-cancelamento` |
-| **W6 Serviços e capacidade** | Catálogo (tipo, duração, preço por porte, unidades) e capacidade por tipo de serviço | RN-12 a RN-15 | `/loja/servicos`, `PUT /loja/unidades/{id}` |
+| **W6 Serviços e capacidade** | Catálogo (tipo, duração, preço por porte, unidades), táxi pet com preço, capacidade por tipo de serviço e o aviso "Os preços são da loja: o Pertim não sugere nem limita valores" | RN-12 a RN-15 | `/loja/servicos`, `PUT /loja/unidades/{id}` |
 | **W7 Avaliações** | Avaliações com tempo restante para responder, responder, denunciar | RN-61, RN-62 | `GET /loja/avaliacoes`, `POST .../resposta`, `POST .../denuncia` |
 
 ### 2.3 App do tutor: telas da v1.1 (390 × 844)
@@ -57,10 +57,11 @@ Os arquivos do Figma foram criados na área de rascunhos do PO e precisam ser mo
 | **T14 Senha nova** | Senha nova e repetição, erro no campo, aviso de saída dos outros aparelhos | RN-04 | `POST /auth/redefinir-senha` |
 | **T15 Meus pets** | Lista com espécie, raça, porte, idade e próximo lembrete; pet com agendamento ativo não pode ser removido | RN-20, RN-24 | `GET /tutor/pets` |
 | **T16 Cadastrar pet** | Nome, espécie, raça, porte (com faixa de peso), nascimento | RN-20 | `POST /tutor/pets` |
-| **T17 Cartão de garantia** | Bandeira e final, para que serve, exemplo da diferença cobrada, trocar e remover | RN-50, RN-57 | `GET /tutor/cartao-garantia` |
-| **T18 Cadastrar ou trocar cartão** | Formulário do provedor (só crédito); o app guarda só bandeira e final | RN-50, RNF-10 | `POST /tutor/cartao-garantia` |
-| **T19 Remover cartão** | Só aparece se houver outro cartão cadastrado; com um cartão só, a tela mostra "Cadastre outro cartão antes de remover este" e o botão para cadastrar | RN-50, RN-74 | `DELETE /tutor/cartao-garantia` |
-| **T20 Notificações** | Avisos do app por dia, com não lidos | RN-70 | `GET /eu/notificacoes` |
+| **T17 Cartão de garantia** | Bandeira e final, para que serve, exemplo da diferença cobrada, trocar e remover | RN-50, RN-57 | `GET /tutor/cartoes-garantia` |
+| **T18 Cadastrar cartão** | Formulário do provedor (só crédito); o app guarda só bandeira e final; o tutor pode ter mais de um | RN-50, RN-74, RNF-10 | `POST /tutor/cartoes-garantia` |
+| **T19a Remover cartão** | Remoção comum, quando o cartão não garante nenhum pedido | RN-50 | `DELETE /tutor/cartoes-garantia/{id}` |
+| **T19b Cartão em uso** | "Este cartão garante um pedido": mostra o pedido com multa e sinal e oferece só "Cadastrar outro cartão" ou "Manter este cartão" | RN-74 | `CARTAO_GARANTIA_EM_USO` |
+| **T20 Notificações** | Avisos do app por dia, com não lidos; o aviso "Remarcação recusada" oferece cancelar sem multa | RN-70, RN-73 | `GET /eu/notificacoes` |
 | **T21 Preferências de aviso** | Push e WhatsApp liga e desliga, alerta se desligar os dois | RN-70 | `PUT /eu/preferencias-aviso` |
 | **T22 Conta** | Dados, cartão, avisos, privacidade, ajuda, sair | — | `PUT /eu`, `POST /auth/sair` |
 | **T23 Privacidade e dados** | Baixar dados (arquivo pronto e validade) e excluir conta | RNF-06, RNF-07 | `POST /eu/exportacao`, `GET /eu/exportacao/{id}` |
@@ -174,13 +175,13 @@ As suposições da v1.1 foram respondidas pelo PO em 10/11/2026.
 | # | Ponto | Decisão |
 |---|---|---|
 | 1 | Remarcação que a loja não aceita | A loja decide. Se recusar, o pedido fica no horário antigo e o tutor pode cancelar sem penalidade (RN-73) |
-| 2 | Remover o cartão de garantia | Só com outro cartão cadastrado (RN-74) |
+| 2 | Remover o cartão que garante um pedido confirmado | Só com outro cartão cadastrado, que passa a garantir o pedido; o tutor pode ter mais de um cartão (RN-74) |
 | 3 | Sentido da integração com o Google Agenda | Nas duas vias: o app envia os pedidos, e compromissos do Google deixam o horário indisponível no app (RN-75) |
 | 4 | Preços nas telas | Os preços dos serviços, inclusive o táxi pet, são definidos pela loja (RN-12, RN-15); os valores nas telas são só ilustração. A mensalidade segue em aberto (P-05) |
 | 5 | Prazos de exemplo | Link do provedor válido por 24 h e arquivo de exportação por 7 dias continuam como proposta de engenharia |
 | 6 | Mapa na busca | Marcador de lugar até a biblioteca ser escolhida |
 
-Os desenhos do Open Design ainda mostram as suposições antigas nas telas T19, T25 e W12 e precisam ser ajustados.
+Os desenhos do Open Design já seguem essas decisões (T19a, T19b, T20, T25, W2, W3, W6 e W12).
 
 Ainda não desenhadas: as demais telas do tutor em tela larga (seção 2.4).
 

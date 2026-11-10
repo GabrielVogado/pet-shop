@@ -121,7 +121,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | ID | Regra |
 |---|---|
 | RN-50 | Para agendar numa loja cuja multa possa ser maior que o sinal, o tutor precisa ter um **cartão de crédito cadastrado** como garantia, para cobrar a diferença (**proposta**, P-15). O débito não permite cobrança posterior sem a presença do tutor. |
-| RN-74 | O tutor **só remove o cartão de garantia se tiver outro cartão cadastrado** (decidido pelo PO em 10/11/2026). Para trocar, cadastra o novo antes. |
+| RN-74 | O tutor pode ter **mais de um cartão** de garantia. Um cartão que garante um pedido confirmado **só pode ser removido se houver outro cartão cadastrado**, que passa a garantir o pedido (decidido pelo PO em 10/11/2026). Sem pedido garantido, a remoção é livre. |
 | RN-51 | O tutor paga pelo app (crédito, débito ou Pix) o **sinal definido pela loja** (RN-56): um percentual do total, de 0% (sem sinal) a 100%. O sinal é um adiantamento do serviço e é abatido do valor final. O sinal é cobrado **ao pedir** (decisão do PO, P-07): o pedido só chega à loja depois que o sinal é pago. |
 | RN-52 | O restante é pago depois do atendimento, pelo app ou direto na loja. |
 | RN-53 | **Recebimento (proposta):** cada loja tem a própria conta recebedora no provedor de pagamento. O PetCare cria a cobrança em nome da loja e nunca recebe nem repassa o dinheiro. O provedor será escolhido num ADR próprio. |
