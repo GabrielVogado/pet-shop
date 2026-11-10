@@ -154,7 +154,7 @@ flowchart TB
 | `lojas` | RN-10 a RN-17 | Loja (CNPJ), unidades, catálogo de serviços, capacidade por tipo de serviço, veterinário com CRMV, inadimplência |
 | `pets` | RN-20 a RN-24 | Origem do registro (loja ou tutor), permissão da carteira pelo tutor, lembretes de reforço e de banho |
 | `agendamento` | RN-40 a RN-48 | Máquina de estados do pedido, prazo de aceite, reserva atômica de horário |
-| `pagamentos` | RN-50 a RN-55 | Sinal de 50%, multa, estorno, restante, mensalidade; guarda só token de cartão (RNF-10) |
+| `pagamentos` | RN-50 a RN-55 | Sinal e multa definidos pela loja, estorno parcial, restante, mensalidade; guarda só token de cartão (RNF-10) |
 | `avaliacoes` | RN-60 a RN-63 | Nota imediata, comentário retido 72 h, avaliação privada do tutor |
 | `notificacoes` | RN-70 a RN-72 | Um evento de negócio vira mensagens nos canais escolhidos |
 | `busca` | RN-30, RN-31 | Lojas aprovadas e em dia, por localização e filtros |

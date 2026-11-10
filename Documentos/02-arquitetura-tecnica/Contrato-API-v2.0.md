@@ -95,10 +95,10 @@ O PetCare **nunca** recebe o número do cartão (RNF-10). O app envia o cartão 
 
 | Método | Rota | Perfil | Descrição | Regra |
 |---|---|---|---|---|
-| POST | `/tutor/agendamentos` | TUTOR | Cria o pedido e a cobrança do sinal. Exige `Idempotency-Key` | RN-40 a RN-42, RN-50, RN-51 |
+| POST | `/tutor/agendamentos` | TUTOR | Cria o pedido e a cobrança do sinal (se a loja cobra sinal). Guarda a política da loja no pedido. Exige `Idempotency-Key` | RN-40 a RN-42, RN-50, RN-51, RN-58 |
 | GET | `/tutor/agendamentos` | TUTOR | Lista (`status`, `de`, `ate`, paginação) | |
 | GET | `/tutor/agendamentos/{id}` | TUTOR | Detalhe, itens, pagamentos e histórico de estados | |
-| POST | `/tutor/agendamentos/{id}/cancelar` | TUTOR | Cancela; a resposta diz se o sinal foi `DEVOLVIDO` ou `RETIDO_PELA_LOJA` | RN-46 |
+| POST | `/tutor/agendamentos/{id}/cancelar` | TUTOR | Cancela. A resposta traz o resultado financeiro (`multaCentavos`, `sinalDevolvidoCentavos`, `diferencaACobrarCentavos`) | RN-46, RN-57 |
 | POST | `/tutor/agendamentos/{id}/remarcar` | TUTOR | Muda os horários, mantendo o sinal. Depende de P-08 | RN-46 |
 | POST | `/tutor/agendamentos/{id}/pagar-restante` | TUTOR | Cria a cobrança do restante, depois do atendimento | RN-52 |
 | GET | `/tutor/agendamentos/{id}/nota-fiscal` | TUTOR | Baixa o PDF ou XML da NFS-e anexada pela loja | RN-55 |
@@ -127,6 +127,7 @@ Idempotency-Key: 6f1c1f0e-2f43-4a51-8d5c-9d3f0c1a7b10
   "status": "AGUARDANDO_PAGAMENTO",
   "totalCentavos": 18000,
   "sinalCentavos": 9000,
+  "politica": { "sinalPercentual": 50, "multaPercentual": 50, "horasSemMulta": 2 },
   "pagarAte": "2026-11-10T16:45:00Z",
   "pagamento": {
     "id": "6711c5...",
@@ -143,7 +144,7 @@ Com `metodoSinal = CARTAO`, o corpo traz o `tokenCartao` (ou usa o cartão de ga
 | Método | Rota | Perfil | Descrição | Regra |
 |---|---|---|---|---|
 | GET | `/lojas` | PUBLICO | Busca: `lat`, `lng`, `raioKm`, `cidade`, `servico`, `especie`, `precoMax`, `notaMin`, `ordem` (`distancia`, `nota`, `preco`). Só lojas aprovadas e em dia | RN-17, RN-30 |
-| GET | `/lojas/{lojaId}` | PUBLICO | Página da loja: unidades, catálogo, nota média, telefone | RN-31 |
+| GET | `/lojas/{lojaId}` | PUBLICO | Página da loja: unidades, catálogo, política de cancelamento (sinal e multa), nota média, telefone | RN-31, RN-58 |
 | GET | `/lojas/{lojaId}/avaliacoes` | PUBLICO | Avaliações publicadas, com a resposta da loja | RN-61 |
 | GET | `/unidades/{unidadeId}/disponibilidade` | PUBLICO | Horários livres: `servicoId`, `data`, `petId?` | RN-41 |
 
@@ -172,6 +173,8 @@ Com `metodoSinal = CARTAO`, o corpo traz o `tokenCartao` (ou usa o cartão de ga
 |---|---|---|---|---|
 | GET | `/loja` | LOJA | Dados da loja, status do cadastro e da mensalidade | RN-03, RN-17 |
 | PUT | `/loja` | LOJA | Edita nome fantasia, telefone e canais de aviso (`painel`, `sms`, `whatsapp`, `email`) | RN-71 |
+| GET | `/loja/politica-cancelamento` | LOJA | Sinal e multa vigentes | RN-56 |
+| PUT | `/loja/politica-cancelamento` | LOJA | Define `sinalPercentual` e `multaPercentual` (0 a 100). Vale só para pedidos novos | RN-56, RN-58 |
 | GET | `/loja/unidades` | LOJA | Unidades da loja | RN-10 |
 | POST | `/loja/unidades` | LOJA | Cria unidade (endereço, horário, capacidade, raio do táxi pet) | RN-10, RN-11, RN-13 |
 | PUT | `/loja/unidades/{unidadeId}` | LOJA | Edita unidade. Mudar horário ou capacidade recria os intervalos futuros | RN-13 |
@@ -192,7 +195,7 @@ Com `metodoSinal = CARTAO`, o corpo traz o `tokenCartao` (ou usa o cartão de ga
 | POST | `/loja/agendamentos/{id}/aceitar` | LOJA | `PENDENTE` para `CONFIRMADO`, dentro do prazo | RN-42, RN-43 |
 | POST | `/loja/agendamentos/{id}/recusar` | LOJA | `PENDENTE` para `RECUSADO`, com `motivo`. Devolve o sinal | RN-45 |
 | POST | `/loja/agendamentos/{id}/cancelar` | LOJA | `CONFIRMADO` para `CANCELADO`, com `motivo`. Devolve o sinal | RN-45 |
-| POST | `/loja/agendamentos/{id}/registrar-falta` | LOJA | `CONFIRMADO` para `FALTA` depois do horário. A loja fica com o sinal | RN-47 |
+| POST | `/loja/agendamentos/{id}/registrar-falta` | LOJA | `CONFIRMADO` para `FALTA` depois do horário. Aplica a multa do pedido; `dispensarMulta: true` abre mão dela (depende de P-14) | RN-47, RN-57 |
 | POST | `/loja/agendamentos/{id}/concluir` | LOJA | `CONFIRMADO` para `CONCLUIDO`, com os registros feitos e o restante (`pagarNoApp` ou `pagoNaLoja`) | RN-48, RN-52 |
 | POST | `/loja/agendamentos/{id}/nota-fiscal` | LOJA | Anexa o PDF ou XML da NFS-e (`multipart`, até 5 MB) | RN-55 |
 | POST | `/loja/agendamentos/{id}/avaliacao-tutor` | LOJA | Avalia o tutor (privada) | RN-63 |
@@ -292,7 +295,7 @@ Corpo padronizado ([ADR-003](../08-analise-tecnica/adrs.md#adr-003-taxonomia-de-
 | 403 | Logado, mas sem permissão | `PERFIL_INSUFICIENTE`, `REGISTRO_VERIFICADO`, `EMAIL_NAO_CONFIRMADO` |
 | 404 | Não existe, ou é de outra loja | `NAO_ENCONTRADO` |
 | 409 | Conflito de estado | `HORARIO_INDISPONIVEL`, `TRANSICAO_INVALIDA`, `PEDIDO_EXPIRADO`, `EMAIL_JA_CADASTRADO`, `CNPJ_JA_CADASTRADO`, `IDEMPOTENCIA_EM_USO` |
-| 422 | Regra de negócio | `CARTAO_GARANTIA_OBRIGATORIO`, `LOJA_INADIMPLENTE`, `LOJA_NAO_APROVADA`, `VETERINARIO_OBRIGATORIO`, `PET_COM_AGENDAMENTO_ATIVO`, `FORA_DO_PRAZO` |
+| 422 | Regra de negócio | `CARTAO_GARANTIA_OBRIGATORIO`, `POLITICA_INVALIDA`, `LOJA_INADIMPLENTE`, `LOJA_NAO_APROVADA`, `VETERINARIO_OBRIGATORIO`, `PET_COM_AGENDAMENTO_ATIVO`, `FORA_DO_PRAZO` |
 | 429 | Muitas chamadas | `LIMITE_EXCEDIDO` (com `Retry-After`) |
 | 502 | Provedor de pagamento ou de mensagem fora do ar | `PROVEDOR_INDISPONIVEL` |
 | 500 | Erro nosso | `ERRO_INTERNO` (sem detalhes técnicos na resposta) |
@@ -331,7 +334,8 @@ A forma exata (ferramenta própria, console do banco, painel interno) é uma dec
 
 | # | Decisão | Onde |
 |---|---|---|
-| 1 | Quando o sinal é cobrado, e como fica o estado `AGUARDANDO_PAGAMENTO` | P-07 |
+| 1 | Quando o sinal é cobrado, e como fica o estado `AGUARDANDO_PAGAMENTO` (loja sem sinal pula o estado) | P-07 |
+| 1a | Teto da multa, dispensa caso a caso e cartão de garantia só quando necessário | P-13 a P-15 |
 | 2 | Remarcação: rota `remarcar` e novo aceite | P-08 |
 | 3 | Duração dos tokens de acesso e de renovação | Segurança |
 | 4 | Limites de chamadas por rota | Testes de carga |
