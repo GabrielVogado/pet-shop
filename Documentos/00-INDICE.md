@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Telas e fluxos
+
+**O que mudou:** novo `03-ui-ux/Telas-e-Fluxos-v1.0.md` com as 17 telas de baixa fidelidade (10 do app do tutor e 7 do painel da loja), o que cada uma mostra, as regras e as rotas da API que chama, os fluxos do tutor e da loja, os princípios das telas e a lista do que falta desenhar. Os desenhos estão no Figma e no FigJam, linkados no documento. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 10/11/2026 — Sinal e multa definidos pela loja
 
 **O que mudou:** por decisão do PO, a loja decide se cobra multa e de quanto, e também o percentual do sinal. No `Documento-Negocial-v2.0.md`, as RN-46, RN-47, RN-50 e RN-51 foram ajustadas e entraram as RN-56 a RN-58 (política de cancelamento, como a multa é aplicada e a política guardada no pedido), além das pendências P-13 a P-15. O modelo de dados, os diagramas de engenharia, o ADR-007 (o provedor precisa cobrar o cartão guardado depois) e o `README.md` acompanharam. Nenhuma mudança de código.
@@ -117,6 +124,7 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | | [Modelo-de-Dados-v2.0](02-arquitetura-tecnica/Modelo-de-Dados-v2.0.md) | Sistema-alvo: coleções do MongoDB, campos, índices, consistência, retenção e perguntas ao PO |
 | | [Diagramas-de-Engenharia-v2.0](02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md) | Estados do agendamento e do pagamento e sequências dos fluxos principais |
 | | [Contrato-API-v2.0](02-arquitetura-tecnica/Contrato-API-v2.0.md) | Sistema-alvo: contrato REST entre backend Kotlin e clientes Flutter, erros e regras de evolução |
+| `03-ui-ux/` | [Telas-e-Fluxos-v1.0](03-ui-ux/Telas-e-Fluxos-v1.0.md) | Sistema-alvo: wireframes do app do tutor e do painel da loja, com regras e rotas de cada tela, e os fluxos |
 | | [Especificacao-API-v1.0](02-arquitetura-tecnica/Especificacao-API-v1.0.md) | Endpoints REST e SSE com perfis de acesso |
 | | [Estimativa-Custo-Nuvem-v1.0](02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) | Custo mensal estimado de nuvem e mensagens, por cenário e perfil, com o que não foi estimado |
 | | [Guia-Ambiente-Local-v1.0](02-arquitetura-tecnica/Guia-Ambiente-Local-v1.0.md) | Pré-requisitos, como rodar e testar na máquina |
@@ -129,7 +137,7 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | `_historico/` | [HISTORICO](_historico/HISTORICO.md) | Linha do tempo do projeto e documentos substituídos |
 | raiz | [De-Para-Backlog-Features](De-Para-Backlog-Features.md) | Rastreabilidade backlog × entregas (PRs) |
 
-Pastas reservadas, criadas quando houver conteúdo: `03-ui-ux`, `05-features`, `06-sprints`, `07-dados`, `11-desempenho`, `12-seguranca`, `13-marketing`.
+Pastas reservadas, criadas quando houver conteúdo: `05-features`, `06-sprints`, `07-dados`, `11-desempenho`, `12-seguranca`, `13-marketing`.
 
 ## ADRs
 
