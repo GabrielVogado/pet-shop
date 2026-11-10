@@ -192,7 +192,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | P-02 | Avaliação do tutor pela loja não pública (RN-63) | Confirmado pelo PO |
 | P-03 | iOS fora do MVP (RNF-04) | Confirmado pelo PO |
 | P-04 | Provedor de pagamento (RN-53) | [ADR-007](../08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) proposto; spike em sandbox fica para depois da fase de documentação |
-| P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir; custo mínimo por loja na estimativa de nuvem. Os preços dos serviços, inclusive o táxi pet, são da loja (RN-12, RN-15) |
+| P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir. O PO vai fixar o valor a partir do custo somado por loja das APIs (WhatsApp, Google e demais) e da nuvem (10/11/2026). Os preços dos serviços, inclusive o táxi pet, são da loja (RN-12, RN-15) |
 | P-06 | Nuvem e custo de infraestrutura (RNF-09) | **Nuvem decidida pelo PO em 10/11/2026: Google Cloud, São Paulo.** [Estimativa v1.0](../02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) feita; faltam as tarifas de São Paulo, provedores de SMS brasileiros e conferir a AWS em fonte oficial |
 | P-07 | Quando o sinal é cobrado? A RN-51 diz "na confirmação", mas as RN-44 e RN-45 devolvem o sinal quando a loja recusa ou o prazo vence | **Decidido pelo PO em 10/11/2026: cobrar ao pedir**, com 15 minutos para pagar e o estado Aguardando pagamento ([Diagramas](../02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md#1-estados-do-agendamento)) |
 | P-08 | Remarcar (RN-46) exige novo aceite da loja? | **Decidido pelo PO em 10/11/2026: sim**, mantendo o sinal |

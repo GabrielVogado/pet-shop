@@ -177,7 +177,7 @@ As suposições da v1.1 foram respondidas pelo PO em 10/11/2026.
 | 1 | Remarcação que a loja não aceita | A loja decide. Se recusar, o pedido fica no horário antigo e o tutor pode cancelar sem penalidade (RN-73) |
 | 2 | Remover o cartão que garante um pedido confirmado | Só com outro cartão cadastrado, que passa a garantir o pedido; o tutor pode ter mais de um cartão (RN-74) |
 | 3 | Sentido da integração com o Google Agenda | Nas duas vias: o app envia os pedidos, e compromissos do Google deixam o horário indisponível no app (RN-75) |
-| 4 | Preços nas telas | Os preços dos serviços, inclusive o táxi pet, são definidos pela loja (RN-12, RN-15); os valores nas telas são só ilustração. A mensalidade segue em aberto (P-05) |
+| 4 | Preços nas telas | Os preços dos serviços, inclusive o táxi pet, são definidos pela loja (RN-12, RN-15); os valores nas telas são só ilustração. A mensalidade segue em aberto (P-05): o PO vai fixá-la pelo custo das APIs (WhatsApp, Google e demais) e da nuvem; o R$ 149,00 da W11 é exemplo |
 | 5 | Prazos de exemplo | Link do provedor válido por 24 h e arquivo de exportação por 7 dias continuam como proposta de engenharia |
 | 6 | Mapa na busca | Marcador de lugar até a biblioteca ser escolhida |
 
