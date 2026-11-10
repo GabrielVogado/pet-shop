@@ -59,7 +59,7 @@
 | C-07 | Como loja, quero cadastrar unidades com endereço e horário (RN-10, RN-11) | Várias unidades por CNPJ; horário por dia da semana; geolocalização do endereço | `/loja/unidades` | M |
 | C-08 | Como loja, quero montar o catálogo (RN-12, RN-14, RN-15) | Tipo, duração, preço por porte e unidades; consulta veterinária exige CRMV; táxi pet com raio | W6 | M |
 | C-09 | Como loja, quero informar a capacidade por tipo de serviço (RN-13) | Número de atendimentos simultâneos por unidade e tipo; muda só para o futuro | W6 | P |
-| C-10 | Como loja, quero definir sinal e multa (RN-56 a RN-58) | Percentuais de 0 a 100; exemplo calculado na tela; aviso de que só vale para pedidos novos; `POLITICA_INVALIDA` para valor fora da faixa | W5 | P |
+| C-10 | Como loja, quero definir sinal e multa (RN-56 a RN-58) | Sinal de 0 a 100 e multa de 0 a 50; exemplo calculado na tela; aviso de que só vale para pedidos novos; `POLITICA_INVALIDA` para valor fora da faixa | W5 | P |
 
 ### M2 Pets e carteira
 

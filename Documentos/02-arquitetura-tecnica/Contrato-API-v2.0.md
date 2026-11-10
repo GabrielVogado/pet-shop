@@ -41,7 +41,7 @@ O `lojaId` vem **sempre do token**; nenhuma rota `/loja/...` aceita `lojaId` no 
 
 ## 2. Autenticação e sessão
 
-Token de acesso JWT RS256 com `kid` ([ADR-005](../08-analise-tecnica/adrs.md#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves)): `sub` (usuário), `perfis`, `lojaId?`, `exp`. Duração do acesso: **15 minutos**; do token de renovação: **30 dias** (propostas). O token de renovação é de uso único e é trocado a cada renovação.
+Token de acesso JWT RS256 com `kid` ([ADR-005](../08-analise-tecnica/adrs.md#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves)): `sub` (usuário), `perfis`, `lojaId?`, `exp`. Duração do acesso: **15 minutos**; do token de renovação: **30 dias** (propostas). O token de renovação é de uso único e é trocado a cada renovação. **No painel web** ele vai em cookie `HttpOnly`, `Secure` e `SameSite`, definido pelo servidor, e não aparece no corpo da resposta (decisão do PO, 10/11/2026); no app Android vai no corpo e fica no armazenamento seguro do sistema.
 
 | Método | Rota | Perfil | Descrição |
 |---|---|---|---|
@@ -137,7 +137,7 @@ Idempotency-Key: 6f1c1f0e-2f43-4a51-8d5c-9d3f0c1a7b10
 }
 ```
 
-Com `metodoSinal = CARTAO`, o corpo traz o `tokenCartao` (ou usa o cartão de garantia) e a resposta vem com `status = PENDENTE` assim que o provedor aprova. O estado `AGUARDANDO_PAGAMENTO` e o prazo `pagarAte` dependem de P-07.
+Com `metodoSinal = CARTAO`, o corpo traz o `tokenCartao` (ou usa o cartão de garantia) e a resposta vem com `status = PENDENTE` assim que o provedor aprova. O estado `AGUARDANDO_PAGAMENTO` e o prazo `pagarAte` valem porque o sinal é cobrado ao pedir (P-07, decidido pelo PO).
 
 ### 3.4 Busca de lojas (público e tutor)
 
@@ -174,7 +174,7 @@ Com `metodoSinal = CARTAO`, o corpo traz o `tokenCartao` (ou usa o cartão de ga
 | GET | `/loja` | LOJA | Dados da loja, status do cadastro e da mensalidade | RN-03, RN-17 |
 | PUT | `/loja` | LOJA | Edita nome fantasia, telefone e canais de aviso (`painel`, `sms`, `whatsapp`, `email`) | RN-71 |
 | GET | `/loja/politica-cancelamento` | LOJA | Sinal e multa vigentes | RN-56 |
-| PUT | `/loja/politica-cancelamento` | LOJA | Define `sinalPercentual` e `multaPercentual` (0 a 100). Vale só para pedidos novos | RN-56, RN-58 |
+| PUT | `/loja/politica-cancelamento` | LOJA | Define `sinalPercentual` (0 a 100) e `multaPercentual` (0 a 50, teto do PO). Vale só para pedidos novos | RN-56, RN-58 |
 | GET | `/loja/unidades` | LOJA | Unidades da loja | RN-10 |
 | POST | `/loja/unidades` | LOJA | Cria unidade (endereço, horário, capacidade, raio do táxi pet) | RN-10, RN-11, RN-13 |
 | PUT | `/loja/unidades/{unidadeId}` | LOJA | Edita unidade. Mudar horário ou capacidade recria os intervalos futuros | RN-13 |
@@ -334,9 +334,9 @@ A forma exata (ferramenta própria, console do banco, painel interno) é uma dec
 
 | # | Decisão | Onde |
 |---|---|---|
-| 1 | Quando o sinal é cobrado, e como fica o estado `AGUARDANDO_PAGAMENTO` (loja sem sinal pula o estado) | P-07 |
-| 1a | Teto da multa, dispensa caso a caso e cartão de garantia só quando necessário | P-13 a P-15 |
-| 2 | Remarcação: rota `remarcar` e novo aceite | P-08 |
+| 1 | ~~Quando o sinal é cobrado~~: decidido, ao pedir; o estado `AGUARDANDO_PAGAMENTO` vale e a loja sem sinal pula o estado | P-07 |
+| 1a | ~~Teto da multa, dispensa e cartão de garantia~~: decididos (teto 50%, dispensa sim, cartão só se preciso) | P-13 a P-15 |
+| 2 | ~~Remarcação exige novo aceite~~: decidido (sim). Falta detalhar a rota `remarcar` | P-08 |
 | 3 | Duração dos tokens de acesso e de renovação | Segurança |
 | 4 | Limites de chamadas por rota | Testes de carga |
 | 5 | Ferramenta da equipe interna (OPERACAO) | Seção 8 |

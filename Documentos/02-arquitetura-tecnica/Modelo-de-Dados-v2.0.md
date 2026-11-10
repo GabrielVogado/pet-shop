@@ -189,12 +189,12 @@ Registradas como pendências P-07 a P-15 do [Documento Negocial](../01-negocio/D
 
 | # | Pergunta | Proposta de engenharia |
 |---|---|---|
-| P-07 | **Quando o sinal é cobrado?** A RN-51 diz "na confirmação", mas as RN-44 e RN-45 devolvem o sinal quando a loja recusa ou o prazo vence, o que só faz sentido se ele já foi pago ao pedir | Cobrar o sinal **ao pedir**, e a loja só vê o pedido depois do pagamento. Recusa e expiração devolvem. Isso acrescenta o estado `AguardandoPagamento` (veja os diagramas) |
-| P-08 | **Remarcar** exige novo aceite da loja? | Remarcar mantém o sinal e volta o pedido para `Pendente`, com novo prazo de aceite |
+| P-07 | **Quando o sinal é cobrado?** A RN-51 diz "na confirmação", mas as RN-44 e RN-45 devolvem o sinal quando a loja recusa ou o prazo vence, o que só faz sentido se ele já foi pago ao pedir | **Decidido (PO, 10/11/2026): cobrar ao pedir.** Cobrar o sinal **ao pedir**, e a loja só vê o pedido depois do pagamento. Recusa e expiração devolvem. Isso acrescenta o estado `AguardandoPagamento` (veja os diagramas) |
+| P-08 | **Remarcar** exige novo aceite da loja? | **Decidido (PO, 10/11/2026): sim.** Remarcar mantém o sinal e volta o pedido para `Pendente`, com novo prazo de aceite |
 | P-09 | Qual o tamanho do intervalo da agenda? | 30 minutos |
 | P-10 | Um pedido com vários pets ou serviços é aceito **inteiro** ou item a item? E os serviços ocorrem em sequência ou ao mesmo tempo? | Aceite do pedido inteiro; cada item escolhe seu horário e ocupa a capacidade do tipo naquele horário |
 | P-11 | Até quando a loja pode concluir ou marcar falta num pedido já vencido? O que acontece se ela esquecer? | Lembrar a loja por aviso; sem conclusão automática, para não reter sinal sem confirmação humana |
 | P-12 | Quanto tempo o tutor tem para avaliar depois do atendimento? | 30 dias |
-| P-13 | Teto para a multa que a loja pode definir | 100% do total, a revisar juridicamente |
-| P-14 | A loja pode dispensar a multa caso a caso? | Sim, antes de a multa ser cobrada |
-| P-15 | O cartão de garantia é exigido só quando a multa pode passar do sinal? | Sim |
+| P-13 | Teto para a multa que a loja pode definir | **Decidido: 50% do total** (PO, 10/11/2026), a revisar juridicamente |
+| P-14 | A loja pode dispensar a multa caso a caso? | **Decidido (PO, 10/11/2026): sim**, antes de a multa ser cobrada |
+| P-15 | O cartão de garantia é exigido só quando a multa pode passar do sinal? | **Decidido (PO, 10/11/2026): sim** |
