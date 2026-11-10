@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Decisões do PO
+
+**O que mudou:** o PO decidiu: remarcar exige novo aceite da loja (P-08); multa com teto de 50% do total (P-13); a loja pode dispensar a multa (P-14); cartão de garantia só quando a multa pode passar do sinal (P-15); aceitos os ADR-008 (isolamento entre lojas, que substitui o ADR-002) e ADR-009 (app Flutter); nuvem Google Cloud em São Paulo; refresh token do painel web em cookie `HttpOnly`; push do sistema no Android; mapa gratuito na busca. Os documentos negocial, modelo de dados, contrato da API, telas, backlog e ADRs acompanharam. Seguem abertas P-07 (quando cobrar o sinal) e as propostas P-09 a P-12. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 10/11/2026 — Backlog, definição de pronto e testes
 
 **O que mudou:** novos `04-backlog/Backlog-v2.0.md` (9 marcos, cerca de 60 histórias com critérios de aceite, riscos que mexem na ordem) e `04-backlog/Definicao-de-Pronto-e-Testes-v1.0.md` (10 itens de pronto, pirâmide de testes, casos obrigatórios, dados e ambientes). O `Roadmap-v1.0.md` ganhou um aviso de que o backlog v2.0 define a ordem do sistema-alvo. Com isso, a lista de documentos antes do desenvolvimento está completa. Nenhuma mudança de código.

@@ -5,14 +5,14 @@ Registros de decisão de arquitetura. Numeração sequencial; um ADR substituíd
 | ADR | Decisão | Status |
 |---|---|---|
 | [ADR-001](#adr-001-services-injetam-os-repositórios-mongo-diretamente) | Services injetam os repositórios Mongo diretamente | Aceito, implementado |
-| [ADR-002](#adr-002-índice-único-parcial-para-garantir-um-único-owner) | Índice único parcial para um único owner | Aceito, será substituído pelo multi-petshop |
+| [ADR-002](#adr-002-índice-único-parcial-para-garantir-um-único-owner) | Índice único parcial para um único owner | Substituído pelo ADR-008 |
 | [ADR-003](#adr-003-taxonomia-de-erros-da-api) | Taxonomia de erros da API | Proposto |
 | [ADR-004](#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na agenda do owner | Proposto |
 | [ADR-005](#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT | Aceito, implementado |
 | [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito |
 | [ADR-007](#adr-007-provedor-de-pagamento) | Provedor de pagamento | Proposto |
-| [ADR-008](#adr-008-isolamento-entre-lojas-multi-tenancy) | Isolamento entre lojas (multi-tenancy) | Proposto |
-| [ADR-009](#adr-009-arquitetura-do-app-flutter) | Arquitetura do app Flutter | Proposto |
+| [ADR-008](#adr-008-isolamento-entre-lojas-multi-tenancy) | Isolamento entre lojas (multi-tenancy) | Aceito |
+| [ADR-009](#adr-009-arquitetura-do-app-flutter) | Arquitetura do app Flutter | Aceito |
 
 ---
 
@@ -39,7 +39,7 @@ Remover as interfaces de port. Os services em `application/service` injetam dire
 
 ## ADR-002: Índice único parcial para garantir um único owner
 
-- **Status:** Aceito, implementado. **Será substituído** pelo [ADR-008](#adr-008-isolamento-entre-lojas-multi-tenancy) quando ele for aceito.
+- **Status:** Substituído pelo [ADR-008](#adr-008-isolamento-entre-lojas-multi-tenancy) em 10/11/2026. O índice continua no código atual até a reescrita.
 - **Data:** 01/08/2026 (revisado em 05/11/2026)
 
 ### Contexto
@@ -325,7 +325,7 @@ Proposto. Nada foi testado, e nenhum provedor foi contratado. O PO decidiu segui
 
 ## ADR-008: Isolamento entre lojas (multi-tenancy)
 
-- **Status:** Proposto, aguardando decisão do PO. Quando aceito, substitui o ADR-002.
+- **Status:** Aceito pelo PO em 10/11/2026. Substitui o ADR-002. Não implementado.
 - **Data:** 10/11/2026
 - **Decisor:** Gabriel Vogado (PO)
 
@@ -374,20 +374,20 @@ Volume previsto para o primeiro ano: pelo menos 30 lojas e 100 tutores (RNF-01).
 
 ### Próximos passos
 
-1. [ ] PO aceitar ou ajustar a decisão e mudar o status para Aceito.
+1. [x] PO aceitar ou ajustar a decisão e mudar o status para Aceito.
 2. [ ] Detalhar as coleções, os campos e os índices no modelo de dados.
 3. [ ] Incluir o teste de isolamento na definição de pronto.
-4. [ ] Marcar o ADR-002 como substituído.
+4. [x] Marcar o ADR-002 como substituído.
 
 ### Situação em 10/11/2026
 
-Proposto. Nada implementado.
+Aceito em 10/11/2026. Nada implementado.
 
 ---
 
 ## ADR-009: Arquitetura do app Flutter
 
-- **Status:** Proposto
+- **Status:** Aceito pelo PO em 10/11/2026. Não implementado.
 - **Data:** 10/11/2026
 - **Decisor:** Gabriel Vogado (PO)
 
@@ -459,18 +459,18 @@ Sem um padrão antes da primeira tela, cada feature escolhe seu próprio jeito d
 
 | Decisão | Quem |
 |---|---|
-| Refresh token na web: cookie `HttpOnly` (exige apoio do backend, mais seguro) ou armazenamento do navegador | PO, com a revisão de segurança |
-| Provedor de push no Android (o PO prefere recursos próprios, mas push de sistema depende do serviço do Android) | PO |
-| Provedor de mapas na busca | PO, com a estimativa de custo |
+| ~~Refresh token na web~~: **cookie `HttpOnly`** (PO, 10/11/2026); o backend emite o cookie | decidido |
+| ~~Push no Android~~: **push do sistema** (PO, 10/11/2026), porque não existe alternativa própria | decidido |
+| ~~Mapas na busca~~: **mapa gratuito com tiles abertos** (PO, 10/11/2026); falta escolher a biblioteca ao iniciar a busca | decidido |
 | Identidade visual (nome, cores, tipografia) | PO |
 
 ### Próximos passos
 
-1. [ ] PO aceitar ou ajustar a decisão e mudar o status para Aceito.
+1. [x] PO aceitar ou ajustar a decisão e mudar o status para Aceito.
 2. [ ] Escrever o OpenAPI a partir do contrato e gerar o cliente Dart.
 3. [ ] Criar o esqueleto do projeto com `core/`, o tema, a navegação e uma feature de exemplo (T1 Entrar).
 4. [ ] Incluir os testes de estado vazio, carregando e erro na definição de pronto.
 
 ### Situação em 10/11/2026
 
-Proposto. Nada implementado.
+Aceito em 10/11/2026. Nada implementado.
