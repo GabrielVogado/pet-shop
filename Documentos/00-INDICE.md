@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Arquitetura-alvo v2.0 e ADR-008 (multi-tenancy)
+
+**O que mudou:** o PO decidiu documentar tudo antes de começar o desenvolvimento. Novo `Arquitetura-Alvo-v2.0.md`, com quatro diagramas Mermaid (solução, contêineres, componentes do backend e implantação provisória), tarefas agendadas, segurança, riscos e decisões que faltam. Novo ADR-008 propõe o isolamento entre lojas: tenant é a loja, um banco com coleções compartilhadas e `lojaId` em todo documento de loja; ao ser aceito, substitui o ADR-002. A `Arquitetura-v1.0.md` ganhou um aviso de que descreve o código atual. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 05/11/2026 — README para quem não é desenvolvedor
 
 **O que mudou:** o `README.md` da raiz agora explica o que é o projeto, para quem é e o que o sistema faz, sem instruções técnicas. As instruções de instalação, execução e testes foram para `pet-shop-backend/README.md` e `pet-shop-frontend/README.md`. Nenhuma mudança de código.
@@ -84,12 +91,13 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | Pasta | Documento | Para que serve |
 |---|---|---|
 | `01-negocio/` | [Documento-Negocial-v2.0](01-negocio/Documento-Negocial-v2.0.md) | Sistema-alvo: visão, modelo de negócio, perfis, regras de negócio (RN-01 a RN-72), requisitos não funcionais e pendências. O código atual segue descrito na [v1.0](_historico/Documento-Negocial-v1.0.md) |
-| `02-arquitetura-tecnica/` | [Arquitetura-v1.0](02-arquitetura-tecnica/Arquitetura-v1.0.md) | Camadas do backend e do frontend, modelo de dados, segurança, tempo real, infraestrutura |
+| `02-arquitetura-tecnica/` | [Arquitetura-v1.0](02-arquitetura-tecnica/Arquitetura-v1.0.md) | Código atual: camadas do backend e do frontend, modelo de dados, segurança, tempo real, infraestrutura |
+| | [Arquitetura-Alvo-v2.0](02-arquitetura-tecnica/Arquitetura-Alvo-v2.0.md) | Sistema-alvo: solução, contêineres, componentes do backend, multi-tenancy, implantação provisória, tarefas agendadas e riscos |
 | | [Especificacao-API-v1.0](02-arquitetura-tecnica/Especificacao-API-v1.0.md) | Endpoints REST e SSE com perfis de acesso |
 | | [Estimativa-Custo-Nuvem-v1.0](02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) | Custo mensal estimado de nuvem e mensagens, por cenário e perfil, com o que não foi estimado |
 | | [Guia-Ambiente-Local-v1.0](02-arquitetura-tecnica/Guia-Ambiente-Local-v1.0.md) | Pré-requisitos, como rodar e testar na máquina |
 | `04-backlog/` | [Roadmap-v1.0](04-backlog/Roadmap-v1.0.md) | Fase 0 (fundação) e épicos: vários petshops, pagamento, app mobile |
-| `08-analise-tecnica/` | [adrs](08-analise-tecnica/adrs.md) | ADR-001 a ADR-007 |
+| `08-analise-tecnica/` | [adrs](08-analise-tecnica/adrs.md) | ADR-001 a ADR-008 |
 | | [Debitos-Tecnicos-v1.0](08-analise-tecnica/Debitos-Tecnicos-v1.0.md) | Débitos com evidência no código |
 | `09-melhoria-continua/` | [MELHORIAS](09-melhoria-continua/MELHORIAS.md) | Melhorias aplicadas (M-NNN), com PR |
 | `10-git-flow/` | [MANUAL](10-git-flow/MANUAL.md) | Git-flow, ambientes, CI/CD, release, testes, regras de documentação |
@@ -110,6 +118,7 @@ Pastas reservadas, criadas quando houver conteúdo: `03-ui-ux`, `05-features`, `
 | [ADR-005](08-analise-tecnica/adrs.md#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT para rotação de chaves | Aceito, implementado |
 | [ADR-006](08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito pelo PO |
 | [ADR-007](08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) | Provedor de pagamento | Proposto |
+| [ADR-008](08-analise-tecnica/adrs.md#adr-008-isolamento-entre-lojas-multi-tenancy) | Isolamento entre lojas (multi-tenancy) | Proposto |
 
 ## Espelho no Obsidian
 
