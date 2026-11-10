@@ -1,6 +1,6 @@
 # Backlog do sistema-alvo (v2.0)
 
-> **Sistema-alvo.** Histórias organizadas em marcos, com critérios de aceite. Cada história aponta as regras do [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md) (RN), as rotas do [Contrato da API](../02-arquitetura-tecnica/Contrato-API-v2.0.md) e as telas das [Telas e fluxos](../03-ui-ux/Telas-e-Fluxos-v1.0.md).
+> **Sistema-alvo.** Histórias organizadas em marcos, com critérios de aceite. Cada história aponta as regras do [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md) (RN), as rotas do [Contrato da API](../02-arquitetura-tecnica/Contrato-API-v2.0.md) e as telas das [Telas e fluxos](../03-ui-ux/Telas-e-Fluxos-v1.1.md).
 >
 > É **proposta**, sujeita às respostas do PO às pendências P-07 a P-15. A ordem substitui a dos épicos do [Roadmap v1.0](Roadmap-v1.0.md), que continua descrevendo a direção de 05/11/2026. A [definição de pronto e a estratégia de testes](Definicao-de-Pronto-e-Testes-v1.0.md) valem para todas as histórias.
 
@@ -144,7 +144,7 @@
 
 ## 4. Telas que ainda faltam desenhar
 
-As histórias C-01, C-03, P-01, A-04, N-01, L-01, L-02, L-03 e N-02 precisam das telas listadas na seção 5 das [Telas e fluxos](../03-ui-ux/Telas-e-Fluxos-v1.0.md). Elas entram na v1.1 desse documento antes de a história ser puxada.
+As histórias C-01, C-03, P-01, A-04, N-01, L-01, L-02, L-03 e N-02 precisam das telas listadas na seção 5 das [Telas e fluxos](../03-ui-ux/Telas-e-Fluxos-v1.1.md). Elas entram na v1.1 desse documento antes de a história ser puxada.
 
 ## 5. Riscos que mexem no backlog
 

@@ -264,6 +264,6 @@ Com mais de uma instância da API, duas delas não podem rodar a mesma tarefa ao
 
 1. ~~Modelo de dados e diagramas de engenharia~~: feitos em [Modelo-de-Dados-v2.0](Modelo-de-Dados-v2.0.md) e [Diagramas-de-Engenharia-v2.0](Diagramas-de-Engenharia-v2.0.md).
 2. ~~Contrato da API v2.0~~: feito em [Contrato-API-v2.0](Contrato-API-v2.0.md).
-3. ~~Telas e fluxos~~: feitos em [Telas-e-Fluxos](../03-ui-ux/Telas-e-Fluxos-v1.0.md).
+3. ~~Telas e fluxos~~: feitos em [Telas-e-Fluxos](../03-ui-ux/Telas-e-Fluxos-v1.1.md).
 4. ~~ADR da arquitetura do app Flutter~~: feito no [ADR-009](../08-analise-tecnica/adrs.md#adr-009-arquitetura-do-app-flutter).
 5. ~~Backlog em histórias, definição de pronto e estratégia de testes~~: feitos em [Backlog-v2.0](../04-backlog/Backlog-v2.0.md) e [Definicao-de-Pronto-e-Testes](../04-backlog/Definicao-de-Pronto-e-Testes-v1.0.md).
