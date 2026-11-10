@@ -1,6 +1,6 @@
 # Arquitetura
 
-> Estado medido no código da branch `develop` em 05/11/2026.
+> Estado medido no código da branch `develop` em 05/11/2026. Descreve o **código atual**; o sistema-alvo está em [Arquitetura-Alvo-v2.0](Arquitetura-Alvo-v2.0.md).
 
 ## Visão geral
 

@@ -11,6 +11,7 @@ Registros de decisão de arquitetura. Numeração sequencial; um ADR substituíd
 | [ADR-005](#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT | Aceito, implementado |
 | [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito |
 | [ADR-007](#adr-007-provedor-de-pagamento) | Provedor de pagamento | Proposto |
+| [ADR-008](#adr-008-isolamento-entre-lojas-multi-tenancy) | Isolamento entre lojas (multi-tenancy) | Proposto |
 
 ---
 
@@ -37,7 +38,7 @@ Remover as interfaces de port. Os services em `application/service` injetam dire
 
 ## ADR-002: Índice único parcial para garantir um único owner
 
-- **Status:** Aceito, implementado. **Será substituído** pelo ADR de multi-tenancy do Épico 1 (vários petshops).
+- **Status:** Aceito, implementado. **Será substituído** pelo [ADR-008](#adr-008-isolamento-entre-lojas-multi-tenancy) quando ele for aceito.
 - **Data:** 01/08/2026 (revisado em 05/11/2026)
 
 ### Contexto
@@ -317,3 +318,66 @@ Pesquisa na documentação pública em 05/11/2026. A coluna "Fonte" diz o que fo
 ### Situação em 05/11/2026
 
 Proposto. Nada foi testado, e nenhum provedor foi contratado. O PO decidiu seguir por enquanto só com estimativas e fazer o teste em sandbox depois da fase de documentação.
+
+
+---
+
+## ADR-008: Isolamento entre lojas (multi-tenancy)
+
+- **Status:** Proposto, aguardando decisão do PO. Quando aceito, substitui o ADR-002.
+- **Data:** 10/11/2026
+- **Decisor:** Gabriel Vogado (PO)
+
+### Contexto
+
+O sistema-alvo é um marketplace: muitas lojas (CNPJ), cada uma com várias unidades, usando a mesma plataforma ([Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md), RN-10). Uma loja nunca pode ler nem alterar dados de outra. O tutor, por outro lado, não pertence a nenhuma loja: pets, carteira e histórico são dele, e cada loja só vê o que as regras RN-22 e RN-23 permitem.
+
+Volume previsto para o primeiro ano: pelo menos 30 lojas e 100 tutores (RNF-01). O ADR-002 (índice único para um único owner) deixa de valer.
+
+### Decisão proposta
+
+1. **Tenant = loja** (empresa, CNPJ). A unidade é parte da loja e não é tenant.
+2. **Um banco MongoDB e coleções compartilhadas.** Todo documento que pertence a uma loja tem o campo `lojaId` (unidades, catálogo, capacidade, agendamentos, pagamentos, avaliações recebidas).
+3. **Dados do tutor ficam fora do tenant:** usuário tutor, pets, carteira de vacinas e histórico não têm `lojaId`. A loja os acessa só por serviços de aplicação que conferem a regra (agendamento com a loja, ou permissão do tutor).
+4. **O `lojaId` vem do token**, nunca do corpo ou da URL fornecidos pelo cliente. Para uma loja logada, qualquer consulta é montada com `lojaId` do token.
+5. **Os repositórios de dados de loja só têm métodos que exigem `lojaId`.** Não existe `findById(id)` sem `lojaId` nessas coleções. Um repositório base em Kotlin aplica o filtro e a revisão de código verifica o uso.
+6. **Índices começam por `lojaId`** (por exemplo `lojaId + unidadeId + inicio` na agenda), o que também acelera as consultas.
+7. **Teste de isolamento obrigatório:** para cada recurso de loja, um teste cria duas lojas e confirma que a loja A recebe 404 ao pedir dado da loja B.
+
+### Opções consideradas
+
+| Opção | Isolamento | Complexidade | Custo | Observação |
+|---|---|---|---|---|
+| **A. Coleções compartilhadas com `lojaId`** (proposta) | Por código e testes | Baixa | Baixo: um banco | Risco de esquecer o filtro, mitigado pelo repositório base e pelo teste de isolamento |
+| B. Um banco por loja | Forte | Alta | Alto: 30 bancos a operar, migrar e fazer backup; limites do plano do Atlas | Exagero para 30 lojas |
+| C. Uma coleção por loja | Média | Média/alta | Médio | Milhares de coleções e índices; difícil buscar entre lojas, que é a função da busca (RN-30) |
+| D. Sem separação (confiar só em permissões da tela) | Fraca | Baixa | Baixo | Rejeitada: uma falha de tela expõe dados de outra loja |
+
+### Análise dos trade-offs
+
+- A busca entre lojas (RN-30) e a média de avaliações atravessam todas as lojas. Com coleções compartilhadas, são consultas simples; nas opções B e C exigiriam juntar dados de vários lugares.
+- O ganho de B (isolamento físico) não compensa para 30 lojas. Se um cliente grande exigir isolamento físico no futuro, o `lojaId` em todos os documentos permite migrar essa loja para um banco próprio.
+- O ponto fraco da opção A é humano: um filtro esquecido vaza dados. Por isso o repositório base e o teste de isolamento fazem parte da decisão, e não são opcionais.
+
+### Consequências
+
+**Ganhos**
+- Um único banco para operar, fazer backup e consultar.
+- Busca e agregações entre lojas simples.
+- Migrar uma loja para um banco próprio continua possível.
+
+**Custos e riscos**
+- Todo código de loja precisa passar pelo repositório base; um acesso direto ao driver sem filtro fura o isolamento.
+- Exportar ou excluir os dados de uma loja é filtrar por `lojaId` em várias coleções (cabe ao módulo de privacidade).
+- O RN-05 (um login por loja no MVP) guarda uma lista de membros da loja desde o início, para que o login por funcionário não exija migração.
+
+### Próximos passos
+
+1. [ ] PO aceitar ou ajustar a decisão e mudar o status para Aceito.
+2. [ ] Detalhar as coleções, os campos e os índices no modelo de dados.
+3. [ ] Incluir o teste de isolamento na definição de pronto.
+4. [ ] Marcar o ADR-002 como substituído.
+
+### Situação em 10/11/2026
+
+Proposto. Nada implementado.
