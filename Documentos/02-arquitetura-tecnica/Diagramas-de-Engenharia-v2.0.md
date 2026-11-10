@@ -2,7 +2,7 @@
 
 > **Sistema-alvo.** Estados e sequências do agendamento e do pagamento, a partir das regras RN-40 a RN-55 do [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md). Os campos citados estão no [Modelo de dados](Modelo-de-Dados-v2.0.md); os módulos, na [Arquitetura-alvo](Arquitetura-Alvo-v2.0.md#3-componentes-do-backend).
 >
-> É **proposta**. Esta versão acrescenta ao ciclo do Documento Negocial o estado **Aguardando pagamento**, que depende da resposta do PO à pergunta P-07 (o sinal é cobrado ao pedir). O sinal e a multa são definidos por cada loja (RN-56 a RN-58); loja sem sinal pula esse estado.
+> É **proposta**. Esta versão acrescenta ao ciclo do Documento Negocial o estado **Aguardando pagamento**, decidido pelo PO em 10/11/2026 (P-07: o sinal é cobrado ao pedir). O sinal e a multa são definidos por cada loja (RN-56 a RN-58); loja sem sinal pula esse estado.
 
 ---
 

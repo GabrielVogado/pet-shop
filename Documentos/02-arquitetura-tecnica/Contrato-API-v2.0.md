@@ -137,7 +137,7 @@ Idempotency-Key: 6f1c1f0e-2f43-4a51-8d5c-9d3f0c1a7b10
 }
 ```
 
-Com `metodoSinal = CARTAO`, o corpo traz o `tokenCartao` (ou usa o cartão de garantia) e a resposta vem com `status = PENDENTE` assim que o provedor aprova. O estado `AGUARDANDO_PAGAMENTO` e o prazo `pagarAte` dependem de P-07.
+Com `metodoSinal = CARTAO`, o corpo traz o `tokenCartao` (ou usa o cartão de garantia) e a resposta vem com `status = PENDENTE` assim que o provedor aprova. O estado `AGUARDANDO_PAGAMENTO` e o prazo `pagarAte` valem porque o sinal é cobrado ao pedir (P-07, decidido pelo PO).
 
 ### 3.4 Busca de lojas (público e tutor)
 
@@ -334,7 +334,7 @@ A forma exata (ferramenta própria, console do banco, painel interno) é uma dec
 
 | # | Decisão | Onde |
 |---|---|---|
-| 1 | Quando o sinal é cobrado, e como fica o estado `AGUARDANDO_PAGAMENTO` (loja sem sinal pula o estado) | P-07 |
+| 1 | ~~Quando o sinal é cobrado~~: decidido, ao pedir; o estado `AGUARDANDO_PAGAMENTO` vale e a loja sem sinal pula o estado | P-07 |
 | 1a | ~~Teto da multa, dispensa e cartão de garantia~~: decididos (teto 50%, dispensa sim, cartão só se preciso) | P-13 a P-15 |
 | 2 | ~~Remarcação exige novo aceite~~: decidido (sim). Falta detalhar a rota `remarcar` | P-08 |
 | 3 | Duração dos tokens de acesso e de renovação | Segurança |

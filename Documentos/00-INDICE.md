@@ -9,7 +9,7 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ## 📌 Revisão 10/11/2026 — Decisões do PO
 
-**O que mudou:** o PO decidiu: remarcar exige novo aceite da loja (P-08); multa com teto de 50% do total (P-13); a loja pode dispensar a multa (P-14); cartão de garantia só quando a multa pode passar do sinal (P-15); aceitos os ADR-008 (isolamento entre lojas, que substitui o ADR-002) e ADR-009 (app Flutter); nuvem Google Cloud em São Paulo; refresh token do painel web em cookie `HttpOnly`; push do sistema no Android; mapa gratuito na busca. Os documentos negocial, modelo de dados, contrato da API, telas, backlog e ADRs acompanharam. Seguem abertas P-07 (quando cobrar o sinal) e as propostas P-09 a P-12. Nenhuma mudança de código.
+**O que mudou:** o PO decidiu: remarcar exige novo aceite da loja (P-08); multa com teto de 50% do total (P-13); a loja pode dispensar a multa (P-14); cartão de garantia só quando a multa pode passar do sinal (P-15); aceitos os ADR-008 (isolamento entre lojas, que substitui o ADR-002) e ADR-009 (app Flutter); nuvem Google Cloud em São Paulo; refresh token do painel web em cookie `HttpOnly`; push do sistema no Android; mapa gratuito na busca. Os documentos negocial, modelo de dados, contrato da API, telas, backlog e ADRs acompanharam. Também decidido: o sinal é cobrado ao pedir (P-07). Seguem como proposta P-09 a P-12. Nenhuma mudança de código.
 **Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
 
 ---

@@ -120,7 +120,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | ID | Regra |
 |---|---|
 | RN-50 | Para agendar numa loja cuja multa possa ser maior que o sinal, o tutor precisa ter um **cartão de crédito cadastrado** como garantia, para cobrar a diferença (**proposta**, P-15). O débito não permite cobrança posterior sem a presença do tutor. |
-| RN-51 | O tutor paga pelo app (crédito, débito ou Pix) o **sinal definido pela loja** (RN-56): um percentual do total, de 0% (sem sinal) a 100%. O sinal é um adiantamento do serviço e é abatido do valor final. Quando ele é cobrado está em aberto (P-07). |
+| RN-51 | O tutor paga pelo app (crédito, débito ou Pix) o **sinal definido pela loja** (RN-56): um percentual do total, de 0% (sem sinal) a 100%. O sinal é um adiantamento do serviço e é abatido do valor final. O sinal é cobrado **ao pedir** (decisão do PO, P-07): o pedido só chega à loja depois que o sinal é pago. |
 | RN-52 | O restante é pago depois do atendimento, pelo app ou direto na loja. |
 | RN-53 | **Recebimento (proposta):** cada loja tem a própria conta recebedora no provedor de pagamento. O PetCare cria a cobrança em nome da loja e nunca recebe nem repassa o dinheiro. O provedor será escolhido num ADR próprio. |
 | RN-54 | A taxa do provedor é descontada da loja. |
@@ -191,7 +191,7 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | P-04 | Provedor de pagamento (RN-53) | [ADR-007](../08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) proposto; spike em sandbox fica para depois da fase de documentação |
 | P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir; custo mínimo por loja na estimativa de nuvem |
 | P-06 | Nuvem e custo de infraestrutura (RNF-09) | **Nuvem decidida pelo PO em 10/11/2026: Google Cloud, São Paulo.** [Estimativa v1.0](../02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) feita; faltam as tarifas de São Paulo, provedores de SMS brasileiros e conferir a AWS em fonte oficial |
-| P-07 | Quando o sinal é cobrado? A RN-51 diz "na confirmação", mas as RN-44 e RN-45 devolvem o sinal quando a loja recusa ou o prazo vence | Pergunta ao PO. Proposta: cobrar ao pedir ([Diagramas de engenharia](../02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md)) |
+| P-07 | Quando o sinal é cobrado? A RN-51 diz "na confirmação", mas as RN-44 e RN-45 devolvem o sinal quando a loja recusa ou o prazo vence | **Decidido pelo PO em 10/11/2026: cobrar ao pedir**, com 15 minutos para pagar e o estado Aguardando pagamento ([Diagramas](../02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md#1-estados-do-agendamento)) |
 | P-08 | Remarcar (RN-46) exige novo aceite da loja? | **Decidido pelo PO em 10/11/2026: sim**, mantendo o sinal |
 | P-09 | Tamanho do intervalo da agenda | Pergunta ao PO. Proposta: 30 minutos ([Modelo de dados](../02-arquitetura-tecnica/Modelo-de-Dados-v2.0.md#7-perguntas-ao-po)) |
 | P-10 | Pedido com vários pets ou serviços: aceite inteiro ou por item, e serviços em sequência ou ao mesmo tempo | Pergunta ao PO. Proposta: aceite inteiro, cada item com seu horário |

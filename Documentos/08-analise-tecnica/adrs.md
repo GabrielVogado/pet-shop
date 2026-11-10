@@ -247,7 +247,7 @@ Decisão aceita e documentada. O código continua em React e Java até as estór
 O [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md) define o fluxo de dinheiro (RN-50 a RN-55). O provedor escolhido precisa cobrir:
 
 1. **Recebimento direto pela loja (RN-53):** cada loja tem a própria conta recebedora; o PetCare cria a cobrança e não recebe nem repassa o dinheiro.
-2. **Sinal definido pela loja (RN-51, RN-56):** percentual do total, de 0% a 100%, cobrado em cartão de crédito, Pix ou débito. O momento da cobrança está em aberto (P-07). Se o tutor cancelar com menos de 2h ou faltar, o sinal é aplicado na multa da loja (RN-46, RN-47, RN-57); nos demais casos, é devolvido ou abatido do serviço. Estorno parcial: quando o sinal é maior que a multa, a diferença volta ao tutor.
+2. **Sinal definido pela loja (RN-51, RN-56):** percentual do total, de 0% a 100%, cobrado em cartão de crédito, Pix ou débito. O sinal é cobrado ao pedir (P-07, decidido pelo PO em 10/11/2026). Se o tutor cancelar com menos de 2h ou faltar, o sinal é aplicado na multa da loja (RN-46, RN-47, RN-57); nos demais casos, é devolvido ou abatido do serviço. Estorno parcial: quando o sinal é maior que a multa, a diferença volta ao tutor.
 3. **Cartão de garantia (RN-50):** cartão de crédito guardado (tokenizado), sem que o PetCare toque nos dados do cartão (RNF-10). O provedor precisa permitir **cobrar o cartão guardado depois, sem o tutor presente**, na conta da loja, para cobrar a diferença quando a multa for maior que o sinal (RN-57).
 4. **Restante após o atendimento (RN-52):** cobrado pelo app ou pago na loja.
 5. **Estorno** total do sinal.
