@@ -10,7 +10,7 @@
 
 - **A premissa mudou.** A Vercel não é só Node.js: a documentação atual lista também Bun, Python, Go, Ruby, Rust e, em **Beta**, o **Container Runtime**, que roda qualquer imagem OCI (Dockerfile). Um backend Kotlin com Quarkus cabe nele, e a própria Vercel cita uma API Java em container como exemplo.
 - **A Vercel não é um servidor virtual (VPS).** É uma plataforma de funções sob demanda, com limite de duração por chamada. O servidor virtual mais barato da estimativa de custo é o da Hetzner (€ 6,49 por mês), mas fica fora do Brasil.
-- **Preço não é o que separa as opções.** Na estimativa de nuvem, o backend no Cloud Run custa a partir de ~US$ 13 por mês (a estimativa avisa que o preço de São Paulo é mais alto); a Vercel Pro custa US$ 20 por mês com US$ 20 de uso incluído. O **plano grátis (Hobby) é só para uso não comercial**, então não serve para um produto que cobra mensalidade.
+- **Preço não é o que separa as opções.** Na estimativa de nuvem, o backend no Cloud Run custa a partir de ~US$ 13 por mês (a estimativa avisa que o preço de São Paulo é mais alto); a Vercel Pro custa US$ 20 por mês com US$ 20 de uso incluído, e o uso em São Paulo sai cerca de 73% mais caro que na região padrão. O **plano grátis (Hobby) é só para uso não comercial**, então não serve para um produto que cobra mensalidade.
 - **O que pesa de verdade** são três regras do Pertim que pedem processo vivo: as **tarefas agendadas** (prazo de aceite), o **SSE** do painel e a **conexão com o MongoDB**. Em funções sob demanda, cada uma precisa de um ajuste.
 - **Kotlin ou Node não muda o app Flutter nem o contrato da API.** O cliente é gerado do OpenAPI (ADR-009), então a linguagem do backend pode mudar sem refazer telas.
 - **Recomendação:** manter Kotlin com Quarkus no Cloud Run em São Paulo (decisão atual). Se o PO quiser mesmo a Vercel, o caminho mais seguro é **Node com TypeScript** e região `gru1`, e antes disso vale um teste de um dia (seção 7).
@@ -30,11 +30,11 @@
 | Daemons | Containers que rodam sem receber tráfego, com instâncias fixas | Alternativa para o trabalho de fundo; a página não informa o status (Beta ou geral) |
 | WebSocket | Beta público | Não usamos; o painel usa SSE |
 | Descritores de arquivo | 1.024 compartilhados entre execuções simultâneas | Exige pool de conexões com o MongoDB |
-| Corpo de requisição | 4,5 MB (sem limite para resposta em streaming) | Cabe: o app envia o token do cartão, e não o número |
+| Corpo de requisição | 4,5 MB (sem limite para resposta em streaming) | **Não cabe** em dois casos: o comprovante de vacina e o PDF ou XML da nota fiscal aceitam até 5 MB no Contrato. Seria preciso baixar o limite para 4 MB ou enviar o arquivo direto a um armazenamento por URL assinada |
 | Regiões | 19, incluindo `gru1` (São Paulo). O padrão é `iad1` (EUA) | Precisa configurar `gru1` por causa da LGPD (RNF-06 a RNF-08) |
 | Plano grátis | Hobby: "uso pessoal e não comercial" | Não serve para o Pertim em produção |
 | Plano Pro | US$ 20 por mês com US$ 20 de uso incluído; depois, uso pago | Custo real depende do tráfego e da memória da JVM |
-| Preço de uso | A partir de US$ 0,128 por hora de CPU ativa, US$ 0,0106 por GB-hora de memória e US$ 0,60 por milhão de chamadas | Espera por banco e por provedor não conta como CPU ativa |
+| Preço de uso | Na região padrão (Washington): US$ 0,128 por hora de CPU ativa, US$ 0,0106 por GB-hora de memória e US$ 0,60 por milhão de chamadas. **Em São Paulo (`gru1`), só no Pro: US$ 0,221 e US$ 0,0183**, cerca de 73% a mais | Espera por banco e por provedor não conta como CPU ativa. Se uma instância de 2 GB ficasse ativa o mês todo, só a memória custaria ~US$ 26 em São Paulo (1.440 GB-hora); o uso real depende do tráfego |
 
 ---
 
@@ -138,6 +138,7 @@ Documentação oficial da Vercel, lida em 10/11/2026 (campo `last_updated` entre
 - Cron jobs, uso e preço (15/07/2026): <https://vercel.com/docs/cron-jobs/usage-and-pricing>
 - Regiões, incluindo `gru1` (11/08/2026): <https://vercel.com/docs/regions>
 - Planos e preços: <https://vercel.com/pricing>
+- Preços da região de São Paulo, `gru1` (14/09/2026): <https://vercel.com/docs/pricing/regional-pricing/gru1>
 - Funções, containers e Daemons: <https://vercel.com/kb/guide/vercel-functions-containers-daemons>
 
 Neste repositório: [Estimativa de custo de nuvem](Estimativa-Custo-Nuvem-v1.0.md), [Arquitetura-alvo](Arquitetura-Alvo-v2.0.md) e [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus).
