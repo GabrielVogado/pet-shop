@@ -251,9 +251,9 @@ Com mais de uma instância da API, duas delas não podem rodar a mesma tarefa ao
 
 | # | Decisão | Quem | Onde |
 |---|---|---|---|
-| 1 | Isolamento entre lojas | PO | [ADR-008](../08-analise-tecnica/adrs.md#adr-008-isolamento-entre-lojas-multi-tenancy), proposto |
+| 1 | ~~Isolamento entre lojas~~: aceito pelo PO em 10/11/2026 | PO | [ADR-008](../08-analise-tecnica/adrs.md#adr-008-isolamento-entre-lojas-multi-tenancy) |
 | 2 | Provedor de pagamento | PO, após teste | ADR-007 |
-| 3 | Nuvem e região | PO | RNF-09, P-06 |
+| 3 | ~~Nuvem e região~~: Google Cloud, São Paulo (PO, 10/11/2026) | PO | RNF-09, P-06 |
 | 4 | Papel do SMS e valor da mensalidade | PO | P-05 |
 | 5 | Arquitetura do app Flutter (estado, navegação, estrutura de pastas) | a documentar | próximo ADR |
 | 6 | Vitrine pública fora do Flutter, para buscadores | a decidir | ADR de busca |

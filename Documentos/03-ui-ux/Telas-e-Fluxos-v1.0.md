@@ -130,5 +130,5 @@ Essas telas seguem o mesmo padrão das já desenhadas e entram numa v1.1 deste d
 |---|---|---|
 | 1 | ~~Identidade visual: nome, logotipo, cores e tipografia~~ Decidida em 10/11/2026: nome Pertim, direção Bairro | [Identidade visual v1.0](Identidade-Visual-v1.0.md) |
 | 2 | Sistema de design em Flutter (Material 3 ou próprio) | ADR do app Flutter |
-| 3 | Mapa na busca (qual provedor de mapas e seu custo) | A decidir, com a estimativa de custo |
+| 3 | ~~Mapa na busca~~: decidido pelo PO em 10/11/2026, mapa gratuito (tiles abertos). Falta escolher a biblioteca no ADR do app | ADR-009 |
 | 4 | Vitrine pública da loja fora do app, para buscadores | Arquitetura-alvo, seção 9 |
