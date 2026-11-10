@@ -262,7 +262,7 @@ Com mais de uma instância da API, duas delas não podem rodar a mesma tarefa ao
 
 ## 10. Próximos documentos
 
-1. Modelo de dados e diagramas de engenharia (estados do pedido e sequências).
+1. ~~Modelo de dados e diagramas de engenharia~~: feitos em [Modelo-de-Dados-v2.0](Modelo-de-Dados-v2.0.md) e [Diagramas-de-Engenharia-v2.0](Diagramas-de-Engenharia-v2.0.md).
 2. Contrato da API v2.0.
 3. Telas e fluxos.
 4. ADR da arquitetura do app Flutter.

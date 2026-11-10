@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Modelo de dados e diagramas de engenharia v2.0
+
+**O que mudou:** novo `Modelo-de-Dados-v2.0.md` (diagrama entidade-relacionamento, coleções, índices, reserva atômica de vaga, retenção e LGPD) e novo `Diagramas-de-Engenharia-v2.0.md` (estados do agendamento e do sinal e seis sequências). A análise encontrou uma ambiguidade no Documento Negocial: a RN-51 cobra o sinal "na confirmação", mas as RN-44 e RN-45 o devolvem quando a loja recusa ou o prazo vence. A proposta cobra o sinal ao pedir, o que acrescenta o estado "Aguardando pagamento". As pendências P-07 a P-12 foram adicionadas ao Documento Negocial. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 10/11/2026 — Arquitetura-alvo v2.0 e ADR-008 (multi-tenancy)
 
 **O que mudou:** o PO decidiu documentar tudo antes de começar o desenvolvimento. Novo `Arquitetura-Alvo-v2.0.md`, com quatro diagramas Mermaid (solução, contêineres, componentes do backend e implantação provisória), tarefas agendadas, segurança, riscos e decisões que faltam. Novo ADR-008 propõe o isolamento entre lojas: tenant é a loja, um banco com coleções compartilhadas e `lojaId` em todo documento de loja; ao ser aceito, substitui o ADR-002. A `Arquitetura-v1.0.md` ganhou um aviso de que descreve o código atual. Nenhuma mudança de código.
@@ -93,6 +100,8 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | `01-negocio/` | [Documento-Negocial-v2.0](01-negocio/Documento-Negocial-v2.0.md) | Sistema-alvo: visão, modelo de negócio, perfis, regras de negócio (RN-01 a RN-72), requisitos não funcionais e pendências. O código atual segue descrito na [v1.0](_historico/Documento-Negocial-v1.0.md) |
 | `02-arquitetura-tecnica/` | [Arquitetura-v1.0](02-arquitetura-tecnica/Arquitetura-v1.0.md) | Código atual: camadas do backend e do frontend, modelo de dados, segurança, tempo real, infraestrutura |
 | | [Arquitetura-Alvo-v2.0](02-arquitetura-tecnica/Arquitetura-Alvo-v2.0.md) | Sistema-alvo: solução, contêineres, componentes do backend, multi-tenancy, implantação provisória, tarefas agendadas e riscos |
+| | [Modelo-de-Dados-v2.0](02-arquitetura-tecnica/Modelo-de-Dados-v2.0.md) | Sistema-alvo: coleções do MongoDB, campos, índices, consistência, retenção e perguntas ao PO |
+| | [Diagramas-de-Engenharia-v2.0](02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md) | Estados do agendamento e do pagamento e sequências dos fluxos principais |
 | | [Especificacao-API-v1.0](02-arquitetura-tecnica/Especificacao-API-v1.0.md) | Endpoints REST e SSE com perfis de acesso |
 | | [Estimativa-Custo-Nuvem-v1.0](02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) | Custo mensal estimado de nuvem e mensagens, por cenário e perfil, com o que não foi estimado |
 | | [Guia-Ambiente-Local-v1.0](02-arquitetura-tecnica/Guia-Ambiente-Local-v1.0.md) | Pré-requisitos, como rodar e testar na máquina |

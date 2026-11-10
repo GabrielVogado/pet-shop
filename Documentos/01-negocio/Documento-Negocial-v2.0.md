@@ -188,3 +188,9 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | P-04 | Provedor de pagamento (RN-53) | [ADR-007](../08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) proposto; spike em sandbox fica para depois da fase de documentação |
 | P-05 | Valor da mensalidade, considerando o custo de WhatsApp e SMS | A definir; custo mínimo por loja na estimativa de nuvem |
 | P-06 | Nuvem e custo de infraestrutura (RNF-09) | [Estimativa v1.0](../02-arquitetura-tecnica/Estimativa-Custo-Nuvem-v1.0.md) feita; faltam as tarifas de São Paulo, provedores de SMS brasileiros e conferir a AWS em fonte oficial |
+| P-07 | Quando o sinal é cobrado? A RN-51 diz "na confirmação", mas as RN-44 e RN-45 devolvem o sinal quando a loja recusa ou o prazo vence | Pergunta ao PO. Proposta: cobrar ao pedir ([Diagramas de engenharia](../02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md)) |
+| P-08 | Remarcar (RN-46) exige novo aceite da loja? | Pergunta ao PO. Proposta: sim, mantendo o sinal |
+| P-09 | Tamanho do intervalo da agenda | Pergunta ao PO. Proposta: 30 minutos ([Modelo de dados](../02-arquitetura-tecnica/Modelo-de-Dados-v2.0.md#7-perguntas-ao-po)) |
+| P-10 | Pedido com vários pets ou serviços: aceite inteiro ou por item, e serviços em sequência ou ao mesmo tempo | Pergunta ao PO. Proposta: aceite inteiro, cada item com seu horário |
+| P-11 | Prazo para a loja concluir ou registrar falta, e o que fazer se esquecer | Pergunta ao PO. Proposta: lembrete, sem conclusão automática |
+| P-12 | Prazo para o tutor avaliar depois do atendimento | Pergunta ao PO. Proposta: 30 dias |
