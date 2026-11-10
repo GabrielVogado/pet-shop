@@ -12,6 +12,7 @@ Registros de decisão de arquitetura. Numeração sequencial; um ADR substituíd
 | [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito |
 | [ADR-007](#adr-007-provedor-de-pagamento) | Provedor de pagamento | Proposto |
 | [ADR-008](#adr-008-isolamento-entre-lojas-multi-tenancy) | Isolamento entre lojas (multi-tenancy) | Proposto |
+| [ADR-009](#adr-009-arquitetura-do-app-flutter) | Arquitetura do app Flutter | Proposto |
 
 ---
 
@@ -377,6 +378,98 @@ Volume previsto para o primeiro ano: pelo menos 30 lojas e 100 tutores (RNF-01).
 2. [ ] Detalhar as coleções, os campos e os índices no modelo de dados.
 3. [ ] Incluir o teste de isolamento na definição de pronto.
 4. [ ] Marcar o ADR-002 como substituído.
+
+### Situação em 10/11/2026
+
+Proposto. Nada implementado.
+
+---
+
+## ADR-009: Arquitetura do app Flutter
+
+- **Status:** Proposto
+- **Data:** 10/11/2026
+- **Decisor:** Gabriel Vogado (PO)
+
+### Contexto
+
+O [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) escolheu Flutter para web e mobile, e o app é desenvolvido do zero. As [telas](../03-ui-ux/Telas-e-Fluxos-v1.0.md) mostram dois produtos de público diferente: o **app do tutor** (Android no MVP, web depois) e o **painel da loja** (web, telas largas). O [contrato da API](../02-arquitetura-tecnica/Contrato-API-v2.0.md) define rotas, erros por `codigo`, idempotência e SSE.
+
+Sem um padrão antes da primeira tela, cada feature escolhe seu próprio jeito de guardar estado, navegar e falar com a API, e o custo aparece na terceira feature.
+
+### Decisão proposta
+
+1. **Um projeto Flutter, dois pontos de entrada** (`main_tutor.dart` e `main_loja.dart`), com o código comum em `core/`. Cada ponto de entrada gera seu próprio build (Android do tutor, web da loja, web do tutor depois). Separar em pacotes só se o tempo de build ou o acoplamento pedir.
+2. **Pastas por feature**, cada uma com `data` (cliente da API e mapeamento), `domain` (modelos e regras de tela) e `presentation` (telas e controladores). Não há camada de casos de uso: o backend já guarda as regras de negócio, e o app só as exibe.
+3. **Estado com Riverpod.** Um controlador por tela, estado imutável, erro e carregamento como parte do estado.
+4. **Navegação com `go_router`**, com redirecionamento por perfil: tutor sem login vai para T1; loja não aprovada vê só o aviso de aprovação.
+5. **Cliente da API gerado do OpenAPI** (a ser escrito a partir do contrato) com `dio`. Interceptores: token de acesso, renovação com o refresh token, `Idempotency-Key` em POST de dinheiro e agendamento, e conversão do corpo de erro em uma exceção com `codigo`, `mensagem` e `campo`.
+6. **Mensagens de erro por `codigo`**, num único arquivo de textos em português, nunca o texto vindo do servidor (Telas, seção 4).
+7. **Dinheiro em centavos (`int`) até a hora de mostrar**, formatado com `intl` como `R$ 0,00`; datas chegam em UTC e são mostradas no fuso do aparelho como `dd/mm/aaaa`.
+8. **Tempo real:** painel da loja assina o SSE `/loja/eventos`; o app do tutor recebe push. Em ambos o evento só avisa, e a tela busca de novo o recurso (Telas, seção 4).
+9. **Tema Material 3** com tokens num só lugar (`core/tema`), para a identidade visual (decisão pendente) entrar sem mexer nas telas. Contraste AA, alvo de toque de 48 dp, fonte escalável.
+10. **Só português do Brasil**, mas com textos em arquivos ARB desde o início, porque trocar depois custa mais.
+11. **Testes:** unitários nos controladores e no mapeamento, de widget nas telas com os estados vazio, carregando e erro, golden nas telas principais, e de integração do fluxo pedir e pagar o sinal contra a API de teste. Detalhes na estratégia de testes.
+12. **Sem modo offline no MVP.** A carteira de vacinas guarda a última leitura para consulta rápida, mas toda escrita exige conexão.
+
+### Opções consideradas
+
+**Estado**
+
+| Opção | Complexidade | Testabilidade | Observação |
+|---|---|---|---|
+| **A. Riverpod** (proposta) | Média | Alta: controladores sem widget | Dependências explícitas, bom com assíncrono |
+| B. Bloc/Cubit | Média/alta | Alta | Mais código por tela; bom para equipes grandes |
+| C. Provider + ChangeNotifier | Baixa | Média | Escala mal quando as telas dependem umas das outras |
+
+**Navegação**
+
+| Opção | Observação |
+|---|---|
+| **A. `go_router`** (proposta) | Mantido pela equipe do Flutter, URLs na web, redirecionamento por perfil |
+| B. `Navigator` direto | Sem URLs na web; o painel da loja precisa delas |
+
+**Cliente da API**
+
+| Opção | Observação |
+|---|---|
+| **A. Gerado do OpenAPI** (proposta) | O contrato manda; mudar o contrato quebra a compilação, não a produção |
+| B. Escrito à mão | Divergência silenciosa entre app e API |
+
+### Análise dos trade-offs
+
+- Dois pontos de entrada num projeto evitam duplicar o código de login, API e tema, ao custo de o build do tutor carregar pastas da loja se o código não for bem separado. Por isso as features da loja e do tutor ficam em pastas distintas e só `core/` é compartilhado.
+- Riverpod pesa mais no começo que Provider, mas as telas de pedido dependem de várias fontes (loja, disponibilidade, pet, política) e isso fica explícito.
+- A geração do cliente exige manter um OpenAPI. Isso é desejado: o contrato passa a ser um arquivo e não só um texto.
+- Flutter na web tem carregamento inicial pesado e busca fraca em buscadores. Para o painel da loja, que exige login, isso não pesa; para a vitrine pública, está na lista de decisões das Telas.
+
+### Consequências
+
+**Ganhos**
+- Toda feature nova segue o mesmo molde, o que acelera revisão e onboarding.
+- Erros, dinheiro e datas tratados num lugar só.
+- A identidade visual entra trocando o tema.
+
+**Custos e riscos**
+- Gerar e versionar o OpenAPI vira parte da rotina; sem ele o item 5 não vale.
+- Dart é novo para a equipe (ADR-006).
+- Guardar o refresh token na web tem risco de XSS se ficar no armazenamento do navegador. No Android usa-se o armazenamento seguro do sistema.
+
+### Decisões que faltam
+
+| Decisão | Quem |
+|---|---|
+| Refresh token na web: cookie `HttpOnly` (exige apoio do backend, mais seguro) ou armazenamento do navegador | PO, com a revisão de segurança |
+| Provedor de push no Android (o PO prefere recursos próprios, mas push de sistema depende do serviço do Android) | PO |
+| Provedor de mapas na busca | PO, com a estimativa de custo |
+| Identidade visual (nome, cores, tipografia) | PO |
+
+### Próximos passos
+
+1. [ ] PO aceitar ou ajustar a decisão e mudar o status para Aceito.
+2. [ ] Escrever o OpenAPI a partir do contrato e gerar o cliente Dart.
+3. [ ] Criar o esqueleto do projeto com `core/`, o tema, a navegação e uma feature de exemplo (T1 Entrar).
+4. [ ] Incluir os testes de estado vazio, carregando e erro na definição de pronto.
 
 ### Situação em 10/11/2026
 

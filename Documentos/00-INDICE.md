@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Arquitetura do app Flutter (ADR-009)
+
+**O que mudou:** o `adrs.md` ganhou o ADR-009 (proposto): um projeto com dois pontos de entrada (tutor e loja), pastas por feature, Riverpod, `go_router`, cliente da API gerado do OpenAPI, erros por `codigo`, dinheiro em centavos, SSE e push, tema Material 3 e política de testes. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 10/11/2026 — Telas e fluxos
 
 **O que mudou:** novo `03-ui-ux/Telas-e-Fluxos-v1.0.md` com as 17 telas de baixa fidelidade (10 do app do tutor e 7 do painel da loja), o que cada uma mostra, as regras e as rotas da API que chama, os fluxos do tutor e da loja, os princípios das telas e a lista do que falta desenhar. Os desenhos estão no Figma e no FigJam, linkados no documento. Nenhuma mudança de código.
