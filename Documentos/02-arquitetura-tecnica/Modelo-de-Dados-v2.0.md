@@ -70,7 +70,7 @@ Regras de acesso:
 
 | Coleção | Tenant | Campos principais |
 |---|---|---|
-| `lojas` | `lojaId` = `_id` | `cnpj` (único), `razaoSocial`, `nomeFantasia`, `statusCadastro` (AGUARDANDO_EMAIL, EM_REVISAO, APROVADA, SUSPENSA), `verificacao` (`situacaoReceita`, `cnaes`, `consultadoEm`), `assinatura` (`situacao`: EM_DIA ou EM_ATRASO, `proximoVencimento`), `contaRecebedora` (`provedor`, `contaId`, `statusKyc`), `membros[]` (`usuarioId`, `papel`), `canaisAviso` (painel, SMS, WhatsApp, e-mail, cada um com liga/desliga e destino), `googleAgenda?`, `notaMedia`, `totalAvaliacoes` |
+| `lojas` | `lojaId` = `_id` | `cnpj` (único), `razaoSocial`, `nomeFantasia`, `statusCadastro` (AGUARDANDO_EMAIL, EM_REVISAO, APROVADA, SUSPENSA), `verificacao` (`situacaoReceita`, `cnaes`, `consultadoEm`), `assinatura` (`situacao`: EM_DIA ou EM_ATRASO, `proximoVencimento`), `politicaCancelamento` (`sinalPercentual` de 0 a 100, `multaPercentual` de 0 a 100; RN-56), `contaRecebedora` (`provedor`, `contaId`, `statusKyc`), `membros[]` (`usuarioId`, `papel`), `canaisAviso` (painel, SMS, WhatsApp, e-mail, cada um com liga/desliga e destino), `googleAgenda?`, `notaMedia`, `totalAvaliacoes` |
 | `unidades` | `lojaId` | `nome`, `endereco`, `localizacao` (ponto GeoJSON), `telefone`, `horarioFuncionamento[]` (`diaSemana`, `abre`, `fecha`), `raioTaxiKm?`, `capacidade` (por tipo de serviço, RN-13), `veterinarios[]` (`nome`, `crmv`; RN-14), `ativa` |
 | `servicos` | `lojaId` | `tipo` (BANHO, TOSA, VACINA, CONSULTA, TAXI_PET), `nome`, `duracaoMinutos`, `precos[]` (`porte?`, `valorCentavos`), `especies[]`, `unidadeIds[]`, `ativo` |
 | `ocupacao` | `lojaId` | `unidadeId`, `tipo`, `inicio` (começo do intervalo), `capacidade`, `ocupados`. Um documento por unidade, tipo de serviço e intervalo (seção 5) |
@@ -82,15 +82,17 @@ O papel do membro (`papel`) existe para o login por funcionário no futuro (RN-0
 
 | Coleção | Tenant | Campos principais |
 |---|---|---|
-| `agendamentos` | `lojaId` | `unidadeId`, `tutorId`, `status`, `itens[]` (`petId`, `servicoId`, `nomeServico`, `precoCentavos`, `inicio`, `fim`), `inicio`, `fim`, `totalCentavos`, `sinalCentavos`, `prazoAceiteEm?`, `tutorSnapshot` (`nome`, `telefone`), `notaFiscal?` (`arquivoId`, `tipo`), `historico[]` (`de`, `para`, `em`, `porUsuarioId?`, `motivo?`), `versao` |
-| `pagamentos` | `lojaId` | `agendamentoId`, `tutorId`, `tipo` (SINAL ou RESTANTE), `valorCentavos`, `metodo` (CARTAO, PIX, DEBITO, NA_LOJA), `status` (CRIADO, PENDENTE, PAGO, FALHOU, ESTORNADO), `desfecho?` (DEVOLVIDO ou RETIDO_PELA_LOJA), `provedor`, `provedorCobrancaId`, `estornos[]`, `pagadorSnapshot`, `retencaoAte` |
+| `agendamentos` | `lojaId` | `unidadeId`, `tutorId`, `status`, `itens[]` (`petId`, `servicoId`, `nomeServico`, `precoCentavos`, `inicio`, `fim`), `inicio`, `fim`, `totalCentavos`, `sinalCentavos`, `politica` (cópia da política da loja na hora do pedido; RN-58), `multaCentavos?`, `prazoAceiteEm?`, `tutorSnapshot` (`nome`, `telefone`), `notaFiscal?` (`arquivoId`, `tipo`), `historico[]` (`de`, `para`, `em`, `porUsuarioId?`, `motivo?`), `versao` |
+| `pagamentos` | `lojaId` | `agendamentoId`, `tutorId`, `tipo` (SINAL, RESTANTE ou MULTA), `valorCentavos`, `metodo` (CARTAO, PIX, DEBITO, NA_LOJA), `status` (CRIADO, PENDENTE, PAGO, FALHOU, ESTORNADO), `desfecho?` (DEVOLVIDO, ABATIDO_NO_SERVICO ou APLICADO_NA_MULTA), `provedor`, `provedorCobrancaId`, `estornos[]`, `pagadorSnapshot`, `retencaoAte` |
 | `avaliacoes_loja` | `lojaId` | `agendamentoId` (único), `tutorId`, `unidadeId`, `nota`, `comentario?`, `status` (RETIDO, PUBLICADO, REMOVIDO), `publicarEm`, `resposta?` (`texto`, `em`), `denuncias[]` |
 | `avaliacoes_tutor` | `lojaId` | `agendamentoId` (único), `tutorId`, `nota`, `comentario?`. **Não é pública** (RN-63) |
 
 Observações:
 - `agendamentos.historico` é a **trilha de auditoria**: toda mudança de status guarda quem fez e quando.
 - `agendamentos.versao` serve para detectar duas alterações simultâneas (otimismo): a gravação só vale se a versão ainda for a lida.
-- Um pagamento `SINAL` com `desfecho = RETIDO_PELA_LOJA` é a multa (RN-46, RN-47). `DEVOLVIDO` vem de recusa, expiração, cancelamento da loja ou cancelamento do tutor com mais de 2 h de antecedência.
+- A política da loja é **copiada** para o agendamento na hora do pedido. A multa é calculada sobre `totalCentavos` com o percentual da cópia, nunca com a política atual da loja.
+- Pagamento `SINAL`: `DEVOLVIDO` (recusa, expiração, cancelamento da loja, cancelamento do tutor com mais de 2 h, ou loja sem multa), `ABATIDO_NO_SERVICO` (atendimento concluído) ou `APLICADO_NA_MULTA` (cancelamento tardio ou falta). Quando o sinal é maior que a multa, a diferença vai em `estornos[]`; quando é menor, nasce um pagamento `MULTA` com a diferença, cobrado no cartão de garantia.
+- Pedido sem sinal (`sinalPercentual = 0`) não tem pagamento `SINAL`.
 - Pagamento `NA_LOJA` é o restante pago direto na loja; quem registra é a loja (RN-52).
 - A média e o total de avaliações ficam em `lojas` (`notaMedia`, `totalAvaliacoes`) para a busca não precisar agregar toda vez; são atualizados quando uma nota entra.
 
@@ -183,7 +185,7 @@ Os pontos acima precisam de **revisão jurídica** junto com a política de priv
 
 ## 7. Perguntas ao PO
 
-Registradas como pendências P-07 a P-12 do [Documento Negocial](../01-negocio/Documento-Negocial-v2.0.md#pendências).
+Registradas como pendências P-07 a P-15 do [Documento Negocial](../01-negocio/Documento-Negocial-v2.0.md#pendências).
 
 | # | Pergunta | Proposta de engenharia |
 |---|---|---|
@@ -193,3 +195,6 @@ Registradas como pendências P-07 a P-12 do [Documento Negocial](../01-negocio/D
 | P-10 | Um pedido com vários pets ou serviços é aceito **inteiro** ou item a item? E os serviços ocorrem em sequência ou ao mesmo tempo? | Aceite do pedido inteiro; cada item escolhe seu horário e ocupa a capacidade do tipo naquele horário |
 | P-11 | Até quando a loja pode concluir ou marcar falta num pedido já vencido? O que acontece se ela esquecer? | Lembrar a loja por aviso; sem conclusão automática, para não reter sinal sem confirmação humana |
 | P-12 | Quanto tempo o tutor tem para avaliar depois do atendimento? | 30 dias |
+| P-13 | Teto para a multa que a loja pode definir | 100% do total, a revisar juridicamente |
+| P-14 | A loja pode dispensar a multa caso a caso? | Sim, antes de a multa ser cobrada |
+| P-15 | O cartão de garantia é exigido só quando a multa pode passar do sinal? | Sim |

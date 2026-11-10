@@ -2,7 +2,7 @@
 
 > **Sistema-alvo.** Estados e sequências do agendamento e do pagamento, a partir das regras RN-40 a RN-55 do [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md). Os campos citados estão no [Modelo de dados](Modelo-de-Dados-v2.0.md); os módulos, na [Arquitetura-alvo](Arquitetura-Alvo-v2.0.md#3-componentes-do-backend).
 >
-> É **proposta**. Esta versão acrescenta ao ciclo do Documento Negocial o estado **Aguardando pagamento**, que depende da resposta do PO à pergunta P-07 (o sinal é cobrado ao pedir).
+> É **proposta**. Esta versão acrescenta ao ciclo do Documento Negocial o estado **Aguardando pagamento**, que depende da resposta do PO à pergunta P-07 (o sinal é cobrado ao pedir). O sinal e a multa são definidos por cada loja (RN-56 a RN-58); loja sem sinal pula esse estado.
 
 ---
 
@@ -10,7 +10,8 @@
 
 ```mermaid
 stateDiagram-v2
-  [*] --> AguardandoPagamento: tutor pede
+  [*] --> AguardandoPagamento: tutor pede, loja com sinal
+  [*] --> Pendente: tutor pede, loja sem sinal
   AguardandoPagamento --> Pendente: sinal pago
   AguardandoPagamento --> Abandonado: sinal não pago a tempo
   Pendente --> Confirmado: loja aceita
@@ -30,9 +31,9 @@ stateDiagram-v2
 
 ### Transições
 
-| De | Para | Quem | Condição | Vaga | Sinal (50%) |
+| De | Para | Quem | Condição | Vaga | Sinal |
 |---|---|---|---|---|---|
-| (novo) | Aguardando pagamento | Tutor | Pedido válido: horário com capacidade livre (RN-41), cartão de garantia cadastrado (RN-50), loja aprovada e em dia (RN-17) | Reservada por tempo curto | Cobrança criada |
+| (novo) | Aguardando pagamento | Tutor | Pedido válido: horário com capacidade livre (RN-41), cartão de garantia se a multa da loja puder passar do sinal (RN-50), loja aprovada e em dia (RN-17) | Reservada por tempo curto | Cobrança criada (valor = sinal da loja) |
 | Aguardando pagamento | Pendente | Sistema | Webhook confirma o sinal | Mantida | Pago |
 | Aguardando pagamento | Abandonado | Sistema | Tempo para pagar acabou (15 minutos, proposta) | Liberada | Cobrança cancelada |
 | Pendente | Confirmado | Loja | Dentro do prazo de aceite | Mantida | Pago |
@@ -40,12 +41,13 @@ stateDiagram-v2
 | Pendente | Expirado | Sistema | Prazo de aceite venceu (RN-43) | Liberada | **Devolvido** (RN-44) |
 | Pendente | Cancelado | Tutor | Antes da resposta da loja | Liberada | Devolvido |
 | Confirmado | Cancelado | Tutor | Faltam **mais** de 2 h para o horário (RN-46) | Liberada | **Devolvido** |
-| Confirmado | Cancelado | Tutor | Faltam **menos** de 2 h (RN-46) | Liberada | **Retido pela loja** |
+| Confirmado | Cancelado | Tutor | Faltam **menos** de 2 h (RN-46) | Liberada | **Aplicado na multa** da loja (RN-57) |
 | Confirmado | Cancelado | Loja | Qualquer momento | Liberada | **Devolvido** (RN-45) |
-| Confirmado | Falta | Loja | Depois do horário marcado (RN-47) | Já consumida | **Retido pela loja** |
+| Confirmado | Falta | Loja | Depois do horário marcado (RN-47) | Já consumida | **Aplicado na multa** da loja (RN-57) |
 | Confirmado | Concluído | Loja | Depois do atendimento; exige os registros do que foi feito (RN-48) | Já consumida | Abatido do total |
 
 Regras de integridade:
+- A multa e o sinal vêm da política da loja **copiada para o pedido** na hora em que ele é feito (RN-58); mudar a política depois não altera pedidos existentes.
 - Toda transição grava uma linha em `historico` (de, para, quem, quando, motivo).
 - Estados finais (Concluído, Falta, Cancelado, Recusado, Expirado, Abandonado) não mudam mais.
 - **Remarcar** (RN-46) ainda não está no desenho: depende da pergunta P-08.
@@ -62,13 +64,26 @@ stateDiagram-v2
   Pendente --> Pago: webhook confirma
   Pendente --> Falhou: recusado ou vencido
   Pago --> Estornado: pedido recusado, expirado ou cancelado sem multa
-  Pago --> RetidoPelaLoja: cancelamento tardio ou falta
+  Pago --> AplicadoNaMulta: cancelamento tardio ou falta
+  Pago --> AbatidoNoServico: atendimento concluido
   Falhou --> [*]
   Estornado --> [*]
-  RetidoPelaLoja --> [*]
+  AplicadoNaMulta --> [*]
+  AbatidoNoServico --> [*]
 ```
 
-`RetidoPelaLoja` é o `pagamentos.desfecho = RETIDO_PELA_LOJA` do modelo de dados: o pagamento continua pago e a loja simplesmente fica com o valor. O restante (RN-52) é outro pagamento, do tipo `RESTANTE`, cobrado depois do atendimento, ou registrado pela loja como `NA_LOJA`.
+`AplicadoNaMulta` é o `pagamentos.desfecho = APLICADO_NA_MULTA` do modelo de dados. A multa é o percentual do total definido pela loja e guardado no pedido (RN-56, RN-58):
+
+| Situação | O que acontece com o sinal |
+|---|---|
+| Loja sem multa (0%) | Devolvido por inteiro |
+| Sinal igual à multa | Fica todo com a loja |
+| Sinal maior que a multa | A loja fica com a multa e a diferença é devolvida |
+| Sinal menor que a multa (ou sem sinal) | A loja fica com o sinal e a diferença é cobrada no cartão de garantia, como pagamento `MULTA` |
+
+Exemplo: total R$ 100, sinal de 30% (R$ 30) e multa de 50% (R$ 50). O tutor falta: a loja fica com os R$ 30 e cobra R$ 20 no cartão de garantia. Com sinal de 60% (R$ 60) e a mesma multa, fica com R$ 50 e devolve R$ 10.
+
+O restante (RN-52) é outro pagamento, do tipo `RESTANTE`, cobrado depois do atendimento, ou registrado pela loja como `NA_LOJA`.
 
 ---
 
@@ -90,7 +105,7 @@ sequenceDiagram
   A->>G: validar e criar
   G->>O: reservar vagas (transação)
   O-->>G: reservado ou esgotado
-  G->>P: criar cobrança do sinal
+  G->>P: criar cobrança do sinal (percentual da loja)
   P->>PR: cobrança na conta da loja
   PR-->>P: dados do Pix ou do cartão
   P-->>T: instruções de pagamento
@@ -103,7 +118,7 @@ sequenceDiagram
   N-->>N: avisa a loja (painel, SMS, WhatsApp, e-mail)
 ```
 
-Se as vagas esgotarem entre a busca do tutor e o pedido, a API devolve o erro de horário indisponível e o app mostra horários próximos.
+Se a loja não cobra sinal (0%), o pedido pula o pagamento e já nasce `Pendente`. Se as vagas esgotarem entre a busca do tutor e o pedido, a API devolve o erro de horário indisponível e o app mostra horários próximos.
 
 ### 3.2 A loja aceita ou recusa
 
@@ -170,7 +185,9 @@ sequenceDiagram
     G->>P: estornar o sinal
     G->>O: liberar vagas
   else faltam menos de 2 horas
-    G->>P: marcar sinal como retido pela loja
+    G->>G: calcular a multa pela política guardada no pedido
+    G->>P: aplicar o sinal na multa
+    P->>P: devolver o excedente ou cobrar a diferença no cartão de garantia
     G->>O: liberar vagas
   end
   G->>G: Confirmado para Cancelado

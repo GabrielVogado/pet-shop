@@ -1,6 +1,6 @@
 # API REST
 
-> Estado medido nos controllers da branch `develop` em 05/11/2026. A especificação OpenAPI gerada pelo Quarkus fica em `GET /q/openapi`.
+> Estado medido nos controllers da branch `develop` em 05/11/2026. Descreve a API do **código atual**; o contrato do sistema-alvo está em [Contrato-API-v2.0](Contrato-API-v2.0.md). A especificação OpenAPI gerada pelo Quarkus fica em `GET /q/openapi`.
 
 Autenticação: `Authorization: Bearer <JWT>` obtido em `/api/auth/login` ou `/api/auth/register`. Erros retornam o status HTTP com mensagem em português.
 
