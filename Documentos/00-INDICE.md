@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Comparativo Kotlin x Node e hospedagem
+
+**O que mudou:** novo `02-arquitetura-tecnica/Comparativo-Kotlin-vs-Node-v1.0.md`, a pedido do PO, que perguntou se vale trocar Kotlin por Node porque a Vercel só aceitaria Node. A documentação atual da Vercel aceita também containers (Beta), então Kotlin roda lá; o que pesa são as tarefas agendadas, o SSE e o plano Pro (o grátis é só para uso não comercial). O documento compara as duas linguagens, quatro formas de hospedar e recomenda manter Kotlin no Cloud Run, com um teste de um dia antes de decidir. O ADR-006 não mudou. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 10/11/2026 — Identidade visual e nome Pertim
 
 **O que mudou:** o PO escolheu a nova identidade entre três direções e quatro nomes. Novo `03-ui-ux/Identidade-Visual-v1.0.md`: nome **Pertim** (de "pertinho"), símbolo de alfinete de mapa com pegada (SVGs em `03-ui-ux/marca/`), paleta Pinheiro, Girassol, Folha, Calçada e Asfalto com papéis do Material 3 nos temas claro e escuro e contrastes medidos, Bricolage Grotesque e Figtree, formas, ícones, tom de voz e esboço do tema Flutter. As `Telas-e-Fluxos-v1.0.md` e o ADR-009 passam a apontar para ele. O nome só troca nos documentos e no código depois da busca no INPI, em PR próprio. Nenhuma mudança de código.
@@ -151,6 +158,7 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | | [Arquitetura-Alvo-v2.0](02-arquitetura-tecnica/Arquitetura-Alvo-v2.0.md) | Sistema-alvo: solução, contêineres, componentes do backend, multi-tenancy, implantação provisória, tarefas agendadas e riscos |
 | | [Modelo-de-Dados-v2.0](02-arquitetura-tecnica/Modelo-de-Dados-v2.0.md) | Sistema-alvo: coleções do MongoDB, campos, índices, consistência, retenção e perguntas ao PO |
 | | [Diagramas-de-Engenharia-v2.0](02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md) | Estados do agendamento e do pagamento e sequências dos fluxos principais |
+| | [Comparativo-Kotlin-vs-Node-v1.0](02-arquitetura-tecnica/Comparativo-Kotlin-vs-Node-v1.0.md) | Kotlin x Node.js e onde rodar o backend (Cloud Run, Vercel, servidor virtual), com limites da Vercel e teste de um dia proposto |
 | | [Contrato-API-v2.0](02-arquitetura-tecnica/Contrato-API-v2.0.md) | Sistema-alvo: contrato REST entre backend Kotlin e clientes Flutter, erros e regras de evolução |
 | `03-ui-ux/` | [Telas-e-Fluxos-v1.0](03-ui-ux/Telas-e-Fluxos-v1.0.md) | Sistema-alvo: wireframes do app do tutor e do painel da loja, com regras e rotas de cada tela, e os fluxos |
 | `03-ui-ux/` | [Identidade-Visual-v1.0](03-ui-ux/Identidade-Visual-v1.0.md) | Sistema-alvo: nome Pertim, marca, cores claro e escuro, tipografia, formas, ícones, tom de voz e tema do app |

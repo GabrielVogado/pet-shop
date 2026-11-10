@@ -257,6 +257,7 @@ Com mais de uma instância da API, duas delas não podem rodar a mesma tarefa ao
 | 4 | Papel do SMS e valor da mensalidade | PO | P-05 |
 | 5 | Arquitetura do app Flutter (estado, navegação, estrutura de pastas) | a documentar | próximo ADR |
 | 6 | Vitrine pública fora do Flutter, para buscadores | a decidir | ADR de busca |
+| 7 | Linguagem e hospedagem do backend: manter Kotlin no Cloud Run ou avaliar Node na Vercel | PO, após teste de um dia | [Comparativo Kotlin x Node](Comparativo-Kotlin-vs-Node-v1.0.md) |
 
 ---
 
