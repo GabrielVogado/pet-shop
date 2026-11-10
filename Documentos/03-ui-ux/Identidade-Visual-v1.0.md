@@ -208,8 +208,9 @@ O painel web da loja usa o mesmo tema; nas telas largas só muda o layout.
 
 | O que | Situação |
 |---|---|
-| Variáveis de cor (claro e escuro), estilos de texto e símbolo no Figma | Em andamento, no arquivo das [Telas e fluxos](Telas-e-Fluxos-v1.0.md), página **Identidade** |
-| Os 17 wireframes | Em andamento: reaplicar com as variáveis |
+| Variáveis de cor e estilos de texto no Figma | Feito no arquivo das [Telas e fluxos](Telas-e-Fluxos-v1.0.md): coleções **Pertim / Cor (claro)** e **Pertim / Cor (escuro)**, com os papéis da seção 3, e estilos de texto **Pertim/…** da seção 4. O plano gratuito do Figma permite um modo por coleção, por isso claro e escuro são duas coleções e não dois modos |
+| Os 17 wireframes | Feito: cores ligadas às variáveis do tema claro, fontes trocadas para Bricolage Grotesque e Figtree (texto de 11 passou a 12) e "PetCare" trocado por "Pertim" nos textos das telas |
+| Página **Identidade** no Figma, com símbolo, paleta e amostra de tipos | A fazer: o limite de uso da integração com o Figma no plano gratuito foi atingido em 10/11 |
 | Telas que faltam (seção 5 de Telas e fluxos) | Serão desenhadas já com a identidade |
 | Ícone do app, splash e capa da Play Store | A fazer, depois da versão final do símbolo |
 | Frontend React atual | Não muda: descreve o código atual e será substituído pelo app Flutter (ADR-006) |
