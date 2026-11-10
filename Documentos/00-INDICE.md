@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Sinal e multa definidos pela loja
+
+**O que mudou:** por decisão do PO, a loja decide se cobra multa e de quanto, e também o percentual do sinal. No `Documento-Negocial-v2.0.md`, as RN-46, RN-47, RN-50 e RN-51 foram ajustadas e entraram as RN-56 a RN-58 (política de cancelamento, como a multa é aplicada e a política guardada no pedido), além das pendências P-13 a P-15. O modelo de dados, os diagramas de engenharia, o ADR-007 (o provedor precisa cobrar o cartão guardado depois) e o `README.md` acompanharam. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 10/11/2026 — Modelo de dados e diagramas de engenharia v2.0
 
 **O que mudou:** novo `Modelo-de-Dados-v2.0.md` (diagrama entidade-relacionamento, coleções, índices, reserva atômica de vaga, retenção e LGPD) e novo `Diagramas-de-Engenharia-v2.0.md` (estados do agendamento e do sinal e seis sequências). A análise encontrou uma ambiguidade no Documento Negocial: a RN-51 cobra o sinal "na confirmação", mas as RN-44 e RN-45 o devolvem quando a loja recusa ou o prazo vence. A proposta cobra o sinal ao pedir, o que acrescenta o estado "Aguardando pagamento". As pendências P-07 a P-12 foram adicionadas ao Documento Negocial. Nenhuma mudança de código.
@@ -47,7 +54,7 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 **O que mudou:** a partir de uma entrevista com o PO em seis blocos, o `Documento-Negocial-v2.0.md` descreve o sistema-alvo, que será desenvolvido do zero:
 - marketplace de lojas com mensalidade fixa;
 - tutor sem custo;
-- sinal de 50% que funciona como multa;
+- sinal e multa que a loja define (na entrevista, sinal de 50% que funcionava como multa);
 - prazo de aceite pela loja;
 - carteira de vacinas com origem verificada e permissão do tutor;
 - avaliações com direito de resposta;

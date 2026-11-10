@@ -10,7 +10,7 @@
 
 ### Problema
 
-O PetCare aproxima petshops e donos de pet. O tutor encontra lojas, agenda serviços e mantém num só lugar o histórico de vacinas e de cuidados de higiene de cada animal. A loja recebe agendamentos com sinal pago, organiza a agenda e registra os atendimentos.
+O PetCare aproxima petshops e donos de pet. O tutor encontra lojas, agenda serviços e mantém num só lugar o histórico de vacinas e de cuidados de higiene de cada animal. A loja recebe agendamentos (com o sinal que ela define), organiza a agenda e registra os atendimentos.
 
 ### Modelo de negócio
 
@@ -109,8 +109,8 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | RN-43 | **Prazo de aceite (proposta):** horário a mais de 48h, a loja tem 24h; entre 24h e 48h, tem 12h; a menos de 24h, tem 4h. O prazo nunca passa de 1h antes do horário. |
 | RN-44 | Se o prazo vencer sem resposta, o pedido fica **Expirado**, o sinal é devolvido e o tutor recebe sugestões de outro horário ou de outra loja. |
 | RN-45 | Se a loja recusar ou cancelar, o sinal é devolvido integralmente e o tutor recebe sugestões de outro horário ou de outra loja. |
-| RN-46 | O tutor pode **cancelar ou remarcar sem penalidade até 2h antes** do horário. Depois disso, a loja fica com o sinal (50%). |
-| RN-47 | **Falta (no-show):** é registrada, e a loja fica com o sinal (50%). O tutor não é bloqueado. |
+| RN-46 | O tutor pode **cancelar ou remarcar sem penalidade até 2h antes** do horário. Depois disso, aplica-se a **multa da loja** (RN-56), se ela tiver definido uma. |
+| RN-47 | **Falta (no-show):** é registrada e aplica-se a **multa da loja** (RN-56), se houver. O tutor não é bloqueado. |
 | RN-48 | A **loja marca o atendimento como concluído** e, nesse momento, registra os procedimentos realizados (vacinas, banho, tosa, consulta) no histórico do pet. |
 
 ---
@@ -119,12 +119,15 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 
 | ID | Regra |
 |---|---|
-| RN-50 | Para agendar, o tutor precisa ter um **cartão de crédito cadastrado** como garantia. O débito não permite cobrança posterior sem a presença do tutor. |
-| RN-51 | Na confirmação, o tutor paga **50% de sinal** pelo app (crédito, débito ou Pix). O sinal funciona como a multa de RN-46 e RN-47. |
+| RN-50 | Para agendar numa loja cuja multa possa ser maior que o sinal, o tutor precisa ter um **cartão de crédito cadastrado** como garantia, para cobrar a diferença (**proposta**, P-15). O débito não permite cobrança posterior sem a presença do tutor. |
+| RN-51 | O tutor paga pelo app (crédito, débito ou Pix) o **sinal definido pela loja** (RN-56): um percentual do total, de 0% (sem sinal) a 100%. O sinal é um adiantamento do serviço e é abatido do valor final. Quando ele é cobrado está em aberto (P-07). |
 | RN-52 | O restante é pago depois do atendimento, pelo app ou direto na loja. |
 | RN-53 | **Recebimento (proposta):** cada loja tem a própria conta recebedora no provedor de pagamento. O PetCare cria a cobrança em nome da loja e nunca recebe nem repassa o dinheiro. O provedor será escolhido num ADR próprio. |
 | RN-54 | A taxa do provedor é descontada da loja. |
 | RN-55 | A **nota fiscal de serviço (NFS-e)** é emitida pela loja no sistema da prefeitura. A loja anexa o PDF ou o XML ao atendimento, e o tutor consulta no app. |
+| RN-56 | **Política de cancelamento da loja:** cada loja define (a) o **percentual de sinal** do total, de 0% a 100%, e (b) se cobra **multa** e de quanto, também em percentual do total do pedido, de 0% a 100%. Multa 0% quer dizer que a loja não cobra multa. O prazo sem multa é de 2 horas antes do horário para todas as lojas (RN-46). |
+| RN-57 | **Como a multa é aplicada:** cancelamento do tutor com menos de 2h ou falta (RN-46, RN-47). O sinal pago cobre a multa; se o sinal for maior que a multa, a loja devolve a diferença; se for menor, a diferença é cobrada no cartão de garantia (RN-50). Se a loja não cobra multa, o sinal é devolvido por inteiro. Recusa, expiração e cancelamento pela loja sempre devolvem o sinal inteiro (RN-44, RN-45). |
+| RN-58 | **A política vale a partir do pedido:** o tutor vê o sinal e a multa antes de confirmar, e o pedido guarda a política da hora em que foi feito. Mudar a política depois não afeta pedidos já feitos. A política aparece também na página da loja (RN-31). |
 
 ---
 
@@ -194,3 +197,6 @@ Pendente ──(loja aceita)──► Confirmado ──(loja conclui)──► C
 | P-10 | Pedido com vários pets ou serviços: aceite inteiro ou por item, e serviços em sequência ou ao mesmo tempo | Pergunta ao PO. Proposta: aceite inteiro, cada item com seu horário |
 | P-11 | Prazo para a loja concluir ou registrar falta, e o que fazer se esquecer | Pergunta ao PO. Proposta: lembrete, sem conclusão automática |
 | P-12 | Prazo para o tutor avaliar depois do atendimento | Pergunta ao PO. Proposta: 30 dias |
+| P-13 | Teto da multa: a plataforma deve limitar o percentual que a loja pode cobrar? Multa alta pode ser contestada pelo tutor e questionada com base no Código de Defesa do Consumidor | Pergunta ao PO e revisão jurídica. Proposta: teto de 100% do total, a revisar |
+| P-14 | A loja pode dispensar a multa caso a caso (por exemplo, tutor com imprevisto)? | Pergunta ao PO. Proposta: sim, a loja pode dispensar antes de a multa ser cobrada |
+| P-15 | O cartão de garantia é exigido só quando a multa pode passar do sinal (RN-50)? | Pergunta ao PO. Proposta: sim, para não pedir cartão à toa |

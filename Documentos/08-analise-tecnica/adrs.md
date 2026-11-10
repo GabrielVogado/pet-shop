@@ -246,8 +246,8 @@ Decisão aceita e documentada. O código continua em React e Java até as estór
 O [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md) define o fluxo de dinheiro (RN-50 a RN-55). O provedor escolhido precisa cobrir:
 
 1. **Recebimento direto pela loja (RN-53):** cada loja tem a própria conta recebedora; o PetCare cria a cobrança e não recebe nem repassa o dinheiro.
-2. **Sinal de 50% (RN-51):** cobrado na confirmação da loja, em cartão de crédito, Pix ou débito. O sinal vira multa se o tutor cancelar depois de 2h antes ou faltar (RN-46, RN-47), e é devolvido nos demais casos.
-3. **Cartão de garantia (RN-50):** cartão de crédito guardado (tokenizado), sem que o PetCare toque nos dados do cartão (RNF-10).
+2. **Sinal definido pela loja (RN-51, RN-56):** percentual do total, de 0% a 100%, cobrado em cartão de crédito, Pix ou débito. O momento da cobrança está em aberto (P-07). Se o tutor cancelar com menos de 2h ou faltar, o sinal é aplicado na multa da loja (RN-46, RN-47, RN-57); nos demais casos, é devolvido ou abatido do serviço. Estorno parcial: quando o sinal é maior que a multa, a diferença volta ao tutor.
+3. **Cartão de garantia (RN-50):** cartão de crédito guardado (tokenizado), sem que o PetCare toque nos dados do cartão (RNF-10). O provedor precisa permitir **cobrar o cartão guardado depois, sem o tutor presente**, na conta da loja, para cobrar a diferença quando a multa for maior que o sinal (RN-57).
 4. **Restante após o atendimento (RN-52):** cobrado pelo app ou pago na loja.
 5. **Estorno** total do sinal.
 6. **Mensalidade da loja:** cobrança recorrente de valor fixo, paga ao PetCare, sem período grátis; inadimplência tira a loja da busca (RN-17).
@@ -297,8 +297,8 @@ Pesquisa na documentação pública em 05/11/2026. A coluna "Fonte" diz o que fo
 
 **Custos e riscos**
 - Cada loja passa por um cadastro (KYC) no provedor antes de receber, o que é mais uma etapa no onboarding.
-- Estornos, disputas e conciliação dos 50% precisam de tratamento no backend (webhooks e uma tabela de pagamentos).
-- A multa de 50% pode ser contestada pelo tutor junto ao banco ou ao cartão.
+- Estornos (inclusive parciais), cobranças da diferença da multa, disputas e conciliação precisam de tratamento no backend (webhooks e uma tabela de pagamentos).
+- A multa, sobretudo a cobrada no cartão depois do atendimento, pode ser contestada pelo tutor junto ao banco ou ao cartão.
 - Os termos de uso precisam descrever o sinal, a multa e o estorno com clareza (revisão jurídica, como no RNF-11).
 
 ### Perguntas em aberto
@@ -310,7 +310,7 @@ Pesquisa na documentação pública em 05/11/2026. A coluna "Fonte" diz o que fo
 
 ### Próximos passos
 
-1. [ ] (Pendente, depois da fase de documentação) Spike em sandbox com Asaas e Stripe: criar uma subconta, cobrar 50% em cartão e em Pix **na conta da loja**, estornar, e criar uma assinatura de mensalidade.
+1. [ ] (Pendente, depois da fase de documentação) Spike em sandbox com Asaas e Stripe: criar uma subconta, cobrar um sinal em cartão e em Pix **na conta da loja**, estornar total e parcialmente, cobrar depois o cartão guardado sem o tutor presente, e criar uma assinatura de mensalidade.
 2. [ ] Levantar o custo real dos dois (tabela de taxas) e o prazo de repasse.
 3. [ ] PO decidir com os resultados e mudar o status para Aceito.
 4. [ ] Atualizar RN-53 e a pendência P-04 do Documento Negocial.

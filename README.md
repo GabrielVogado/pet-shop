@@ -10,7 +10,7 @@ O PetCare Agenda é uma plataforma que liga **donos de pets (tutores)** a **pets
 ## O que o sistema faz
 
 - **Agendamento com aceite da loja:** o pedido só vira horário marcado quando o petshop confirma.
-- **Sinal de 50%:** o tutor paga metade na reserva. O sinal também funciona como multa: cancelando com menos de 2 horas de antecedência, ou faltando, a loja fica com ele.
+- **Sinal e multa definidos pela loja:** cada petshop decide quanto cobra de sinal e se cobra multa para quem cancelar com menos de 2 horas de antecedência ou faltar. O tutor vê as regras antes de confirmar.
 - **Pagamento direto para a loja:** cada petshop tem a própria conta recebedora. O PetCare não recebe o dinheiro do serviço.
 - **Cartão de vacina digital:** cada registro mostra se foi aplicado por uma loja (verificado) ou informado pelo tutor.
 - **Avaliações:** o tutor avalia a loja com estrelas e comentário, e a loja pode responder.
