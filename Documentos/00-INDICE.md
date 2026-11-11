@@ -10,13 +10,17 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 ## 📌 Revisão 10/11/2026 — Comparativo Kotlin x Node e hospedagem
 
 **O que mudou:** novo `02-arquitetura-tecnica/Comparativo-Kotlin-vs-Node-v1.0.md`, a pedido do PO, que perguntou se vale trocar Kotlin por Node porque a Vercel só aceitaria Node. A documentação atual da Vercel aceita também containers (Beta), então Kotlin roda lá; o que pesa são as tarefas agendadas, o SSE e o plano Pro (o grátis é só para uso não comercial). O documento compara as duas linguagens, quatro formas de hospedar e recomenda manter Kotlin no Cloud Run, com um teste de um dia antes de decidir. O ADR-006 não mudou. Nenhuma mudança de código.
+
+## 📌 Revisão 10/11/2026 — Telas e fluxos v1.1
+
+**O que mudou:** `03-ui-ux/Telas-e-Fluxos-v1.1.md` substitui a v1.0 (que foi para `_historico/`). Entram as 32 telas que faltavam: tutor T11 a T25 (cadastro, confirmação de e-mail, senha, pets, cartão de garantia, notificações, conta, LGPD e remarcação), tutor na web TW1 a TW3, loja W8 a W12 (unidades, conta recebedora, mensalidade, canais de aviso e Google Agenda) e os estados E1 a E9. Os fluxos ganharam cadastro, recuperação de senha, cartão e remarcação, e o prazo sem multa passou a dizer "até 2 h antes do horário" (RN-46). A seção 5 registra as respostas do PO às suposições das telas: remarcação recusada permite cancelar sem multa (RN-73), o cartão que garante um pedido só sai com outro cadastrado, e o tutor pode ter mais de um (RN-74), Google Agenda nas duas vias (RN-75) e preços definidos pela loja; o documento negocial, o modelo, o contrato da API e o backlog acompanharam. Os desenhos estão no Open Design, no computador do PO. Nenhuma mudança de código.
 **Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
 
 ---
 
 ## 📌 Revisão 10/11/2026 — Identidade visual e nome Pertim
 
-**O que mudou:** o PO escolheu a nova identidade entre três direções e quatro nomes. Novo `03-ui-ux/Identidade-Visual-v1.0.md`: nome **Pertim** (de "pertinho"), símbolo de alfinete de mapa com pegada (SVGs em `03-ui-ux/marca/`), paleta Pinheiro, Girassol, Folha, Calçada e Asfalto com papéis do Material 3 nos temas claro e escuro e contrastes medidos, Bricolage Grotesque e Figtree, formas, ícones, tom de voz e esboço do tema Flutter. As `Telas-e-Fluxos-v1.0.md` e o ADR-009 passam a apontar para ele. O nome só troca nos documentos e no código depois da busca no INPI, em PR próprio. Nenhuma mudança de código.
+**O que mudou:** o PO escolheu a nova identidade entre três direções e quatro nomes. Novo `03-ui-ux/Identidade-Visual-v1.0.md`: nome **Pertim** (de "pertinho"), símbolo de alfinete de mapa com pegada (SVGs em `03-ui-ux/marca/`), paleta Pinheiro, Girassol, Folha, Calçada e Asfalto com papéis do Material 3 nos temas claro e escuro e contrastes medidos, Bricolage Grotesque e Figtree, formas, ícones, tom de voz e esboço do tema Flutter. As `Telas-e-Fluxos-v1.1.md` e o ADR-009 passam a apontar para ele. O nome só troca nos documentos e no código depois da busca no INPI, em PR próprio. Nenhuma mudança de código.
 **Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
 
 ---
@@ -44,7 +48,7 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ## 📌 Revisão 10/11/2026 — Telas e fluxos
 
-**O que mudou:** novo `03-ui-ux/Telas-e-Fluxos-v1.0.md` com as 17 telas de baixa fidelidade (10 do app do tutor e 7 do painel da loja), o que cada uma mostra, as regras e as rotas da API que chama, os fluxos do tutor e da loja, os princípios das telas e a lista do que falta desenhar. Os desenhos estão no Figma e no FigJam, linkados no documento. Nenhuma mudança de código.
+**O que mudou:** novo `03-ui-ux/Telas-e-Fluxos-v1.1.md` com as 17 telas de baixa fidelidade (10 do app do tutor e 7 do painel da loja), o que cada uma mostra, as regras e as rotas da API que chama, os fluxos do tutor e da loja, os princípios das telas e a lista do que falta desenhar. Os desenhos estão no Figma e no FigJam, linkados no documento. Nenhuma mudança de código.
 **Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
 
 ---
@@ -160,7 +164,7 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | | [Diagramas-de-Engenharia-v2.0](02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md) | Estados do agendamento e do pagamento e sequências dos fluxos principais |
 | | [Comparativo-Kotlin-vs-Node-v1.0](02-arquitetura-tecnica/Comparativo-Kotlin-vs-Node-v1.0.md) | Kotlin x Node.js e onde rodar o backend (Cloud Run, Vercel, servidor virtual), com limites da Vercel e teste de um dia proposto |
 | | [Contrato-API-v2.0](02-arquitetura-tecnica/Contrato-API-v2.0.md) | Sistema-alvo: contrato REST entre backend Kotlin e clientes Flutter, erros e regras de evolução |
-| `03-ui-ux/` | [Telas-e-Fluxos-v1.0](03-ui-ux/Telas-e-Fluxos-v1.0.md) | Sistema-alvo: wireframes do app do tutor e do painel da loja, com regras e rotas de cada tela, e os fluxos |
+| `03-ui-ux/` | [Telas-e-Fluxos-v1.1](03-ui-ux/Telas-e-Fluxos-v1.1.md) | Sistema-alvo: 50 telas do app do tutor (Android e web), do painel da loja e dos estados vazios e de erro, com regras e rotas de cada tela, e os fluxos |
 | `03-ui-ux/` | [Identidade-Visual-v1.0](03-ui-ux/Identidade-Visual-v1.0.md) | Sistema-alvo: nome Pertim, marca, cores claro e escuro, tipografia, formas, ícones, tom de voz e tema do app |
 | `04-backlog/` | [Backlog-v2.0](04-backlog/Backlog-v2.0.md) | Sistema-alvo: marcos e histórias com critérios de aceite |
 | | [Definicao-de-Pronto-e-Testes-v1.0](04-backlog/Definicao-de-Pronto-e-Testes-v1.0.md) | Sistema-alvo: o que é "pronto" e a estratégia de testes |
