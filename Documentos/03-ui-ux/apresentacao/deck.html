@@ -103,7 +103,7 @@ body { margin: 0; background: #888; }
     <tr><td>Partida a frio e memória</td><td>JVM: segundos e mais memória. Quarkus nativo: milissegundos</td><td>Rápida e leve</td></tr>
     <tr><td>Tipagem</td><td>Forte, null-safety no compilador</td><td>Tipos só no build; validar a entrada em tempo de execução</td></tr>
     <tr><td>MongoDB, JWT, SSE, agendador</td><td>Panache Kotlin e tudo no Quarkus</td><td>Driver oficial ou Mongoose e bibliotecas separadas</td></tr>
-    <tr><td>Código com o app</td><td colspan="2">Nenhum nas duas: o app é Flutter (Dart)</td></tr>
+    <tr><td>Código com o app</td><td>Modelos e regras no módulo KMP, usados também pelo app Android (ADR-011)</td><td>Tipos TypeScript valeriam só para a web; o app Android segue em Kotlin</td></tr>
     <tr><td>Documentação pronta</td><td>Contrato, Modelo de Dados, Arquitetura e Backlog já assumem Kotlin</td><td>Novo ADR e revisão de 5 documentos</td></tr>
     <tr><td>Equipe</td><td>Vem de Java (backend atual Java 17 + Quarkus)</td><td>Stack nova no backend</td></tr>
   </tbody></table></section>
@@ -120,7 +120,7 @@ body { margin: 0; background: #888; }
     <li><b>Região</b> padrão é os EUA: configurar gru1 (LGPD).</li></ul></div></div></section>
 
 <section class="s"><span class="k">Para o time</span><h2>Próximos passos</h2><div class="cols"><ul>
-  <li><b>Dev:</b> tema em <code>core/tema</code> pelos papéis (ADR-009), nunca hex fixo.</li><li>Mensagens de erro mapeadas pelo <code>codigo</code> (tabela na página Estados).</li><li>Contrato: cartão em uso e disponibilidade descontando o Google.</li></ul>
+  <li><b>Dev:</b> tema pelos papéis: Tailwind na web e <code>MaterialTheme</code> no Android (ADR-010 e ADR-011), nunca hex fixo.</li><li>Mensagens de erro mapeadas pelo <code>codigo</code> (tabela na página Estados).</li><li>Contrato: cartão em uso e disponibilidade descontando o Google.</li></ul>
   <ul><li><b>UI/UX:</b> comparar com o Figma e validar com o PO.</li><li>Versão final do símbolo; mapa da busca (provedor a decidir).</li><li>Web do tutor além de TW1 a TW3.</li><li>Tudo no Open Design: projeto "Pertim – telas e fluxos".</li></ul></div></section>
 
 <script>

@@ -192,6 +192,6 @@ Ainda não desenhadas: as demais telas do tutor em tela larga (seção 2.4).
 | # | Decisão | Onde |
 |---|---|---|
 | 1 | ~~Identidade visual: nome, logotipo, cores e tipografia~~ Decidida em 10/11/2026: nome Pertim, direção Bairro | [Identidade visual v1.0](Identidade-Visual-v1.0.md) |
-| 2 | Sistema de design em Flutter (Material 3 ou próprio) | ADR do app Flutter |
-| 3 | ~~Mapa na busca~~: decidido pelo PO em 10/11/2026, mapa gratuito (tiles abertos). Falta escolher a biblioteca no ADR do app | ADR-009 |
+| 2 | ~~Sistema de design~~ Decidido em 11/11/2026: tokens Material 3 em Tailwind (web) e Compose (Android) | [Identidade visual v1.0, seção 8](Identidade-Visual-v1.0.md#8-como-entra-nos-aplicativos) |
+| 3 | ~~Mapa na busca~~: decidido pelo PO em 10/11/2026, mapa gratuito (tiles abertos). Falta escolher a biblioteca nos ADR-010 e ADR-011 | [ADR-010](../08-analise-tecnica/adrs.md) e [ADR-011](../08-analise-tecnica/adrs.md) |
 | 4 | Vitrine pública da loja fora do app, para buscadores | Arquitetura-alvo, seção 9 |
