@@ -26,8 +26,9 @@ Uma história só está pronta quando **todos** os itens valem:
 | Unitário, backend | Regras puras: prazo de aceite, cálculo de sinal e multa, transições de estado | JUnit 5 + Kotlin | Todo PR |
 | Integração, backend | Rotas REST com MongoDB real, JWT, erros, idempotência, isolamento entre lojas | `@QuarkusTest` + Testcontainers (MongoDB) | Todo PR |
 | Contrato | A API não diverge do OpenAPI | Comparação do OpenAPI gerado com o versionado | Todo PR |
-| Unitário, app | Controladores Riverpod, mapeamento, formatação de dinheiro e data | `flutter_test` | Todo PR |
-| Widget e golden, app | Telas nos estados vazio, carregando e erro; telas principais por imagem | `flutter_test` + golden | Todo PR |
+| Unitário e componente, web | Mapeamento, formatação de dinheiro e data; telas nos estados vazio, carregando e erro | Vitest + Testing Library | Todo PR |
+| Unitário e interface, Android | `ViewModel`, mapeamento; telas nos estados vazio, carregando e erro | JUnit + testes de interface do Compose | Todo PR |
+| Módulo compartilhado | Cálculo de sinal, multa e prazos, usado pelo backend e pelo app | JUnit (alvo JVM) | Todo PR |
 | Integração, app | Pedir e pagar o sinal; aceitar um pedido no painel | `integration_test` contra o ambiente de desenvolvimento | Antes de mesclar em `master` |
 | Provedor | Pix, webhook, estorno, cartão guardado | Sandbox do provedor, atrás da porta `PagamentoGateway` | Manual até o ADR-007; depois no CI noturno |
 | Carga | 30 lojas e 100 tutores com folga de dez vezes; corrida pela mesma vaga | k6 ou similar | Antes da publicação |

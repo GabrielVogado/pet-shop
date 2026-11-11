@@ -19,7 +19,7 @@
 |---|---|---|
 | 1 | 30 lojas e 100 tutores no primeiro ano | PO (RNF-01) |
 | 2 | Disponibilidade o tempo todo; uma janela de 1h de madrugada é aceitável | PO (RNF-02) |
-| 3 | Backend em Kotlin/Quarkus; web e app em Flutter; MongoDB | [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) |
+| 3 | Backend em Kotlin/Quarkus; web em React e app Android em Kotlin; MongoDB | [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) |
 | 4 | Referência de nuvem: Google Cloud (Cloud Run) com Firebase Hosting e MongoDB Atlas. AWS e servidor virtual foram comparados só no backend (seção 4.1); **Azure e Oracle não** | Escolha desta estimativa |
 | 5 | 8 mensagens por agendamento: 5 para o tutor (WhatsApp) e 3 para a loja (pedido novo, prazo de aceite perto de vencer e lembrete) | Suposição |
 | 5b | 3 e-mails por agendamento | Suposição |
