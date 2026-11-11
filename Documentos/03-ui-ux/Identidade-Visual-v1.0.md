@@ -2,7 +2,7 @@
 
 > **Sistema-alvo.** Nome, marca, cores, tipografia, formas, ícones e tom de voz do produto. Vale para o app do tutor (Android), para o painel web da loja e para tudo o que for publicado (Play Store, e-mails, avisos).
 >
-> Decidido pelo PO em 10/11/2026, entre três direções e quatro nomes. Substitui a paleta herdada do protótipo React (tinta, coral, oceano, menta e papel, fonte Inter), que nunca foi decidida e cujo botão principal tinha contraste 3,0:1, abaixo do mínimo AA pedido em [Telas e fluxos, seção 4](Telas-e-Fluxos-v1.0.md).
+> Decidido pelo PO em 10/11/2026, entre três direções e quatro nomes. Substitui a paleta herdada do protótipo React (tinta, coral, oceano, menta e papel, fonte Inter), que nunca foi decidida e cujo botão principal tinha contraste 3,0:1, abaixo do mínimo AA pedido em [Telas e fluxos, seção 4](Telas-e-Fluxos-v1.1.md).
 
 ---
 
@@ -100,7 +100,7 @@ Contrastes calculados pela fórmula da WCAG 2.1. Toda combinação de texto acim
 
 ### 3.4 Estados do pedido
 
-O estado nunca é só cor: o selo sempre tem texto ([Telas e fluxos, seção 4](Telas-e-Fluxos-v1.0.md)).
+O estado nunca é só cor: o selo sempre tem texto ([Telas e fluxos, seção 4](Telas-e-Fluxos-v1.1.md)).
 
 | Estado | Fundo / texto do selo |
 |---|---|
@@ -208,10 +208,10 @@ O painel web da loja usa o mesmo tema; nas telas largas só muda o layout.
 
 | O que | Situação |
 |---|---|
-| Variáveis de cor e estilos de texto no Figma | Feito no arquivo das [Telas e fluxos](Telas-e-Fluxos-v1.0.md): coleções **Pertim / Cor (claro)** e **Pertim / Cor (escuro)**, com os papéis da seção 3, e estilos de texto **Pertim/…** da seção 4. O plano gratuito do Figma permite um modo por coleção, por isso claro e escuro são duas coleções e não dois modos |
+| Variáveis de cor e estilos de texto no Figma | Feito no arquivo das [Telas e fluxos](Telas-e-Fluxos-v1.1.md): coleções **Pertim / Cor (claro)** e **Pertim / Cor (escuro)**, com os papéis da seção 3, e estilos de texto **Pertim/…** da seção 4. O plano gratuito do Figma permite um modo por coleção, por isso claro e escuro são duas coleções e não dois modos |
 | Os 17 wireframes | Feito: cores ligadas às variáveis do tema claro, fontes trocadas para Bricolage Grotesque e Figtree (texto de 11 passou a 12) e "PetCare" trocado por "Pertim" nos textos das telas |
-| Página **Identidade** no Figma, com símbolo, paleta e amostra de tipos | A fazer: o limite de uso da integração com o Figma no plano gratuito foi atingido em 10/11 |
-| Telas que faltam (seção 5 de Telas e fluxos) | Serão desenhadas já com a identidade |
+| Página **Identidade** no Figma, com símbolo, paleta e amostra de tipos | A fazer no Figma. No Open Design (projeto **Pertim – telas e fluxos**), a página de identidade e componentes já mostra símbolo, ícone, assinatura, paleta, temas claro e escuro, tipos e componentes |
+| Telas novas da v1.1 de [Telas e fluxos](Telas-e-Fluxos-v1.1.md) | Desenhadas com a identidade no Open Design |
 | Ícone do app, splash e capa da Play Store | A fazer, depois da versão final do símbolo |
 | Frontend React atual | Não muda: descreve o código atual e será substituído pelo app Flutter (ADR-006) |
 

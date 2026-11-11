@@ -60,7 +60,7 @@ Na coluna **Tenant**, `lojaId` quer dizer que o documento pertence a uma loja; `
 | `registros_saude` | tutor | `petId`, `tutorId`, `tipo` (VACINA, BANHO, TOSA, CONSULTA, OUTRO), `nome`, `data`, `proximaDose?`, `origem` (LOJA ou TUTOR), `verificado`, `lojaId?`, `agendamentoId?`, `profissional?` (`nome`, `crmv?`), `comprovanteId?`, `observacao?` |
 | `permissoes_carteira` | tutor | `petId`, `tutorId`, `lojaId`, `concedidaEm`, `revogadaEm?` |
 
-`perfilTutor` embutido em `usuarios`: `cartaoGarantia?` (`tokenProvedor`, `bandeira`, `final`), `preferenciasAviso` (push e WhatsApp), `indicadores` (`concluidos`, `faltas`, `notaMedia`; veja RN-63).
+`perfilTutor` embutido em `usuarios`: `cartoesGarantia[]` (`id`, `tokenProvedor`, `bandeira`, `final`; RN-74), `preferenciasAviso` (push e WhatsApp), `indicadores` (`concluidos`, `faltas`, `notaMedia`; veja RN-63).
 
 Regras de acesso:
 - `registros_saude` com `origem = LOJA` tem `verificado = true`, o `profissional` e não pode ser editado pelo tutor. `origem = TUTOR` é sempre `verificado = false` e pode ter comprovante (RN-21). Um registro nunca sobrescreve o outro.
@@ -82,7 +82,7 @@ O papel do membro (`papel`) existe para o login por funcionário no futuro (RN-0
 
 | Coleção | Tenant | Campos principais |
 |---|---|---|
-| `agendamentos` | `lojaId` | `unidadeId`, `tutorId`, `status`, `itens[]` (`petId`, `servicoId`, `nomeServico`, `precoCentavos`, `inicio`, `fim`), `inicio`, `fim`, `totalCentavos`, `sinalCentavos`, `politica` (cópia da política da loja na hora do pedido; RN-58), `multaCentavos?`, `prazoAceiteEm?`, `tutorSnapshot` (`nome`, `telefone`), `notaFiscal?` (`arquivoId`, `tipo`), `historico[]` (`de`, `para`, `em`, `porUsuarioId?`, `motivo?`), `versao` |
+| `agendamentos` | `lojaId` | `unidadeId`, `tutorId`, `status`, `itens[]` (`petId`, `servicoId`, `nomeServico`, `precoCentavos`, `inicio`, `fim`), `inicio`, `fim`, `totalCentavos`, `sinalCentavos`, `politica` (cópia da política da loja na hora do pedido; RN-58), `multaCentavos?`, `cartaoGarantiaId?` (cartão que garante a diferença da multa; RN-74), `prazoAceiteEm?`, `tutorSnapshot` (`nome`, `telefone`), `notaFiscal?` (`arquivoId`, `tipo`), `historico[]` (`de`, `para`, `em`, `porUsuarioId?`, `motivo?`), `versao` |
 | `pagamentos` | `lojaId` | `agendamentoId`, `tutorId`, `tipo` (SINAL, RESTANTE ou MULTA), `valorCentavos`, `metodo` (CARTAO, PIX, DEBITO, NA_LOJA), `status` (CRIADO, PENDENTE, PAGO, FALHOU, ESTORNADO), `desfecho?` (DEVOLVIDO, ABATIDO_NO_SERVICO ou APLICADO_NA_MULTA), `provedor`, `provedorCobrancaId`, `estornos[]`, `pagadorSnapshot`, `retencaoAte` |
 | `avaliacoes_loja` | `lojaId` | `agendamentoId` (único), `tutorId`, `unidadeId`, `nota`, `comentario?`, `status` (RETIDO, PUBLICADO, REMOVIDO), `publicarEm`, `resposta?` (`texto`, `em`), `denuncias[]` |
 | `avaliacoes_tutor` | `lojaId` | `agendamentoId` (único), `tutorId`, `nota`, `comentario?`. **Não é pública** (RN-63) |
@@ -190,7 +190,7 @@ Registradas como pendências P-07 a P-15 do [Documento Negocial](../01-negocio/D
 | # | Pergunta | Proposta de engenharia |
 |---|---|---|
 | P-07 | **Quando o sinal é cobrado?** A RN-51 diz "na confirmação", mas as RN-44 e RN-45 devolvem o sinal quando a loja recusa ou o prazo vence, o que só faz sentido se ele já foi pago ao pedir | **Decidido (PO, 10/11/2026): cobrar ao pedir.** Cobrar o sinal **ao pedir**, e a loja só vê o pedido depois do pagamento. Recusa e expiração devolvem. Isso acrescenta o estado `AguardandoPagamento` (veja os diagramas) |
-| P-08 | **Remarcar** exige novo aceite da loja? | **Decidido (PO, 10/11/2026): sim.** Remarcar mantém o sinal e volta o pedido para `Pendente`, com novo prazo de aceite |
+| P-08 | **Remarcar** exige novo aceite da loja? | **Decidido (PO, 10/11/2026): sim.** Remarcar mantém o sinal e volta o pedido para `Pendente`, com novo prazo de aceite. Se a loja recusar, o pedido volta ao horário antigo e o tutor pode cancelar sem multa (RN-73) |
 | P-09 | Qual o tamanho do intervalo da agenda? | 30 minutos |
 | P-10 | Um pedido com vários pets ou serviços é aceito **inteiro** ou item a item? E os serviços ocorrem em sequência ou ao mesmo tempo? | Aceite do pedido inteiro; cada item escolhe seu horário e ocupa a capacidade do tipo naquele horário |
 | P-11 | Até quando a loja pode concluir ou marcar falta num pedido já vencido? O que acontece se ela esquecer? | Lembrar a loja por aviso; sem conclusão automática, para não reter sinal sem confirmação humana |
