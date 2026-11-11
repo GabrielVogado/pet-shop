@@ -393,7 +393,7 @@ Aceito em 10/11/2026. Nada implementado.
 
 ### Contexto
 
-O [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) escolheu Flutter para web e mobile, e o app é desenvolvido do zero. As [telas](../03-ui-ux/Telas-e-Fluxos-v1.0.md) mostram dois produtos de público diferente: o **app do tutor** (Android no MVP, web depois) e o **painel da loja** (web, telas largas). O [contrato da API](../02-arquitetura-tecnica/Contrato-API-v2.0.md) define rotas, erros por `codigo`, idempotência e SSE.
+O [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) escolheu Flutter para web e mobile, e o app é desenvolvido do zero. As [telas](../03-ui-ux/Telas-e-Fluxos-v1.1.md) mostram dois produtos de público diferente: o **app do tutor** (Android no MVP, web depois) e o **painel da loja** (web, telas largas). O [contrato da API](../02-arquitetura-tecnica/Contrato-API-v2.0.md) define rotas, erros por `codigo`, idempotência e SSE.
 
 Sem um padrão antes da primeira tela, cada feature escolhe seu próprio jeito de guardar estado, navegar e falar com a API, e o custo aparece na terceira feature.
 

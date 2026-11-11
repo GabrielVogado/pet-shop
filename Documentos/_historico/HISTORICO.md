@@ -31,11 +31,12 @@ Reconstruída do histórico do Git em 05/11/2026.
 | 10/11/2026 | PO decide documentar tudo antes de desenvolver; propostas a arquitetura-alvo e o ADR-008 (multi-tenancy) | [Arquitetura-Alvo-v2.0](../02-arquitetura-tecnica/Arquitetura-Alvo-v2.0.md) |
 | 10/11/2026 | Propostos o modelo de dados e os diagramas de engenharia do sistema-alvo; pendências P-07 a P-12 abertas ao PO | [Modelo-de-Dados-v2.0](../02-arquitetura-tecnica/Modelo-de-Dados-v2.0.md) |
 | 10/11/2026 | Proposto o contrato da API v2.0 | [Contrato-API-v2.0](../02-arquitetura-tecnica/Contrato-API-v2.0.md) |
-| 10/11/2026 | Propostas as telas e os fluxos: 17 wireframes (tutor e loja) no Figma e fluxos no FigJam | [Telas-e-Fluxos](../03-ui-ux/Telas-e-Fluxos-v1.0.md) |
+| 10/11/2026 | Propostas as telas e os fluxos: 17 wireframes (tutor e loja) no Figma e fluxos no FigJam | [Telas-e-Fluxos](../03-ui-ux/Telas-e-Fluxos-v1.1.md) |
 | 10/11/2026 | Proposta a arquitetura do app Flutter (ADR-009) | [ADR-009](../08-analise-tecnica/adrs.md#adr-009-arquitetura-do-app-flutter) |
 | 10/11/2026 | Propostos o backlog em marcos e histórias, a definição de pronto e a estratégia de testes | [Backlog-v2.0](../04-backlog/Backlog-v2.0.md) |
 | 10/11/2026 | PO decide: remarcação com novo aceite, teto de multa de 50%, dispensa da multa, cartão só se preciso, ADR-008 e ADR-009 aceitos, Google Cloud em São Paulo, cookie HttpOnly, push do sistema e mapa gratuito | [ADR-008](../08-analise-tecnica/adrs.md#adr-008-isolamento-entre-lojas-multi-tenancy) |
 | 10/11/2026 | PO escolhe a identidade visual: nome Pertim (sujeito à busca no INPI), símbolo de alfinete com pegada, paleta Pinheiro e Girassol, Bricolage Grotesque e Figtree. Substitui a paleta herdada do protótipo, que reprovava em contraste | [Identidade-Visual-v1.0](../03-ui-ux/Identidade-Visual-v1.0.md) |
+| 10/11/2026 | Telas e fluxos v1.1: 32 telas novas (cadastro, pets, cartão, notificações, LGPD, remarcação, tutor na web, unidades, conta recebedora, mensalidade, avisos e estados), desenhadas no Open Design | [Telas-e-Fluxos-v1.1](../03-ui-ux/Telas-e-Fluxos-v1.1.md) |
 | 05/11/2026 | Direção do produto definida pelo PO: vários petshops, pagamento e app mobile, com foco em documentação antes de desenvolver | [Roadmap](../04-backlog/Roadmap-v1.0.md) |
 | 05/11/2026 | Entrevista com o PO define o sistema-alvo: marketplace com mensalidade da loja, sinal de 50%, carteira de vacinas com origem verificada, avaliações com direito de resposta, Android e web | [Documento-Negocial-v2.0](../01-negocio/Documento-Negocial-v2.0.md) |
 | 05/11/2026 | ADR-007 propõe o caminho para escolher o provedor de pagamento (Asaas recomendado, Stripe Connect como alternativa, a validar em sandbox) | [ADR-007](../08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) |
@@ -71,3 +72,4 @@ Antes de 05/11/2026 a documentação existia só no vault `D:\Mega Brain`. Ela f
 | Documento | Versão | Data | Motivo da troca |
 |---|---|---|---|
 | [Documento-Negocial](Documento-Negocial-v1.0.md) | v1.0 | 05/11/2026 | Substituído pela v2.0, que descreve o sistema-alvo definido em entrevista com o PO. A v1.0 continua sendo a referência do comportamento do código atual (MVP de um petshop). |
+| [Telas-e-Fluxos](Telas-e-Fluxos-v1.0.md) | v1.0 | 10/11/2026 | Substituída pela v1.1, que acrescenta as 32 telas que faltavam (tutor T11 a T25, tutor na web, loja W8 a W12 e estados) e corrige o texto do prazo de cancelamento. |
