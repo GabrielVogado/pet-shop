@@ -29,9 +29,15 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 11/11/2026 — Identidade visual em Tailwind e Compose
+
+**O que mudou:** `03-ui-ux/Identidade-Visual-v1.0.md` deixa o esboço Flutter e passa a trazer os tokens em Tailwind (variáveis CSS e `tailwind.config.js`, para a web) e em Compose (`ColorScheme`, tipografia, formas e espaço, para o Android), conforme os ADR-010 e ADR-011. Cores, fontes e medidas não mudaram. Nenhuma mudança de código.
+
+---
+
 ## 📌 Revisão 10/11/2026 — Identidade visual e nome Pertim
 
-**O que mudou:** o PO escolheu a nova identidade entre três direções e quatro nomes. Novo `03-ui-ux/Identidade-Visual-v1.0.md`: nome **Pertim** (de "pertinho"), símbolo de alfinete de mapa com pegada (SVGs em `03-ui-ux/marca/`), paleta Pinheiro, Girassol, Folha, Calçada e Asfalto com papéis do Material 3 nos temas claro e escuro e contrastes medidos, Bricolage Grotesque e Figtree, formas, ícones, tom de voz e esboço do tema Flutter. As `Telas-e-Fluxos-v1.1.md` e o ADR-009 passam a apontar para ele. O nome só troca nos documentos e no código depois da busca no INPI, em PR próprio. Nenhuma mudança de código.
+**O que mudou:** o PO escolheu a nova identidade entre três direções e quatro nomes. Novo `03-ui-ux/Identidade-Visual-v1.0.md`: nome **Pertim** (de "pertinho"), símbolo de alfinete de mapa com pegada (SVGs em `03-ui-ux/marca/`), paleta Pinheiro, Girassol, Folha, Calçada e Asfalto com papéis do Material 3 nos temas claro e escuro e contrastes medidos, Bricolage Grotesque e Figtree, formas, ícones, tom de voz e esboço do tema em Tailwind e Compose. As `Telas-e-Fluxos-v1.1.md` e o ADR-009 passam a apontar para ele. O nome só troca nos documentos e no código depois da busca no INPI, em PR próprio. Nenhuma mudança de código.
 **Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
 
 ---
@@ -177,7 +183,7 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | | [Reavaliacao-Frontend-v1.0](02-arquitetura-tecnica/Reavaliacao-Frontend-v1.0.md) | Sistema-alvo: comparação entre Flutter, React e Kotlin nativo para a web e o Android, e a decisão do PO |
 | | [Contrato-API-v2.0](02-arquitetura-tecnica/Contrato-API-v2.0.md) | Sistema-alvo: contrato REST entre backend Kotlin e clientes web e Android, erros e regras de evolução |
 | `03-ui-ux/` | [Telas-e-Fluxos-v1.1](03-ui-ux/Telas-e-Fluxos-v1.1.md) | Sistema-alvo: 50 telas do app do tutor (Android e web), do painel da loja e dos estados vazios e de erro, com regras e rotas de cada tela, e os fluxos |
-| `03-ui-ux/` | [Identidade-Visual-v1.0](03-ui-ux/Identidade-Visual-v1.0.md) | Sistema-alvo: nome Pertim, marca, cores claro e escuro, tipografia, formas, ícones, tom de voz e tema do app |
+| `03-ui-ux/` | [Identidade-Visual-v1.0](03-ui-ux/Identidade-Visual-v1.0.md) | Sistema-alvo: nome Pertim, marca, cores claro e escuro, tipografia, formas, ícones, tom de voz e tema (Tailwind e Compose) |
 | `04-backlog/` | [Backlog-v2.0](04-backlog/Backlog-v2.0.md) | Sistema-alvo: marcos e histórias com critérios de aceite |
 | | [Definicao-de-Pronto-e-Testes-v1.0](04-backlog/Definicao-de-Pronto-e-Testes-v1.0.md) | Sistema-alvo: o que é "pronto" e a estratégia de testes |
 | | [Especificacao-API-v1.0](02-arquitetura-tecnica/Especificacao-API-v1.0.md) | Endpoints REST e SSE com perfis de acesso |
