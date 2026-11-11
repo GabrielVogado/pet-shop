@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Apresentação para desenvolvimento e UI/UX
+
+**O que mudou:** nova pasta `03-ui-ux/apresentacao/` com a apresentação do Pertim para quem vai desenvolver e desenhar: 20 slides com as 50 telas reais (produto, identidade, componentes, telas do tutor, do painel da loja e dos estados, decisões do dia e próximos passos). Vem em PDF, em PPT (cada slide é uma imagem) e em `deck.html`, que é a versão editável e usa `pertim.css` e as imagens de `telas/`. Também entra `03-ui-ux/marca/pertim-simbolo-negativo.svg`, a versão negativa do símbolo. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 10/11/2026 — Identidade visual e nome Pertim
 
 **O que mudou:** o PO escolheu a nova identidade entre três direções e quatro nomes. Novo `03-ui-ux/Identidade-Visual-v1.0.md`: nome **Pertim** (de "pertinho"), símbolo de alfinete de mapa com pegada (SVGs em `03-ui-ux/marca/`), paleta Pinheiro, Girassol, Folha, Calçada e Asfalto com papéis do Material 3 nos temas claro e escuro e contrastes medidos, Bricolage Grotesque e Figtree, formas, ícones, tom de voz e esboço do tema Flutter. As `Telas-e-Fluxos-v1.0.md` e o ADR-009 passam a apontar para ele. O nome só troca nos documentos e no código depois da busca no INPI, em PR próprio. Nenhuma mudança de código.
