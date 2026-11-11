@@ -50,7 +50,7 @@ Os blocos que rodam e o que cada um guarda.
 
 ```mermaid
 flowchart TB
-  subgraph clientes["Clientes (Flutter, uma base de código)"]
+  subgraph clientes["Clientes (web em React, app em Kotlin)"]
     app["App Android<br/>tutor"]
     webt["Web do tutor"]
     webl["Painel web da loja"]
@@ -82,8 +82,9 @@ flowchart TB
 
 | Contêiner | Tecnologia | Responsabilidade |
 |---|---|---|
-| App Android e web do tutor | Flutter | Busca, agendamento, carteira de vacinas, avaliações. Mesma base do painel |
-| Painel web da loja | Flutter web | Pedidos, agenda, catálogo, atendimento, avaliações |
+| App Android do tutor | Kotlin + Jetpack Compose ([ADR-011](../08-analise-tecnica/adrs.md#adr-011-app-android-em-kotlin-e-módulo-compartilhado-kmp)) | Busca, agendamento, carteira de vacinas, avaliações |
+| Web do tutor e painel web da loja | React + Vite + TypeScript ([ADR-010](../08-analise-tecnica/adrs.md#adr-010-web-em-react-e-vite)) | Pedidos, agenda, catálogo, atendimento, avaliações, busca do tutor |
+| Módulo compartilhado | Kotlin Multiplatform (JVM e Android) | Modelos da API, política de sinal e multa, prazos e cliente HTTP, usado pelo backend e pelo app |
 | API | Quarkus 3 + Kotlin, REST, SSE | Regras de negócio, autenticação, webhooks |
 | Tarefas agendadas | `quarkus-scheduler` no mesmo processo | Prazo de aceite, lembretes, avaliações pendentes (seção 6) |
 | Banco | MongoDB (Panache Kotlin) | Todos os dados; arquivos pequenos (comprovantes, notas) em GridFS |
@@ -188,7 +189,7 @@ A nuvem ainda não está definida (RNF-09). O desenho abaixo é o da [estimativa
 flowchart LR
   user["Usuários"]
   subgraph gcp["Google Cloud, região de São Paulo"]
-    host["Firebase Hosting<br/>Flutter web estático"]
+    host["Firebase Hosting<br/>React estático (Vite)"]
     run["Cloud Run<br/>API Kotlin"]
   end
   atlas[("MongoDB Atlas")]
@@ -240,7 +241,7 @@ Com mais de uma instância da API, duas delas não podem rodar a mesma tarefa ao
 | Cloud Run cobrado só por requisição desliga o processador entre requisições | As tarefas agendadas do `quarkus-scheduler` podem não rodar quando ninguém usa o sistema | Cobrança por instância (perfil B da estimativa) ou o Cloud Scheduler chamando um endpoint interno. A estimativa de custo precisa refletir a escolha |
 | Reserva de horário sob concorrência | Dois pedidos para a última vaga | Reserva atômica (seção 3) e teste de concorrência |
 | Provedor de pagamento sem cobrança direta na conta da loja | RN-53 não se cumpre | Spike em sandbox, depois da fase de documentação (ADR-007) |
-| Flutter web: carregamento inicial pesado e SEO fraco | Página pública de busca difícil de achar em buscadores | Decidir no ADR de busca se a vitrine fica fora do app |
+| Web em SPA (React): busca pública sem renderização no servidor | Página pública de busca difícil de achar em buscadores | Decidir no ADR de busca se a vitrine fica fora do app |
 | Hospedagem fora do Brasil | Transferência internacional de dados pela LGPD | Preferir região de São Paulo; revisão jurídica |
 | Muitos canais de mensagem | Custo de SMS (cerca de 9 vezes o do WhatsApp) | SMS como canal de reserva ou com limite (pendência P-05) |
 | Crescimento acima do previsto | Processo único e MongoDB menores que o necessário | Reavaliar fila e cache, separar `notificacoes` em outro serviço, ou fragmentar o banco |
@@ -255,8 +256,8 @@ Com mais de uma instância da API, duas delas não podem rodar a mesma tarefa ao
 | 2 | Provedor de pagamento | PO, após teste | ADR-007 |
 | 3 | ~~Nuvem e região~~: Google Cloud, São Paulo (PO, 10/11/2026) | PO | RNF-09, P-06 |
 | 4 | Papel do SMS e valor da mensalidade | PO | P-05 |
-| 5 | Arquitetura do app Flutter (estado, navegação, estrutura de pastas) | a documentar | próximo ADR |
-| 6 | Vitrine pública fora do Flutter, para buscadores | a decidir | ADR de busca |
+| 5 | ~~Arquitetura dos clientes~~: web em React e app Android em Kotlin (PO, 11/11/2026) | PO | [ADR-010](../08-analise-tecnica/adrs.md#adr-010-web-em-react-e-vite) e [ADR-011](../08-analise-tecnica/adrs.md#adr-011-app-android-em-kotlin-e-módulo-compartilhado-kmp) |
+| 6 | Vitrine pública para buscadores (pré-renderização ou página estática) | a decidir | ADR de busca |
 | 7 | Linguagem e hospedagem do backend: manter Kotlin no Cloud Run ou avaliar Node na Vercel | PO, após teste de um dia | [Comparativo Kotlin x Node](Comparativo-Kotlin-vs-Node-v1.0.md) |
 
 ---
@@ -266,5 +267,5 @@ Com mais de uma instância da API, duas delas não podem rodar a mesma tarefa ao
 1. ~~Modelo de dados e diagramas de engenharia~~: feitos em [Modelo-de-Dados-v2.0](Modelo-de-Dados-v2.0.md) e [Diagramas-de-Engenharia-v2.0](Diagramas-de-Engenharia-v2.0.md).
 2. ~~Contrato da API v2.0~~: feito em [Contrato-API-v2.0](Contrato-API-v2.0.md).
 3. ~~Telas e fluxos~~: feitos em [Telas-e-Fluxos](../03-ui-ux/Telas-e-Fluxos-v1.1.md).
-4. ~~ADR da arquitetura do app Flutter~~: feito no [ADR-009](../08-analise-tecnica/adrs.md#adr-009-arquitetura-do-app-flutter).
+4. ~~ADR da arquitetura dos clientes~~: feito nos [ADR-010](../08-analise-tecnica/adrs.md#adr-010-web-em-react-e-vite) e [ADR-011](../08-analise-tecnica/adrs.md#adr-011-app-android-em-kotlin-e-módulo-compartilhado-kmp) (o ADR-009, de Flutter, foi substituído).
 5. ~~Backlog em histórias, definição de pronto e estratégia de testes~~: feitos em [Backlog-v2.0](../04-backlog/Backlog-v2.0.md) e [Definicao-de-Pronto-e-Testes](../04-backlog/Definicao-de-Pronto-e-Testes-v1.0.md).

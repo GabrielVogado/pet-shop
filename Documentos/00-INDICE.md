@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 11/11/2026 — Frontend: React na web e Kotlin no Android
+
+**O que mudou:** um especialista mobile questionou o Flutter, e o PO decidiu: **web em React + Vite** (painel da loja e web do tutor) e **app Android em Kotlin nativo** com um módulo compartilhado pequeno em Kotlin Multiplatform (modelos da API, sinal, multa e prazos). Novos ADR-010 e ADR-011; o ADR-009 (Flutter) foi substituído e o ADR-006 mantém só o backend. Novo `02-arquitetura-tecnica/Reavaliacao-Frontend-v1.0.md` com a comparação das três opções. Ajustados a arquitetura-alvo, o contrato, o backlog (F-04, F-05, F-10 e F-11), a definição de pronto, o Documento Negocial, a estimativa de nuvem e as telas (sistema de design). Contrato, modelo de dados, diagramas de engenharia e wireframes não mudam. A `Identidade-Visual-v1.0.md` ainda tem trechos em Flutter (ícones e tokens em Dart) a adaptar para Tailwind e Compose. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 10/11/2026 — Apresentação para desenvolvimento e UI/UX
 
 **O que mudou:** nova pasta `03-ui-ux/apresentacao/` com a apresentação do Pertim para quem vai desenvolver e desenhar: 20 slides com as 50 telas reais (produto, identidade, componentes, telas do tutor, do painel da loja e dos estados, decisões do dia e próximos passos). Vem em PDF, em PPT (cada slide é uma imagem) e em `deck.html`, que é a versão editável e usa `pertim.css` e as imagens de `telas/`. Também entra `03-ui-ux/marca/pertim-simbolo-negativo.svg`, a versão negativa do símbolo. Nenhuma mudança de código.
@@ -167,7 +174,8 @@ A v1.0 foi para `_historico/` e continua descrevendo o código atual. `MANUAL.md
 | | [Modelo-de-Dados-v2.0](02-arquitetura-tecnica/Modelo-de-Dados-v2.0.md) | Sistema-alvo: coleções do MongoDB, campos, índices, consistência, retenção e perguntas ao PO |
 | | [Diagramas-de-Engenharia-v2.0](02-arquitetura-tecnica/Diagramas-de-Engenharia-v2.0.md) | Estados do agendamento e do pagamento e sequências dos fluxos principais |
 | | [Comparativo-Kotlin-vs-Node-v1.0](02-arquitetura-tecnica/Comparativo-Kotlin-vs-Node-v1.0.md) | Kotlin x Node.js e onde rodar o backend (Cloud Run, Vercel, servidor virtual), com limites da Vercel e teste de um dia proposto |
-| | [Contrato-API-v2.0](02-arquitetura-tecnica/Contrato-API-v2.0.md) | Sistema-alvo: contrato REST entre backend Kotlin e clientes Flutter, erros e regras de evolução |
+| | [Reavaliacao-Frontend-v1.0](02-arquitetura-tecnica/Reavaliacao-Frontend-v1.0.md) | Sistema-alvo: comparação entre Flutter, React e Kotlin nativo para a web e o Android, e a decisão do PO |
+| | [Contrato-API-v2.0](02-arquitetura-tecnica/Contrato-API-v2.0.md) | Sistema-alvo: contrato REST entre backend Kotlin e clientes web e Android, erros e regras de evolução |
 | `03-ui-ux/` | [Telas-e-Fluxos-v1.1](03-ui-ux/Telas-e-Fluxos-v1.1.md) | Sistema-alvo: 50 telas do app do tutor (Android e web), do painel da loja e dos estados vazios e de erro, com regras e rotas de cada tela, e os fluxos |
 | `03-ui-ux/` | [Identidade-Visual-v1.0](03-ui-ux/Identidade-Visual-v1.0.md) | Sistema-alvo: nome Pertim, marca, cores claro e escuro, tipografia, formas, ícones, tom de voz e tema do app |
 | `04-backlog/` | [Backlog-v2.0](04-backlog/Backlog-v2.0.md) | Sistema-alvo: marcos e histórias com critérios de aceite |
@@ -195,7 +203,7 @@ Pastas reservadas, criadas quando houver conteúdo: `05-features`, `06-sprints`,
 | [ADR-003](08-analise-tecnica/adrs.md#adr-003-taxonomia-de-erros-da-api) | Taxonomia de erros da API | Proposto, não implementado |
 | [ADR-004](08-analise-tecnica/adrs.md#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na listagem de agendamentos do owner | Proposto, não implementado |
 | [ADR-005](08-analise-tecnica/adrs.md#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT para rotação de chaves | Aceito, implementado |
-| [ADR-006](08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito pelo PO |
+| [ADR-006](08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito; frontend substituído pelos ADR-010 e ADR-011 |
 | [ADR-007](08-analise-tecnica/adrs.md#adr-007-provedor-de-pagamento) | Provedor de pagamento | Proposto |
 | [ADR-008](08-analise-tecnica/adrs.md#adr-008-isolamento-entre-lojas-multi-tenancy) | Isolamento entre lojas (multi-tenancy) | Proposto |
 

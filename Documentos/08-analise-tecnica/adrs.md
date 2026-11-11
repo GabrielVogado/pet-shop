@@ -9,10 +9,12 @@ Registros de decisão de arquitetura. Numeração sequencial; um ADR substituíd
 | [ADR-003](#adr-003-taxonomia-de-erros-da-api) | Taxonomia de erros da API | Proposto |
 | [ADR-004](#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner) | Eliminar N+1 na agenda do owner | Proposto |
 | [ADR-005](#adr-005-kid-no-header-do-jwt-para-rotação-de-chaves) | `kid` no header do JWT | Aceito, implementado |
-| [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito |
+| [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus) | Flutter na web e no mobile e Kotlin no backend Quarkus | Aceito; a parte do frontend foi substituída pelos ADR-010 e ADR-011 |
 | [ADR-007](#adr-007-provedor-de-pagamento) | Provedor de pagamento | Proposto |
 | [ADR-008](#adr-008-isolamento-entre-lojas-multi-tenancy) | Isolamento entre lojas (multi-tenancy) | Aceito |
-| [ADR-009](#adr-009-arquitetura-do-app-flutter) | Arquitetura do app Flutter | Aceito |
+| [ADR-009](#adr-009-arquitetura-do-app-flutter) | Arquitetura do app Flutter | Substituído pelos ADR-010 e ADR-011 |
+| [ADR-010](#adr-010-web-em-react-e-vite) | Web em React e Vite | Aceito |
+| [ADR-011](#adr-011-app-android-em-kotlin-e-módulo-compartilhado-kmp) | App Android em Kotlin e módulo compartilhado (KMP) | Aceito |
 
 ---
 
@@ -132,7 +134,7 @@ Sem identificador de chave no token, trocar o par RSA invalida todas as sessões
 
 ## ADR-006: Flutter na web e no mobile e Kotlin no backend Quarkus
 
-- **Status:** Aceito pelo PO em 05/11/2026, com mudança de escopo no mesmo dia (web também em Flutter). Não implementado.
+- **Status:** Aceito pelo PO em 05/11/2026, com mudança de escopo no mesmo dia (web também em Flutter). **Em 11/11/2026 o PO substituiu a parte do frontend (Flutter) pelos [ADR-010](#adr-010-web-em-react-e-vite) e [ADR-011](#adr-011-app-android-em-kotlin-e-módulo-compartilhado-kmp).** Backend em Kotlin, Quarkus e Panache Kotlin continua valendo. Não implementado.
 - **Data:** 05/11/2026
 - **Decisor:** Gabriel Vogado (PO)
 
@@ -387,7 +389,7 @@ Aceito em 10/11/2026. Nada implementado.
 
 ## ADR-009: Arquitetura do app Flutter
 
-- **Status:** Aceito pelo PO em 10/11/2026. Não implementado.
+- **Status:** Substituído em 11/11/2026 pelos [ADR-010](#adr-010-web-em-react-e-vite) e [ADR-011](#adr-011-app-android-em-kotlin-e-módulo-compartilhado-kmp), depois que um especialista mobile questionou o Flutter. Fica como registro. As decisões de cookie `HttpOnly`, push do sistema e mapa gratuito foram mantidas.
 - **Data:** 10/11/2026
 - **Decisor:** Gabriel Vogado (PO)
 
@@ -474,3 +476,103 @@ Sem um padrão antes da primeira tela, cada feature escolhe seu próprio jeito d
 ### Situação em 10/11/2026
 
 Aceito em 10/11/2026. Nada implementado.
+
+---
+
+## ADR-010: Web em React e Vite
+
+- **Status:** Aceito pelo PO em 11/11/2026. Não implementado.
+- **Data:** 11/11/2026
+- **Decisor:** Gabriel Vogado (PO)
+- **Substitui:** a parte web do [ADR-009](#adr-009-arquitetura-do-app-flutter) e do [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus)
+
+### Contexto
+
+Um especialista mobile apontou que, na web, React + Vite é mais leve e mais rápido que Flutter web, e que o projeto já tem essa base. A análise em [Reavaliação do frontend](../02-arquitetura-tecnica/Reavaliacao-Frontend-v1.0.md) comparou três caminhos, e o PO escolheu React na web e Kotlin no Android. O painel da loja é de uso diário, com tabelas, agenda e formulários longos, onde o Flutter web é mais fraco: carga inicial pesada, acessibilidade e autopreenchimento piores.
+
+### Decisão
+
+1. **React 19 + Vite + TypeScript** para o painel da loja e para a web do tutor, num mesmo repositório (`pet-shop-frontend/`) com dois aplicativos (`loja` e `tutor`) e pacotes comuns (cliente da API, tema, componentes).
+2. **Mantém o que já existe na SPA atual:** Tailwind, React Router, Feature-Sliced Design e a configuração de Vitest e Playwright. As telas são reescritas para o sistema-alvo.
+3. **Dados do servidor com TanStack Query.** Estado local simples, sem biblioteca global até haver necessidade.
+4. **Componentes acessíveis** (Radix UI ou equivalente) sobre Tailwind, com os tokens da identidade visual num só arquivo. Contraste AA, alvo de toque de 48 px, fonte escalável e estado nunca só por cor.
+5. **Cliente TypeScript gerado do OpenAPI** do [contrato da API](../02-arquitetura-tecnica/Contrato-API-v2.0.md). Erros mostrados em português pelo `codigo`, nunca pelo texto do servidor.
+6. **Dinheiro em centavos até a hora de mostrar**, formatado com `Intl` como `R$ 0,00`; datas em UTC, mostradas no fuso do navegador como `dd/mm/aaaa`.
+7. **Tempo real:** o painel assina o SSE `/loja/eventos` com `EventSource`; o evento só avisa e a tela busca de novo.
+8. **Sessão:** renovação em cookie `HttpOnly`, `Secure` e `SameSite`, emitido pelo backend (decisão do PO de 10/11/2026), com proteção contra CSRF.
+9. **Testes:** Vitest e Testing Library nos componentes e nos estados vazio, carregando e erro; Playwright no fluxo de pedir e pagar o sinal e no de aceitar um pedido.
+10. **Hospedagem estática** (Firebase Hosting na arquitetura-alvo, ou outro host estático), sem servidor de aplicação para a web.
+
+### Opções consideradas
+
+| Opção | Web | Observação |
+|---|---|---|
+| **A. React + Vite** (escolhida) | Leve, acessível, base já existente | Duas interfaces no projeto (web e Android) |
+| B. Flutter web (ADR-009 anterior) | Carga inicial pesada, acessibilidade menor | Uma base de interface só |
+| C. Kotlin/Wasm ou Compose para web | Ainda é a parte menos madura do ecossistema Kotlin | Confirmar o estado atual antes de considerar |
+
+### Consequências
+
+**Ganhos:** web mais rápida e acessível; reaproveita conhecimento e configuração da SPA; hospedagem estática barata; mais desenvolvedores disponíveis.
+
+**Custos e riscos:** duas interfaces a manter (web e Android); a vitrine pública para buscadores continua uma decisão aberta e pode pedir pré-renderização; o refresh em cookie exige apoio do backend.
+
+### Próximos passos
+
+1. [ ] Escrever o OpenAPI a partir do contrato e gerar o cliente TypeScript.
+2. [ ] Criar o esqueleto com `loja` e `tutor`, tema, roteamento e a tela de entrar (T1).
+3. [ ] Decidir a vitrine pública (pré-renderização ou página estática separada).
+
+---
+
+## ADR-011: App Android em Kotlin e módulo compartilhado (KMP)
+
+- **Status:** Aceito pelo PO em 11/11/2026. Não implementado.
+- **Data:** 11/11/2026
+- **Decisor:** Gabriel Vogado (PO)
+- **Substitui:** a parte mobile do [ADR-009](#adr-009-arquitetura-do-app-flutter) e do [ADR-006](#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus)
+
+### Contexto
+
+O MVP é só Android (RNF-04) e o backend já é Kotlin. Kotlin com Jetpack Compose é o caminho oficial do Android e tem a melhor integração com push, localização e armazenamento seguro. O iOS está fora do MVP, mas pode vir depois.
+
+### Decisão
+
+1. **App do tutor em Kotlin nativo com Jetpack Compose**, em `pet-shop-android/`.
+2. **Arquitetura em camadas simples:** `ViewModel` com `StateFlow` por tela, estado imutável com carregamento e erro dentro dele, repositórios por feature. Sem camada de casos de uso: as regras de negócio ficam no backend.
+3. **Navegação Compose**, injeção de dependência com Koin (a confirmar contra Hilt na criação do esqueleto).
+4. **Módulo compartilhado `shared` (Kotlin Multiplatform, alvo JVM e Android)**, usado pelo backend e pelo app, só com o que dá retorno claro: modelos da API, política de sinal e multa, prazo de aceite, janela de 2 horas, formatação de dinheiro e cliente HTTP (Ktor). **Interface não entra no módulo.** O backend continua sendo a fonte da verdade; o app usa o módulo para mostrar a multa em reais antes de o tutor pedir.
+5. **Build com Gradle (Kotlin DSL) em projeto multimódulo** com `pet-shop-backend`, `shared` e `pet-shop-android`. O Quarkus tem suporte a Gradle.
+6. **Cliente da API a partir do OpenAPI** ou, onde o módulo compartilhado já tem o modelo, usando o próprio módulo.
+7. **Tokens** guardados com o Android Keystore. Acesso de 15 minutos e renovação de 30 dias, como no contrato.
+8. **Push do sistema** (Firebase Cloud Messaging), **mapa gratuito** com tiles abertos (MapLibre ou equivalente), **sem modo offline** no MVP (RNF-05).
+9. **Erros por `codigo`** em português, dinheiro em centavos e datas em UTC, como na web.
+10. **Testes:** JUnit nos `ViewModel` e no módulo compartilhado, testes de interface do Compose nos estados vazio, carregando e erro, e um teste de integração do fluxo de pedir e pagar o sinal contra o ambiente de desenvolvimento.
+
+### Opções consideradas
+
+| Opção | Observação |
+|---|---|
+| **A. Kotlin nativo + KMP enxuto** (escolhida) | Melhor Android; lógica comum com o backend; iOS depois exige SwiftUI ou Compose Multiplatform |
+| B. Flutter só no mobile | iOS quase de graça, mas três linguagens e Dart sem ligação com o backend |
+| C. Flutter em tudo | Uma base só, com web mais pesada (ADR-009 anterior) |
+
+### Consequências
+
+**Ganhos:** app nativo e rápido; uma só linguagem entre backend e app; a regra da multa escrita uma vez.
+
+**Custos e riscos:** o iOS custa mais se virar requisito (reescrever a interface); o módulo KMP pede disciplina para não virar depósito de código; o build do backend passa para Gradle.
+
+### Decisões que faltam
+
+| Decisão | Quem |
+|---|---|
+| Versão mínima do Android (proposta: Android 8, API 26) | PO, com o perfil dos aparelhos dos tutores |
+| Se o iOS virar requisito: SwiftUI ou Compose Multiplatform | PO, quando houver data |
+| Koin ou Hilt | Equipe, ao criar o esqueleto |
+
+### Próximos passos
+
+1. [ ] Criar o projeto Gradle multimódulo com `shared`.
+2. [ ] Mover para `shared` os modelos e o cálculo de multa e prazos, com testes.
+3. [ ] Criar o esqueleto do app com tema, navegação e a tela de entrar (T1).

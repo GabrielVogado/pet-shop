@@ -40,8 +40,8 @@ O PetCare aproxima petshops e donos de pet. O tutor encontra lojas, agenda servi
 
 | Perfil | Onde usa | Como é validado |
 |---|---|---|
-| **Tutor** | App Flutter (Android) e web | E-mail confirmado; CPF opcional |
-| **Loja** | Painel web (Flutter web) | E-mail da loja confirmado e CNPJ verificado (RN-03) |
+| **Tutor** | App Android (Kotlin) e web (React) | E-mail confirmado; CPF opcional |
+| **Loja** | Painel web (React) | E-mail da loja confirmado e CNPJ verificado (RN-03) |
 
 | ID | Regra |
 |---|---|

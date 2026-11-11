@@ -1,6 +1,6 @@
 # Contrato da API (v2.0)
 
-> **Sistema-alvo.** Contrato REST entre o backend Kotlin e os clientes Flutter (app Android, web do tutor e painel da loja), para que os dois lados possam ser feitos em paralelo. Regras vêm do [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md); campos, do [Modelo de dados](Modelo-de-Dados-v2.0.md); estados, dos [Diagramas de engenharia](Diagramas-de-Engenharia-v2.0.md). A API do código atual está na [Especificação v1.0](Especificacao-API-v1.0.md).
+> **Sistema-alvo.** Contrato REST entre o backend Kotlin e os clientes (app Android em Kotlin, web do tutor e painel da loja em React), para que os dois lados possam ser feitos em paralelo. Regras vêm do [Documento Negocial v2.0](../01-negocio/Documento-Negocial-v2.0.md); campos, do [Modelo de dados](Modelo-de-Dados-v2.0.md); estados, dos [Diagramas de engenharia](Diagramas-de-Engenharia-v2.0.md). A API do código atual está na [Especificação v1.0](Especificacao-API-v1.0.md).
 >
 > É **proposta**. Os nomes de campo e de rota ainda podem mudar até o contrato ser aceito; depois disso, toda mudança segue a regra da seção 9. A especificação OpenAPI será escrita a partir deste documento, antes do primeiro código.
 
@@ -340,4 +340,4 @@ A forma exata (ferramenta própria, console do banco, painel interno) é uma dec
 | 3 | Duração dos tokens de acesso e de renovação | Segurança |
 | 4 | Limites de chamadas por rota | Testes de carga |
 | 5 | Ferramenta da equipe interna (OPERACAO) | Seção 8 |
-| 6 | Formato do OpenAPI e geração do cliente Dart | ADR do app Flutter |
+| 6 | ~~Formato do OpenAPI e geração do cliente~~: arquivo versionado, com clientes TypeScript e Kotlin gerados | ADR-010 e ADR-011 |
