@@ -7,6 +7,10 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 10/11/2026 — Apresentação para desenvolvimento e UI/UX
+
+**O que mudou:** nova pasta `03-ui-ux/apresentacao/` com a apresentação do Pertim para quem vai desenvolver e desenhar: 20 slides com as 50 telas reais (produto, identidade, componentes, telas do tutor, do painel da loja e dos estados, decisões do dia e próximos passos). Vem em PDF, em PPT (cada slide é uma imagem) e em `deck.html`, que é a versão editável e usa `pertim.css` e as imagens de `telas/`. Também entra `03-ui-ux/marca/pertim-simbolo-negativo.svg`, a versão negativa do símbolo. Nenhuma mudança de código.
+
 ## 📌 Revisão 10/11/2026 — Comparativo Kotlin x Node e hospedagem
 
 **O que mudou:** novo `02-arquitetura-tecnica/Comparativo-Kotlin-vs-Node-v1.0.md`, a pedido do PO, que perguntou se vale trocar Kotlin por Node porque a Vercel só aceitaria Node. A documentação atual da Vercel aceita também containers (Beta), então Kotlin roda lá; o que pesa são as tarefas agendadas, o SSE e o plano Pro (o grátis é só para uso não comercial). O documento compara as duas linguagens, quatro formas de hospedar e recomenda manter Kotlin no Cloud Run, com um teste de um dia antes de decidir. O ADR-006 não mudou. Nenhuma mudança de código.
