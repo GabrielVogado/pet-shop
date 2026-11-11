@@ -12,7 +12,7 @@
 - **A Vercel não é um servidor virtual (VPS).** É uma plataforma de funções sob demanda, com limite de duração por chamada. O servidor virtual mais barato da estimativa de custo é o da Hetzner (€ 6,49 por mês), mas fica fora do Brasil.
 - **Preço não é o que separa as opções.** Na estimativa de nuvem, o backend no Cloud Run custa a partir de ~US$ 13 por mês (a estimativa avisa que o preço de São Paulo é mais alto); a Vercel Pro custa US$ 20 por mês com US$ 20 de uso incluído, e o uso em São Paulo sai cerca de 73% mais caro que na região padrão. O **plano grátis (Hobby) é só para uso não comercial**, então não serve para um produto que cobra mensalidade.
 - **O que pesa de verdade** são três regras do Pertim que pedem processo vivo: as **tarefas agendadas** (prazo de aceite), o **SSE** do painel e a **conexão com o MongoDB**. Em funções sob demanda, cada uma precisa de um ajuste.
-- **Kotlin ou Node não muda o app Flutter nem o contrato da API.** O cliente é gerado do OpenAPI (ADR-009), então a linguagem do backend pode mudar sem refazer telas.
+- **Kotlin ou Node não muda as telas nem o contrato da API.** Os clientes são gerados do OpenAPI (ADR-010 e ADR-011), então a linguagem do backend pode mudar sem refazer telas.
 - **Recomendação:** manter Kotlin com Quarkus no Cloud Run em São Paulo (decisão atual). Se o PO quiser mesmo a Vercel, o caminho mais seguro é **Node com TypeScript** e região `gru1`, e antes disso vale um teste de um dia (seção 7).
 
 ---

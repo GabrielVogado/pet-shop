@@ -6,6 +6,8 @@
 
 ## Stack (ADR-006, aceito em 05/11/2026)
 
+> **Atualização de 11/11/2026:** o PO substituiu o Flutter por React na web e Kotlin no Android ([ADR-010](../08-analise-tecnica/adrs.md#adr-010-web-em-react-e-vite) e [ADR-011](../08-analise-tecnica/adrs.md#adr-011-app-android-em-kotlin-e-módulo-compartilhado-kmp)). O backend em Kotlin continua. Onde este texto diz Flutter, leia o ADR novo.
+
 > Decisão do PO registrada no [ADR-006](../08-analise-tecnica/adrs.md#adr-006-flutter-na-web-e-no-mobile-e-kotlin-no-backend-quarkus):
 > - **Frontend:** Flutter para web, Android e iOS numa base só, substituindo a SPA React.
 > - **Backend:** reescrito em Kotlin no mesmo Quarkus, **de uma vez e junto com o Épico 1**. A persistência passa a ser `quarkus-mongodb-panache-kotlin`, no lugar do JNoSQL.
