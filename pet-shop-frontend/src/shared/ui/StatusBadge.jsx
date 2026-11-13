@@ -1,14 +1,14 @@
 const statusStyles = {
-  Agendado: 'bg-ocean text-white',
-  Concluido: 'bg-ink text-white',
-  Cancelado: 'bg-coral/15 text-coral'
+  Agendado: 'bg-primary-container text-on-primary-container',
+  Concluido: 'bg-surface-highest text-on-surface-variant',
+  Cancelado: 'bg-error-container text-on-error-container'
 };
 
 export function StatusBadge({ status }) {
   return (
     <span
-      className={`inline-flex min-w-24 justify-center rounded px-3 py-1 text-xs font-bold ${
-        statusStyles[status] ?? 'bg-ink/10 text-ink'
+      className={`inline-flex min-w-24 justify-center rounded-xl px-3 py-1 text-xs font-bold ${
+        statusStyles[status] ?? 'bg-surface-highest text-on-surface'
       }`}
     >
       {status}

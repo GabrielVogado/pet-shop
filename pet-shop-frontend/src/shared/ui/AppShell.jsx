@@ -15,18 +15,16 @@ export function AppShell({
 	children
 }) {
 	return (
-		<div className="min-h-screen bg-paper">
-			<header className="sticky top-0 z-20 border-b border-ink/10 bg-paper/95 backdrop-blur">
+		<div className="min-h-screen bg-surface">
+			<header className="sticky top-0 z-20 border-b border-outline-variant bg-surface/95 backdrop-blur">
 				<div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
 					<div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 						<div className="flex items-center gap-3">
-							<div className="grid h-11 w-11 place-items-center rounded-md bg-coral text-white shadow-soft">
-								<PawPrint size={23} />
-							</div>
+							<img src="/pertim-simbolo.svg" alt="" className="h-11 w-11" />
 							<div>
-								<h1 className="text-xl font-bold tracking-normal text-ink">PetCare Agenda</h1>
-								<p className="text-sm text-ink/60">
-									Tutor: <span className="font-semibold text-ink">{tutor.name}</span>
+								<h1 className="text-xl font-bold tracking-normal text-on-surface">PetCare Agenda</h1>
+								<p className="text-sm text-on-surface-variant">
+									Tutor: <span className="font-semibold text-on-surface">{tutor.name}</span>
 									{activePet ? ` | Pet ativo: ${activePet.name}` : ' | Cadastre seu primeiro pet'}
 								</p>
 							</div>
@@ -35,7 +33,7 @@ export function AppShell({
 						<button
 							type="button"
 							onClick={onLogout}
-							className="flex min-h-10 items-center justify-center gap-2 rounded border border-ink/10 bg-white px-3 text-sm font-bold text-ink/70 transition hover:bg-mint hover:text-ink focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2"
+							className="flex min-h-10 items-center justify-center gap-2 rounded-xl border border-outline-variant bg-surface-lowest px-3 text-sm font-bold text-on-surface-variant transition hover:bg-primary-container hover:text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
 						>
 							<LogOut size={17} />
 							Sair
@@ -43,7 +41,7 @@ export function AppShell({
 					</div>
 
 					{pets.length > 0 && (
-						<div className="flex gap-2 overflow-x-auto rounded-md border border-ink/10 bg-white p-1 shadow-sm">
+						<div className="flex gap-2 overflow-x-auto rounded-2xl border border-outline-variant bg-surface-lowest p-1">
 							{pets.map((pet) => {
 								const isActive = activePetId === pet.id;
 
@@ -52,8 +50,8 @@ export function AppShell({
 										key={pet.id}
 										type="button"
 										onClick={() => onPetChange(pet.id)}
-										className={`flex min-h-10 shrink-0 items-center gap-2 rounded px-3 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2 ${
-											isActive ? 'bg-ocean text-white' : 'text-ink/65 hover:bg-mint hover:text-ink'
+										className={`flex min-h-10 shrink-0 items-center gap-2 rounded-xl px-3 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+											isActive ? 'bg-primary text-on-primary' : 'text-on-surface-variant hover:bg-primary-container hover:text-on-surface'
 										}`}
 									>
 										<PawPrint size={16} />
@@ -64,7 +62,7 @@ export function AppShell({
 						</div>
 					)}
 
-					<nav className="flex gap-2 overflow-x-auto rounded-md border border-ink/10 bg-white p-1 shadow-sm">
+					<nav className="flex gap-2 overflow-x-auto rounded-2xl border border-outline-variant bg-surface-lowest p-1">
 						{tabs.map((tab) => {
 							const Icon = tab.icon || PawPrint;
 							const isActive = activeTab === tab.id;
@@ -75,10 +73,10 @@ export function AppShell({
 									type="button"
 									onClick={() => onTabChange(tab.id)}
 									disabled={!activePet}
-									className={`flex min-h-10 shrink-0 items-center gap-2 rounded px-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-45 focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2 ${
+									className={`flex min-h-10 shrink-0 items-center gap-2 rounded-xl px-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-45 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
 										isActive
-											? 'bg-ink text-white'
-											: 'text-ink/65 hover:bg-mint hover:text-ink'
+											? 'bg-primary text-on-primary'
+											: 'text-on-surface-variant hover:bg-primary-container hover:text-on-surface'
 									}`}
 								>
 									<Icon size={17} />
@@ -92,17 +90,17 @@ export function AppShell({
 
 			<main className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8">
 				{notifications.length > 0 && (
-					<section className="rounded-md border border-coral/20 bg-white p-4 shadow-soft" role="region" aria-label="Notificações do petshop">
+					<section className="rounded-2xl border border-primary/20 bg-surface-lowest p-4" role="region" aria-label="Notificações do petshop">
 						<div className="flex items-center gap-2">
-							<Bell size={18} className="text-coral" aria-hidden="true" />
-							<h2 className="font-bold text-ink">Notificações do petshop</h2>
+							<Bell size={18} className="text-primary" aria-hidden="true" />
+							<h2 className="font-bold text-on-surface">Notificações do petshop</h2>
 						</div>
 						<div className="mt-3 space-y-2">
 							{notifications.slice(0, 3).map((notification) => (
-								<article key={notification.id} className="rounded border border-ink/10 bg-paper p-3">
-									<p className="text-sm font-bold text-ink">{notification.title}</p>
-									<p className="mt-1 text-sm text-ink/65">{notification.message}</p>
-									<p className="mt-1 text-xs font-semibold text-ink/45">{notification.createdAt}</p>
+								<article key={notification.id} className="rounded-xl border border-outline-variant bg-surface p-3">
+									<p className="text-sm font-bold text-on-surface">{notification.title}</p>
+									<p className="mt-1 text-sm text-on-surface-variant">{notification.message}</p>
+									<p className="mt-1 text-xs font-semibold text-on-surface-variant">{notification.createdAt}</p>
 								</article>
 							))}
 						</div>

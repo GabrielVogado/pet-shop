@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Building2, Dog, LogIn, PawPrint, UserPlus, Loader2 } from 'lucide-react';
+import { Building2, Dog, LogIn, UserPlus, Loader2 } from 'lucide-react';
 import { Field } from '../../../shared/ui/Field';
 
 const initialRegister = {
@@ -116,23 +116,21 @@ export function AuthScreen({ onRegister, onLogin }) {
 	}
 
 	return (
-		<main className="min-h-screen bg-paper px-4 py-8 sm:px-6">
+		<main className="min-h-screen bg-surface px-4 py-8 sm:px-6">
 			<div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
 				<section className="space-y-5">
 					<div className="flex items-center gap-3">
-						<div className="grid h-12 w-12 place-items-center rounded-md bg-coral text-white shadow-soft">
-							<PawPrint size={25} />
-						</div>
+						<img src="/pertim-simbolo.svg" alt="" className="h-12 w-12" />
 						<div>
-							<h1 className="text-2xl font-bold text-ink">PetCare Agenda</h1>
-							<p className="text-sm text-ink/60">Gestão para tutores, pets e um petshop</p>
+							<h1 className="text-2xl font-bold text-on-surface">PetCare Agenda</h1>
+							<p className="text-sm text-on-surface-variant">Gestão para tutores, pets e um petshop</p>
 						</div>
 					</div>
 					<div className="space-y-3">
-						<h2 className="text-3xl font-bold text-ink sm:text-4xl">
+						<h2 className="text-3xl font-bold text-on-surface sm:text-4xl">
 							Cadastros separados para clientes e petshop.
 						</h2>
-						<p className="max-w-xl text-base leading-7 text-ink/70">
+						<p className="max-w-xl text-base leading-7 text-on-surface-variant">
 							Tutores gerenciam seus pets e agendamentos. Donos de petshop acessam um dashboard
 							do único estabelecimento cadastrado no sistema.
 						</p>
@@ -144,16 +142,16 @@ export function AuthScreen({ onRegister, onLogin }) {
 					</div>
 				</section>
 
-				<section className="rounded-md border border-ink/10 bg-white p-5 shadow-soft">
-					<div className="grid grid-cols-2 rounded-md bg-paper p-1">
+				<section className="rounded-2xl border border-outline-variant bg-surface-lowest p-5">
+					<div className="grid grid-cols-2 rounded-2xl bg-surface p-1">
 						<button
 							type="button"
 							onClick={() => {
 								setMode('login');
 								setMessage('');
 							}}
-							className={`flex min-h-11 items-center justify-center gap-2 rounded text-sm font-bold focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2 ${
-								mode === 'login' ? 'bg-ink text-white' : 'text-ink/65 hover:bg-mint'
+							className={`flex min-h-11 items-center justify-center gap-2 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+								mode === 'login' ? 'bg-primary text-on-primary' : 'text-on-surface-variant hover:bg-primary-container'
 							}`}
 						>
 							<LogIn size={17} />
@@ -165,8 +163,8 @@ export function AuthScreen({ onRegister, onLogin }) {
 								setMode('register');
 								setMessage('');
 							}}
-							className={`flex min-h-11 items-center justify-center gap-2 rounded text-sm font-bold focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2 ${
-								mode === 'register' ? 'bg-ink text-white' : 'text-ink/65 hover:bg-mint'
+							className={`flex min-h-11 items-center justify-center gap-2 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+								mode === 'register' ? 'bg-primary text-on-primary' : 'text-on-surface-variant hover:bg-primary-container'
 							}`}
 						>
 							<UserPlus size={17} />
@@ -177,12 +175,12 @@ export function AuthScreen({ onRegister, onLogin }) {
 					{message && (
 						<div
 							role="alert"
-							className={`mt-4 rounded border px-3 py-2 text-sm font-semibold ${
+							className={`mt-4 rounded-xl border px-3 py-2 text-sm font-semibold ${
 								messageType === 'error'
-									? 'border-coral/20 bg-coral/10 text-coral'
+									? 'border-error/20 bg-error-container text-on-error-container'
 									: messageType === 'success'
-									? 'border-ocean/20 bg-mint text-ocean'
-									: 'border-ocean/20 bg-mint text-ocean'
+									? 'border-primary/20 bg-primary-container text-on-primary-container'
+									: 'border-primary/20 bg-primary-container text-on-primary-container'
 							}`}
 						>
 							{message}
@@ -208,7 +206,7 @@ export function AuthScreen({ onRegister, onLogin }) {
 							<button
 								type="submit"
 								disabled={loadingLogin}
-								className="flex min-h-11 w-full items-center justify-center gap-2 rounded bg-coral px-4 text-sm font-bold text-white transition hover:bg-coral-hover focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-ink/20 disabled:text-ink/45"
+								className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-bold text-on-primary transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-surface-highest disabled:text-on-surface-variant"
 							>
 								{loadingLogin ? (
 									<Loader2 size={17} className="animate-spin" />
@@ -217,14 +215,14 @@ export function AuthScreen({ onRegister, onLogin }) {
 								)}
 								{loadingLogin ? 'Entrando...' : 'Entrar'}
 							</button>
-							<div className="space-y-1 text-xs text-ink/55">
+							<div className="space-y-1 text-xs text-on-surface-variant">
 								<p>Use suas credenciais ou crie uma conta na aba Cadastro.</p>
 							</div>
 						</form>
 					) : (
 						<form className="mt-5 space-y-5" onSubmit={submitRegister}>
 							<div>
-								<p className="text-sm font-bold text-ink">{selectedRoleLabel}</p>
+								<p className="text-sm font-bold text-on-surface">{selectedRoleLabel}</p>
 								<div className="mt-3 grid gap-3 sm:grid-cols-2">
 									<ProfileCard
 										icon={Dog}
@@ -260,7 +258,7 @@ export function AuthScreen({ onRegister, onLogin }) {
 							<button
 								type="submit"
 								disabled={!registerForm.role || loadingRegister}
-								className="flex min-h-11 w-full items-center justify-center gap-2 rounded bg-coral px-4 text-sm font-bold text-white transition hover:bg-coral-hover focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-ink/20 disabled:text-ink/45"
+								className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-bold text-on-primary transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-surface-highest disabled:text-on-surface-variant"
 							>
 								{loadingRegister ? (
 									<Loader2 size={17} className="animate-spin" />
@@ -305,19 +303,19 @@ function TutorFields({ form, includeFirstPet, onIncludeFirstPet, onChange, onPet
 				/>
 			</div>
 
-			<label className="flex items-center gap-2 rounded border border-ink/10 bg-paper p-3 text-sm font-bold text-ink/70">
+			<label className="flex items-center gap-2 rounded-xl border border-outline-variant bg-surface p-3 text-sm font-bold text-on-surface-variant">
 				<input
 					type="checkbox"
 					id="include-first-pet"
 					checked={includeFirstPet}
 					onChange={(event) => onIncludeFirstPet(event.target.checked)}
-					className="h-4 w-4 accent-coral focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
+					className="h-4 w-4 accent-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
 				/>
 				Adicionar primeiro pet agora
 			</label>
 
 			{includeFirstPet && (
-				<div className="grid gap-4 rounded border border-ink/10 bg-paper p-4 sm:grid-cols-4">
+				<div className="grid gap-4 rounded-xl border border-outline-variant bg-surface p-4 sm:grid-cols-4">
 					<Field
 						label="Nome do pet"
 						id="pet-name"
@@ -325,12 +323,12 @@ function TutorFields({ form, includeFirstPet, onIncludeFirstPet, onChange, onPet
 						onChange={(value) => onPetChange('name', value)}
 					/>
 					<label className="block">
-						<span className="text-sm font-bold text-ink/70">Espécie</span>
+						<span className="text-sm font-bold text-on-surface-variant">Espécie</span>
 						<select
 							id="pet-species"
 							value={form.firstPet.species}
 							onChange={(event) => onPetChange('species', event.target.value)}
-							className="mt-1 min-h-11 w-full rounded border border-ink/10 bg-white px-3 text-sm text-ink outline-none transition focus:border-ocean focus:ring-2 focus:ring-ocean/15"
+							className="mt-1 min-h-11 w-full rounded-xl border border-outline-variant bg-surface-lowest px-3 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15"
 						>
 							<option>Cachorro</option>
 							<option>Gato</option>
@@ -382,14 +380,14 @@ function OwnerFields({ form, onChange }) {
 				/>
 			</div>
 
-			<div className="grid gap-4 rounded border border-ink/10 bg-paper p-4 sm:grid-cols-[1fr_0.9fr]">
+			<div className="grid gap-4 rounded-xl border border-outline-variant bg-surface p-4 sm:grid-cols-[1fr_0.9fr]">
 				<Field
 					label="Razão social / Nome da loja"
 					id="owner-business-name"
 					value={form.businessName}
 					onChange={(value) => onChange('businessName', value)}
 				/>
-				<div className="rounded border border-ink/10 bg-white px-3 py-2 text-sm text-ink/65">
+				<div className="rounded-xl border border-outline-variant bg-surface-lowest px-3 py-2 text-sm text-on-surface-variant">
 					Este cadastro usa automaticamente o petshop único do sistema.
 				</div>
 			</div>
@@ -402,23 +400,23 @@ function ProfileCard({ icon: Icon, title, text, selected, onClick }) {
 		<button
 			type="button"
 			onClick={onClick}
-			className={`min-h-36 rounded-md border p-4 text-left transition focus:outline-none focus:ring-2 focus:ring-ocean focus:ring-offset-2 ${
+			className={`min-h-36 rounded-2xl border p-4 text-left transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
 				selected
-					? 'border-ocean bg-mint shadow-soft'
-					: 'border-ink/10 bg-white hover:border-ocean/40 hover:bg-paper'
+					? 'border-primary bg-primary-container'
+					: 'border-outline-variant bg-surface-lowest hover:border-primary/40 hover:bg-surface'
 			}`}
 		>
 			<div className="flex items-start gap-3">
 				<div
-					className={`grid h-11 w-11 place-items-center rounded ${
-						selected ? 'bg-ocean text-white' : 'bg-paper text-coral'
+					className={`grid h-11 w-11 place-items-center rounded-xl ${
+						selected ? 'bg-primary text-on-primary' : 'bg-surface text-primary'
 					}`}
 				>
 					<Icon size={22} />
 				</div>
 				<div>
-					<h3 className="font-bold text-ink">{title}</h3>
-					<p className="mt-2 text-sm leading-6 text-ink/60">{text}</p>
+					<h3 className="font-bold text-on-surface">{title}</h3>
+					<p className="mt-2 text-sm leading-6 text-on-surface-variant">{text}</p>
 				</div>
 			</div>
 		</button>
@@ -427,9 +425,9 @@ function ProfileCard({ icon: Icon, title, text, selected, onClick }) {
 
 function InfoBox({ title, text }) {
 	return (
-		<div className="rounded-md border border-ink/10 bg-white p-4 shadow-sm">
-			<h3 className="font-bold text-ink">{title}</h3>
-			<p className="mt-1 text-sm text-ink/60">{text}</p>
+		<div className="rounded-2xl border border-outline-variant bg-surface-lowest p-4">
+			<h3 className="font-bold text-on-surface">{title}</h3>
+			<p className="mt-1 text-sm text-on-surface-variant">{text}</p>
 		</div>
 	);
 }

@@ -365,7 +365,7 @@ O painel web da loja usa o mesmo tema da seção 8.1; nas telas largas só muda 
 | Página **Identidade** no Figma, com símbolo, paleta e amostra de tipos | A fazer no Figma. No Open Design (projeto **Pertim – telas e fluxos**), a página de identidade e componentes já mostra símbolo, ícone, assinatura, paleta, temas claro e escuro, tipos e componentes |
 | Telas novas da v1.1 de [Telas e fluxos](Telas-e-Fluxos-v1.1.md) | Desenhadas com a identidade no Open Design |
 | Ícone do app, splash e capa da Play Store | A fazer, depois da versão final do símbolo |
-| Frontend React atual | Não muda: descreve o código atual e será reescrito conforme o ADR-010, com os tokens da seção 8.1 |
+| Frontend React atual | Tokens da seção 8.1 aplicados (`src/shared/tema/tokens.css`, `tailwind.config.js`), fontes Bricolage Grotesque e Figtree empacotadas, símbolo no cabeçalho e na tela de entrada, tema claro e escuro pelo sistema. O nome exibido continua "PetCare Agenda" até a busca no INPI (pendência 1). Próximas fatias: componentes base (botão, campo, selo, cartão) e telas novas da v1.1 |
 
 ---
 
