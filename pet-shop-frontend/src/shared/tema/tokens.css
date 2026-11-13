@@ -1,0 +1,47 @@
+/* Tokens da identidade Pertim (Documentos/03-ui-ux/Identidade-Visual-v1.0.md, seção 8.1). Trios RGB para o Tailwind aplicar transparência. */
+:root {
+  color-scheme: light;
+  --c-primary: 31 91 74;          --c-on-primary: 255 255 255;
+  --c-primary-container: 220 235 227; --c-on-primary-container: 14 42 34;
+  --c-secondary: 245 184 46;      --c-on-secondary: 20 35 30;
+  --c-secondary-container: 253 240 207; --c-on-secondary-container: 91 63 0;
+  --c-surface: 246 248 244;       --c-on-surface: 20 35 30;
+  --c-surface-container-lowest: 255 255 255;
+  --c-surface-container-highest: 230 236 232;
+  --c-on-surface-variant: 74 90 83;
+  --c-outline: 122 138 131;       --c-outline-variant: 220 227 222;
+  --c-error: 179 38 30;           --c-on-error: 255 255 255;
+  --c-error-container: 249 222 220; --c-on-error-container: 65 14 11;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --c-primary: 143 211 184;       --c-on-primary: 10 42 32;
+    --c-primary-container: 31 91 74; --c-on-primary-container: 220 235 227;
+    --c-secondary: 245 184 46;      --c-on-secondary: 20 35 30;
+    --c-secondary-container: 74 58 16; --c-on-secondary-container: 253 240 207;
+    --c-surface: 15 23 20;          --c-on-surface: 227 236 231;
+    --c-surface-container-lowest: 23 33 29;
+    --c-surface-container-highest: 38 49 44;
+    --c-on-surface-variant: 169 184 177;
+    --c-outline: 117 133 126;       --c-outline-variant: 42 54 49;
+    --c-error: 242 184 181;         --c-on-error: 96 20 16;
+    --c-error-container: 140 29 24; --c-on-error-container: 249 222 220;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --c-primary: 143 211 184;       --c-on-primary: 10 42 32;
+  --c-primary-container: 31 91 74; --c-on-primary-container: 220 235 227;
+  --c-secondary: 245 184 46;      --c-on-secondary: 20 35 30;
+  --c-secondary-container: 74 58 16; --c-on-secondary-container: 253 240 207;
+  --c-surface: 15 23 20;          --c-on-surface: 227 236 231;
+  --c-surface-container-lowest: 23 33 29;
+  --c-surface-container-highest: 38 49 44;
+  --c-on-surface-variant: 169 184 177;
+  --c-outline: 117 133 126;       --c-outline-variant: 42 54 49;
+  --c-error: 242 184 181;         --c-on-error: 96 20 16;
+  --c-error-container: 140 29 24; --c-on-error-container: 249 222 220;
+}

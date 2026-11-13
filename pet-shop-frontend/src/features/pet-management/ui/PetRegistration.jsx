@@ -58,18 +58,18 @@ export function PetRegistration({ pets, activePet, onAddPet, onUpdatePet }) {
 	}
 
 	return (
-		<section className="rounded-md border border-ink/10 bg-white p-5 shadow-soft">
+		<section className="rounded-2xl border border-outline-variant bg-surface-lowest p-5">
 			<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 				<div>
-					<p className="text-sm font-semibold uppercase tracking-wide text-ocean">Meus pets</p>
-					<h2 className="mt-1 text-xl font-bold text-ink">
+					<p className="text-sm font-semibold uppercase tracking-wide text-primary">Meus pets</p>
+					<h2 className="mt-1 text-xl font-bold text-on-surface">
 						{pets.length > 0 ? `${pets.length} pet(s) cadastrados` : 'Cadastre seu primeiro pet'}
 					</h2>
 				</div>
 				<button
 					type="button"
 					onClick={() => setIsOpen((current) => !current)}
-					className="flex min-h-10 items-center justify-center gap-2 rounded bg-ink px-3 text-sm font-bold text-white transition hover:bg-ink/90"
+					className="flex min-h-10 items-center justify-center gap-2 rounded-xl bg-primary px-3 text-sm font-bold text-on-primary transition hover:bg-primary/90"
 				>
 					<Plus size={17} />
 					Novo pet
@@ -80,11 +80,11 @@ export function PetRegistration({ pets, activePet, onAddPet, onUpdatePet }) {
 				<form className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-5" onSubmit={submitPet}>
 					<Field label="Nome" value={form.name} onChange={(value) => updateField('name', value)} />
 					<label className="block">
-						<span className="text-sm font-bold text-ink/70">Especie</span>
+						<span className="text-sm font-bold text-on-surface-variant">Especie</span>
 						<select
 							value={form.species}
 							onChange={(event) => updateField('species', event.target.value)}
-							className="mt-1 min-h-11 w-full rounded border border-ink/10 bg-white px-3 text-sm text-ink outline-none transition focus:border-ocean focus:ring-2 focus:ring-ocean/15"
+							className="mt-1 min-h-11 w-full rounded-xl border border-outline-variant bg-surface-lowest px-3 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15"
 						>
 							<option>Cachorro</option>
 							<option>Gato</option>
@@ -102,7 +102,7 @@ export function PetRegistration({ pets, activePet, onAddPet, onUpdatePet }) {
 					<div className="md:col-span-2 xl:col-span-5">
 						<button
 							type="submit"
-							className="flex min-h-11 w-full items-center justify-center gap-2 rounded bg-coral px-4 text-sm font-bold text-white transition hover:bg-[#dc5848] sm:w-auto"
+							className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-bold text-on-primary transition hover:bg-primary/90 sm:w-auto"
 						>
 							<Plus size={17} />
 							Cadastrar pet
@@ -113,17 +113,17 @@ export function PetRegistration({ pets, activePet, onAddPet, onUpdatePet }) {
 
 			{activePet && (
 				<div className="mt-6 space-y-4">
-					<p className="text-sm font-semibold uppercase tracking-wide text-ocean">Editar pet selecionado</p>
+					<p className="text-sm font-semibold uppercase tracking-wide text-primary">Editar pet selecionado</p>
 					{(() => {
 						const pet = activePet;
 						const isEditing = editingPetId === pet.id;
 
 						return (
-							<div key={pet.id} className="rounded border border-ink/10 bg-paper p-4">
+							<div key={pet.id} className="rounded-xl border border-outline-variant bg-surface p-4">
 								<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 									<div>
-										<h3 className="font-bold text-ink">{pet.name}</h3>
-										<p className="text-sm text-ink/60">
+										<h3 className="font-bold text-on-surface">{pet.name}</h3>
+										<p className="text-sm text-on-surface-variant">
 											{pet.species} {pet.breed ? `| ${pet.breed}` : ''}
 										</p>
 									</div>
@@ -131,7 +131,7 @@ export function PetRegistration({ pets, activePet, onAddPet, onUpdatePet }) {
 										<button
 											type="button"
 											onClick={() => startEditing(pet)}
-											className="flex min-h-10 items-center justify-center rounded bg-ink px-3 text-sm font-bold text-white transition hover:bg-ink/90"
+											className="flex min-h-10 items-center justify-center rounded-xl bg-primary px-3 text-sm font-bold text-on-primary transition hover:bg-primary/90"
 										>
 											Editar dados
 										</button>
@@ -149,11 +149,11 @@ export function PetRegistration({ pets, activePet, onAddPet, onUpdatePet }) {
 											onChange={(value) => updateEditField('name', value)}
 										/>
 										<label className="block">
-											<span className="text-sm font-bold text-ink/70">Especie</span>
+											<span className="text-sm font-bold text-on-surface-variant">Especie</span>
 											<select
 												value={editForm.species}
 												onChange={(event) => updateEditField('species', event.target.value)}
-												className="mt-1 min-h-11 w-full rounded border border-ink/10 bg-white px-3 text-sm text-ink outline-none transition focus:border-ocean focus:ring-2 focus:ring-ocean/15"
+												className="mt-1 min-h-11 w-full rounded-xl border border-outline-variant bg-surface-lowest px-3 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15"
 											>
 												<option>Cachorro</option>
 												<option>Gato</option>
@@ -179,14 +179,14 @@ export function PetRegistration({ pets, activePet, onAddPet, onUpdatePet }) {
 										<div className="md:col-span-2 xl:col-span-5 flex gap-2">
 											<button
 												type="submit"
-												className="flex min-h-11 items-center justify-center rounded bg-ocean px-4 text-sm font-bold text-white transition hover:bg-ocean/90"
+												className="flex min-h-11 items-center justify-center rounded-xl bg-primary px-4 text-sm font-bold text-on-primary transition hover:bg-primary/90"
 											>
 												Salvar alteracoes
 											</button>
 											<button
 												type="button"
 												onClick={cancelEditing}
-												className="flex min-h-11 items-center justify-center rounded border border-ink/20 bg-white px-4 text-sm font-bold text-ink/70 transition hover:bg-paper"
+												className="flex min-h-11 items-center justify-center rounded-xl border border-outline-variant bg-surface-lowest px-4 text-sm font-bold text-on-surface-variant transition hover:bg-surface"
 											>
 												Cancelar
 											</button>
