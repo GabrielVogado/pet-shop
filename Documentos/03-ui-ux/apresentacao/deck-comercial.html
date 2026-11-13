@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Pertim – convite para a Agro Mendes</title>
+<link rel="stylesheet" href="pertim.css">
+<style>
+@page { size: 1920px 1080px; margin: 0; }
+body { margin: 0; background: #888; counter-reset: pg; }
+.s { width: 1920px; height: 1080px; background: var(--surface); padding: 80px 104px 96px; display: flex; flex-direction: column; gap: 36px; page-break-after: always; overflow: hidden; position: relative; counter-increment: pg; }
+.s h1 { font: 800 112px/1 var(--font-title); margin: 0; letter-spacing: -2px; }
+.s h2 { font: 800 60px/68px var(--font-title); margin: 0; letter-spacing: -0.5px; max-width: 1500px; }
+.s h3 { font: 700 32px/40px var(--font-title); margin: 0; }
+.s .k { font: 700 20px/28px var(--font-body); color: var(--primary); text-transform: uppercase; letter-spacing: 3px; }
+.s p, .s li { font: 400 28px/40px var(--font-body); margin: 0; }
+.s .lead { font: 400 32px/46px var(--font-body); color: var(--on-surface-variant); max-width: 1500px; }
+.s ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 22px; }
+.s ul li { padding-left: 52px; position: relative; }
+.s ul li::before { content: ""; position: absolute; left: 0; top: 6px; width: 30px; height: 30px; border-radius: 50%; background: var(--primary-container) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.5 16.2 5.8 12.5l-1.3 1.3 5 5 10-10-1.3-1.3z' fill='%231F5B4A'/%3E%3C/svg%3E") center/22px no-repeat; }
+.split { display: grid; grid-template-columns: 700px 1fr; gap: 72px; flex: 1; align-items: center; }
+.split.wide { grid-template-columns: 600px 1fr; }
+.stack { display: flex; flex-direction: column; gap: 28px; }
+.shots { display: flex; gap: 36px; justify-content: center; align-items: center; }
+.shots figure { margin: 0; text-align: center; }
+.shots figcaption { font: 600 20px/28px var(--font-body); margin-top: 14px; color: var(--on-surface-variant); }
+.cel img { height: 690px; display: block; border-radius: 32px; box-shadow: 0 20px 48px rgba(20,35,30,.18); border: 6px solid #14231E; }
+.cel.sm img { height: 640px; }
+.wb img { width: 1000px; display: block; border-radius: 16px; box-shadow: 0 20px 48px rgba(20,35,30,.16); border: 1px solid var(--outline-variant); }
+.wb.sm img { width: 900px; }
+.note { background: var(--secondary-container); color: var(--on-secondary-container); border-radius: 16px; padding: 22px 28px; font: 500 24px/34px var(--font-body) !important; }
+.box { background: var(--surface-lowest); border: 1px solid var(--outline-variant); border-radius: 24px; padding: 36px 40px; display: flex; flex-direction: column; gap: 14px; }
+.box p { font-size: 25px; line-height: 36px; color: var(--on-surface-variant); }
+.ic { width: 64px; height: 64px; border-radius: 18px; background: var(--primary-container); color: var(--primary); display: flex; align-items: center; justify-content: center; font-family: "Material Symbols Rounded"; font-size: 38px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+.dark { background: var(--pinheiro); color: #fff; }
+.dark .k { color: var(--girassol); }
+.dark .lead { color: #DCEBE3; }
+.pl { background: #FFE58A; color: #5B3F00; border-radius: 8px; padding: 0 10px; font-weight: 700; white-space: nowrap; }
+.foot { position: absolute; bottom: 36px; left: 104px; right: 104px; display: flex; justify-content: space-between; font: 600 18px var(--font-body); color: var(--on-surface-variant); }
+.foot::after { content: counter(pg); }
+.dark .foot { color: #9FC4B5; }
+.steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+.step { background: var(--surface-lowest); border: 1px solid var(--outline-variant); border-radius: 24px; padding: 30px 26px; display: flex; flex-direction: column; gap: 14px; }
+.step b.n { font: 800 52px/1 var(--font-title); color: var(--girassol); }
+.step h3 { font-size: 27px; line-height: 34px; }
+.step p { font-size: 22px; line-height: 31px; color: var(--on-surface-variant); }
+.who { font: 700 18px/24px var(--font-body); text-transform: uppercase; letter-spacing: 2px; }
+.who.t { color: #8A5A00; } .who.l { color: var(--primary); }
+table.cmp { border-collapse: separate; border-spacing: 0; width: 100%; background: var(--surface-lowest); border-radius: 24px; overflow: hidden; border: 1px solid var(--outline-variant); }
+table.cmp th { font: 700 24px/32px var(--font-title); text-align: left; padding: 22px 32px; background: var(--surface-highest); }
+table.cmp th:last-child { background: var(--pinheiro); color: #fff; }
+table.cmp td { font: 400 25px/35px var(--font-body); padding: 20px 32px; border-top: 1px solid var(--outline-variant); vertical-align: top; }
+table.cmp td:first-child { font-weight: 700; width: 360px; }
+table.cmp td:nth-child(2) { color: var(--on-surface-variant); }
+.big { font: 800 150px/1 var(--font-title); color: var(--girassol); letter-spacing: -3px; }
+.faq { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 56px; }
+.faq h3 { font-size: 28px; line-height: 36px; margin-bottom: 6px; }
+.faq p { font-size: 23px; line-height: 33px; color: var(--on-surface-variant); }
+</style></head><body>
+
+<!-- 1 Capa -->
+<section class="s dark" style="justify-content:center;gap:28px">
+  <img src="../marca/pertim-simbolo-negativo.svg" width="150" alt="Símbolo Pertim">
+  <h1 style="font-size:150px">pertim</h1>
+  <p style="font:700 48px/58px var(--font-title);color:#F5B82E">O pet shop pertinho de você.</p>
+  <p class="lead" style="margin-top:40px;font-size:36px;line-height:50px">Um convite para a <b style="color:#fff">Agro Mendes</b>:<br>ser a primeira loja do Pertim e usar o sistema <b style="color:#fff">sem pagar mensalidade, para sempre</b>.</p>
+  <div class="foot"><span>Pertim · convite para a loja parceira</span></div>
+</section>
+
+<!-- 2 Carta -->
+<section class="s">
+  <span class="k">Antes de tudo</span>
+  <h2>Olá, Alessandro. Queremos construir o Pertim com a sua loja.</h2>
+  <p class="lead">O Pertim é um sistema que liga o seu pet shop aos donos de pet do bairro: eles encontram a sua loja, pedem o horário pelo celular e já pagam o sinal. Você só aceita e atende.</p>
+  <div class="grid3" style="margin-top:12px">
+    <div class="box"><div class="ic">storefront</div><h3>O que é</h3><p>Um app gratuito para os seus clientes e um painel para a sua loja, que concentram pedidos, agenda, pagamento do sinal e lembretes.</p></div>
+    <div class="box"><div class="ic">handshake</div><h3>O convite</h3><p>Ser a primeira loja a usar o Pertim e nos ajudar a deixá-lo do jeito que um pet shop de verdade precisa.</p></div>
+    <div class="box"><div class="ic">workspace_premium</div><h3>O que você ganha</h3><p>Mensalidade gratuita para sempre e um sistema pensado a partir da rotina da sua loja.</p></div>
+  </div>
+  <p class="note" style="margin-top:8px">O Pertim está na fase de projeto: as telas deste material são os desenhos do sistema. É justamente por isso que a sua opinião agora vale tanto, porque ainda dá para mudar tudo.</p>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 3 Dores -->
+<section class="s">
+  <span class="k">O dia a dia de um pet shop</span>
+  <h2>Isso parece familiar?</h2>
+  <div class="grid3" style="flex:1;align-content:center">
+    <div class="box"><div class="ic">chat</div><h3>WhatsApp que não para</h3><p>Metade do dia vai em responder preço, horário livre e "tem vaga amanhã?".</p></div>
+    <div class="box"><div class="ic">event_busy</div><h3>Cliente que não aparece</h3><p>O horário fica reservado, outro cliente foi recusado e a loja perde o atendimento.</p></div>
+    <div class="box"><div class="ic">edit_calendar</div><h3>Agenda no caderno</h3><p>Dois banhos no mesmo horário, remarcação esquecida, recado que ninguém anotou.</p></div>
+    <div class="box"><div class="ic">payments</div><h3>Sinal difícil de cobrar</h3><p>Pedir adiantamento por mensagem é chato, e conferir cada Pix toma tempo.</p></div>
+    <div class="box"><div class="ic">vaccines</div><h3>Cliente que some</h3><p>O tutor esquece o próximo banho ou o reforço da vacina e acaba indo a outro lugar.</p></div>
+    <div class="box"><div class="ic">travel_explore</div><h3>Difícil de ser achado</h3><p>Quem mora perto e procura um pet shop pelo celular nem sempre encontra a sua loja.</p></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 4 Duas pontas -->
+<section class="s">
+  <span class="k">O que é o Pertim</span>
+  <h2>Dois lados que conversam sozinhos</h2>
+  <div class="split wide" style="grid-template-columns:1fr 1fr;gap:56px">
+    <div class="stack">
+      <div class="box" style="gap:18px"><span class="who t">Para o seu cliente · grátis</span><h3>App do tutor</h3>
+        <p>No celular Android ou no navegador do computador. Ele encontra lojas perto, vê preços e avaliações, pede o horário, paga o sinal e guarda a carteira de vacinas de cada pet.</p></div>
+      <div class="box" style="gap:18px"><span class="who l">Para a sua loja</span><h3>Painel da loja</h3>
+        <p>No computador ou tablet da loja, pelo navegador. Você aceita pedidos, vê a agenda do dia, registra o atendimento, define preços e regras e responde avaliações.</p></div>
+      <p class="note">Quem tem iPhone também consegue usar: pelo navegador, no site do Pertim.</p>
+    </div>
+    <div class="shots"><figure class="cel sm"><img src="telas/t3.png" alt=""><figcaption>Sua loja no app do tutor</figcaption></figure><figure class="cel sm"><img src="telas/t7.png" alt=""><figcaption>A agenda do tutor</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 5 Jornada -->
+<section class="s">
+  <span class="k">Como funciona</span>
+  <h2>Do primeiro clique ao pet de banho tomado</h2>
+  <p class="lead">Cada etapa a seguir tem a sua própria página neste material.</p>
+  <div class="steps" style="flex:1;align-content:center">
+    <div class="step"><b class="n">1</b><span class="who t">Tutor</span><h3>Encontra a sua loja</h3><p>Busca "perto de mim" e vê preço, nota e regras.</p></div>
+    <div class="step"><b class="n">2</b><span class="who t">Tutor</span><h3>Pede um horário</h3><p>Só aparecem horários que a loja tem livre.</p></div>
+    <div class="step"><b class="n">3</b><span class="who t">Tutor</span><h3>Paga o sinal</h3><p>Pix, débito ou crédito. Só depois o pedido chega para você.</p></div>
+    <div class="step"><b class="n">4</b><span class="who l">Loja</span><h3>Aceita ou recusa</h3><p>Nada entra na agenda sem o seu "sim".</p></div>
+    <div class="step"><b class="n">5</b><span class="who l">Loja</span><h3>Atende e conclui</h3><p>Registra o que foi feito e o pet ganha histórico.</p></div>
+    <div class="step"><b class="n">6</b><span class="who t">Tutor</span><h3>Avalia e volta</h3><p>Recebe lembrete do próximo banho e da vacina.</p></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 6 Ser encontrado -->
+<section class="s">
+  <span class="k">Etapa 1 · ser encontrado</span>
+  <h2>A sua loja na vitrine do bairro</h2>
+  <div class="split">
+    <div class="stack"><ul>
+      <li>O tutor procura por <b>"perto de mim"</b>, por serviço, espécie, preço ou nota.</li>
+      <li>A página da sua loja mostra endereço, telefone, serviços com preço, avaliações e as suas regras de sinal e multa.</li>
+      <li>O cliente chega sabendo quanto vai pagar: menos pergunta repetida no WhatsApp.</li>
+      <li>Os preços são seus. O Pertim não sugere nem limita valores.</li></ul></div>
+    <div class="shots"><figure class="cel"><img src="telas/t2.png" alt=""><figcaption>Busca</figcaption></figure><figure class="cel"><img src="telas/t3.png" alt=""><figcaption>Página da loja</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 7 Pedido e sinal -->
+<section class="s">
+  <span class="k">Etapas 2 e 3 · pedido e sinal</span>
+  <h2>O pedido chega com o sinal já pago</h2>
+  <div class="split wide">
+    <div class="stack"><ul>
+      <li>O tutor escolhe pet, serviço e um horário que <b>a sua loja tem livre</b>.</li>
+      <li>Antes de confirmar, ele vê o total, o sinal e a multa em reais.</li>
+      <li>Paga o sinal por Pix, débito ou crédito. No Pix, tem 15 minutos.</li>
+      <li>Se não pagar a tempo, o pedido é descartado e você nem fica sabendo.</li></ul></div>
+    <div class="shots"><figure class="cel sm"><img src="telas/t4.png" alt=""><figcaption>Escolher horário</figcaption></figure><figure class="cel sm"><img src="telas/t5.png" alt=""><figcaption>Resumo com sinal e multa</figcaption></figure><figure class="cel sm"><img src="telas/t6.png" alt=""><figcaption>Sinal no Pix</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 8 Aceitar -->
+<section class="s">
+  <span class="k">Etapa 4 · você decide</span>
+  <h2>Nada entra na sua agenda sem o seu "sim"</h2>
+  <div class="split wide">
+    <div class="stack"><ul>
+      <li>Cada pedido mostra o serviço, o pet, o sinal pago e <b>quanto tempo falta para responder</b>.</li>
+      <li>Você vê o histórico do cliente: quantas vezes faltou e a nota que outras lojas deram.</li>
+      <li>Um clique para aceitar ou recusar. Se recusar, o sinal volta inteiro para o tutor.</li>
+      <li>Os pedidos aparecem na tela na hora, sem precisar atualizar.</li></ul></div>
+    <div class="shots"><figure class="wb"><img src="telas/w2.png" alt=""><figcaption>Painel da loja · pedidos pendentes</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 9 Prazo de aceite -->
+<section class="s">
+  <span class="k">Etapa 4 · prazo para responder</span>
+  <h2>Prazos claros para os dois lados</h2>
+  <p class="lead">O tutor sabe até quando a loja vai responder, e a loja sabe quanto tempo tem. O prazo depende de quando é o horário pedido:</p>
+  <table class="cmp" style="max-width:1400px" data-w><thead><tr><th>Horário pedido</th><th style="background:var(--surface-highest);color:inherit">Prazo da loja para responder</th></tr></thead><tbody>
+    <tr><td>Daqui a mais de 48 horas</td><td style="color:inherit">até 24 horas</td></tr>
+    <tr><td>Entre 24 e 48 horas</td><td style="color:inherit">até 12 horas</td></tr>
+    <tr><td>Em menos de 24 horas</td><td style="color:inherit">até 4 horas</td></tr></tbody></table>
+  <p class="note" style="max-width:1400px">O prazo sempre termina pelo menos 1 hora antes do horário. Antes de vencer, a loja recebe um aviso. Se ninguém responder, o pedido expira, o sinal volta para o tutor e ele recebe sugestões de outro horário.</p>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 10 Agenda -->
+<section class="s">
+  <span class="k">Agenda do dia</span>
+  <h2>A agenda se organiza sozinha</h2>
+  <div class="split wide">
+    <div class="stack"><ul>
+      <li>Grade por hora e por tipo de serviço, com quantos atendimentos cabem ao mesmo tempo.</li>
+      <li>Você diz, por exemplo, "2 banhos e 1 vacina por vez", e o Pertim <b>não deixa marcar além disso</b>.</li>
+      <li>Liga com o seu Google Agenda nos dois sentidos: pedido confirmado vai para lá, e compromisso de lá bloqueia o horário no app.</li></ul></div>
+    <div class="shots"><figure class="wb"><img src="telas/w3.png" alt=""><figcaption>Painel da loja · agenda do dia</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 11 Política -->
+<section class="s">
+  <span class="k">Sinal e multa · as regras são suas</span>
+  <h2>Menos faltas, sem você precisar cobrar ninguém</h2>
+  <div class="split wide">
+    <div class="stack"><ul>
+      <li>Você escolhe o <b>sinal</b>: de 0% (sem sinal) a 100% do serviço. Ele é abatido do valor final.</li>
+      <li>Você escolhe a <b>multa</b> para quem cancela em cima da hora ou falta: de 0% a 50% do total.</li>
+      <li>Até 2 horas antes, o tutor cancela ou remarca sem multa, em qualquer loja.</li>
+      <li>Imprevisto de um cliente fiel? Você pode dispensar a multa.</li>
+      <li>Mudou a regra? Vale só para pedidos novos.</li></ul></div>
+    <div class="shots"><figure class="wb"><img src="telas/w5.png" alt=""><figcaption>Painel da loja · política de cancelamento</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 12 Remarcar e cancelar -->
+<section class="s">
+  <span class="k">Remarcar e cancelar</span>
+  <h2>Imprevistos resolvidos sem troca de mensagens</h2>
+  <div class="split">
+    <div class="stack"><ul>
+      <li>O tutor remarca pelo app, e o sinal já pago continua valendo.</li>
+      <li>A remarcação também precisa do seu aceite. Se não der, o horário antigo continua marcado.</li>
+      <li>O tutor sempre vê, antes de cancelar, o que acontece com o dinheiro dele.</li>
+      <li>Se o cancelamento for da loja, o sinal volta inteiro para o cliente.</li></ul></div>
+    <div class="shots"><figure class="cel"><img src="telas/t8.png" alt=""><figcaption>O que acontece se cancelar</figcaption></figure><figure class="cel"><img src="telas/t25.png" alt=""><figcaption>Remarcar</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 13 Lembretes -->
+<section class="s">
+  <span class="k">Lembretes automáticos</span>
+  <h2>O Pertim lembra por você</h2>
+  <div class="split wide">
+    <div class="stack"><ul>
+      <li><b>Para o tutor</b>, no app e no WhatsApp: pedido aceito, lembrete antes do horário, atendimento concluído, <b>reforço da vacina e próximo banho</b>.</li>
+      <li><b>Para a loja</b>: pedido novo, prazo acabando, cancelamento, lembrete do dia e avaliação para responder.</li>
+      <li>Você escolhe onde quer ser avisado: no painel, por WhatsApp, SMS ou e-mail.</li>
+      <li>O custo das mensagens de WhatsApp e SMS já faz parte do Pertim.</li></ul></div>
+    <div class="shots"><figure class="cel sm"><img src="telas/t20.png" alt=""><figcaption>Avisos do tutor</figcaption></figure><figure class="wb" style="width:640px"><img src="telas/w12.png" alt="" style="width:640px"><figcaption>Avisos da loja</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 14 Atendimento e carteira -->
+<section class="s">
+  <span class="k">Etapa 5 · atendimento</span>
+  <h2>Atendeu, registrou: o pet ganha histórico</h2>
+  <div class="split wide">
+    <div class="stack"><ul>
+      <li>Ao concluir, você registra o que foi feito: banho, tosa, consulta ou vacina com lote e CRMV.</li>
+      <li>O registro vai para a <b>carteira de vacinas</b> do pet com o selo "Verificado pela loja".</li>
+      <li>O restante é pago pelo app ou na loja, como preferir. A nota fiscal pode ser anexada ao atendimento.</li>
+      <li>Cliente não veio? Um clique registra a falta e aplica a sua multa.</li></ul></div>
+    <div class="shots" style="gap:24px;justify-content:flex-start"><figure class="wb" style="width:700px"><img src="telas/w4.png" alt="" style="width:700px"><figcaption>Concluir atendimento</figcaption></figure><figure class="cel sm"><img src="telas/t9.png" alt=""><figcaption>Carteira do pet</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 15 Avaliações -->
+<section class="s">
+  <span class="k">Etapa 6 · avaliações</span>
+  <h2>Boa reputação que trabalha por você</h2>
+  <div class="split wide">
+    <div class="stack"><ul>
+      <li>Depois do atendimento, o tutor dá uma nota de 1 a 5 e pode deixar um comentário.</li>
+      <li><b>Direito de resposta:</b> o comentário espera 72 horas antes de ser publicado, para você responder antes.</li>
+      <li>Conteúdo ofensivo pode ser denunciado e é removido.</li>
+      <li>Você também avalia o cliente, de forma privada: outras lojas veem só o número de faltas e a nota média dele.</li></ul></div>
+    <div class="shots"><figure class="wb"><img src="telas/w7.png" alt=""><figcaption>Painel da loja · avaliações</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 16 Dinheiro -->
+<section class="s">
+  <span class="k">Seu dinheiro</span>
+  <h2>O dinheiro cai direto na conta da sua loja</h2>
+  <div class="split wide">
+    <div class="stack"><ul>
+      <li>Sinal e restante pagos pelo app vão para a <b>conta da sua loja</b> no provedor de pagamento.</li>
+      <li>O Pertim não recebe, não segura e não repassa o seu dinheiro.</li>
+      <li><b>Sem taxa do Pertim por atendimento.</b> Só existe a tarifa do provedor de pagamento, como em qualquer maquininha.</li>
+      <li>O Pertim não guarda dados de cartão dos seus clientes.</li></ul></div>
+    <div class="shots"><figure class="wb"><img src="telas/w10.png" alt=""><figcaption>Painel da loja · recebimento</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 17 Filiais e serviços -->
+<section class="s">
+  <span class="k">Serviços e filiais</span>
+  <h2>Do seu jeito, em uma ou várias unidades</h2>
+  <div class="split wide">
+    <div class="stack"><ul>
+      <li>Banho, tosa, vacina, consulta veterinária e <b>táxi pet</b>, com duração e preço seus, que podem variar pelo porte.</li>
+      <li>Tem filial? Cada unidade tem endereço, horário e agenda próprios, no mesmo login.</li>
+      <li>Consulta e vacina aparecem só nas unidades com veterinário cadastrado.</li>
+      <li>Táxi pet com o raio de atendimento que você definir.</li></ul></div>
+    <div class="shots"><figure class="wb"><img src="telas/w6.png" alt=""><figcaption>Painel da loja · serviços e capacidade</figcaption></figure></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 18 Antes e depois -->
+<section class="s">
+  <span class="k">Resumo</span>
+  <h2>O que muda na rotina da loja</h2>
+  <table class="cmp"><thead><tr><th>Situação</th><th>Hoje</th><th>Com o Pertim</th></tr></thead><tbody>
+    <tr><td>Marcar horário</td><td>Mensagem para lá e para cá</td><td>O cliente escolhe um horário livre e você aceita com um clique</td></tr>
+    <tr><td>Sinal</td><td>Pedir e conferir Pix um a um</td><td>O pedido só chega com o sinal pago, direto na conta da loja</td></tr>
+    <tr><td>Faltas</td><td>Prejuízo e vaga perdida</td><td>Sinal e multa definidos por você, aplicados automaticamente</td></tr>
+    <tr><td>Agenda</td><td>Caderno, conflitos e esquecimentos</td><td>Grade por serviço, com limite de vagas e Google Agenda</td></tr>
+    <tr><td>Cliente voltar</td><td>Depende da memória do tutor</td><td>Lembrete de banho e de vacina no WhatsApp e no app</td></tr>
+    <tr><td>Novos clientes</td><td>Boca a boca</td><td>Sua loja na busca "perto de mim", com nota e preços</td></tr></tbody></table>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 19 Oferta -->
+<section class="s dark" style="justify-content:center">
+  <span class="k">A nossa proposta</span>
+  <h2 style="color:#fff">A primeira loja do Pertim</h2>
+  <div style="display:flex;align-items:center;gap:72px;margin:24px 0">
+    <div class="big">R$ 0</div>
+    <p style="font:700 44px/56px var(--font-title);color:#fff">de mensalidade.<br>Para sempre.</p>
+  </div>
+  <ul style="max-width:1500px">
+    <li style="color:#fff">As outras lojas vão pagar uma mensalidade fixa. A Agro Mendes não paga, nunca.</li>
+    <li style="color:#fff">Todas as funções deste material, incluindo os avisos por WhatsApp e SMS, sem custo de mensalidade.</li>
+    <li style="color:#fff">Você ajuda a decidir como o Pertim vai ser: as suas sugestões chegam direto a quem está construindo.</li>
+    <li style="color:#fff">Sem taxa do Pertim por atendimento. Só a tarifa do provedor de pagamento, sobre o que você receber pelo app.</li></ul>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 20 O que pedimos -->
+<section class="s">
+  <span class="k">Em troca</span>
+  <h2>O que esperamos da loja piloto</h2>
+  <div class="grid2" style="flex:1;align-content:center">
+    <div class="box"><div class="ic">forum</div><h3>Contar como a loja funciona</h3><p>Uma conversa para entendermos a sua rotina: como marca, como cobra, o que mais dá trabalho.</p></div>
+    <div class="box"><div class="ic">visibility</div><h3>Olhar as telas e opinar</h3><p>Ver os desenhos antes de virarem sistema e dizer o que falta, o que sobra e o que confunde.</p></div>
+    <div class="box"><div class="ic">storefront</div><h3>Usar com clientes de verdade</h3><p>Quando a primeira versão estiver pronta, cadastrar seus serviços e preços e receber pedidos reais pelo Pertim.</p></div>
+    <div class="box"><div class="ic">rate_review</div><h3>Dar retorno sincero</h3><p>Avisar quando algo der errado ou atrapalhar o atendimento. Reclamação é o que mais nos ajuda.</p></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 21 Etapas do piloto -->
+<section class="s">
+  <span class="k">Como vai ser</span>
+  <h2>As etapas do piloto</h2>
+  <div class="steps" style="grid-template-columns:repeat(5,1fr);flex:1;align-content:center">
+    <div class="step"><b class="n">1</b><h3>Conversa inicial</h3><p>Conhecemos a loja, a equipe e a rotina de atendimento.</p></div>
+    <div class="step"><b class="n">2</b><h3>Revisão das telas</h3><p>Você vê os desenhos e ajustamos o que não fizer sentido para a loja.</p></div>
+    <div class="step"><b class="n">3</b><h3>Loja configurada</h3><p>Juntos cadastramos unidades, serviços, preços, sinal, multa e avisos.</p></div>
+    <div class="step"><b class="n">4</b><h3>Uso real</h3><p>Seus clientes começam a pedir pelo Pertim, ao lado do jeito de hoje.</p></div>
+    <div class="step"><b class="n">5</b><h3>Ajustes contínuos</h3><p>Corrigimos e melhoramos a partir do que a loja contar.</p></div>
+  </div>
+  <p class="note">Você não precisa largar o jeito atual de trabalhar: o Pertim entra aos poucos, ao lado do telefone e do WhatsApp da loja. As datas de cada etapa serão combinadas com você.</p>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 22 FAQ -->
+<section class="s">
+  <span class="k">Perguntas frequentes</span>
+  <h2>Antes que você pergunte</h2>
+  <div class="faq" style="flex:1;align-content:center">
+    <div><h3>Vou pagar alguma coisa?</h3><p>Mensalidade, nunca. Só a tarifa do provedor de pagamento sobre o que você receber pelo app. Pagamento feito na loja continua como hoje.</p></div>
+    <div><h3>Meus clientes pagam para usar?</h3><p>Não. O app é gratuito para o tutor.</p></div>
+    <div><h3>Preciso comprar algum equipamento?</h3><p>Não. O painel abre no navegador de um computador, notebook ou tablet com internet.</p></div>
+    <div><h3>Funcionários precisam de login próprio?</h3><p>Na primeira versão, a equipe toda usa o mesmo login da loja.</p></div>
+    <div><h3>E os dados dos meus clientes?</h3><p>Seguem a LGPD. Você vê a carteira de vacinas do pet que agendou com você e, depois, só com permissão do tutor.</p></div>
+    <div><h3>Quais animais posso atender?</h3><p>Todos. O sistema aceita qualquer espécie, e você decide quais pedidos aceita.</p></div>
+  </div>
+  <div class="foot"><span>Pertim · convite para a <span>Agro Mendes</span></span></div>
+</section>
+
+<!-- 23 CTA -->
+<section class="s dark" style="justify-content:center;gap:32px">
+  <img src="../marca/pertim-simbolo-negativo.svg" width="110" alt="Símbolo Pertim">
+  <span class="k">Próximo passo</span>
+  <h2 style="color:#fff;font-size:76px;line-height:86px">Topa ser a primeira loja do Pertim?</h2>
+  <p class="lead" style="font-size:34px;line-height:48px">Responda esta mensagem com um "topo" e marcamos a conversa inicial no dia e horário que for melhor para você. Pode ser na loja ou por videochamada.</p>
+  <div style="display:flex;gap:56px;margin-top:20px">
+    <div><p style="color:#9FC4B5;font-size:22px">Fale com</p><p style="font:700 34px/44px var(--font-title);color:#fff">Gabriel Vogado</p></div>
+    <div><p style="color:#9FC4B5;font-size:22px">WhatsApp</p><p style="font:700 34px/44px var(--font-title)">(61) 99851-4753</p></div>
+    <div><p style="color:#9FC4B5;font-size:22px">E-mail</p><p style="font:700 34px/44px var(--font-title)">devpointinnovations@gmail.com</p></div>
+  </div>
+  <div class="foot"><span>Pertim · o pet shop pertinho de você</span></div>
+</section>
+
+<script>
+(function(){var n=+new URLSearchParams(location.search).get('s');if(!n)return;
+document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.s').forEach(function(e,i){if(i!==n-1)e.remove();});document.body.style.background='transparent';});})();
+</script>
+</body></html>

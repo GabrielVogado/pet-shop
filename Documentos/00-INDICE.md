@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 11/11/2026 — Apresentação comercial para a loja piloto
+
+**O que mudou:** nova apresentação em `03-ui-ux/apresentacao/` para convidar o primeiro pet shop a testar o Pertim: 23 slides em linguagem de lojista, feitos para serem enviados e lidos sem apresentador. Mostram as dores do dia a dia, as seis etapas do sistema com as telas reais (busca, pedido, sinal, aceite e prazo, agenda e Google Agenda, sinal e multa, remarcação, lembretes, atendimento e carteira de vacinas, avaliações, recebimento direto na conta da loja, serviços e filiais), a oferta de mensalidade gratuita para sempre à loja piloto, o que se espera dela, as etapas do piloto, perguntas frequentes e o próximo passo. Vem em PDF, em PPT (cada slide é uma imagem) e em `deck-comercial.html`, a versão editável. A loja convidada é a Agro Mendes (Alessandro Mendes); o contato do PO (WhatsApp e e-mail) já está no último slide. Nada é prometido além do Documento Negocial v2.0 e não há datas. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 11/11/2026 — Frontend: React na web e Kotlin no Android
 
 **O que mudou:** um especialista mobile questionou o Flutter, e o PO decidiu: **web em React + Vite** (painel da loja e web do tutor) e **app Android em Kotlin nativo** com um módulo compartilhado pequeno em Kotlin Multiplatform (modelos da API, sinal, multa e prazos). Novos ADR-010 e ADR-011; o ADR-009 (Flutter) foi substituído e o ADR-006 mantém só o backend. Novo `02-arquitetura-tecnica/Reavaliacao-Frontend-v1.0.md` com a comparação das três opções. Ajustados a arquitetura-alvo, o contrato, o backlog (F-04, F-05, F-10 e F-11), a definição de pronto, o Documento Negocial, a estimativa de nuvem e as telas (sistema de design). Contrato, modelo de dados, diagramas de engenharia e wireframes não mudam. A `Identidade-Visual-v1.0.md` ainda tem trechos em Flutter (ícones e tokens em Dart) a adaptar para Tailwind e Compose. Nenhuma mudança de código.
