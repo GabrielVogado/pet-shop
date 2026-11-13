@@ -44,10 +44,9 @@ feature/* ──► develop ──► master ──► release/<tag>
 | `feature/<nome>` | `develop` | `develop` | Nova funcionalidade |
 | `bugfix/<nome>` ou `hotfix/<nome>` | `develop` | `develop` | Correção de bug em funcionalidade já entregue |
 | `doc/<nome>` | `develop` | `develop` | Somente documentação |
-| `chore/<nome>` | `develop` | `develop` | Manutenção sem mudança de comportamento (limpeza, build, dependências) |
 | `release/<versão>` | tag homologada | — | Produção, versão fixada |
 
-Nomes em minúsculas e kebab-case, por exemplo `feature/cadastro-varios-petshops`. Nunca use prefixos gerados automaticamente (ex.: `claude/`).
+Só esses prefixos valem (não existe `chore/`: manutenção, build e CI entram como `feature/`). Nomes em minúsculas e kebab-case, por exemplo `feature/cadastro-varios-petshops`. Nunca use prefixos gerados automaticamente (ex.: `claude/`).
 
 ### 3.2 Nova funcionalidade ou correção
 
