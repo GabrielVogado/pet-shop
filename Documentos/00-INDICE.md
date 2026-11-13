@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 13/11/2026 — Regras de git-flow
+
+**O que mudou:** a pedido do PO, `10-git-flow/MANUAL.md` passa a permitir só `feature/`, `hotfix/`, `doc/` e `release/` (saem `bugfix/` e `chore/`), e ganha as regras de qualidade dos PRs: trava de contagem de testes, cobertura mínima de 90% no código novo, conferência do CD do merge. O que depende de CI ainda inexistente está marcado com ⚠️. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 11/11/2026 — Apresentação comercial para a loja piloto
 
 **O que mudou:** nova apresentação em `03-ui-ux/apresentacao/` para convidar o primeiro pet shop a testar o Pertim: 23 slides em linguagem de lojista, feitos para serem enviados e lidos sem apresentador. Mostram as dores do dia a dia, as seis etapas do sistema com as telas reais (busca, pedido, sinal, aceite e prazo, agenda e Google Agenda, sinal e multa, remarcação, lembretes, atendimento e carteira de vacinas, avaliações, recebimento direto na conta da loja, serviços e filiais), a oferta de mensalidade gratuita para sempre à loja piloto, o que se espera dela, as etapas do piloto, perguntas frequentes e o próximo passo. Vem em PDF, em PPT (cada slide é uma imagem) e em `deck-comercial.html`, a versão editável. A loja convidada é a Agro Mendes (Alessandro Mendes); o contato do PO (WhatsApp e e-mail) já está no último slide. Nada é prometido além do Documento Negocial v2.0 e não há datas. Nenhuma mudança de código.
