@@ -1,4 +1,4 @@
-package com.petcare.service;
+package com.petcare.application.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,17 +22,17 @@ class AuthServiceTest {
 
     private RegistrationService service;
     private MongoUserRepository usuarios;
-    private BCryptPasswordEncoder BCryptPasswordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @BeforeEach
     void setUp() {
         service = new RegistrationService();
         usuarios = mock(MongoUserRepository.class);
-        BCryptPasswordEncoder = mock(BCryptPasswordEncoder.class);
+        passwordEncoder = mock(BCryptPasswordEncoder.class);
 
         service.usuarios = usuarios;
-        service.pets = mock(PetRepository.class);
-        service.BCryptPasswordEncoder = BCryptPasswordEncoder;
+        service.pets = mock(MongoPetRepository.class);
+        service.passwordEncoder = passwordEncoder;
     }
 
     @Test
@@ -49,7 +49,7 @@ class AuthServiceTest {
 
         when(usuarios.existsByEmail("owner@example.com")).thenReturn(false);
         when(usuarios.existsOwner()).thenReturn(false);
-        when(BCryptPasswordEncoder.hash("123456")).thenReturn("hash");
+        when(passwordEncoder.hash("123456")).thenReturn("hash");
         when(usuarios.insert(any(Usuario.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         Usuario created = service.register(request);
