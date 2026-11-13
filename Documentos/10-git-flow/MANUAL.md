@@ -89,19 +89,7 @@ Checks a exigir: `Backend (Quarkus)` e `Frontend (React + Vite)` na `develop` e 
 Workflows em `.github/workflows/`:
 
 | Workflow | Gatilho | Ação |
-|---|---|---|
-| `ci.yml` | PR para `develop` e `master`; push em `develop`/`master` | Um job por área, só roda se a área mudou: **Backend (Quarkus)** (`mvn verify`, Java 17) e **Frontend (React + Vite)** (`npm ci`, `npm test`, `npm run build`, Node 20). Cache de Maven e npm. |
-| `pr-origem-master.yml` | PR para `master` | **Origem do PR (master)**: só aceita PR vindo da `develop`. |
-
-- O teste do frontend é **bloqueante** (decisão do PO em 13/11/2026). Na criação do CI a `develop` tinha 4 de 6 testes falhando, então todo PR com mudança no frontend fica vermelho até consertá-los.
-- Os testes do backend são unitários, sem MongoDB. Quando entrar o primeiro teste de integração (`@QuarkusTest`): Testcontainers e `JWT_PUBLIC_KEY`/`JWT_PRIVATE_KEY` de teste por variável de ambiente.
-- O E2E (Playwright) e o `cd-*.yml` (deploy) ainda não existem.
-
----|---|---|
-| `ci.yml` | PR para `develop` e `master`; push em `develop`/`master` | `mvn test` no backend, `npm test` e `npm run build` no frontend |
-| `cd-*.yml` | push em `develop`, `master`, `release/**` | Deploy do ambiente correspondente (§2) |
-
----
+|---
 
 ## 5. Testes
 
