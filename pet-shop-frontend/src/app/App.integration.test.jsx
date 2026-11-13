@@ -38,6 +38,12 @@ const { sharedApiMocks, streamHookMocks } = vi.hoisted(() => ({
 	}
 }));
 
+vi.mock('../features/auth/api/authApi', () => ({ authApi: sharedApiMocks.authApi }));
+vi.mock('../features/pet-management/api/petsApi', () => ({ petsApi: sharedApiMocks.petsApi }));
+vi.mock('../features/scheduling/api/agendamentosApi', () => ({ agendamentosApi: sharedApiMocks.agendamentosApi }));
+vi.mock('../features/scheduling/api/petshopsApi', () => ({ petshopsApi: sharedApiMocks.petshopsApi }));
+vi.mock('../features/notifications/api/notificationsApi', () => ({ notificationsApi: sharedApiMocks.notificationsApi }));
+vi.mock('../features/service-catalog/api/servicosApi', () => ({ servicosApi: sharedApiMocks.servicosApi }));
 vi.mock('../shared/api/httpClient', () => ({
   getToken: vi.fn(() => null),
   setToken: sharedApiMocks.setToken,
@@ -169,6 +175,7 @@ describe('App integration flows', () => {
 		await fillAndSubmitLogin(user, 'owner@example.com', '123456');
 
 		expect(await screen.findByText('Dashboard do Petshop')).toBeInTheDocument();
+		await user.click(await screen.findByRole('button', { name: 'Ver detalhes' }));
 		await user.click(screen.getByRole('button', { name: 'Cancelar agendamento' }));
 
 		expect(sharedApiMocks.agendamentosApi.cancel).toHaveBeenCalledWith('ag-owner-1');
@@ -186,7 +193,7 @@ describe('App integration flows', () => {
 		await user.type(screen.getByLabelText('Nome'), 'Ana Souza');
 		await user.type(screen.getByLabelText('Email'), 'ana@example.com');
 		await user.type(screen.getByLabelText('Telefone'), '11999990000');
-		await user.type(screen.getByLabelText('Endereco'), 'Rua A, 100');
+		await user.type(screen.getByLabelText('Endereço'), 'Rua A, 100');
 		await user.type(screen.getByLabelText('Senha'), '123456');
 		await user.click(screen.getByRole('button', { name: 'Criar conta' }));
 
@@ -198,16 +205,16 @@ describe('App integration flows', () => {
 				firstPet: null
 			})
 		);
-		expect(await screen.findByText(/Cadastro criado\./i)).toBeInTheDocument();
+		expect(await screen.findByText(/Conta criada com sucesso/i)).toBeInTheDocument();
 		expect(screen.getByLabelText('Email')).toHaveValue('ana@example.com');
 
 		await user.click(screen.getByRole('button', { name: 'Cadastro' }));
 		await user.click(screen.getByRole('button', { name: /Sou Empresa \/ Petshop/i }));
-		await user.type(screen.getByLabelText('Nome do responsavel'), 'Carlos Dono');
+		await user.type(screen.getByLabelText('Nome do responsável'), 'Carlos Dono');
 		await user.type(screen.getByLabelText('Email corporativo'), 'owner@example.com');
 		await user.type(screen.getByLabelText('Telefone'), '11988887777');
 		await user.type(screen.getByLabelText('Senha'), '654321');
-		await user.type(screen.getByLabelText('Razao social / Nome da loja'), 'Pet Shop Central');
+		await user.type(screen.getByLabelText('Razão social / Nome da loja'), 'Pet Shop Central');
 		await user.click(screen.getByRole('button', { name: 'Criar conta' }));
 
 		expect(sharedApiMocks.authApi.register).toHaveBeenCalledTimes(2);

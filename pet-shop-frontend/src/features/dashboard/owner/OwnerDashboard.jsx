@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
 	CalendarCheck,
 	LogOut,
@@ -22,7 +22,7 @@ export function OwnerDashboard({
 	onCancelAppointment,
 	onLogout
 }) {
-	const [selectedAppointmentId, setSelectedAppointmentId] = useState(appointments[0]?.id ?? null);
+	const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
 	const [activeTab, setActiveTab] = useState('appointments');
 
 	useEffect(() => {
