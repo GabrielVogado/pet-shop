@@ -95,6 +95,7 @@ Workflows em `.github/workflows/`:
 - O teste do frontend é **bloqueante** (decisão do PO em 13/11/2026): todo PR com mudança no frontend fica vermelho se um teste falhar.
 - Os testes do backend são unitários, sem MongoDB. Quando entrar o primeiro teste de integração (`@QuarkusTest`): Testcontainers e `JWT_PUBLIC_KEY`/`JWT_PRIVATE_KEY` de teste por variável de ambiente.
 - O E2E (Playwright) e o `cd-*.yml` (deploy) ainda não existem.
+- Análise de qualidade e cobertura no SonarQube Cloud (só roda quando o secret `SONAR_TOKEN` existe): ver [SONAR.md](SONAR.md).
 
 ---
 
