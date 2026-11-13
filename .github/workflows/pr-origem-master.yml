@@ -1,0 +1,27 @@
+# A `master` so aceita PR vindo da `develop`. O GitHub nao tem regra nativa para
+# "de onde o PR vem", entao a restricao vira um check que o ruleset da master exige.
+name: PR para master
+
+on:
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  origem:
+    name: Origem do PR (master)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verificar a branch de origem
+        env:
+          ORIGEM: ${{ github.head_ref }}
+        run: |
+          if [ "$ORIGEM" = "develop" ]; then
+            echo "Origem develop: promocao valida."
+            exit 0
+          fi
+          echo "::error::A master so aceita PR vindo da develop. Origem recebida: $ORIGEM"
+          exit 1
