@@ -10,7 +10,7 @@
 | DT-04 | Disponibilidade faz centenas de consultas por chamada | `availability` percorre 14 dias × até 18 horários e cada `hasConflict` chama `findByPetshopId` | Lento com agenda cheia | Média |
 | DT-05 | N+1 na agenda do owner | `AppointmentController.list` busca usuário e pet por agendamento ([ADR-004](adrs.md#adr-004-eliminar-n1-na-listagem-de-agendamentos-do-owner)) | Lento com muitos agendamentos | Média |
 | DT-06 | Datas e duração guardadas como texto | `Agendamento.dateTime` e `Servico.duration` são `String` | Ordenação e consultas por período frágeis | Média |
-| DT-07 | Sem CI | não existe `.github/workflows/` | Nenhum teste roda automaticamente nos PRs | Alta |
+| DT-07 | ~~Sem CI~~ (resolvido em 13/11/2026: `.github/workflows/ci.yml`) | CI roda testes e build, ainda sem check obrigatório | Resolvido: testes rodam nos PRs | Alta |
 | DT-08 | Imagem Docker pula testes | `Dockerfile`: `-Dmaven.test.skip=true` | Build quebrado pode ir para produção | Média |
 | DT-09 | Cobertura baixa e não medida | 12 `@Test` no backend em 4 classes; 6 testes Vitest + 2 Playwright no frontend; sem JaCoCo | Regressões passam despercebidas | Alta |
 | DT-10 | Status `Concluido` nunca é atribuído | nenhum uso de `AppointmentStatus.COMPLETED` fora do enum | Histórico não diferencia realizado de pendente | Média |

@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 13/11/2026 — Esteiras de CI
+
+**O que mudou:** novo `.github/workflows/ci.yml` (Backend com Maven e Java 17; Frontend com `npm ci`, Vitest e build) que roda só nas áreas alteradas, com cache de dependências, e `pr-origem-master.yml` (a `master` só aceita PR da `develop`). Teste do frontend é bloqueante por decisão do PO. `MANUAL.md` §3.5 e §4 e o débito DT-07 atualizados. Pendente: depois de rodar verde, o PO importa os rulesets com os checks obrigatórios.
+**Sem mudança:** `De-Para-Backlog-Features.md` (FD-03 só fecha com os checks obrigatórios) e `MELHORIAS.md`.
+
+---
+
 ## 📌 Revisão 11/11/2026 — Apresentação comercial para a loja piloto
 
 **O que mudou:** nova apresentação em `03-ui-ux/apresentacao/` para convidar o primeiro pet shop a testar o Pertim: 23 slides em linguagem de lojista, feitos para serem enviados e lidos sem apresentador. Mostram as dores do dia a dia, as seis etapas do sistema com as telas reais (busca, pedido, sinal, aceite e prazo, agenda e Google Agenda, sinal e multa, remarcação, lembretes, atendimento e carteira de vacinas, avaliações, recebimento direto na conta da loja, serviços e filiais), a oferta de mensalidade gratuita para sempre à loja piloto, o que se espera dela, as etapas do piloto, perguntas frequentes e o próximo passo. Vem em PDF, em PPT (cada slide é uma imagem) e em `deck-comercial.html`, a versão editável. A loja convidada é a Agro Mendes (Alessandro Mendes); o contato do PO (WhatsApp e e-mail) já está no último slide. Nada é prometido além do Documento Negocial v2.0 e não há datas. Nenhuma mudança de código.

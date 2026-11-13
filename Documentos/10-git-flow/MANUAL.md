@@ -2,7 +2,7 @@
 
 Manual operacional do projeto: fluxo de desenvolvimento (git-flow), ambientes, CI/CD, release, testes e como manter a documentação.
 
-> **Revisão 05/11/2026.** Primeira versão no padrão `Documentos/10-git-flow/`. Hoje o projeto **não tem CI/CD nem ambiente publicado**: as seções 2 e 4 descrevem o modelo adotado e marcam com ⚠️ o que ainda não existe.
+> **Revisão 05/11/2026.** Primeira versão no padrão `Documentos/10-git-flow/`. Hoje o projeto **tem CI (§4), mas não tem CD nem ambiente publicado**: as seções 2 e 4 descrevem o modelo adotado e marcam com ⚠️ o que ainda não existe.
 
 ---
 
@@ -44,10 +44,9 @@ feature/* ──► develop ──► master ──► release/<tag>
 | `feature/<nome>` | `develop` | `develop` | Nova funcionalidade |
 | `bugfix/<nome>` ou `hotfix/<nome>` | `develop` | `develop` | Correção de bug em funcionalidade já entregue |
 | `doc/<nome>` | `develop` | `develop` | Somente documentação |
-| `chore/<nome>` | `develop` | `develop` | Manutenção sem mudança de comportamento (limpeza, build, dependências) |
 | `release/<versão>` | tag homologada | — | Produção, versão fixada |
 
-Nomes em minúsculas e kebab-case, por exemplo `feature/cadastro-varios-petshops`. Nunca use prefixos gerados automaticamente (ex.: `claude/`).
+Só esses prefixos valem (não existe `chore/`: manutenção, build e CI entram como `feature/`). Nomes em minúsculas e kebab-case, por exemplo `feature/cadastro-varios-petshops`. Nunca use prefixos gerados automaticamente (ex.: `claude/`).
 
 ### 3.2 Nova funcionalidade ou correção
 
@@ -78,20 +77,24 @@ Nomes em minúsculas e kebab-case, por exemplo `feature/cadastro-varios-petshops
 
 ### 3.5 Proteção de branches
 
-> ⚠️ `develop` e `master` **não estão protegidas** (verificado pela API do GitHub em 05/11/2026: `protected: false`). Hoje um PR pode ser mergeado sem revisão nem CI. A proteção entra junto com o CI (Fase 0 do [Roadmap](../04-backlog/Roadmap-v1.0.md)).
+`develop` e `master` têm rulesets ativos: tudo entra por PR, sem push direto, sem force-push e sem apagar a branch. Os checks do CI (§4) **ainda não são obrigatórios**: entram no ruleset depois que o `ci.yml` rodar com sucesso na `develop`, e isso exige o PO importar o JSON atualizado em *Settings → Rules → Rulesets* (o GitHub App não tem permissão de admin).
+
+Checks a exigir: `Backend (Quarkus)` e `Frontend (React + Vite)` na `develop` e na `master`; na `master`, também `Origem do PR (master)`. Jobs pulados por não haver mudança na área contam como sucesso.
 
 ---
 
 ## 4. CI/CD
 
-> ⚠️ **Não existe** `.github/workflows/`. Nenhum teste roda automaticamente nos PRs (débito DT-07 em [`Debitos-Tecnicos-v1.0.md`](../08-analise-tecnica/Debitos-Tecnicos-v1.0.md)).
-
-Modelo previsto (Fase 0):
+Workflows em `.github/workflows/`:
 
 | Workflow | Gatilho | Ação |
 |---|---|---|
-| `ci.yml` | PR para `develop` e `master`; push em `develop`/`master` | `mvn test` no backend, `npm test` e `npm run build` no frontend |
-| `cd-*.yml` | push em `develop`, `master`, `release/**` | Deploy do ambiente correspondente (§2) |
+| `ci.yml` | PR para `develop` e `master`; push em `develop`/`master` | Um job por área, só roda se a área mudou: **Backend (Quarkus)** (`mvn verify`, Java 17) e **Frontend (React + Vite)** (`npm ci`, `npm test`, `npm run build`, Node 20). Cache de Maven e npm. |
+| `pr-origem-master.yml` | PR para `master` | **Origem do PR (master)**: só aceita PR vindo da `develop`. |
+
+- O teste do frontend é **bloqueante** (decisão do PO em 13/11/2026): todo PR com mudança no frontend fica vermelho se um teste falhar.
+- Os testes do backend são unitários, sem MongoDB. Quando entrar o primeiro teste de integração (`@QuarkusTest`): Testcontainers e `JWT_PUBLIC_KEY`/`JWT_PRIVATE_KEY` de teste por variável de ambiente.
+- O E2E (Playwright) e o `cd-*.yml` (deploy) ainda não existem.
 
 ---
 
