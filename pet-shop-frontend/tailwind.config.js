@@ -2,7 +2,7 @@ const cor = (n) => `rgb(var(--c-${n}) / <alpha-value>)`;
 
 /** Papéis de cor, tipografia e raios da identidade Pertim (Documentos/03-ui-ux/Identidade-Visual-v1.0.md). */
 export default {
-  content: ['./index.html', './src/**/*.{js,jsx}'],
+  content: ['./index.html', './src/**/*.{js,jsx}', './apps/**/*.{html,ts,tsx}', './packages/**/*.{ts,tsx}'],
   theme: {
     colors: {
       transparent: 'transparent',

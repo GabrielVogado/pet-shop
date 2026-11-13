@@ -5,12 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build && npm run build:loja && npm run build:tutor",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "test:e2e:headed": "playwright test --headed"
+    "test:e2e:headed": "playwright test --headed",
+    "dev:loja": "vite --config apps/loja/vite.config.ts",
+    "dev:tutor": "vite --config apps/tutor/vite.config.ts",
+    "typecheck": "tsc",
+    "build:loja": "vite build --config apps/loja/vite.config.ts",
+    "build:tutor": "vite build --config apps/tutor/vite.config.ts"
   },
   "dependencies": {
     "@fontsource/bricolage-grotesque": "^5.3.0",
@@ -27,10 +32,13 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.4.20",
     "jsdom": "^29.1.1",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.3",
     "vitest": "^4.1.9"
   },
   "overrides": {

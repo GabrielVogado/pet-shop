@@ -20,6 +20,26 @@ npm run preview          # serve o build
 
 Com Docker, a partir da raiz do repositório: `docker compose up -d --build` (frontend em http://localhost:8081).
 
+## Web nova (ADR-010)
+
+A reescrita em TypeScript convive com o protótipo no mesmo `package.json`:
+
+| Pasta | O que é |
+|---|---|
+| `apps/loja`, `apps/tutor` | Os dois aplicativos novos (hoje, só a tela de entrar) |
+| `packages/tema` | Tokens de cor, fontes e base CSS da identidade, usados também pelo protótipo |
+| `packages/ui` | Componentes base: `Botao`, `Campo`, `Selo`, `Cartao`, `Marca`, `PaginaEntrar` |
+| `src/` | Protótipo em JavaScript, até as telas novas o substituírem |
+
+```bash
+npm run dev:loja         # painel da loja, http://localhost:5174
+npm run dev:tutor        # web do tutor, http://localhost:5175
+npm run typecheck        # tsc nos apps e pacotes
+npm run build            # typecheck + build do protótipo e dos dois apps
+```
+
+Os pacotes são importados como `@pertim/ui` e `@pertim/tema/...` (alias em `caminhos.js` e `tsconfig.json`). `npm test` roda os testes do protótipo e os novos.
+
 ## Testes
 
 | Tipo | Comando |
