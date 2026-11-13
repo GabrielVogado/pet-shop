@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 13/11/2026 — SonarQube Cloud
+
+**O que mudou:** análise de qualidade e cobertura no `ci.yml`, um projeto Sonar por área (backend com JaCoCo, frontend com Vitest/lcov). O passo só roda quando o secret `SONAR_TOKEN` existe. Novo [`10-git-flow/SONAR.md`](10-git-flow/SONAR.md) com o passo a passo do PO. Pendente: o PO criar os projetos no painel e cadastrar o secret.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md`.
+
+---
+
 ## 📌 Revisão 13/11/2026 — Esteiras de CI
 
 **O que mudou:** novo `.github/workflows/ci.yml` (Backend com Maven e Java 17; Frontend com `npm ci`, Vitest e build) que roda só nas áreas alteradas, com cache de dependências, e `pr-origem-master.yml` (a `master` só aceita PR da `develop`). Teste do frontend é bloqueante por decisão do PO. `MANUAL.md` §3.5 e §4 e o débito DT-07 atualizados. Pendente: depois de rodar verde, o PO importa os rulesets com os checks obrigatórios.
