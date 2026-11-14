@@ -520,7 +520,7 @@ Um especialista mobile apontou que, na web, React + Vite é mais leve e mais rá
 ### Próximos passos
 
 1. [ ] Escrever o OpenAPI a partir do contrato e gerar o cliente TypeScript.
-2. [ ] Criar o esqueleto com `loja` e `tutor`, tema, roteamento e a tela de entrar (T1).
+2. [x] Criar o esqueleto com `loja` e `tutor`, tema, roteamento e a tela de entrar (T1). Feito em 13/11/2026 em `pet-shop-frontend/apps` e `packages`; os pacotes comuns são pastas resolvidas por alias (`caminhos.js`), sem workspaces, para não mudar o Docker nem o CI. A T1 valida o formulário mas ainda não chama a API (depende do passo 1); Google, esqueci a senha e criar conta entram com as telas T11 a T13.
 3. [ ] Decidir a vitrine pública (pré-renderização ou página estática separada).
 
 ---

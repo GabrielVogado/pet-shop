@@ -185,10 +185,10 @@ Os papéis de cor e os estilos de texto são os mesmos nas duas plataformas ([AD
 
 ### 8.1 Web: Tailwind
 
-As cores ficam como variáveis CSS em `src/shared/tema/tokens.css`, escritas como trio RGB para o Tailwind aplicar transparência (`bg-primary/10`).
+As cores ficam como variáveis CSS em `packages/tema/tokens.css`, escritas como trio RGB para o Tailwind aplicar transparência (`bg-primary/10`).
 
 ```css
-/* src/shared/tema/tokens.css (esboço) */
+/* packages/tema/tokens.css (esboço) */
 :root {
   --c-primary: 31 91 74;          --c-on-primary: 255 255 255;
   --c-primary-container: 220 235 227; --c-on-primary-container: 14 42 34;
@@ -365,7 +365,8 @@ O painel web da loja usa o mesmo tema da seção 8.1; nas telas largas só muda 
 | Página **Identidade** no Figma, com símbolo, paleta e amostra de tipos | A fazer no Figma. No Open Design (projeto **Pertim – telas e fluxos**), a página de identidade e componentes já mostra símbolo, ícone, assinatura, paleta, temas claro e escuro, tipos e componentes |
 | Telas novas da v1.1 de [Telas e fluxos](Telas-e-Fluxos-v1.1.md) | Desenhadas com a identidade no Open Design |
 | Ícone do app, splash e capa da Play Store | A fazer, depois da versão final do símbolo |
-| Frontend React atual | Tokens da seção 8.1 aplicados (`src/shared/tema/tokens.css`, `tailwind.config.js`), fontes Bricolage Grotesque e Figtree empacotadas, símbolo no cabeçalho e na tela de entrada, tema claro e escuro pelo sistema. O nome exibido continua "PetCare Agenda" até a busca no INPI (pendência 1). Próximas fatias: componentes base (botão, campo, selo, cartão) e telas novas da v1.1 |
+| Protótipo React (`pet-shop-frontend/src`) | Usa os tokens e as fontes do pacote `packages/tema`. O nome exibido continua "PetCare Agenda"; o protótipo será aposentado quando as telas novas o substituírem |
+| Web nova (`apps/loja` e `apps/tutor`, ADR-010) | Em TypeScript, com o tema em `packages/tema` e os componentes base em `packages/ui` (botão, campo, selo de estado, cartão, marca e tela de entrar). Nome exibido: Pertim (decisão do PO em 13/11/2026); o texto fica em `packages/ui/src/marca.ts`, a assinatura visual em `Marca.tsx` e os títulos das abas nos `index.html`. Faltam ícones Material Symbols, símbolo negativo no tema escuro e as demais telas |
 
 ---
 
