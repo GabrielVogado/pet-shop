@@ -64,7 +64,7 @@ Esses quatro são os **únicos** prefixos permitidos. Não existem `bugfix/` nem
 
 ### 3.3 Promoção para homologação
 
-1. Abra um PR de `develop` → `master`. **Só de `develop`:** um PR de feature direto para `master` pularia a integração. ⚠️ Hoje isso é regra de processo; vira o check `Origem do PR (master)` quando o CI existir (Fase 0).
+1. Abra um PR de `develop` → `master`. **Só de `develop`:** um PR de feature direto para `master` pularia a integração. O check `Origem do PR (master)` (§4) reprova qualquer outra origem.
 2. Cada promoção ganha um registro em [`homologacoes/`](./homologacoes/) com o que entrou, o roteiro de teste e o resultado.
 
 > ⚠️ Enquanto o ambiente de homologação não existir, `master` só recebe promoções de `develop` já validadas localmente.
