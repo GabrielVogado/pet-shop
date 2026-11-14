@@ -1,4 +1,4 @@
-package com.petcare.service;
+package com.petcare.application.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,15 +18,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import com.petcare.application.dto.input.AgendamentoRequest;
-import com.petcare.application.dto.input.AgendamentoAvailabilityView;
+import com.petcare.application.dto.output.AgendamentoAvailabilityView;
 import com.petcare.domain.entity.Agendamento;
 import com.petcare.domain.entity.Pet;
 import com.petcare.domain.entity.Servico;
 import com.petcare.domain.entity.Usuario;
-import com.petcare.infrastructure.persistence.MongoMongoAppointmentRepository;
-import com.petcare.infrastructure.persistence.MongoMongoPetRepository;
-import com.petcare.infrastructure.persistence.MongoMongoServiceRepository;
-import com.petcare.infrastructure.persistence.MongoMongoUserRepository;
+import com.petcare.infrastructure.persistence.MongoAppointmentRepository;
+import com.petcare.infrastructure.persistence.MongoPetRepository;
+import com.petcare.infrastructure.persistence.MongoServiceRepository;
+import com.petcare.infrastructure.persistence.MongoUserRepository;
 import com.petcare.infrastructure.web.exception.ApiException;
 
 class AgendamentoServiceTest {

@@ -47,3 +47,7 @@ CLAUDE.md
 .spec/
 skill-observations/
 skill-updates/
+
+# Cobertura gerada pelos testes
+coverage/
+.scannerwork/

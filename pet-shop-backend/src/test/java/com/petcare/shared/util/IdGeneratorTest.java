@@ -1,4 +1,4 @@
-package com.petcare.service;
+package com.petcare.shared.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-class IdsTest {
+class IdGeneratorTest {
 
     @Test
     void newIdUsaPrefixoEhUnico() {
