@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Só a janela antes do Compose desenhar; as cores das telas vêm de ui/tema. -->
+    <style name="Theme.Pertim" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/superficie</item>
+    </style>
+</resources>

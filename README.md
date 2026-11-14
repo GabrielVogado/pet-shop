@@ -33,5 +33,6 @@ Cada parte do código tem o próprio README com instruções de instalação, ex
 
 - [`pet-shop-backend/`](pet-shop-backend/README.md): API
 - [`pet-shop-frontend/`](pet-shop-frontend/README.md): interface web
+- [`pet-shop-android/`](pet-shop-android/README.md): app Android do tutor (esqueleto) e como baixar o APK
 
 O fluxo de branches e de documentação está no [Manual do desenvolvedor](Documentos/10-git-flow/MANUAL.md).
