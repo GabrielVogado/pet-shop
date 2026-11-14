@@ -122,7 +122,7 @@ export function AuthScreen({ onRegister, onLogin }) {
 					<div className="flex items-center gap-3">
 						<img src="/pertim-simbolo.svg" alt="" className="h-12 w-12" />
 						<div>
-							<h1 className="text-2xl font-bold text-on-surface">PetCare Agenda</h1>
+							<h1 className="text-2xl font-bold text-on-surface">Pertim</h1>
 							<p className="text-sm text-on-surface-variant">Gestão para tutores, pets e um petshop</p>
 						</div>
 					</div>

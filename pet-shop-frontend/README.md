@@ -1,6 +1,6 @@
-# Frontend — PetCare Agenda
+# Frontend — Pertim
 
-Interface web do PetCare Agenda. React 19, Vite 7, Tailwind e React Router, organizada em FSD (Feature-Sliced Design).
+Interface web do Pertim. React 19, Vite 7, Tailwind e React Router, organizada em FSD (Feature-Sliced Design).
 
 > Esta é a implementação atual. O sistema-alvo mantém React + Vite na web (painel da loja e web do tutor), reescrito conforme o [ADR-010](../Documentos/08-analise-tecnica/adrs.md#adr-010-web-em-react-e-vite). O app Android será em Kotlin ([ADR-011](../Documentos/08-analise-tecnica/adrs.md#adr-011-app-android-em-kotlin-e-módulo-compartilhado-kmp)).
 
