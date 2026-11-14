@@ -7,6 +7,13 @@ Cada documento descreve o estado **medido no código** na data indicada nele. O 
 
 ---
 
+## 📌 Revisão 13/11/2026 — Regras de git-flow
+
+**O que mudou:** a pedido do PO, `10-git-flow/MANUAL.md` passa a permitir só `feature/`, `hotfix/`, `doc/` e `release/` (saem `bugfix/` e `chore/`), e ganha as regras de qualidade dos PRs: trava de contagem de testes, cobertura mínima de 90% no código novo, conferência do CD do merge. O que depende de CI ainda inexistente está marcado com ⚠️. Nenhuma mudança de código.
+**Sem mudança:** `De-Para-Backlog-Features.md` e `MELHORIAS.md` (documentação, nada entregue).
+
+---
+
 ## 📌 Revisão 13/11/2026 — SonarQube Cloud
 
 **O que mudou:** análise de qualidade e cobertura no `ci.yml`, um projeto Sonar por área (backend com JaCoCo, frontend com Vitest/lcov). O passo só roda quando o secret `SONAR_TOKEN` existe. Novo [`10-git-flow/SONAR.md`](10-git-flow/SONAR.md) com o passo a passo. Projetos e secret já criados pelo PO.

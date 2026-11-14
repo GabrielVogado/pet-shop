@@ -2,6 +2,8 @@
 
 Manual operacional do projeto: fluxo de desenvolvimento (git-flow), ambientes, CI/CD, release, testes e como manter a documentação.
 
+> **Revisão 13/11/2026.** Regras de branch, PR e qualidade revisadas a pedido do PO: tipos de branch reduzidos a `feature/`, `hotfix/`, `doc/` e `release/` (saem `bugfix/` e `chore/`), trava de contagem de testes, cobertura mínima de 90% no código novo, conferência do CD do merge e registro por promoção. O que depende de CI ainda inexistente está marcado com ⚠️.
+>
 > **Revisão 05/11/2026.** Primeira versão no padrão `Documentos/10-git-flow/`. Hoje o projeto **tem CI (§4), mas não tem CD nem ambiente publicado**: as seções 2 e 4 descrevem o modelo adotado e marcam com ⚠️ o que ainda não existe.
 
 ---
@@ -42,11 +44,11 @@ feature/* ──► develop ──► master ──► release/<tag>
 | Prefixo | Parte de | Vai para | Uso |
 |---|---|---|---|
 | `feature/<nome>` | `develop` | `develop` | Nova funcionalidade |
-| `bugfix/<nome>` ou `hotfix/<nome>` | `develop` | `develop` | Correção de bug em funcionalidade já entregue |
+| `hotfix/<nome>` | `develop` | `develop` | Correção de bug em funcionalidade já entregue (inclui testes quebrados) |
 | `doc/<nome>` | `develop` | `develop` | Somente documentação |
 | `release/<versão>` | tag homologada | — | Produção, versão fixada |
 
-Só esses prefixos valem (não existe `chore/`: manutenção, build e CI entram como `feature/`). Nomes em minúsculas e kebab-case, por exemplo `feature/cadastro-varios-petshops`. Nunca use prefixos gerados automaticamente (ex.: `claude/`).
+Esses quatro são os **únicos** prefixos permitidos. Não existem `bugfix/` nem `chore/`: limpeza, build e dependências entram como `feature/` (ou `hotfix/`, se corrigem algo quebrado). Nomes em minúsculas e kebab-case, por exemplo `feature/cadastro-varios-petshops`. Nunca use prefixos gerados automaticamente (ex.: `claude/`).
 
 ### 3.2 Nova funcionalidade ou correção
 
@@ -62,10 +64,14 @@ Só esses prefixos valem (não existe `chore/`: manutenção, build e CI entram 
 
 ### 3.3 Promoção para homologação
 
-1. Abra um PR de `develop` → `master`. **Só de `develop`:** um PR de feature direto para `master` pularia a integração.
+1. Abra um PR de `develop` → `master`. **Só de `develop`:** um PR de feature direto para `master` pularia a integração. O check `Origem do PR (master)` (§4) reprova qualquer outra origem.
 2. Cada promoção ganha um registro em [`homologacoes/`](./homologacoes/) com o que entrou, o roteiro de teste e o resultado.
 
 > ⚠️ Enquanto o ambiente de homologação não existir, `master` só recebe promoções de `develop` já validadas localmente.
+
+### 3.3.1 Merge só está entregue com o CD verde
+
+⚠️ Quando houver CD (§4), o merge só conta como entregue depois que os workflows disparados pelo commit do merge terminarem verdes. CD vermelho é trabalho da mesma entrega, não de outro PR.
 
 ### 3.4 Release de produção
 
@@ -99,6 +105,21 @@ Workflows em `.github/workflows/`:
 
 ---
 
+### 4.1 Qualidade exigida nos PRs
+
+O `ci.yml` já roda os testes e o Sonar (§4). ⚠️ A trava de contagem de testes e a exigência de 90% no código novo ainda não estão automatizadas; até lá, confira à mão antes de abrir o PR.
+
+| Regra | Exigência |
+|---|---|
+| Trava de contagem de testes | Se o PR altera código de produção de uma área (backend ou frontend), a contagem de testes dela precisa **subir**. Se não altera, a contagem **não pode cair**. Teste ignorado (`@Disabled`, `it.skip`, `it.todo`) não conta |
+| Cobertura do código novo | Mínimo de **90%** nas linhas que o PR altera |
+| Cobertura total | Não pode cair em relação à base |
+| Análise de qualidade (SonarCloud) | Roda no CI de cada área, com cobertura |
+
+Corrigir ou mover um teste não é motivo para removê-lo: um teste só sai se o comportamento que ele cobre foi retirado de propósito, e isso é dito no PR.
+
+---
+
 ## 5. Testes
 
 | Onde | Comando |
@@ -115,7 +136,7 @@ Rode os testes da área alterada antes de abrir o PR.
 
 - [Conventional Commits](https://www.conventionalcommits.org/pt-br/) em português: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`, com escopo opcional (`feat(agendamento): ...`).
 - Autor e committer: o PO (`GabrielVogado <gabriel.vogado@gmail.com>`).
-- O PR aponta para `develop` e descreve o que muda, por quê e como foi verificado.
+- O PR aponta para `develop` e descreve o que muda, por quê e como foi verificado. Um PR por tarefa.
 
 ---
 
