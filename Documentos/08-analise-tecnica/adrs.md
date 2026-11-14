@@ -575,4 +575,4 @@ O MVP é só Android (RNF-04) e o backend já é Kotlin. Kotlin com Jetpack Comp
 
 1. [ ] Criar o projeto Gradle multimódulo com `shared`.
 2. [ ] Mover para `shared` os modelos e o cálculo de multa e prazos, com testes.
-3. [ ] Criar o esqueleto do app com tema, navegação e a tela de entrar (T1).
+3. [x] Criar o esqueleto do app com tema, navegação e a tela de entrar (T1). Feito em 14/11/2026 em `pet-shop-android/`, como projeto Gradle próprio, com o APK de debug gerado pelo CI.
