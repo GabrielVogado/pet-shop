@@ -4,13 +4,13 @@ App do tutor em Kotlin com Jetpack Compose, conforme o [ADR-011](../Documentos/0
 
 ## Pegar o APK pronto
 
-O CI gera um APK a cada PR ou push que mexe em `pet-shop-android/`:
+A esteira **APK Android** gera um APK a cada PR ou push que mexe em `pet-shop-android/`:
 
-1. Abra o PR (ou a aba **Actions**) e entre na execução **CI - Build e Testes**.
+1. Abra o PR (ou a aba **Actions**) e entre na execução da esteira **APK Android**.
 2. Em **Artifacts**, baixe `pertim-tutor-debug-<commit>` e descompacte.
 3. No celular, permita instalar de fontes desconhecidas e abra o `pertim-tutor-debug.apk`.
 
-Para gerar de qualquer branch sem PR: **Actions > CI - Build e Testes > Run workflow**.
+Para gerar de qualquer branch sem PR: **Actions > APK Android > Run workflow**.
 
 O APK é de debug (assinado com a chave de debug). O de release para a Play Store depende da chave da loja guardada como secret.
 
