@@ -1,12 +1,11 @@
 import type { ComponentProps } from 'react';
-import { Cartao } from './Cartao';
 import { FormularioEntrar } from './FormularioEntrar';
 import { Marca } from './Marca';
-import { ASSINATURA } from './marca';
+import { ASSINATURA } from './textos-marca';
 
-type Props = {
+type Props = Omit<ComponentProps<typeof FormularioEntrar>, 'onEntrar'> & {
+  /** Nome da página para leitor de tela e aba; o protótipo T1 não mostra título visível. */
   titulo: string;
-  descricao: string;
   onEntrar?: ComponentProps<typeof FormularioEntrar>['onEntrar'];
 };
 
@@ -15,21 +14,16 @@ const servidorEmConstrucao = () => {
   throw new Error('Ainda não dá para entrar: o servidor novo está em construção.');
 };
 
-/** Tela de entrar (T1), igual na loja e no tutor a não ser pelos textos. */
-export function PaginaEntrar({ titulo, descricao, onEntrar = servidorEmConstrucao }: Props) {
+/** Tela de entrar (T1), na disposição do protótipo (Documentos/03-ui-ux/apresentacao/telas/t1.png). */
+export function PaginaEntrar({ titulo, onEntrar = servidorEmConstrucao, ...opcoes }: Props) {
   return (
-    <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-6 px-4 py-8">
-      <header className="space-y-2">
-        <Marca />
-        <p className="text-body-md text-on-surface-variant">{ASSINATURA}</p>
+    <main className="mx-auto flex min-h-screen max-w-md flex-col px-4 pb-6 pt-12 sm:justify-center">
+      <h1 className="sr-only">{titulo}</h1>
+      <header className="mb-8 flex flex-col items-center gap-1 text-center">
+        <Marca empilhada />
+        <p className="text-body-lg text-on-surface-variant">{ASSINATURA}</p>
       </header>
-      <Cartao className="space-y-4">
-        <div>
-          <h1 className="text-title-lg text-on-surface">{titulo}</h1>
-          <p className="text-body-md text-on-surface-variant">{descricao}</p>
-        </div>
-        <FormularioEntrar onEntrar={onEntrar} />
-      </Cartao>
+      <FormularioEntrar onEntrar={onEntrar} {...opcoes} />
     </main>
   );
 }

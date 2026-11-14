@@ -45,4 +45,20 @@ class EntrarViewModelTest {
         assertNull(vm.estado.value.erroEmail)
         assertEquals("Informe sua senha.", vm.estado.value.erroSenha)
     }
+
+    @Test
+    fun `olho alterna a senha visivel`() {
+        val vm = EntrarViewModel()
+        vm.alternarSenhaVisivel()
+        assertEquals(true, vm.estado.value.senhaVisivel)
+        vm.alternarSenhaVisivel()
+        assertEquals(false, vm.estado.value.senhaVisivel)
+    }
+
+    @Test
+    fun `opcoes que ainda nao existem avisam que chegam em breve`() {
+        val vm = EntrarViewModel()
+        vm.opcaoIndisponivel()
+        assertEquals(EntrarViewModel.OPCAO_EM_BREVE, vm.estado.value.falha)
+    }
 }
