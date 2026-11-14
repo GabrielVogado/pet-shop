@@ -21,7 +21,7 @@
 
 1. Busca de marca no INPI nas classes 35 (marketplace), 42 (software) e 44 (serviços para animais).
 2. Domínio `.com.br` e nome de usuário nas redes.
-3. Só então a troca de "PetCare" para "Pertim" nos documentos, no repositório e no código, num PR próprio. Até lá os outros documentos continuam dizendo PetCare.
+3. Só então a troca de "PetCare" para "Pertim" nos documentos, no repositório e no código, num PR próprio. Até lá os outros documentos continuam dizendo PetCare. Em 14/11/2026 o PO decidiu exibir "Pertim" nas telas e nos READMEs antes da busca (veja a seção 9).
 
 ---
 
@@ -365,7 +365,7 @@ O painel web da loja usa o mesmo tema da seção 8.1; nas telas largas só muda 
 | Página **Identidade** no Figma, com símbolo, paleta e amostra de tipos | A fazer no Figma. No Open Design (projeto **Pertim – telas e fluxos**), a página de identidade e componentes já mostra símbolo, ícone, assinatura, paleta, temas claro e escuro, tipos e componentes |
 | Telas novas da v1.1 de [Telas e fluxos](Telas-e-Fluxos-v1.1.md) | Desenhadas com a identidade no Open Design |
 | Ícone do app, splash e capa da Play Store | A fazer, depois da versão final do símbolo |
-| Protótipo React (`pet-shop-frontend/src`) | Usa os tokens e as fontes do pacote `packages/tema`. O nome exibido continua "PetCare Agenda"; o protótipo será aposentado quando as telas novas o substituírem |
+| Protótipo React (`pet-shop-frontend/src`) | Usa os tokens e as fontes do pacote `packages/tema`. Exibe o nome "Pertim" desde 14/11/2026 (decisão do PO); o protótipo será aposentado quando as telas novas o substituírem |
 | Web nova (`apps/loja` e `apps/tutor`, ADR-010) | Em TypeScript, com o tema em `packages/tema` e os componentes base em `packages/ui` (botão, campo, selo de estado, cartão, marca e tela de entrar). Nome exibido: Pertim (decisão do PO em 13/11/2026); o texto fica em `packages/ui/src/marca.ts`, a assinatura visual em `Marca.tsx` e os títulos das abas nos `index.html`. Faltam ícones Material Symbols, símbolo negativo no tema escuro e as demais telas |
 
 ---
@@ -376,4 +376,4 @@ O painel web da loja usa o mesmo tema da seção 8.1; nas telas largas só muda 
 |---|---|---|
 | 1 | Busca de marca no INPI e domínio para "Pertim" | PO |
 | 2 | Versão final do símbolo e da assinatura (desenho refinado e contorno) | Designer, aprovação do PO |
-| 3 | Troca de "PetCare" por "Pertim" nos documentos e no código | PR próprio, depois do item 1 |
+| 3 | Troca de "PetCare" por "Pertim" | Telas e READMEs feitos em 14/11/2026, por decisão do PO, antes da busca no INPI. Faltam os outros documentos e os identificadores técnicos (pacote Java `com.petcare`, nomes de contêiner e de banco) |

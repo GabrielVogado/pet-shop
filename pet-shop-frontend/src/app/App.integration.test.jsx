@@ -115,7 +115,7 @@ describe('App integration flows', () => {
 		render(<App />);
 		await fillAndSubmitLogin(user, 'ana@example.com', '123456');
 
-		expect(await screen.findByText('PetCare Agenda')).toBeInTheDocument();
+		expect(await screen.findByText('Pertim')).toBeInTheDocument();
 		await waitFor(() => {
 			expect(screen.getByRole('button', { name: 'Agendar' })).toBeEnabled();
 		});

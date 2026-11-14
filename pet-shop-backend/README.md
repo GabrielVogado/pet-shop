@@ -1,6 +1,6 @@
-# Backend — PetCare Agenda
+# Backend — Pertim
 
-API REST do PetCare Agenda. Quarkus 3.15 (Java 17), MongoDB via JNoSQL, autenticação JWT RS256 e notificações em tempo real por SSE.
+API REST do Pertim. Quarkus 3.15 (Java 17), MongoDB via JNoSQL, autenticação JWT RS256 e notificações em tempo real por SSE.
 
 > Esta é a implementação atual (um único petshop). A reescrita em Kotlin com Quarkus e Panache Kotlin está decidida no [ADR-006](../Documentos/08-analise-tecnica/adrs.md); o que o sistema deve fazer está no [Documento Negocial](../Documentos/01-negocio/Documento-Negocial-v2.0.md).
 

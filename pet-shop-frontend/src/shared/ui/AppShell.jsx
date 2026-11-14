@@ -22,7 +22,7 @@ export function AppShell({
 						<div className="flex items-center gap-3">
 							<img src="/pertim-simbolo.svg" alt="" className="h-11 w-11" />
 							<div>
-								<h1 className="text-xl font-bold tracking-normal text-on-surface">PetCare Agenda</h1>
+								<h1 className="text-xl font-bold tracking-normal text-on-surface">Pertim</h1>
 								<p className="text-sm text-on-surface-variant">
 									Tutor: <span className="font-semibold text-on-surface">{tutor.name}</span>
 									{activePet ? ` | Pet ativo: ${activePet.name}` : ' | Cadastre seu primeiro pet'}

@@ -1,6 +1,6 @@
-# PetCare Agenda
+# Pertim
 
-O PetCare Agenda é uma plataforma que liga **donos de pets (tutores)** a **petshops** para agendar serviços pelo celular ou pelo navegador, sem ligação, sem mensagem solta e sem agenda de papel.
+O Pertim é uma plataforma que liga **donos de pets (tutores)** a **petshops** para agendar serviços pelo celular ou pelo navegador, sem ligação, sem mensagem solta e sem agenda de papel.
 
 ## Para quem é
 
@@ -11,7 +11,7 @@ O PetCare Agenda é uma plataforma que liga **donos de pets (tutores)** a **pets
 
 - **Agendamento com aceite da loja:** o pedido só vira horário marcado quando o petshop confirma.
 - **Sinal e multa definidos pela loja:** cada petshop decide quanto cobra de sinal e se cobra multa para quem cancelar com menos de 2 horas de antecedência ou faltar. O tutor vê as regras antes de confirmar.
-- **Pagamento direto para a loja:** cada petshop tem a própria conta recebedora. O PetCare não recebe o dinheiro do serviço.
+- **Pagamento direto para a loja:** cada petshop tem a própria conta recebedora. O Pertim não recebe o dinheiro do serviço.
 - **Cartão de vacina digital:** cada registro mostra se foi aplicado por uma loja (verificado) ou informado pelo tutor.
 - **Avaliações:** o tutor avalia a loja com estrelas e comentário, e a loja pode responder.
 - **Avisos:** notificações no app e pelo WhatsApp para o tutor; app, SMS, WhatsApp e e-mail para a loja.
