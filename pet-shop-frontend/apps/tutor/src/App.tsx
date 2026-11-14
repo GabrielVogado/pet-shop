@@ -5,7 +5,7 @@ export function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/entrar" element={<PaginaEntrar titulo="Entrar" descricao="Use o e-mail e a senha da sua conta." />} />
+        <Route path="/entrar" element={<PaginaEntrar titulo="Entrar" />} />
         <Route path="*" element={<Navigate to="/entrar" replace />} />
       </Routes>
     </BrowserRouter>

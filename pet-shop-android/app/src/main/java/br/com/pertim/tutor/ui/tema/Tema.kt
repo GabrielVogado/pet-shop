@@ -58,5 +58,5 @@ private val Escuro = darkColorScheme(
 
 @Composable
 fun TemaPertim(escuro: Boolean = isSystemInDarkTheme(), conteudo: @Composable () -> Unit) {
-    MaterialTheme(colorScheme = if (escuro) Escuro else Claro, content = conteudo)
+    MaterialTheme(colorScheme = if (escuro) Escuro else Claro, typography = TipografiaPertim, content = conteudo)
 }

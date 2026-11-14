@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.update
 data class EntrarEstado(
     val email: String = "",
     val senha: String = "",
+    val senhaVisivel: Boolean = false,
     val erroEmail: String? = null,
     val erroSenha: String? = null,
     val falha: String? = null,
@@ -22,6 +23,11 @@ class EntrarViewModel : ViewModel() {
     fun mudarEmail(valor: String) = _estado.update { it.copy(email = valor, erroEmail = null, falha = null) }
 
     fun mudarSenha(valor: String) = _estado.update { it.copy(senha = valor, erroSenha = null, falha = null) }
+
+    fun alternarSenhaVisivel() = _estado.update { it.copy(senhaVisivel = !it.senhaVisivel) }
+
+    /** Esqueci a senha, Google e Criar conta (T11 a T13) ainda não existem. */
+    fun opcaoIndisponivel() = _estado.update { it.copy(falha = OPCAO_EM_BREVE) }
 
     fun entrar() {
         val atual = _estado.value
@@ -40,5 +46,6 @@ class EntrarViewModel : ViewModel() {
     companion object {
         private val EMAIL = Regex("^\\S+@\\S+\\.\\S+$")
         const val SERVIDOR_EM_CONSTRUCAO = "Ainda não dá para entrar: o servidor novo está em construção."
+        const val OPCAO_EM_BREVE = "Essa opção chega em breve: o servidor novo está em construção."
     }
 }
