@@ -4,7 +4,7 @@ import { NOME_PRODUTO } from './textos-marca';
  * Assinatura visual: símbolo + nome em minúsculas, "per" em Asfalto e "tim" em Pinheiro.
  * `empilhada` põe o símbolo em cima e o nome grande embaixo, como na tela de entrar (T1).
  */
-export function Marca({ empilhada = false }: { empilhada?: boolean }) {
+export function Marca({ empilhada = false }: Readonly<{ empilhada?: boolean }>) {
   return (
     <span
       className={empilhada ? 'inline-flex flex-col items-center gap-1' : 'inline-flex items-center gap-2'}
