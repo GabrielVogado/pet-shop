@@ -15,7 +15,7 @@ function validar({ email, senha }: Credenciais): Erros {
   return erros;
 }
 
-function Olho({ aberto }: { aberto: boolean }) {
+function Olho({ aberto }: Readonly<{ aberto: boolean }>) {
   // Material Icons Outlined "visibility" e "visibility_off" (Apache 2.0).
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="h-6 w-6 fill-current">
@@ -30,13 +30,13 @@ function Olho({ aberto }: { aberto: boolean }) {
 
 const estiloLink = 'rounded text-body-lg font-semibold text-primary underline underline-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary';
 
-type Props = {
+type Props = Readonly<{
   onEntrar: (credenciais: Credenciais) => void | Promise<void>;
   /** Esqueci a senha, Google e Criar conta (T11 a T13). Sem a função, a tela avisa que a opção chega em breve. */
   onEsqueciSenha?: () => void;
   onEntrarComGoogle?: () => void;
   onCriarConta?: () => void;
-};
+}>;
 
 /**
  * Formulário de entrar (T1), na disposição do protótipo: e-mail, senha com olho, esqueci a senha,
@@ -109,7 +109,7 @@ export function FormularioEntrar({ onEntrar, onEsqueciSenha, onEntrarComGoogle, 
 
       <div className="flex items-center gap-3 text-body-md text-on-surface-variant" aria-hidden="true">
         <span className="h-px flex-1 bg-outline-variant" />
-        ou
+        <span>ou</span>
         <span className="h-px flex-1 bg-outline-variant" />
       </div>
 
@@ -117,7 +117,7 @@ export function FormularioEntrar({ onEntrar, onEsqueciSenha, onEntrarComGoogle, 
         <span aria-hidden="true" className="font-display text-title-lg font-extrabold">
           G
         </span>
-        Entrar com Google
+        <span>Entrar com Google</span>
       </Botao>
 
       <p className="mt-auto pt-6 text-center text-body-lg text-on-surface">
